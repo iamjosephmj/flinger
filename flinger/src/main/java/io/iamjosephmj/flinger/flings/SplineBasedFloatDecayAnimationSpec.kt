@@ -1,27 +1,69 @@
+/*
+* MIT License
+*
+* Copyright (c) 2021 Joseph James
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
 package io.iamjosephmj.flinger.flings
 
 import androidx.compose.animation.core.FloatDecayAnimationSpec
 import androidx.compose.ui.unit.Density
-import io.iamjosephmj.flinger.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
 import kotlin.math.sign
 
-
+/**
+ * Spline based decay animation based on {@see FloatDecayAnimationSpec}
+ *
+ *  @author Joseph James.
+ */
 class SplineBasedFloatDecayAnimationSpec(
     density: Density,
     scrollConfiguration: ScrollViewConfiguration
 ) :
     FloatDecayAnimationSpec {
 
+    /*
+     * Fling calculation.
+     */
     private val flingCalculator = FlingCalculator(
         density = density,
         scrollConfiguration = scrollConfiguration
     )
 
-    override val absVelocityThreshold: Float get() = 0f
+    /*
+     * This is the absolute value of a velocity threshold, below which the animation is
+     * considered finished.
+     */
+    override val absVelocityThreshold: Float by lazy { scrollConfiguration.absVelocityThreshold }
 
+    /*
+     * Distance that is to be covered by the fling.
+     */
     private fun flingDistance(startVelocity: Float): Float =
         flingCalculator.flingDistance(startVelocity) * sign(startVelocity)
 
+    /*
+     * Target value at the end of the fling.
+     */
     override fun getTargetValue(initialValue: Float, initialVelocity: Float): Float =
         initialValue + flingDistance(initialVelocity)
 
