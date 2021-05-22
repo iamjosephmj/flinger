@@ -24,4 +24,4 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: ansible-lint
-      uses: iamjosephmj/flinger@main
+      uses: ansible/ansible-lint-action@main
