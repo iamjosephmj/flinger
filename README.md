@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg" 
-    width="800" 
-    height="500" 
+    width="1000" 
+    height="600" 
     />
 </p>
 
@@ -61,9 +61,11 @@ you can see that Android uses a fixed set of values so that the flings will look
 throughout different devices. The whole idea behind the creation of this library is that the
 developers will have full access to all the internal parameters that governs the fling behaviour.
 This library can be easily integrated with
-the <a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyColumns`</a>,
-<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyRows`</a>,
-<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyLists`</a> 
+the <a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyColumns`</a>
+,
+<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyRows`</a>
+,
+<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyLists`</a>
 that is provided by compose.
 </p>
 
@@ -127,7 +129,7 @@ LazyColumn(
              * number of sampling points in the spline
              */
             .numberOfSplinePoints(100)
-                
+
             // builder pattern.
             .build(),
     )
@@ -140,21 +142,26 @@ LazyColumn(
 
 ## Stock Behaviours
 
-If you are not comfortable with tweaking values, we provide you some pre-defined methods that can 
-be used to bring the behaviour to your project, you can refer to 
+If you are not comfortable with tweaking values, we provide you some pre-defined methods that can be
+used to bring the behaviour to your project, you can refer to
 <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
 
 ## Custom Behaviours
 
-If you are interested in designing your own behaviours for the Flings, you can tryout different 
-possibilities in the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree/develop/apk/">`Flinger app`</a>
+If you are interested in designing your own behaviours for the Flings, you can tryout different
+possibilities in
+the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree/develop/apk/">`Flinger app`</a>
 
-## Issues or Future Ideas
+## Contribution, Issues or Future Ideas
 
-If part of Flinger is not working correctly be sure to file a Github issue. In the issue provide as 
-many details as possible. This could include example code or the exact steps that you did so that 
-everyone can reproduce the issue. Sample projects are always the best way :). 
-This makes it easy for me or someone from the open-source community to start working!
+If part of Flinger is not working correctly be sure to file a Github issue. In the issue provide as
+many details as possible. This could include example code or the exact steps that you did so that
+everyone can reproduce the issue. Sample projects are always the best way :). This makes it easy for
+our developers or someone from the open-source community to start working!
 
-If you have a feature idea submit an issue with a feature request or submit a pull request and we 
+If you have a feature idea submit an issue with a feature request or submit a pull request and we
 will work with you to merge it in!
+
+Anyone can contribute scroll behaviours
+to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+. Before you raise a PR please make sure your code had no issue from Android studio lint analyzer.

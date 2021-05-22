@@ -125,7 +125,7 @@ fun decideFlingBehaviour(): FlingBehavior {
         }
         1 -> {
             // Smooth scroll.
-            ScrollBehaviourBank.lowInflectionLowFrictionLowDecelerationHighSampleScroll()
+            ScrollBehaviourBank.smoothScroll()
         }
         2 -> {
             /*
@@ -136,7 +136,7 @@ fun decideFlingBehaviour(): FlingBehavior {
         }
         else -> {
             // Smooth scroll.
-            ScrollBehaviourBank.lowInflectionLowFrictionLowDecelerationHighSampleScroll()
+            ScrollBehaviourBank.smoothScroll()
         }
     }
 }
