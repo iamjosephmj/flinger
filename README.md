@@ -157,7 +157,7 @@ the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree
 If part of Flinger is not working correctly be sure to file a Github issue. In the issue provide as
 many details as possible. This could include example code or the exact steps that you did so that
 everyone can reproduce the issue. Sample projects are always the best way :). This makes it easy for
-our developers or someone from the open-source community to start working!
+me or someone from the open-source community to start working!
 
 If you have a feature idea submit an issue with a feature request or submit a pull request and we
 will work with you to merge it in!
