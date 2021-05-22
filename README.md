@@ -48,6 +48,7 @@ dependencies {
 ## Basics
 
 <p>
+
 By the launch of Jetpack compose at least some of you might have thought if did they port the old 
 scroll behaviour to it. The answer to that is YES, they had ported the old 
 <a style = "color: white" href ="https://developer.android.com/reference/android/widget/OverScroller">`Overscroller`</a> behaviour 
