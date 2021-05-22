@@ -1,6 +1,6 @@
 package io.iamjosephmj.flinger.ui.state
 
-import io.iamjosephmj.flinger.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
 
 object ScrollState {
     fun buildScrollBehaviour() = ScrollViewConfiguration.Builder()

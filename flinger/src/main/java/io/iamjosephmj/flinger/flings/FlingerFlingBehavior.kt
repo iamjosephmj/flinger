@@ -25,41 +25,41 @@
 
 package io.iamjosephmj.flinger.flings
 
+import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.DecayAnimationSpec
-import androidx.compose.animation.core.generateDecayAnimationSpec
+import androidx.compose.animation.core.animateDecay
 import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalDensity
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import androidx.compose.foundation.gestures.ScrollScope
+import kotlin.math.abs
 
 /**
- *  Simple utility class for Fling based decay animations.
  *
- *  @author Joseph James.
+ * This is the default fling behaviour.
+ *
+ * @author Joseph James
  */
-
-@Composable
-fun flingBehavior(
-    scrollConfiguration: ScrollViewConfiguration =
-        ScrollViewConfiguration.Builder()
-            .build()
-): FlingBehavior {
-    val flingSpec = rememberSplineBasedDecay<Float>(scrollConfiguration)
-    return remember(flingSpec) {
-        FlingerFlingBehavior(flingSpec)
-    }
-}
-
-@Composable
-fun <T> rememberSplineBasedDecay(scrollConfiguration: ScrollViewConfiguration): DecayAnimationSpec<T> {
-    // This function will internally update the calculation of fling decay when the density changes,
-    // but the reference to the returned spec will not change across calls.
-    val density = LocalDensity.current
-    return remember(density.density) {
-        SplineBasedFloatDecayAnimationSpec(
-            density,
-            scrollConfiguration
-        ).generateDecayAnimationSpec()
+class FlingerFlingBehavior(
+    private val flingDecay: DecayAnimationSpec<Float>
+) : FlingBehavior {
+    override suspend fun ScrollScope.performFling(initialVelocity: Float): Float {
+        // come up with the better threshold, but we need it since spline curve gives us NaNs
+        return if (abs(initialVelocity) > 1f) {
+            var velocityLeft = initialVelocity
+            var lastValue = 0f
+            AnimationState(
+                initialValue = 0f,
+                initialVelocity = initialVelocity,
+            ).animateDecay(flingDecay) {
+                val delta = value - lastValue
+                val consumed = scrollBy(delta)
+                lastValue = value
+                velocityLeft = this.velocity
+                // avoid rounding errors and stop if anything is unconsumed
+                if (abs(delta - consumed) > 0.5f) this.cancelAnimation()
+            }
+            velocityLeft
+        } else {
+            initialVelocity
+        }
     }
 }
