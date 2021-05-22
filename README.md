@@ -19,7 +19,10 @@ Flinger:
 </p>
 
 <p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger-demo.gif" />
+  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger-demo.gif" 
+     width="400" 
+     height="500" 
+    />
 </p>
 
 ## Gradle
