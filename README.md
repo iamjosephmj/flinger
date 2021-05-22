@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/repo-imgs/images/flinger.jpeg" />
+  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-imgs/flinger.jpeg" />
 </p>
 
 # Flinger
