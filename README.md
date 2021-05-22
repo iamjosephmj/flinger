@@ -5,7 +5,7 @@
     />
 </p>
 
-# Flinger
+# Flinger (Only compatible with compose)
 
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
