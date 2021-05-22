@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg" 
-    width="900" 
+    width="1000" 
     height="500" 
     />
 </p>
