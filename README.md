@@ -144,4 +144,4 @@ be used to bring the behaviour to your project, you can refer to
 ## Custom Behaviours
 
 If you are interested in designing your own behaviours for the Flings, you can tryout different 
-possibilities in the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree/develop/apk/flinger.apk">`Flinger app`</a>
+possibilities in the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree/develop/apk/">`Flinger app`</a>
