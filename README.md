@@ -152,7 +152,7 @@ If you are interested in designing your own behaviours for the Flings, you can t
 possibilities in
 the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree/develop/apk/">`Flinger app`</a>
 
-## Issues or Future Ideas
+## Contribution, Issues or Future Ideas
 
 If part of Flinger is not working correctly be sure to file a Github issue. In the issue provide as
 many details as possible. This could include example code or the exact steps that you did so that
