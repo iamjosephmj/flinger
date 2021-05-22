@@ -29,7 +29,7 @@ Flinger:
 
 Add the following to your project's root build.gradle file
 
-```kotlin
+```groovy
 repositories {
     maven {
         url  "tbd"
@@ -39,7 +39,7 @@ repositories {
 
 Add the following to your project's build.gradle file
 
-```kotlin
+```groovy
 dependencies {
     implementation 'tbd'
 }
