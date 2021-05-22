@@ -15,3 +15,25 @@ Flinger is a plugin that is made on top of <a style = "color: white" href ="http
 tweak the LazyColumn's fling behaviour.
 
 </p>
+
+## Gradle
+
+Add the following to your project's root build.gradle file
+
+```kotlin
+repositories {
+	maven {
+		url  "tbd"
+	}
+}
+```
+
+Add the following to your project's build.gradle file
+
+```kotlin
+dependencies {
+implementation 'tbd'
+}
+```
+
+
