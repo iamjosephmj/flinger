@@ -70,6 +70,7 @@ Refer to the Sample project under to get more insights about the implementation.
 
 LazyColumn(
     flingBehavior = flingBehavior(
+
         ScrollViewConfiguration.Builder()
             /*
              * This variable manages the friction to the scrolls in the LazyColumn
@@ -81,6 +82,7 @@ LazyColumn(
              * animation is considered finished.
              */
             .absVelocityThreshold(0f)
+
             /*
              * Gravitational obstruction to the scroll.
              */
@@ -90,10 +92,12 @@ LazyColumn(
              * Scroll Inches per meter
              */
             .inchesPerMeter(39.37f)
+
             /*
              * Rate of deceleration of the scrollView.
              */
             .decelerationRate((ln(0.78) / ln(0.9)).toFloat())
+
             /*
              * Friction at the time of deceleration.
              */
@@ -118,6 +122,7 @@ LazyColumn(
              * number of sampling points in the spline
              */
             .numberOfSplinePoints(100)
+            // builder pattern.
             .build(),
     )
 )
