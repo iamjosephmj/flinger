@@ -1,3 +1,28 @@
+/*
+* MIT License
+*
+* Copyright (c) 2021 Joseph James
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
 package io.iamjosephmj.flinger.ui.scroll
 
 import androidx.compose.foundation.gestures.FlingBehavior
@@ -18,7 +43,19 @@ import io.iamjosephmj.flinger.bahaviours.ScrollBehaviourBank
 import io.iamjosephmj.flinger.flings.flingBehavior
 import io.iamjosephmj.flinger.ui.state.ScrollState
 
+/**
+ * The below set of methods are used to render the scroll page.
+ *
+ * @author Joseph James.
+ */
 
+/**
+ * @param navController used for navigating to the settings page.
+ *
+ * Entry point, this does 2 functions:
+ * 1. Render settings button.
+ * 2. Renders the list that is used for showcasing the scroll behaviour.
+ */
 @Composable
 fun RenderScrollPage(navController: NavController) {
     Column(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp)) {
@@ -30,6 +67,7 @@ fun RenderScrollPage(navController: NavController) {
 
 @Composable
 private fun RenderButton(navController: NavController) {
+    // Settings button.
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -52,7 +90,10 @@ private fun RenderButton(navController: NavController) {
 fun RenderList() {
     LazyColumn(
         modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
-        flingBehavior = DecideFlingBehaviour(),
+        /*
+         * Important, this is the main functionality that we are looking into.
+         */
+        flingBehavior = decideFlingBehaviour(),
     ) {
         items(100) { item ->
             Button(
@@ -76,18 +117,25 @@ fun RenderList() {
 }
 
 @Composable
-fun DecideFlingBehaviour(): FlingBehavior {
+fun decideFlingBehaviour(): FlingBehavior {
     return when (ScrollState.type) {
         0 -> {
+            // Native scroll.
             ScrollBehaviourBank.getAndroidNativeScroll()
         }
         1 -> {
+            // Smooth scroll.
             ScrollBehaviourBank.lowInflectionLowFrictionLowDecelerationHighSampleScroll()
         }
         2 -> {
+            /*
+             * custom scroll, this is how you should build the scroll behaviour.
+             * you can build the scroll behaviour with the below mentioned builder pattern.
+             */
             flingBehavior(scrollConfiguration = ScrollState.buildScrollBehaviour())
         }
         else -> {
+            // Smooth scroll.
             ScrollBehaviourBank.lowInflectionLowFrictionLowDecelerationHighSampleScroll()
         }
     }

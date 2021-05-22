@@ -1,3 +1,28 @@
+/*
+* MIT License
+*
+* Copyright (c) 2021 Joseph James
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
 package io.iamjosephmj.flinger.ui.settings
 
 import androidx.compose.foundation.layout.*
@@ -30,7 +55,15 @@ import androidx.navigation.compose.popUpTo
 import io.iamjosephmj.flinger.ui.state.ScrollState
 import io.iamjosephmj.flinger.ui.utils.toFloatNum
 
+/**
+ * The below set of methods are used to render the settings page page.
+ *
+ * @author Joseph James.
+ */
 
+/**
+ * Entry point.
+ */
 @Composable
 fun RenderSettingsPage(navController: NavController) {
     BuildPage(navController)
@@ -38,7 +71,7 @@ fun RenderSettingsPage(navController: NavController) {
 
 @Composable
 fun BuildPage(navController: NavController) {
-
+    // Heading.
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -53,11 +86,13 @@ fun BuildPage(navController: NavController) {
             textAlign = TextAlign.Center
         )
         val radioSelection = remember {
+            // default selection is smooth-scroll behaviour.
             mutableStateOf("smooth")
         }
-
+        // Radio buttons used for selecting native, smooth or custom scroll behaviours.
         BuildRadioButton(radioSelection)
 
+        // Edit texts for setting the custom scroll behaviour.
         BuildRadioSelectionPage(radioSelection, navController)
     }
 }
@@ -367,7 +402,7 @@ fun BuildEditTexts(navController: NavController) {
                         }.count() > 1 -> {
                             decelerationRate.value = ScrollState.decelerationRate.toString()
                         }
-                        it.length >= 1 -> {
+                        it.isNotEmpty() -> {
                             decelerationRate.value = it
                             ScrollState.decelerationRate = it.toFloatNum()
                         }
@@ -411,7 +446,7 @@ fun BuildEditTexts(navController: NavController) {
                         }.count() > 1 -> {
                             splineInflection.value = ScrollState.splineInflection.toString()
                         }
-                        it.length >= 1 -> {
+                        it.isNotEmpty() -> {
                             splineInflection.value = it
                             ScrollState.splineInflection = it.toFloatNum()
                         }
@@ -451,7 +486,7 @@ fun BuildEditTexts(navController: NavController) {
                         }.count() > 1 -> {
                             splineStartTension.value = ScrollState.splineStartTension.toString()
                         }
-                        it.length >= 1 -> {
+                        it.isNotEmpty() -> {
                             splineStartTension.value = it
                             ScrollState.splineStartTension = it.toFloatNum()
                         }
@@ -492,7 +527,7 @@ fun BuildEditTexts(navController: NavController) {
                         }.count() > 1 -> {
                             splineEndTension.value = ScrollState.splineEndTension.toString()
                         }
-                        it.length >= 1 -> {
+                        it.isNotEmpty() -> {
                             splineEndTension.value = it
                             ScrollState.splineEndTension = it.toFloatNum()
                         }
