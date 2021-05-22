@@ -41,16 +41,39 @@ object ScrollBehaviourBank {
     @Composable
     fun getAndroidNativeScroll(): FlingBehavior = ScrollableDefaults.flingBehavior()
 
+
     @Composable
-    fun lowInflectionLowFrictionLowDecelerationScroll(): FlingBehavior = flingBehavior(
+    fun smoothScroll(): FlingBehavior = flingBehavior(
         scrollConfiguration = ScrollViewConfiguration.Builder()
             .build()
     )
 
     @Composable
-    fun lowInflectionLowFrictionLowDecelerationHighSampleScroll(): FlingBehavior = flingBehavior(
+    fun presetOne(): FlingBehavior = flingBehavior(
         scrollConfiguration = ScrollViewConfiguration.Builder()
-            .numberOfSplinePoints(1000)
+            .scrollViewFriction(0.04f)
+            .build()
+    )
+
+    @Composable
+    fun presetTwo(): FlingBehavior = flingBehavior(
+        scrollConfiguration = ScrollViewConfiguration.Builder()
+            .splineInflection(0.16f)
+            .build()
+    )
+
+    @Composable
+    fun presetThree(): FlingBehavior = flingBehavior(
+        scrollConfiguration = ScrollViewConfiguration.Builder()
+            .decelerationFriction(0.5f)
+            .build()
+    )
+
+    @Composable
+    fun presetFour(): FlingBehavior = flingBehavior(
+        scrollConfiguration = ScrollViewConfiguration.Builder()
+            .decelerationFriction(0.6f)
+            .splineInflection(.4f)
             .build()
     )
 
