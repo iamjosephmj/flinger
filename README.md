@@ -135,4 +135,13 @@ LazyColumn(
 
 ```
 
+## Stock Behaviours
 
+If you are not comfortable with tweaking values, we provide you some pre-defined methods that can 
+be used to bring the behaviour to your project, you can refer to 
+<a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+
+## Custom Behaviours
+
+If you are interested in designing your own behaviours for the Flings, you can tryout different 
+possibilities in the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`Flinger app`</a>
