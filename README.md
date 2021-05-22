@@ -50,8 +50,8 @@ dependencies {
 By the launch of Jetpack compose at least some of you might have thought if the folks at Google had port the old
 scroll behaviour to it. The answer to that is YES, they had ported the old
 <a style = "color: white" href ="https://developer.android.com/reference/android/widget/OverScroller">`Overscroller`</a>
-behaviour to the latest compose. The Overscroller is the component that is responsible for flings in
-ScrollView/RecyclerViews in Android. If we dig deeper into the implementation of the Overscroller,
+behaviour to the latest compose. The Overscroller is the component that is responsible driving fling behaviours in
+ScrollView/RecyclerViews. If we dig deeper into the implementation of the Overscroller,
 you can see that Android uses a fixed set of values so that the flings will look almost similar
 throughout different devices. The whole idea behind the creation of this library is that the
 developers will have full access to all the internal parameters that governs the fling behaviour.
