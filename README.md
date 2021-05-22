@@ -13,7 +13,7 @@
 
 Flinger is a plugin that is made on top
 of <a style = "color: white" href ="https://developer.android.com/jetpack/compose">`jetpack compose`</a>
-that will help the developer to tweak the LazyColumn's fling behaviour. This Library will help the
+that will help the developer to tweak the LazyList's fling behaviour. This Library will help the
 developers to change the fling behaviours much easier without digging deep. Here is a prototype of
 Flinger:
 </p>
