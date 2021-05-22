@@ -58,7 +58,9 @@ you can see that Android uses a fixed set of values so that the flings will look
 throughout different devices. The whole idea behind the creation of this library is that the
 developers will have full access to all the internal parameters that governs the fling behaviour.
 This library can be easily integrated with
-the <a style = "color: white" href ="https://developer.android.com/jetpack/compose/listsr">`LazyColumns`</a>
+the <a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyColumns`</a>,
+<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyRows`</a>,
+<a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyLists`</a> 
 that is provided by compose.
 </p>
 
@@ -122,6 +124,7 @@ LazyColumn(
              * number of sampling points in the spline
              */
             .numberOfSplinePoints(100)
+                
             // builder pattern.
             .build(),
     )
