@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  quality-check:
     runs-on: ubuntu-latest
     steps:
       - name: ansible-lint
