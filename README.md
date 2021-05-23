@@ -10,6 +10,8 @@
 [![CircleCI Build Status](https://circleci.com/gh/willowtreeapps/spruce-android.svg?style=shield)](https://app.circleci.com/projects/project-setup/github/iamjosephmj/flinger/)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
+[![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
+
 
 ## What is Flinger?
 
