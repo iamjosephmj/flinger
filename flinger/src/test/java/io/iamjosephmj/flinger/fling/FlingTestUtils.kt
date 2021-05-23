@@ -3,13 +3,8 @@ package io.iamjosephmj.flinger.fling
 import androidx.compose.ui.unit.Density
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.FlingCalculator
-import org.mockito.Mockito
 
 object FlingTestUtils {
-
-    fun mockDensity(density: Density) {
-        Mockito.`when`(density.density).thenReturn(221f)
-    }
 
     fun getFlingCalculatorObject(
         density: Density,
