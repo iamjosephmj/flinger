@@ -25,7 +25,7 @@
 
 package io.iamjosephmj.flinger.spline
 
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 import kotlin.math.abs
 
 /**
@@ -38,7 +38,7 @@ internal fun computeSplineInfo(
     splinePositions: FloatArray,
     splineTimes: FloatArray,
     nbSamples: Int,
-    scrollViewConfiguration: ScrollViewConfiguration
+    flingConfiguration: FlingConfiguration
 ) {
     var xMin = 0.0f
     var yMin = 0.0f
@@ -52,25 +52,25 @@ internal fun computeSplineInfo(
             x = xMin + (xMax - xMin) / 2.0f
             coef = 3.0f * x * (1.0f - x)
             tx = coef * ((1.0f - x)
-                    * scrollViewConfiguration.splineP1 + x
-                    * scrollViewConfiguration.splineP2) + x * x * x
+                    * flingConfiguration.splineP1 + x
+                    * flingConfiguration.splineP2) + x * x * x
             if (abs(tx - alpha) < 1E-5) break
             if (tx > alpha) xMax = x else xMin = x
         }
         splinePositions[i] =
-            coef * ((1.0f - x) * scrollViewConfiguration.splineStartTension + x) + x * x * x
+            coef * ((1.0f - x) * flingConfiguration.splineStartTension + x) + x * x * x
         var yMax = 1.0f
         var y: Float
         var dy: Float
         while (true) {
             y = yMin + (yMax - yMin) / 2.0f
             coef = 3.0f * y * (1.0f - y)
-            dy = coef * ((1.0f - y) * scrollViewConfiguration.splineStartTension + y) + y * y * y
+            dy = coef * ((1.0f - y) * flingConfiguration.splineStartTension + y) + y * y * y
             if (abs(dy - alpha) < 1E-5) break
             if (dy > alpha) yMax = y else yMin = y
         }
-        splineTimes[i] = coef * ((1.0f - y) * scrollViewConfiguration.splineP1 + y *
-                scrollViewConfiguration.splineP2
+        splineTimes[i] = coef * ((1.0f - y) * flingConfiguration.splineP1 + y *
+                flingConfiguration.splineP2
                 ) + y * y * y
     }
     splineTimes[nbSamples] = 1.0f

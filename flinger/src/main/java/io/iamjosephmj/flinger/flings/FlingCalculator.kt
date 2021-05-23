@@ -26,7 +26,7 @@
 package io.iamjosephmj.flinger.flings
 
 import androidx.compose.ui.unit.Density
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.spline.AndroidFlingSpline
 import kotlin.math.exp
 import kotlin.math.sign
@@ -36,17 +36,17 @@ import kotlin.math.sign
  * Configuration for Android-feel flinging motion at the given density.
  *
  * @param density density of the screen. Use LocalDensity to get current density in composition.
- * @param scrollConfiguration this contain all parameters need for setting the scroll behaviour.
+ * @param flingConfiguration this contain all parameters need for setting the scroll behaviour.
  *
  * @author Joseph James
  */
 class FlingCalculator(
     val density: Density,
-    val scrollConfiguration: ScrollViewConfiguration
+    val flingConfiguration: FlingConfiguration
 ) {
 
     private val androidFlingSpline: AndroidFlingSpline by lazy {
-        AndroidFlingSpline(scrollViewConfiguration = scrollConfiguration)
+        AndroidFlingSpline(flingConfiguration = flingConfiguration)
     }
 
     /**
@@ -54,8 +54,8 @@ class FlingCalculator(
      * and a [coefficient of friction][friction].
      */
     private fun computeDeceleration(friction: Float, density: Float): Float =
-        scrollConfiguration.gravitationalForce *
-                scrollConfiguration.inchesPerMeter *
+        flingConfiguration.gravitationalForce *
+                flingConfiguration.inchesPerMeter *
                 density *
                 160f *
                 friction
@@ -71,12 +71,12 @@ class FlingCalculator(
      * the given [density].
      */
     private fun computeDeceleration(density: Density) =
-        computeDeceleration(scrollConfiguration.decelerationFriction, density.density)
+        computeDeceleration(flingConfiguration.decelerationFriction, density.density)
 
     private fun getSplineDeceleration(velocity: Float): Double =
         androidFlingSpline.deceleration(
             velocity,
-            scrollConfiguration.scrollFriction * magicPhysicalCoefficient
+            flingConfiguration.scrollFriction * magicPhysicalCoefficient
         )
 
     /**
@@ -84,7 +84,7 @@ class FlingCalculator(
      */
     fun flingDuration(velocity: Float): Long {
         val l = getSplineDeceleration(velocity)
-        val decelMinusOne = scrollConfiguration.decelerationRate - 1.0
+        val decelMinusOne = flingConfiguration.decelerationRate - 1.0
         return (1000.0 * exp(l / decelMinusOne)).toLong()
     }
 
@@ -93,10 +93,10 @@ class FlingCalculator(
      */
     fun flingDistance(velocity: Float): Float {
         val l = getSplineDeceleration(velocity)
-        val decelMinusOne = scrollConfiguration.decelerationRate - 1.0
+        val decelMinusOne = flingConfiguration.decelerationRate - 1.0
         return (
-                scrollConfiguration.scrollFriction * magicPhysicalCoefficient
-                        * exp(scrollConfiguration.decelerationRate / decelMinusOne * l)
+                flingConfiguration.scrollFriction * magicPhysicalCoefficient
+                        * exp(flingConfiguration.decelerationRate / decelMinusOne * l)
                 ).toFloat()
     }
 
@@ -105,12 +105,12 @@ class FlingCalculator(
      */
     fun flingInfo(velocity: Float): FlingInfo {
         val l = getSplineDeceleration(velocity)
-        val decelMinusOne = scrollConfiguration.decelerationRate - 1.0
+        val decelMinusOne = flingConfiguration.decelerationRate - 1.0
         return FlingInfo(
             initialVelocity = velocity,
             distance = (
-                    scrollConfiguration.scrollFriction * magicPhysicalCoefficient
-                            * exp(scrollConfiguration.decelerationRate / decelMinusOne * l)
+                    flingConfiguration.scrollFriction * magicPhysicalCoefficient
+                            * exp(flingConfiguration.decelerationRate / decelMinusOne * l)
                     ).toFloat(),
             duration = (1000.0 * exp(l / decelMinusOne)).toLong(),
             androidFlingSpline

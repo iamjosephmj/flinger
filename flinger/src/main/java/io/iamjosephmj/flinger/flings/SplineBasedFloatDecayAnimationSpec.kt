@@ -27,7 +27,7 @@ package io.iamjosephmj.flinger.flings
 
 import androidx.compose.animation.core.FloatDecayAnimationSpec
 import androidx.compose.ui.unit.Density
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 import kotlin.math.sign
 
 /**
@@ -37,7 +37,7 @@ import kotlin.math.sign
  */
 class SplineBasedFloatDecayAnimationSpec(
     density: Density,
-    scrollConfiguration: ScrollViewConfiguration
+    scrollConfiguration: FlingConfiguration
 ) :
     FloatDecayAnimationSpec {
 
@@ -46,7 +46,7 @@ class SplineBasedFloatDecayAnimationSpec(
      */
     private val flingCalculator = FlingCalculator(
         density = density,
-        scrollConfiguration = scrollConfiguration
+        flingConfiguration = scrollConfiguration
     )
 
     /*
