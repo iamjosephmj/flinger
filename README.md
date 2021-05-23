@@ -144,7 +144,7 @@ LazyColumn(
 
 If you are not comfortable with tweaking values, we provide you some pre-defined methods that can be
 used to bring the behaviour to your project, you can refer to
-<a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+<a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/StockFlingBehaviours.kt">`StockFlingBehaviours.kt`</a>
 
 ## Custom Behaviours
 
@@ -163,5 +163,5 @@ If you have a feature idea submit an issue with a feature request or submit a pu
 will work with you to merge it in!
 
 Anyone can contribute scroll behaviours
-to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/StockFlingBehaviours.kt">`StockFlingBehaviours.kt`</a>
 . Before you raise a PR please make sure your code had no issue from Android studio lint analyzer.

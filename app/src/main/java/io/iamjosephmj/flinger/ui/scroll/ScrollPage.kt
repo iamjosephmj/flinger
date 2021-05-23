@@ -38,8 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
-import io.iamjosephmj.flinger.bahaviours.ScrollBehaviourBank
+import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
 import io.iamjosephmj.flinger.flings.flingBehavior
 import io.iamjosephmj.flinger.ui.state.ScrollState
 
@@ -121,11 +120,11 @@ fun decideFlingBehaviour(): FlingBehavior {
     return when (ScrollState.type) {
         0 -> {
             // Native scroll.
-            ScrollBehaviourBank.getAndroidNativeScroll()
+            StockFlingBehaviours.getAndroidNativeScroll()
         }
         1 -> {
             // Smooth scroll.
-            ScrollBehaviourBank.smoothScroll()
+            StockFlingBehaviours.smoothScroll()
         }
         2 -> {
             /*
@@ -136,7 +135,7 @@ fun decideFlingBehaviour(): FlingBehavior {
         }
         else -> {
             // Smooth scroll.
-            ScrollBehaviourBank.smoothScroll()
+            StockFlingBehaviours.smoothScroll()
         }
     }
 }

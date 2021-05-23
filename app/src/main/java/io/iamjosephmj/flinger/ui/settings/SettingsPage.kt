@@ -50,8 +50,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
-import androidx.navigation.compose.popUpTo
 import io.iamjosephmj.flinger.ui.state.ScrollState
 import io.iamjosephmj.flinger.ui.utils.toFloatNum
 
