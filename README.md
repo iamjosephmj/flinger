@@ -36,7 +36,7 @@ Add the following to your project's root build.gradle file
 ```groovy
 repositories {
     maven {
-        url "tbd"
+        url "https://jitpack.io"
     }
 }
 ```
@@ -45,7 +45,7 @@ Add the following to your project's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'tbd'
+    implementation 'com.github.iamjosephmj:flinger:1.0.0'
 }
 ```
 
