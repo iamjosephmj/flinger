@@ -7,24 +7,18 @@ orbs:
   android: circleci/android@1.0.3
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  test:
-
-    override:
-      - chmod +x gradlew
-    # These next lines define the Android machine image executor: https://circleci.com/docs/2.0/executor-types/
+  unit-test:
     executor:
       name: android/android-machine
-
+      resource-class: xlarge
     steps:
-      # Checkout the code as the first step.
       - checkout
-      - chmod +x gradlew
-      - ./gradlew assemble
-
-      # The next step will run the unit tests
+      - android/restore-gradle-cache
+      - android/restore-build-cache
       - android/run-tests:
-          test-command: ./gradlew test
+          test-command: ./gradlew testDebug
+      - android/save-gradle-cache
+      - android/save-build-cache
 
 workflows:
   # Below is the definition of your workflow.
@@ -33,4 +27,4 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample:
     jobs:
-      - test
+      - unit-test
