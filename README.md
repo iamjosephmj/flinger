@@ -1,8 +1,5 @@
 <p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg" 
-    width="1000" 
-    height="600" 
-    />
+  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg"/>
 </p>
 
 # Flinger (Only compatible with compose)
