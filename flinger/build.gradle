@@ -74,7 +74,7 @@ afterEvaluate {
 
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'io.iamjosephmj.flinger'
-                artifactId = 'final-05242021'
+                artifactId = 'flinger-release-05242021'
                 version = '1.0.0'
             }
             // Creates a Maven publication called “debug”.
@@ -83,7 +83,7 @@ afterEvaluate {
                 from components.debug
 
                 groupId = 'io.iamjosephmj.flinger'
-                artifactId = 'debug-05242021'
+                artifactId = 'flinger-debug-05242021'
                 version = '1.0.0'
             }
         }
