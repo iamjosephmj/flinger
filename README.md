@@ -163,6 +163,13 @@ our developers or someone from the open-source community to start working!
 If you have a feature idea submit an issue with a feature request or submit a pull request and we
 will work with you to merge it in!
 
-Anyone can contribute scroll behaviours
+## Contribution guidelines
+
+Contributions are more than welcome!
+- You should make sure that all the test are working properly.
+- You should raise a PR to `develop` branch
+- Anyone can contribute fling behaviours
 to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/StockFlingBehaviours.kt">`StockFlingBehaviours.kt`</a>
-. Before you raise a PR please make sure your code had no issue from Android studio lint analyzer.
+. 
+- Before you raise a PR please make sure your code had no issue from Android studio lint analyzer.  
+
