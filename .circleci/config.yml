@@ -19,7 +19,7 @@ jobs:
           name: chmod permissions
           command: chmod +x ./gradlew
       - android/run-tests:
-          test-command: ./gradlew testDebug
+          test-command: ./gradlew flinger:testDebugUnitTest
       - android/save-gradle-cache
       - android/save-build-cache
 
