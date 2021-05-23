@@ -25,7 +25,7 @@
 
 package io.iamjosephmj.flinger.spline
 
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 import kotlin.math.abs
 import kotlin.math.ln
 
@@ -39,19 +39,19 @@ import kotlin.math.ln
  *
  * @author Joseph James.
  */
-class AndroidFlingSpline(private val scrollViewConfiguration: ScrollViewConfiguration) {
-    private val samples by lazy { scrollViewConfiguration.numberOfSplinePoints }
+class AndroidFlingSpline(private val flingConfiguration: FlingConfiguration) {
+    private val samples by lazy { flingConfiguration.numberOfSplinePoints }
 
     private val splinePositions by lazy {
-        FloatArray(scrollViewConfiguration.numberOfSplinePoints + 1)
+        FloatArray(flingConfiguration.numberOfSplinePoints + 1)
     }
 
     private val splineTimes by lazy {
-        FloatArray(scrollViewConfiguration.numberOfSplinePoints + 1)
+        FloatArray(flingConfiguration.numberOfSplinePoints + 1)
     }
 
     init {
-        computeSplineInfo(splinePositions, splineTimes, samples, scrollViewConfiguration)
+        computeSplineInfo(splinePositions, splineTimes, samples, flingConfiguration)
     }
 
     /**
@@ -81,7 +81,7 @@ class AndroidFlingSpline(private val scrollViewConfiguration: ScrollViewConfigur
      * The rate of deceleration along the spline motion given [velocity] and [friction].
      */
     fun deceleration(velocity: Float, friction: Float): Double =
-        ln(scrollViewConfiguration.splineInflection * abs(velocity) / friction.toDouble())
+        ln(flingConfiguration.splineInflection * abs(velocity) / friction.toDouble())
 
     /**
      * Result coefficients of a scroll computation

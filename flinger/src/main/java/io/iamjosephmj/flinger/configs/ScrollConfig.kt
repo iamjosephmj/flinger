@@ -32,7 +32,7 @@ import kotlin.math.ln
  *
  * @author Joseph James.
  */
-class ScrollViewConfiguration private constructor(
+class FlingConfiguration private constructor(
     val scrollFriction: Float,
     val absVelocityThreshold: Float,
     val gravitationalForce: Float,
@@ -132,7 +132,7 @@ class ScrollViewConfiguration private constructor(
         fun numberOfSplinePoints(numberOfSplinePoints: Int) =
             apply { this.numberOfSplinePoints = numberOfSplinePoints }
 
-        fun build() = ScrollViewConfiguration(
+        fun build() = FlingConfiguration(
             scrollViewFriction,
             absVelocityThreshold,
             gravitationalForce,

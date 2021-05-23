@@ -25,7 +25,7 @@
 
 package io.iamjosephmj.flinger.ui.state
 
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 
 /**
  * This is how we make a fling behaviour with all values from the settings page.
@@ -33,7 +33,7 @@ import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
  * @author Joseph James.
  */
 object ScrollState {
-    fun buildScrollBehaviour() = ScrollViewConfiguration.Builder()
+    fun buildScrollBehaviour() = FlingConfiguration.Builder()
         .scrollViewFriction(scrollFriction)
         .absVelocityThreshold(absVelocityThreshold)
         .gravitationalForce(gravitationalForce)

@@ -31,7 +31,7 @@ import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalDensity
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 
 /**
  *  Simple utility class for Fling based decay animations.
@@ -41,8 +41,8 @@ import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
 
 @Composable
 fun flingBehavior(
-    scrollConfiguration: ScrollViewConfiguration =
-        ScrollViewConfiguration.Builder()
+    scrollConfiguration: FlingConfiguration =
+        FlingConfiguration.Builder()
             .build()
 ): FlingBehavior {
     val flingSpec = rememberSplineBasedDecay<Float>(scrollConfiguration)
@@ -52,7 +52,7 @@ fun flingBehavior(
 }
 
 @Composable
-fun <T> rememberSplineBasedDecay(scrollConfiguration: ScrollViewConfiguration): DecayAnimationSpec<T> {
+fun <T> rememberSplineBasedDecay(scrollConfiguration: FlingConfiguration): DecayAnimationSpec<T> {
     // This function will internally update the calculation of fling decay when the density changes,
     // but the reference to the returned spec will not change across calls.
     val density = LocalDensity.current

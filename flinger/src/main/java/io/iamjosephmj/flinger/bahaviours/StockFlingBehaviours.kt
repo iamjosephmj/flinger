@@ -28,7 +28,7 @@ package io.iamjosephmj.flinger.bahaviours
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.runtime.Composable
-import io.iamjosephmj.flinger.configs.ScrollViewConfiguration
+import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.flingBehavior
 
 /**
@@ -44,34 +44,34 @@ object StockFlingBehaviours {
 
     @Composable
     fun smoothScroll(): FlingBehavior = flingBehavior(
-        scrollConfiguration = ScrollViewConfiguration.Builder()
+        scrollConfiguration = FlingConfiguration.Builder()
             .build()
     )
 
     @Composable
     fun presetOne(): FlingBehavior = flingBehavior(
-        scrollConfiguration = ScrollViewConfiguration.Builder()
+        scrollConfiguration = FlingConfiguration.Builder()
             .scrollViewFriction(0.04f)
             .build()
     )
 
     @Composable
     fun presetTwo(): FlingBehavior = flingBehavior(
-        scrollConfiguration = ScrollViewConfiguration.Builder()
+        scrollConfiguration = FlingConfiguration.Builder()
             .splineInflection(0.16f)
             .build()
     )
 
     @Composable
     fun presetThree(): FlingBehavior = flingBehavior(
-        scrollConfiguration = ScrollViewConfiguration.Builder()
+        scrollConfiguration = FlingConfiguration.Builder()
             .decelerationFriction(0.5f)
             .build()
     )
 
     @Composable
     fun presetFour(): FlingBehavior = flingBehavior(
-        scrollConfiguration = ScrollViewConfiguration.Builder()
+        scrollConfiguration = FlingConfiguration.Builder()
             .decelerationFriction(0.6f)
             .splineInflection(.4f)
             .build()
