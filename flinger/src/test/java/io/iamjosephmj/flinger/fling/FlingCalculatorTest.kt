@@ -1,7 +1,6 @@
 package io.iamjosephmj.flinger.fling
 
 import com.google.common.truth.Truth
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.runners.MockitoJUnitRunner
@@ -9,11 +8,6 @@ import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class FlingCalculatorTest {
-
-    @Before
-    fun setup() {
-
-    }
 
     @Test
     fun `test fling distance success`() {
