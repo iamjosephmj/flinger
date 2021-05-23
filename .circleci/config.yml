@@ -19,7 +19,7 @@ jobs:
 
       # The next step will run the unit tests
       - android/run-tests:
-          test-command: ./gradlew lint testDebug --continue
+          test-command: ./gradlew test
 
 workflows:
   # Below is the definition of your workflow.
