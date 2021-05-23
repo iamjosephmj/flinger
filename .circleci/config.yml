@@ -18,8 +18,8 @@ jobs:
       - android/run-tests:
           test-command: ./gradlew flinger:testDebugUnitTest
       - android/save-gradle-cache
-      - android/save-build-cache
-
+      - store_test_results:
+          path: flinger/build/test-results
 workflows:
   pipeline:
     jobs:
