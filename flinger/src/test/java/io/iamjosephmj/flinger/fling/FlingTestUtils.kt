@@ -12,7 +12,7 @@ object FlingTestUtils {
     ): FlingCalculator {
         return FlingCalculator(
             density,
-            getDefaultScrollConfiguration()
+            flingConfiguration
         )
     }
 
