@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'maven-publish'
 }
 
 android {
@@ -61,4 +62,30 @@ dependencies {
 
     testImplementation "com.google.truth:truth:1.1.2"
 
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'io.iamjosephmj.flinger'
+                artifactId = 'final-05242021'
+                version = '1.0.0'
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.debug
+
+                groupId = 'io.iamjosephmj.flinger'
+                artifactId = 'debug-05242021'
+                version = '1.0.0'
+            }
+        }
+    }
 }
