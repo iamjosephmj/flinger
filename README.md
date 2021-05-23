@@ -7,7 +7,7 @@
 
 # Flinger (Only compatible with compose)
 
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)]()
+[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 
 ## What is Flinger?
