@@ -16,6 +16,8 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - chmod +x gradlew
+      - ./gradlew assemble
 
       # The next step will run the unit tests
       - android/run-tests:
