@@ -36,7 +36,7 @@ import io.iamjosephmj.flinger.flings.flingBehavior
  *
  * @author Joseph James
  */
-object ScrollBehaviourBank {
+object StockFlingBehaviours {
 
     @Composable
     fun getAndroidNativeScroll(): FlingBehavior = ScrollableDefaults.flingBehavior()

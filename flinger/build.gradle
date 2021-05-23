@@ -29,6 +29,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-Xallow-jvm-ir-dependencies"
     }
 
     buildFeatures {
@@ -37,11 +38,25 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.0.0-beta01'
+        kotlinCompilerVersion = "1.4.32"
+        kotlinCompilerExtensionVersion = "1.0.0-beta07"
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = false
     }
 }
 
 dependencies {
-    implementation 'androidx.compose.ui:ui:1.0.0-beta06'
-    implementation 'androidx.compose.material:material:1.0.0-beta06'
+    implementation("androidx.compose.compiler:compiler:1.0.0-beta07")
+    implementation 'androidx.compose.ui:ui:1.0.0-beta07'
+    implementation 'androidx.compose.material:material:1.0.0-beta07'
+
+    // Required -- JUnit 4 framework
+    testImplementation("junit:junit:4.12")
+    // Optional -- Robolectric environment
+    testImplementation('androidx.test:core:1.0.0')
+    // Optional -- Mockito framework
+    testImplementation("org.mockito:mockito-core:1.10.19")
+
 }

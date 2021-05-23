@@ -1,5 +1,7 @@
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg" 
+    width="1000" 
+    height="600" 
     />
 </p>
 
@@ -10,11 +12,14 @@
 
 ## What is Flinger?
 
+<p>
+
 Flinger is a plugin that is made on top
 of <a style = "color: white" href ="https://developer.android.com/jetpack/compose">`jetpack compose`</a>
 that will help the developer to tweak the LazyList's fling behaviour. This Library will help the
 developers to change the fling behaviours much easier without digging deep. Here is a prototype of
 Flinger:
+</p>
 
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger-demo.gif" 
@@ -45,11 +50,13 @@ dependencies {
 
 ## Basics
 
-By the launch of Jetpack compose at least some of you might have thought if the folks at Google had port the old
+<p>
+
+By the launch of Jetpack compose at least some of you might have thought if did they port the old
 scroll behaviour to it. The answer to that is YES, they had ported the old
 <a style = "color: white" href ="https://developer.android.com/reference/android/widget/OverScroller">`Overscroller`</a>
-behaviour to the latest compose. The Overscroller is the component that is responsible driving fling behaviours in
-ScrollView/RecyclerViews. If we dig deeper into the implementation of the Overscroller,
+behaviour to the latest compose. The Overscroller is the component that is responsible for flings in
+ScrollView/RecyclerViews in Android. If we dig deeper into the implementation of the Overscroller,
 you can see that Android uses a fixed set of values so that the flings will look almost similar
 throughout different devices. The whole idea behind the creation of this library is that the
 developers will have full access to all the internal parameters that governs the fling behaviour.
@@ -60,7 +67,7 @@ the <a style = "color: white" href ="https://developer.android.com/jetpack/compo
 ,
 <a style = "color: white" href ="https://developer.android.com/jetpack/compose/lists">`LazyLists`</a>
 that is provided by compose.
-
+</p>
 
 ## Usage
 
@@ -137,7 +144,7 @@ LazyColumn(
 
 If you are not comfortable with tweaking values, we provide you some pre-defined methods that can be
 used to bring the behaviour to your project, you can refer to
-<a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+<a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/StockFlingBehaviours.kt">`StockFlingBehaviours.kt`</a>
 
 ## Custom Behaviours
 
@@ -150,11 +157,11 @@ the <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/tree
 If part of Flinger is not working correctly be sure to file a Github issue. In the issue provide as
 many details as possible. This could include example code or the exact steps that you did so that
 everyone can reproduce the issue. Sample projects are always the best way :). This makes it easy for
-me or someone from the open-source community to start working!
+our developers or someone from the open-source community to start working!
 
 If you have a feature idea submit an issue with a feature request or submit a pull request and we
 will work with you to merge it in!
 
 Anyone can contribute scroll behaviours
-to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/ScrollBehaviourBank.kt">`ScrollBehaviourBank.kt`</a>
+to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/main/flinger/src/main/java/io/iamjosephmj/flinger/bahaviours/StockFlingBehaviours.kt">`StockFlingBehaviours.kt`</a>
 . Before you raise a PR please make sure your code had no issue from Android studio lint analyzer.
