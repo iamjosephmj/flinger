@@ -1,9 +1,4 @@
-<p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg"
-      width=25% 
-       height=25%
-       />
-</p>
+![Spruce Logo](https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg)
 
 # Flinger (Only compatible with compose)
 
