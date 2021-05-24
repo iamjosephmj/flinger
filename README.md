@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg"
        width="700"
-       height="500"
+       height="400"
        />
 </p>
 
