@@ -34,9 +34,9 @@ import io.iamjosephmj.flinger.ui.scroll.RenderScrollPage
 import io.iamjosephmj.flinger.ui.settings.RenderSettingsPage
 
 @Composable
-fun CreateNavHost(navController: NavController) {
+fun CreateNavHost(navController: NavHostController) {
     NavHost(
-        navController = navController as NavHostController,
+        navController = navController,
         startDestination = "scrollPage",
     ) {
         composable("scrollPage") { RenderScrollPage(navController) }

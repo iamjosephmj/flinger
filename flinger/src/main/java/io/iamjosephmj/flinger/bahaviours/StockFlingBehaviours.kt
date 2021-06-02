@@ -77,4 +77,12 @@ object StockFlingBehaviours {
             .build()
     )
 
+    @Composable
+    fun presetFive(): FlingBehavior = flingBehavior(
+        scrollConfiguration = FlingConfiguration.Builder()
+            .scrollViewFriction(.09f)
+            .decelerationFriction(0.015f)
+            .build()
+    )
+
 }
