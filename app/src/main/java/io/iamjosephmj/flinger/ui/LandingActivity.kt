@@ -34,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import io.iamjosephmj.flinger.ui.utils.CreateNavHost
 import io.iamjosephmj.flinger.ui.utils.LightTheme
@@ -45,7 +46,7 @@ import io.iamjosephmj.flinger.ui.utils.LightTheme
  */
 class LandingActivity : AppCompatActivity() {
 
-    lateinit var navController: NavController
+    lateinit var navController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
