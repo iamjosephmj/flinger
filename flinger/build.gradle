@@ -38,7 +38,7 @@ android {
 
     composeOptions {
         kotlinCompilerVersion = "1.5.10"
-        kotlinCompilerExtensionVersion = "1.0.0-beta08"
+        kotlinCompilerExtensionVersion = "1.0.0-beta09"
     }
 
     testOptions {
@@ -47,9 +47,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.compiler:compiler:1.0.0-beta08")
-    implementation 'androidx.compose.ui:ui:1.0.0-beta08'
-    implementation 'androidx.compose.material:material:1.0.0-beta08'
+    implementation("androidx.compose.compiler:compiler:1.0.0-beta09")
+    implementation 'androidx.compose.ui:ui:1.0.0-beta09'
+    implementation 'androidx.compose.material:material:1.0.0-beta09'
 
     // Required -- JUnit 4 framework
     testImplementation("junit:junit:4.13.2")
