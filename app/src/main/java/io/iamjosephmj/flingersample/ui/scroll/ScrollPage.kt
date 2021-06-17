@@ -23,7 +23,7 @@
 *
 */
 
-package io.iamjosephmj.flinger.ui.scroll
+package io.iamjosephmj.flingersample.ui.scroll
 
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.layout.*
@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
 import io.iamjosephmj.flinger.flings.flingBehavior
-import io.iamjosephmj.flinger.ui.state.ScrollState
+import io.iamjosephmj.flingersample.ui.state.ScrollState
 
 /**
  * The below set of methods are used to render the scroll page.
