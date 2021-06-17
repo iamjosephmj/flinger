@@ -23,23 +23,18 @@
 *
 */
 
-package io.iamjosephmj.flinger.ui.utils
+package io.iamjosephmj.flingersample.ui.utils
 
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import io.iamjosephmj.flinger.ui.scroll.RenderScrollPage
-import io.iamjosephmj.flinger.ui.settings.RenderSettingsPage
+import android.text.TextUtils
 
-@Composable
-fun CreateNavHost(navController: NavHostController) {
-    NavHost(
-        navController = navController,
-        startDestination = "scrollPage",
+fun String.toFloatNum(): Float {
+    return if (isNotEmpty() && length == 1 &&
+        TextUtils.equals(get(0).toString(), ".")
     ) {
-        composable("scrollPage") { RenderScrollPage(navController) }
-        composable("Settings") { RenderSettingsPage(navController) }
+        "0.".toFloat()
+    } else if (isEmpty()) {
+        "0".toFloat()
+    } else {
+        toFloat()
     }
 }

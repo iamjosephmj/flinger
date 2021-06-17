@@ -23,7 +23,7 @@
 *
 */
 
-package io.iamjosephmj.flinger.ui.state
+package io.iamjosephmj.flingersample.ui.state
 
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 

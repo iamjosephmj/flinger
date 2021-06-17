@@ -23,7 +23,7 @@
 *
 */
 
-package io.iamjosephmj.flinger.ui.settings
+package io.iamjosephmj.flingersample.ui.settings
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,8 +50,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flinger.ui.state.ScrollState
-import io.iamjosephmj.flinger.ui.utils.toFloatNum
+import io.iamjosephmj.flingersample.ui.state.ScrollState
+import io.iamjosephmj.flingersample.ui.utils.toFloatNum
 
 /**
  * The below set of methods are used to render the settings page page.

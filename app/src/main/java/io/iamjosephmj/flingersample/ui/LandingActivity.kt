@@ -23,7 +23,7 @@
 *
 */
 
-package io.iamjosephmj.flinger.ui
+package io.iamjosephmj.flingersample.ui
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -33,11 +33,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import io.iamjosephmj.flinger.ui.utils.CreateNavHost
-import io.iamjosephmj.flinger.ui.utils.LightTheme
+import io.iamjosephmj.flingersample.ui.utils.CreateNavHost
+import io.iamjosephmj.flingersample.ui.utils.LightTheme
 
 /**
  * Landing page activity.
