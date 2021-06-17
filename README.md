@@ -6,7 +6,9 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 [![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
-
+<a href = "https://github.com/iamjosephmj/flinger/stargazers">
+     <img src = "https://img.shields.io/github/stars/iamjosephmj/flinger" />
+</a>
 
 ## What is Flinger?
 
@@ -42,7 +44,7 @@ Add the following to your project's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:flinger:1.0.1'
+    implementation 'com.github.iamjosephmj:flinger:1.0.2'
 }
 ```
 
