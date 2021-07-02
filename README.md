@@ -44,7 +44,7 @@ Add the following to your project's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:flinger:1.0.3'
+    implementation 'com.github.iamjosephmj:flinger:1.0.4'
 }
 ```
 
