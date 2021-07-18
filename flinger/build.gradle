@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -38,7 +38,7 @@ android {
 
     composeOptions {
         kotlinCompilerVersion = "1.5.10"
-        kotlinCompilerExtensionVersion = "1.0.0-rc01"
+        kotlinCompilerExtensionVersion = "1.0.0-rc02"
     }
 
     testOptions {
@@ -47,9 +47,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.compiler:compiler:1.0.0-rc01")
-    implementation 'androidx.compose.ui:ui:1.0.0-rc01'
-    implementation 'androidx.compose.material:material:1.0.0-rc01'
+    implementation("androidx.compose.compiler:compiler:1.0.0-rc02")
+    implementation 'androidx.compose.ui:ui:1.0.0-rc02'
+    implementation 'androidx.compose.material:material:1.0.0-rc02'
 
     // Required -- JUnit 4 framework
     testImplementation("junit:junit:4.13.2")
@@ -73,7 +73,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = 'io.iamjosephmj.flinger'
                 artifactId = 'release'
-                version = '1.0.4'
+                version = '1.0.5'
             }
             // Creates a Maven publication called “debug”.
             debug(MavenPublication) {
@@ -82,7 +82,7 @@ afterEvaluate {
 
                 groupId = 'io.iamjosephmj.flinger'
                 artifactId = 'release'
-                version = '1.0.4'
+                version = '1.0.5'
             }
         }
     }
