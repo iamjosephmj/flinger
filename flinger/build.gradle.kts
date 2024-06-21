@@ -61,15 +61,17 @@ afterEvaluate {
     publishing {
         publications {
             create("release", MavenPublication::class) {
+                from(components.findByName("release"))
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.5"
+                version = "1.1.6"
             }
 
             create("debug", MavenPublication::class) {
+                from(components.findByName("release"))
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.5"
+                version = "1.1.6"
             }
         }
     }
