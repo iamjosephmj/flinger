@@ -1,14 +1,27 @@
-name: Android CI
+name: Android Lint
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  code_quality_check:
+  lint:
+    name: Run Lint
     runs-on: ubuntu-latest
+
     steps:
-      - name: ansible-lint
-        uses: ansible/ansible-lint-action@master
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Lint
+        run: ./gradlew app:lint
