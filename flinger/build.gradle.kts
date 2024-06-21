@@ -62,16 +62,16 @@ afterEvaluate {
         publications {
             create("release", MavenPublication::class) {
                 from(components.findByName("release"))
-                groupId = "io.iamjosephmj.flinger"
+                groupId = "io.imjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.6"
+                version = "1.1.7"
             }
 
             create("debug", MavenPublication::class) {
-                from(components.findByName("release"))
+                from(components.findByName("debug"))
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.6"
+                version = "1.1.7"
             }
         }
     }
