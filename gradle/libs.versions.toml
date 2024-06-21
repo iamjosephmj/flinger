@@ -1,0 +1,27 @@
+[versions]
+agp = "8.4.2"
+core = "1.5.0"
+flinger = "1.1.1"
+junit = "4.13.2"
+kotlin = "1.9.0"
+coreKtx = "1.13.1"
+composeBom = "2024.06.00"
+appcompat = "1.7.0"
+mockitoCore = "3.5.11"
+truth = "1.1.2"
+
+[libraries]
+androidx-core = { module = "androidx.test:core", version.ref = "core" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+flinger = { module = "com.github.iamjosephmj:Flinger", version.ref = "flinger" }
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
