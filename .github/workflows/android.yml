@@ -1,4 +1,4 @@
-name: Android Lint
+name: Android CI
 
 on:
   pull_request:
@@ -25,3 +25,6 @@ jobs:
 
       - name: Run Lint
         run: ./gradlew app:lint
+
+      - name: Run Tests
+        run: ./gradlew :flinger:testDebugUnitTest
