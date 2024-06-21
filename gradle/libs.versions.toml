@@ -5,21 +5,28 @@ flinger = "1.1.1"
 junit = "4.13.2"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
+activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 appcompat = "1.7.0"
+material = "1.6.8"
 mockitoCore = "3.5.11"
 truth = "1.1.2"
+navigationRuntimeKtx = "2.7.7"
+navigationCompose = "2.7.7"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 flinger = { module = "com.github.iamjosephmj:Flinger", version.ref = "flinger" }
 junit = { module = "junit:junit", version.ref = "junit" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

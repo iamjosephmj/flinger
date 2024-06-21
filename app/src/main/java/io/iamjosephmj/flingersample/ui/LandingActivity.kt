@@ -25,6 +25,7 @@
 
 package io.iamjosephmj.flingersample.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -45,13 +46,16 @@ import io.iamjosephmj.flingersample.ui.utils.LightTheme
  */
 class LandingActivity : AppCompatActivity() {
 
-    lateinit var navController: NavHostController
+    private lateinit var navController: NavHostController
 
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             LightTheme {
-                Scaffold(modifier = Modifier.background(Color.White)) {
+                Scaffold(
+                    modifier = Modifier.background(Color.White),
+                ) {
                     InitializeNavComponentsAndView()
                 }
             }
