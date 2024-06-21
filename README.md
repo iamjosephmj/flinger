@@ -12,6 +12,7 @@
 <a href = "https://android-arsenal.com/details/1/8249">
      <img src = "https://img.shields.io/badge/Android%20Arsenal-Flinger-green.svg?style=flat" />
 </a>
+
 ## What is Flinger?
 
 <p>
