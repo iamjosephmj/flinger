@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "io.iamjosephmj.flinger"
     compileSdk = 34
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         minSdk = 21
@@ -49,7 +49,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
 
-    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material)
 
     testImplementation(libs.junit)
     testImplementation(libs.androidx.core)

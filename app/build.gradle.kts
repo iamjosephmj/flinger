@@ -6,10 +6,9 @@ plugins {
 android {
     namespace = "io.iamjosephmj.flingersample"
     compileSdk = 34
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
-        applicationId = "io.iamjosephmj.flingersample"
         minSdk = 21
         versionCode = 1
         versionName = "1.0"
@@ -48,9 +47,13 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.activity.compose)
+
 
     implementation(platform(libs.androidx.compose.bom))
 
     implementation(libs.flinger)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
 }
