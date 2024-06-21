@@ -2,10 +2,10 @@
 
 # Flinger (Only compatible with compose)
 
-[![CircleCI Build Status](https://circleci.com/gh/willowtreeapps/spruce-android.svg?style=shield)](https://app.circleci.com/projects/project-setup/github/iamjosephmj/flinger/)
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 [![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
+
 <a href = "https://github.com/iamjosephmj/flinger/stargazers">
      <img src = "https://img.shields.io/github/stars/iamjosephmj/flinger" />
 </a>
@@ -46,7 +46,7 @@ Add the following to your project's build.gradle file
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:Flinger:1.1.1'
+    implementation 'com.github.iamjosephmj:Flinger:1.1.4'
 }
 ```
 
