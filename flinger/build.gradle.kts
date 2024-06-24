@@ -63,14 +63,14 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "io.imjosephmj.flinger"
                 artifactId = "release"
-                version = "1.2.0"
+                version = "1.2.1"
             }
 
             create("debug", MavenPublication::class) {
                 from(components["debug"])
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "release"
-                version = "1.2.0"
+                version = "1.2.1"
             }
         }
     }
