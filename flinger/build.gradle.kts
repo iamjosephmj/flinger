@@ -31,10 +31,6 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
-    testOptions {
-        unitTests.isIncludeAndroidResources = false
-    }
 }
 
 
@@ -44,9 +40,7 @@ dependencies {
 
     implementation(libs.androidx.material)
 
-    testImplementation(libs.junit)
     testImplementation(libs.androidx.core)
-    testImplementation(libs.mockito.core)
     testImplementation(libs.truth)
 }
 

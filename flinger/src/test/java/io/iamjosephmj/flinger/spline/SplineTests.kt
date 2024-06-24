@@ -1,14 +1,10 @@
 package io.iamjosephmj.flinger.spline
 
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import io.iamjosephmj.flinger.fling.FlingTestUtils
 import io.iamjosephmj.flinger.flings.SplineBasedFloatDecayAnimationSpec
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.runners.MockitoJUnitRunner
 
-
-@RunWith(MockitoJUnitRunner::class)
 class SplineTests {
 
     @Test
@@ -20,16 +16,16 @@ class SplineTests {
             scrollConfiguration = scrollConfig
         )
 
-        Truth.assertThat(spline.getDurationNanos(1f, 20f))
+        assertThat(spline.getDurationNanos(1f, 20f))
             .isEqualTo(18000000)
 
-        Truth.assertThat(spline.getTargetValue(1f, 20f))
+        assertThat(spline.getTargetValue(1f, 20f))
             .isEqualTo(1.037405f)
 
-        Truth.assertThat(spline.getValueFromNanos(1000, 1f, 20f))
+        assertThat(spline.getValueFromNanos(1000, 1f, 20f))
             .isEqualTo(1.0000027f)
 
-        Truth.assertThat(spline.getVelocityFromNanos(1000, 1f, 20f))
+        assertThat(spline.getVelocityFromNanos(1000, 1f, 20f))
             .isEqualTo(16.320223f)
     }
 
@@ -44,8 +40,8 @@ class SplineTests {
             flingConfiguration = FlingTestUtils.getDefaultScrollConfiguration()
         )
 
-        Truth.assertThat(splinePositions).isEqualTo(SplineTestUtils.getExpectedPositionArray())
+        assertThat(splinePositions).isEqualTo(SplineTestUtils.getExpectedPositionArray())
 
-        Truth.assertThat(splineTimes).isEqualTo(SplineTestUtils.getExpectedTimeArray())
+        assertThat(splineTimes).isEqualTo(SplineTestUtils.getExpectedTimeArray())
     }
 }
