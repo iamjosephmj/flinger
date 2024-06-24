@@ -28,9 +28,9 @@ jobs:
       - name: Assemble
         run: ./gradlew assembleDebug
       
-      - name: Run Lint
+      - name: Lint
         run: ./gradlew app:lint
       
-      - name: Run Tests
+      - name: Tests
         run: ./gradlew :flinger:testDebugUnitTest
         
