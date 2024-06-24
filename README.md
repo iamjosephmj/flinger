@@ -1,4 +1,4 @@
-![Spruce Logo](https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger.jpeg)
+![Spruce Logo](https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger.jpeg)
 
 # Flinger (Only compatible with compose)
 
