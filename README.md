@@ -5,7 +5,6 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 [![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
-[![](https://jitci.com/gh/iamjosephmj/flinger/svg)](https://jitci.com/gh/iamjosephmj/flinger)
 
 
 <a href = "https://github.com/iamjosephmj/flinger/stargazers">

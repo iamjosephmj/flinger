@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "io.iamjosephmj.flinger"
+    namespace = "io.iamjosephmj.flingersample"
     compileSdk = 34
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
-        applicationId = "io.iamjosephmj.flinger"
+        applicationId = "io.iamjosephmj.flingersample"
         minSdk = 21
         versionCode = 1
         versionName = "1.0"
