@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("maven-publish")
 }
@@ -7,11 +7,10 @@ plugins {
 android {
     namespace = "io.iamjosephmj.flinger"
     compileSdk = 34
-    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         minSdk = 21
-
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -61,17 +60,17 @@ afterEvaluate {
     publishing {
         publications {
             create("release", MavenPublication::class) {
-                from(components.findByName("release"))
+                from(components["release"])
                 groupId = "io.imjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.7"
+                version = "1.2.0"
             }
 
             create("debug", MavenPublication::class) {
-                from(components.findByName("debug"))
+                from(components["debug"])
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "release"
-                version = "1.1.7"
+                version = "1.2.0"
             }
         }
     }

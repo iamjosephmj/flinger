@@ -4,16 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "io.iamjosephmj.flingersample"
+    namespace = "io.iamjosephmj.flinger"
     compileSdk = 34
     buildToolsVersion = "34.0.0"
 
     defaultConfig {
+        applicationId = "io.iamjosephmj.flinger"
         minSdk = 21
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -42,6 +41,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
@@ -53,7 +58,7 @@ dependencies {
 
     implementation(platform(libs.androidx.compose.bom))
 
-    implementation(libs.flinger)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":flinger"))
 }
