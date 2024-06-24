@@ -1,7 +1,7 @@
 [versions]
 agp = "8.4.2"
 core = "1.5.0"
-flinger = "1.1.1"
+flinger = "1.2.2"
 junit = "4.13.2"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -21,7 +21,7 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-flinger = { module = "com.github.iamjosephmj:Flinger", version.ref = "flinger" }
+flinger = { module = "com.github.iamjosephmj:flinger", version.ref = "flinger" }
 junit = { module = "junit:junit", version.ref = "junit" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
