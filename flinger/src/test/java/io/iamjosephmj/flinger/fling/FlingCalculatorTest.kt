@@ -1,9 +1,7 @@
 package io.iamjosephmj.flinger.fling
 
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.runners.MockitoJUnitRunner
 
 
 class FlingCalculatorTest {
@@ -17,7 +15,7 @@ class FlingCalculatorTest {
             flingConfiguration = config
         )
 
-        Truth.assertThat(flingCalculator.flingDistance(5f)).isEqualTo(0.0033697102f)
+        assertThat(flingCalculator.flingDistance(5f)).isEqualTo(0.0033697102f)
     }
 
     @Test
@@ -29,7 +27,7 @@ class FlingCalculatorTest {
             flingConfiguration = config
         )
 
-        Truth.assertThat(flingCalculator.flingDistance(21f)).isNotEqualTo(5f)
+        assertThat(flingCalculator.flingDistance(21f)).isNotEqualTo(5f)
     }
 
     @Test
@@ -41,7 +39,7 @@ class FlingCalculatorTest {
             flingConfiguration = config
         )
 
-        Truth.assertThat(flingCalculator.flingDuration(5f)).isEqualTo(6)
+        assertThat(flingCalculator.flingDuration(5f)).isEqualTo(6)
     }
 
 
@@ -54,7 +52,7 @@ class FlingCalculatorTest {
             flingConfiguration = config
         )
 
-        Truth.assertThat(flingCalculator.flingDuration(18f)).isNotEqualTo(20)
+        assertThat(flingCalculator.flingDuration(18f)).isNotEqualTo(20)
     }
 
     @Test
@@ -68,21 +66,21 @@ class FlingCalculatorTest {
 
         val info = flingCalculator.flingInfo(5f)
 
-        Truth.assertThat(info.distance).isEqualTo(0.0033697102f)
-        Truth.assertThat(info.duration).isEqualTo(6)
-        Truth.assertThat(info.androidFlingSpline.deceleration(5f, config.decelerationFriction))
+        assertThat(info.distance).isEqualTo(0.0033697102f)
+        assertThat(info.duration).isEqualTo(6)
+        assertThat(info.androidFlingSpline.deceleration(5f, config.decelerationFriction))
             .isEqualTo(1.7147983883554976)
 
-        Truth.assertThat(info.androidFlingSpline.flingPosition(5f).distanceCoefficient)
+        assertThat(info.androidFlingSpline.flingPosition(5f).distanceCoefficient)
             .isEqualTo(1f)
 
-        Truth.assertThat(info.androidFlingSpline.flingPosition(10f).distanceCoefficient)
+        assertThat(info.androidFlingSpline.flingPosition(10f).distanceCoefficient)
             .isEqualTo(1f)
 
-        Truth.assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
+        assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
             .isEqualTo(0f)
 
-        Truth.assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
+        assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
             .isEqualTo(0f)
     }
 }
