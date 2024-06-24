@@ -5,6 +5,7 @@
 [![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/iamjosephmj/flinger/blob/main/LICENSE)
 [![Public Yes](https://img.shields.io/badge/Public-yes-green.svg?style=flat)]()
 [![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
+<a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_Issue_%2367-blue?logo=Jetpack+Compose&amp;logoColor=white" alt="As Seen In - jetc.dev Newsletter Issue #67"></a>
 
 
 <a href = "https://github.com/iamjosephmj/flinger/stargazers">
