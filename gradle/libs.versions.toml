@@ -10,7 +10,7 @@ composeBom = "2024.06.00"
 appcompat = "1.7.0"
 material = "1.6.8"
 mockitoCore = "5.12.0"
-truth = "1.4.2"
+truth = "1.4.3"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 
