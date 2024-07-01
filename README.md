@@ -27,7 +27,7 @@ Flinger:
 </p>
 
 <p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/develop/repo-media/flinger-demo.gif" 
+  <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger-demo.gif" 
      width="250" 
      height="600" 
     />
