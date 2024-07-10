@@ -184,5 +184,10 @@ to <a style = "color: white" href ="https://github.com/iamjosephmj/flinger/blob/
      <img src = "https://img.shields.io/twitter/url?label=follow&style=social&url=https%3A%2F%2Ftwitter.com" />
   </a>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=iamjosephmj/flinger&type=Timeline)](https://star-history.com/#iamjosephmj/flinger&Timeline)
-
+<a href="https://star-history.com/#iamjosephmj/flinger&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=iamjosephmj/flinger&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=iamjosephmj/flinger&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=iamjosephmj/flinger&type=Timeline" />
+ </picture>
+</a>
