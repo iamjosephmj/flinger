@@ -7,6 +7,7 @@
 [![](https://jitpack.io/v/iamjosephmj/flinger.svg)](https://jitpack.io/#iamjosephmj/flinger)
 <a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_Issue_%2367-blue?logo=Jetpack+Compose&amp;logoColor=white" alt="As Seen In - jetc.dev Newsletter Issue #67"></a>
 
+[![Star History Chart](https://api.star-history.com/svg?repos=iamjosephmj/flinger&type=Timeline)](https://star-history.com/#iamjosephmj/flinger&Timeline)
 
 <a href = "https://github.com/iamjosephmj/flinger/stargazers">
      <img src = "https://img.shields.io/github/stars/iamjosephmj/flinger" />
