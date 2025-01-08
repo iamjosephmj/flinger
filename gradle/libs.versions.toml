@@ -12,7 +12,7 @@ material = "1.7.6"
 mockitoCore = "5.13.0"
 truth = "1.4.4"
 navigationRuntimeKtx = "2.8.5"
-navigationCompose = "2.8.1"
+navigationCompose = "2.8.5"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
