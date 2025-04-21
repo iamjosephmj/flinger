@@ -9,10 +9,10 @@ activityCompose = "1.10.1"
 composeBom = "2025.04.00"
 appcompat = "1.7.0"
 material = "1.7.8"
-mockitoCore = "5.15.2"
+mockitoCore = "5.17.0"
 truth = "1.4.4"
 navigationRuntimeKtx = "2.8.7"
-navigationCompose = "2.8.7"
+navigationCompose = "2.8.9"
 
 [libraries]
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
