@@ -50,12 +50,16 @@ class FlingerFlingBehavior(
                 initialValue = 0f,
                 initialVelocity = initialVelocity,
             ).animateDecay(flingDecay) {
-                val delta = value - lastValue
-                val consumed = scrollBy(delta)
-                lastValue = value
-                velocityLeft = this.velocity
-                // avoid rounding errors and stop if anything is unconsumed
-                if (abs(delta - consumed) > 0.5f) this.cancelAnimation()
+                try {
+                    val delta = value - lastValue
+                    val consumed = scrollBy(delta)
+                    lastValue = value
+                    velocityLeft = this.velocity
+                    // avoid rounding errors and stop if anything is unconsumed
+                    if (abs(delta - consumed) > 0.5f) this.cancelAnimation()
+                } catch (e: Exception) {
+                    this.cancelAnimation()
+                }
             }
             velocityLeft
         } else {
