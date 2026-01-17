@@ -27,56 +27,19 @@
 
 Experience Flinger's customizable scroll behaviors in action:
 
-<table>
-  <tr>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-1.mp4" width="300" controls>
-        Demo 1
-      </video>
-      <br/>Demo 1
-    </td>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-2.mp4" width="300" controls>
-        Demo 2
-      </video>
-      <br/>Demo 2
-    </td>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-3.mp4" width="300" controls>
-        Demo 3
-      </video>
-      <br/>Demo 3
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-4.mp4" width="300" controls>
-        Demo 4
-      </video>
-      <br/>Demo 4
-    </td>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-5.mp4" width="300" controls>
-        Demo 5
-      </video>
-      <br/>Demo 5
-    </td>
-    <td align="center">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-6.mp4" width="300" controls>
-        Demo 6
-      </video>
-      <br/>Demo 6
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="3">
-      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-7.mp4" width="300" controls>
-        Demo 7
-      </video>
-      <br/>Demo 7
-    </td>
-  </tr>
-</table>
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-1.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-2.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-3.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-4.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-5.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-6.mp4
+
+https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-7.mp4
 
 ---
 
