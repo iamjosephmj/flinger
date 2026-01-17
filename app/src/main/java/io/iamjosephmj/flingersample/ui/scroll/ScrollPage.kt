@@ -26,26 +26,35 @@
 package io.iamjosephmj.flingersample.ui.scroll
 
 import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
+import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flinger.flings.flingBehavior
 import io.iamjosephmj.flingersample.ui.state.ScrollState
 
 /**
- * The below set of methods are used to render the scroll page.
+ * Legacy scroll page for demonstrating fling behaviors.
  *
- * @author Joseph James.
+ * This page is kept for backward compatibility with the original sample app.
+ * For a more comprehensive demo, see the new HomeScreen and its navigation options.
+ *
+ * @author Joseph James
  */
 
 /**
@@ -58,29 +67,35 @@ import io.iamjosephmj.flingersample.ui.state.ScrollState
 @Composable
 fun RenderScrollPage(navController: NavController) {
     Column(modifier = Modifier.padding(0.dp, 10.dp, 0.dp, 0.dp)) {
-        RenderButton(navController)
-        Spacer(modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 10.dp))
+        RenderButtons(navController)
+        Box(modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 10.dp))
         RenderList()
     }
 }
 
 @Composable
-private fun RenderButton(navController: NavController) {
-    // Settings button.
+private fun RenderButtons(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Back to home button
         Button(
-            onClick = {
-                navController.navigate("Settings")
-            },
-            modifier = Modifier.size(200.dp, 60.dp)
+            onClick = { navController.navigate("home") },
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Settings")
+            Text(text = "Back to Home")
+        }
+        
+        // Settings button
+        Button(
+            onClick = { navController.navigate("Settings") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Custom Settings")
         }
     }
 }
@@ -89,25 +104,23 @@ private fun RenderButton(navController: NavController) {
 fun RenderList() {
     LazyColumn(
         modifier = Modifier.padding(10.dp, 0.dp, 10.dp, 0.dp),
-        /*
-         * Important, this is the main functionality that we are looking into.
-         */
         flingBehavior = decideFlingBehaviour(),
     ) {
         items(100) { item ->
             Button(
-                onClick = { }, shape = RoundedCornerShape(6.dp),
+                onClick = { },
+                shape = RoundedCornerShape(6.dp),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp)
             ) {
                 Text(
-                    text = "no $item",
+                    text = "Item $item",
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight(),
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.h6
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
             Box(modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 2.5.dp))
@@ -119,24 +132,20 @@ fun RenderList() {
 fun decideFlingBehaviour(): FlingBehavior {
     return when (ScrollState.type) {
         0 -> {
-            // Native scroll.
-            StockFlingBehaviours.getAndroidNativeScroll()
+            // Native scroll
+            FlingPresets.androidNative()
         }
         1 -> {
-            // Smooth scroll.
-            StockFlingBehaviours.smoothScroll()
+            // Smooth scroll (new API)
+            FlingPresets.smooth()
         }
         2 -> {
-            /*
-             * custom scroll, this is how you should build the scroll behaviour.
-             * you can build the scroll behaviour with the below mentioned builder pattern.
-             */
+            // Custom scroll configuration
             flingBehavior(scrollConfiguration = ScrollState.buildScrollBehaviour())
         }
         else -> {
-            // Smooth scroll.
-            StockFlingBehaviours.smoothScroll()
+            // Default to smooth scroll
+            FlingPresets.smooth()
         }
     }
 }
-
