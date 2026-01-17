@@ -124,30 +124,32 @@ fun AdaptiveDemo(navController: NavController) {
                 items(100) { index ->
                     AdaptiveListItem(index)
                 }
-            }
-            
-            // Info card
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "How it works",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Adaptive fling uses different physics based on velocity:\n" +
-                                "• Gentle swipes → precise, controlled scrolling\n" +
-                                "• Aggressive swipes → long momentum scrolls",
-                        style = MaterialTheme.typography.bodySmall
-                    )
+                
+                // Info card at the bottom of the scrollable list
+                item {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        )
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                text = "How it works",
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Adaptive fling uses different physics based on velocity:\n" +
+                                        "• Gentle swipes → precise, controlled scrolling\n" +
+                                        "• Aggressive swipes → long momentum scrolls",
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+                    }
                 }
             }
         }

@@ -323,14 +323,12 @@ fun PagerDemo(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "This demonstrates pager-like behavior using snap fling physics. " +
-                                "Different presets provide varying page-turn feels:\n\n" +
-                                "• Standard: Balanced page transitions\n" +
-                                "• iOS: Higher resistance, iOS-like feel\n" +
+                        text = "Pager-like behavior using snap fling physics:\n\n" +
+                                "• Standard: Balanced transitions\n" +
+                                "• iOS: Higher resistance\n" +
                                 "• Snappy: Quick page turns\n" +
-                                "• Smooth: Longer, gliding transitions\n\n" +
-                                "Dynamic Fusion: When enabled, the snap starts while still scrolling, " +
-                                "creating seamless page turns.",
+                                "• Smooth: Gliding transitions\n\n" +
+                                "Smooth Fusion: Snap starts while still scrolling.",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }

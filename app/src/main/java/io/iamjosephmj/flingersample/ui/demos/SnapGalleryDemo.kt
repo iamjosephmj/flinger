@@ -8,6 +8,7 @@ package io.iamjosephmj.flingersample.ui.demos
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -93,6 +94,7 @@ fun SnapGalleryDemo(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
         ) {
             // Snap position selector
             Text(
@@ -284,17 +286,17 @@ fun SnapGalleryDemo(navController: NavController) {
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "The snap animation controls how items settle into position after scrolling. " +
+                        text = "The snap animation controls how items settle into position. " +
                                 "Each preset uses different physics:\n\n" +
                                 "• Spring-based: Stiffness + damping ratio\n" +
                                 "• Tween-based: Duration + easing curve\n\n" +
-                                "Dynamic Fusion: Instead of waiting for fling to stop, snap starts when " +
-                                "velocity decays below a threshold. The fusion point slider controls when " +
-                                "this transition happens - earlier = smoother, later = snappier.",
+                                "Smooth Fusion: Snap starts when velocity decays below a threshold.",
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
             }
+            
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
