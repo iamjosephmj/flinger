@@ -182,7 +182,7 @@ private fun AdaptiveListItem(index: Int) {
 }
 
 private fun getModeDescription(mode: AdaptiveMode): String = when (mode) {
-    AdaptiveMode.Balanced -> "Balanced mode: Good for general use. Controlled scrolling for gentle swipes, longer momentum for aggressive swipes."
-    AdaptiveMode.Precision -> "Precision mode: Prioritizes control. Even aggressive swipes are relatively controlled, gentle swipes are very precise."
-    AdaptiveMode.Momentum -> "Momentum mode: Prioritizes long scrolls. Even gentle swipes have some momentum, aggressive swipes travel very far."
+    AdaptiveMode.Balanced -> "Balanced: Controlled for gentle swipes, more momentum for aggressive swipes."
+    AdaptiveMode.Precision -> "Precision: Prioritizes control. Even aggressive swipes stop quickly."
+    AdaptiveMode.Momentum -> "Momentum: Prioritizes distance. Swipes travel farther."
 }

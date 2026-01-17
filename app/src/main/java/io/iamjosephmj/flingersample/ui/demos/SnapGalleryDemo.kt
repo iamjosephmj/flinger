@@ -169,13 +169,13 @@ fun SnapGalleryDemo(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(modifier = Modifier.weight(1f)) {
+                Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                     Text(
-                        text = "Dynamic Smooth Fusion",
+                        text = "Smooth Fusion",
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = "Snap starts when velocity decays, not after stop",
+                        text = "Snap starts when velocity decays",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

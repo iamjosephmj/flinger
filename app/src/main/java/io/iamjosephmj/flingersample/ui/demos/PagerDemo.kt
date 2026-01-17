@@ -189,9 +189,9 @@ fun PagerDemo(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(modifier = Modifier.weight(1f)) {
+                Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                     Text(
-                        text = "Dynamic Smooth Fusion",
+                        text = "Smooth Fusion",
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
