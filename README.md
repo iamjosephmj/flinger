@@ -23,23 +23,60 @@
   <a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_%2367-blue?logo=Jetpack+Compose&logoColor=white" alt="jetc.dev Newsletter"/></a>
 </p>
 
-<p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger-demo.gif" width="280" alt="Flinger Demo"/>
-</p>
+### 🎥 Demo Videos
 
-### Demo Videos
+Experience Flinger's customizable scroll behaviors in action:
 
-Check out these demo videos showcasing Flinger's scroll behaviors in action:
-
-| Demo | Link |
-|:----:|:-----|
-| Demo 1 | [demo-video-1.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-1.mp4) |
-| Demo 2 | [demo-video-2.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-2.mp4) |
-| Demo 3 | [demo-video-3.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-3.mp4) |
-| Demo 4 | [demo-video-4.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-4.mp4) |
-| Demo 5 | [demo-video-5.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-5.mp4) |
-| Demo 6 | [demo-video-6.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-6.mp4) |
-| Demo 7 | [demo-video-7.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-7.mp4) |
+<table>
+  <tr>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-1.mp4" width="300" controls>
+        Demo 1
+      </video>
+      <br/>Demo 1
+    </td>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-2.mp4" width="300" controls>
+        Demo 2
+      </video>
+      <br/>Demo 2
+    </td>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-3.mp4" width="300" controls>
+        Demo 3
+      </video>
+      <br/>Demo 3
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-4.mp4" width="300" controls>
+        Demo 4
+      </video>
+      <br/>Demo 4
+    </td>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-5.mp4" width="300" controls>
+        Demo 5
+      </video>
+      <br/>Demo 5
+    </td>
+    <td align="center">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-6.mp4" width="300" controls>
+        Demo 6
+      </video>
+      <br/>Demo 6
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3">
+      <video src="https://github.com/iamjosephmj/flinger/assets/repo-media/demo-video-7.mp4" width="300" controls>
+        Demo 7
+      </video>
+      <br/>Demo 7
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -539,10 +576,6 @@ Experience Flinger's capabilities firsthand with our sample app:
 - **Snap Gallery Demo** - Experience snap-to-item behavior
 - **Pager Demo** - Custom pager physics
 - **Debug Overlay** - Visualize fling physics in real-time
-
-<p align="center">
-  <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger-demo.gif" width="250" alt="Sample App Demo"/>
-</p>
 
 ---
 
