@@ -29,15 +29,37 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import io.iamjosephmj.flingersample.ui.comparison.ComparisonScreen
+import io.iamjosephmj.flingersample.ui.home.HomeScreen
+import io.iamjosephmj.flingersample.ui.playground.PlaygroundScreen
+import io.iamjosephmj.flingersample.ui.presets.PresetsGalleryScreen
 import io.iamjosephmj.flingersample.ui.scroll.RenderScrollPage
 import io.iamjosephmj.flingersample.ui.settings.RenderSettingsPage
 
+/**
+ * Navigation setup for the Flinger sample app.
+ *
+ * Routes:
+ * - "home" - Main dashboard with navigation cards
+ * - "playground" - Interactive parameter playground
+ * - "presets" - Preset gallery with visual previews
+ * - "comparison" - Side-by-side comparison screen
+ * - "scrollPage" - Legacy scroll demo page
+ * - "Settings" - Legacy settings page
+ */
 @Composable
 fun CreateNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "scrollPage",
+        startDestination = "home",
     ) {
+        // New screens
+        composable("home") { HomeScreen(navController) }
+        composable("playground") { PlaygroundScreen(navController) }
+        composable("presets") { PresetsGalleryScreen(navController) }
+        composable("comparison") { ComparisonScreen(navController) }
+        
+        // Legacy screens (kept for backward compatibility)
         composable("scrollPage") { RenderScrollPage(navController) }
         composable("Settings") { RenderSettingsPage(navController) }
     }

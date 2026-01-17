@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "io.iamjosephmj.flinger"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 21
@@ -31,17 +31,33 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    
+    buildFeatures {
+        compose = true
+    }
 }
 
 
 dependencies {
+    // Compose BOM for version management
     implementation(platform(libs.androidx.compose.bom))
+    
+    // Core Compose dependencies
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.ui)
+    
+    // AppCompat for backward compatibility
     implementation(libs.androidx.appcompat)
 
+    // Material (for FlingBehavior compatibility)
     implementation(libs.androidx.material)
 
+    // Unit Testing
+    testImplementation(libs.junit)
     testImplementation(libs.androidx.core)
     testImplementation(libs.truth)
+    testImplementation(libs.mockito.core)
 }
 
 afterEvaluate {
@@ -49,16 +65,16 @@ afterEvaluate {
         publications {
             create("release", MavenPublication::class) {
                 from(components["release"])
-                groupId = "io.imjosephmj.flinger"
-                artifactId = "release"
-                version = "1.3.0"
+                groupId = "io.iamjosephmj.flinger"
+                artifactId = "flinger"
+                version = "1.4.0"
             }
 
             create("debug", MavenPublication::class) {
                 from(components["debug"])
                 groupId = "io.iamjosephmj.flinger"
-                artifactId = "release"
-                version = "1.3.0"
+                artifactId = "flinger-debug"
+                version = "1.4.0"
             }
         }
     }

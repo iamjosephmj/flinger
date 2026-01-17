@@ -6,14 +6,17 @@ plugins {
 
 android {
     namespace = "io.iamjosephmj.flingersample"
-    compileSdk = 34
-    buildToolsVersion = "34.0.0"
+    compileSdk = 35
+    buildToolsVersion = "35.0.0"
 
     defaultConfig {
         applicationId = "io.iamjosephmj.flingersample"
         minSdk = 21
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 2
+        versionName = "1.4.0"
+        
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -34,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    
+    buildFeatures {
+        compose = true
+    }
 
     packaging {
         resources {
@@ -44,15 +51,46 @@ android {
 
 
 dependencies {
+    // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.material)
     implementation(libs.androidx.activity.compose)
 
-
+    // Compose BOM for version management
     implementation(platform(libs.androidx.compose.bom))
+    
+    // Compose UI
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.animation)
+    
+    // Material 3
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons)
+    
+    // Keep Material 2 for backward compatibility during migration
+    implementation(libs.androidx.material)
 
+    // Navigation
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.flinger)
+    
+    // Flinger library (use project reference for development)
+    implementation(project(":flinger"))
+    
+    // Debug tooling
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    
+    // Unit Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    
+    // Android Instrumented Testing
+    androidTestImplementation(libs.androidx.junit.ext)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 }
