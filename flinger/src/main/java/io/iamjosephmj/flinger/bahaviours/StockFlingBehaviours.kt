@@ -26,63 +26,142 @@
 package io.iamjosephmj.flinger.bahaviours
 
 import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.runtime.Composable
-import io.iamjosephmj.flinger.configs.FlingConfiguration
-import io.iamjosephmj.flinger.flings.flingBehavior
+import io.iamjosephmj.flinger.behaviours.FlingPresets
 
 /**
- * This is a helper class for selecting the predefined set of scroll behaviours.
+ * Legacy helper class for selecting predefined scroll behaviours.
+ *
+ * **Deprecated:** This class is deprecated due to the typo in the package name.
+ * Please migrate to [io.iamjosephmj.flinger.behaviours.FlingPresets] instead.
+ *
+ * ## Migration Guide
+ * ```kotlin
+ * // Old (deprecated)
+ * import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
+ * StockFlingBehaviours.smoothScroll()
+ * StockFlingBehaviours.presetOne()
+ *
+ * // New (recommended)
+ * import io.iamjosephmj.flinger.behaviours.FlingPresets
+ * FlingPresets.smooth()
+ * FlingPresets.iOSStyle()
+ * ```
  *
  * @author Joseph James
+ * @see FlingPresets
  */
+@Deprecated(
+    message = "Package name has a typo. Use io.iamjosephmj.flinger.behaviours.FlingPresets instead.",
+    replaceWith = ReplaceWith(
+        "FlingPresets",
+        "io.iamjosephmj.flinger.behaviours.FlingPresets"
+    )
+)
 object StockFlingBehaviours {
 
-    @Composable
-    fun getAndroidNativeScroll(): FlingBehavior = ScrollableDefaults.flingBehavior()
-
-
-    @Composable
-    fun smoothScroll(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .build()
+    /**
+     * Returns the native Android fling behavior.
+     *
+     * @deprecated Use [FlingPresets.androidNative] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.androidNative() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.androidNative()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
     )
-
     @Composable
-    fun presetOne(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .scrollViewFriction(0.04f)
-            .build()
-    )
+    fun getAndroidNativeScroll(): FlingBehavior = FlingPresets.androidNative()
 
+    /**
+     * A smooth, balanced fling behavior.
+     *
+     * @deprecated Use [FlingPresets.smooth] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.smooth() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.smooth()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
     @Composable
-    fun presetTwo(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .splineInflection(0.16f)
-            .build()
-    )
+    fun smoothScroll(): FlingBehavior = FlingPresets.smooth()
 
+    /**
+     * iOS-style fling behavior with higher friction.
+     *
+     * @deprecated Use [FlingPresets.iOSStyle] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.iOSStyle() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.iOSStyle()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
     @Composable
-    fun presetThree(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .decelerationFriction(0.5f)
-            .build()
-    )
+    fun presetOne(): FlingBehavior = FlingPresets.iOSStyle()
 
+    /**
+     * Modified spline behavior for unique scroll feel.
+     *
+     * @deprecated Use [FlingPresets.smoothCurve] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.smoothCurve() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.smoothCurve()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
     @Composable
-    fun presetFour(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .decelerationFriction(0.6f)
-            .splineInflection(.4f)
-            .build()
-    )
+    fun presetTwo(): FlingBehavior = FlingPresets.smoothCurve()
 
+    /**
+     * Quick-stop fling behavior for precision scrolling.
+     *
+     * @deprecated Use [FlingPresets.quickStop] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.quickStop() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.quickStop()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
     @Composable
-    fun presetFive(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder()
-            .scrollViewFriction(.09f)
-            .decelerationFriction(0.015f)
-            .build()
-    )
+    fun presetThree(): FlingBehavior = FlingPresets.quickStop()
 
+    /**
+     * Bouncy, playful fling behavior.
+     *
+     * @deprecated Use [FlingPresets.bouncy] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.bouncy() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.bouncy()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
+    @Composable
+    fun presetFour(): FlingBehavior = FlingPresets.bouncy()
+
+    /**
+     * Floaty, long-distance fling behavior.
+     *
+     * @deprecated Use [FlingPresets.floaty] instead.
+     */
+    @Deprecated(
+        message = "Use FlingPresets.floaty() instead",
+        replaceWith = ReplaceWith(
+            "FlingPresets.floaty()",
+            "io.iamjosephmj.flinger.behaviours.FlingPresets"
+        )
+    )
+    @Composable
+    fun presetFive(): FlingBehavior = FlingPresets.floaty()
 }

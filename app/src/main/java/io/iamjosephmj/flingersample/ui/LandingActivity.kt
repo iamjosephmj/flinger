@@ -25,54 +25,47 @@
 
 package io.iamjosephmj.flingersample.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
-import androidx.compose.material.Scaffold
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import io.iamjosephmj.flingersample.ui.theme.FlingerTheme
 import io.iamjosephmj.flingersample.ui.utils.CreateNavHost
-import io.iamjosephmj.flingersample.ui.utils.LightTheme
 
 /**
- * Landing page activity.
+ * Main activity for the Flinger sample app.
  *
- * @author Joseph James.
+ * This app demonstrates the capabilities of the Flinger library:
+ * - Interactive fling parameter playground
+ * - Preset gallery with visual previews
+ * - Side-by-side comparison with native Android scroll
+ * - Legacy custom configuration screen
+ *
+ * @author Joseph James
  */
-class LandingActivity : AppCompatActivity() {
+class LandingActivity : ComponentActivity() {
 
-    private lateinit var navController: NavHostController
-
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
-            LightTheme {
-                Scaffold(
-                    modifier = Modifier.background(Color.White),
-                ) {
-                    InitializeNavComponentsAndView()
+            FlingerTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    FlingerApp()
                 }
             }
         }
     }
 
     @Composable
-    private fun InitializeNavComponentsAndView() {
-        navController = rememberNavController()
+    private fun FlingerApp() {
+        val navController: NavHostController = rememberNavController()
         CreateNavHost(navController = navController)
     }
-
-    override fun onBackPressed() {
-        if (!navController.navigateUp()) {
-            super.onBackPressed()
-        }
-    }
-
-
 }
