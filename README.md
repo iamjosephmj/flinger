@@ -21,6 +21,7 @@
   <a href="https://github.com/iamjosephmj/flinger/stargazers"><img src="https://img.shields.io/github/stars/iamjosephmj/flinger?style=social" alt="GitHub Stars"/></a>
   <a href="https://android-arsenal.com/details/1/8249"><img src="https://img.shields.io/badge/Android%20Arsenal-Flinger-green.svg?style=flat" alt="Android Arsenal"/></a>
   <a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_%2367-blue?logo=Jetpack+Compose&logoColor=white" alt="jetc.dev Newsletter"/></a>
+  <a href="#privacy"><img src="https://img.shields.io/badge/Privacy-GDPR_Compliant-brightgreen.svg?style=flat" alt="GDPR Compliant"/></a>
 </p>
 
 ---
@@ -81,6 +82,7 @@ LazyColumn(flingBehavior = FlingPresets.floaty())    // Long glide
 - [Roadmap](#roadmap)
 - [Community & Support](#community--support)
 - [License](#license)
+- [Privacy](#privacy)
 
 ---
 
@@ -756,6 +758,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+---
+
+## Privacy
+
+Flinger is privacy-friendly and GDPR compliant:
+- ✅ No data collection
+- ✅ No analytics or tracking  
+- ✅ No internet permissions required
+- ✅ 100% offline - all processing happens locally on device
+- ✅ No personal data processed
+
+This library only handles scroll physics calculations in-memory and does not collect, store, or transmit any user information.
 
 ---
 
