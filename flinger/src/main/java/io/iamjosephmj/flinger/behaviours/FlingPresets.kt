@@ -27,9 +27,16 @@ package io.iamjosephmj.flinger.behaviours
 
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
+import io.iamjosephmj.flinger.accessibility.AccessibilityFlingPresets
+import io.iamjosephmj.flinger.adaptive.AdaptiveMode
+import io.iamjosephmj.flinger.adaptive.adaptiveFlingBehavior
+import io.iamjosephmj.flinger.callbacks.FlingCallbacks
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.flingBehavior
+import io.iamjosephmj.flinger.snap.SnapPosition
+import io.iamjosephmj.flinger.snap.snapFlingBehavior
 
 /**
  * A collection of pre-configured fling behaviors for common use cases.
@@ -85,7 +92,7 @@ object FlingPresets {
      */
     @Composable
     fun smooth(): FlingBehavior = flingBehavior(
-        scrollConfiguration = FlingConfiguration.Builder().build()
+        scrollConfiguration = FlingConfiguration.Default
     )
 
     /**
@@ -271,4 +278,90 @@ object FlingPresets {
             .numberOfSplinePoints(150)
             .build()
     )
+    
+    // ==================== Advanced Features ====================
+    
+    /**
+     * Snap-to-item fling behavior for carousels and galleries.
+     *
+     * After a fling, the list snaps to the nearest item boundary.
+     *
+     * **Best for:**
+     * - Photo carousels
+     * - Card decks
+     * - Feature showcases
+     * - Any list where items should align
+     *
+     * @param lazyListState The state of the LazyList to snap.
+     * @param snapPosition Where items should snap to (Start, Center, End).
+     * @param callbacks Optional fling lifecycle callbacks.
+     * @return A [FlingBehavior] that snaps to item boundaries.
+     */
+    @Composable
+    fun snapToItem(
+        lazyListState: LazyListState,
+        snapPosition: SnapPosition = SnapPosition.Start,
+        callbacks: FlingCallbacks = FlingCallbacks.Empty
+    ): FlingBehavior = snapFlingBehavior(
+        lazyListState = lazyListState,
+        snapPosition = snapPosition,
+        callbacks = callbacks
+    )
+    
+    /**
+     * Velocity-aware adaptive fling behavior.
+     *
+     * Automatically adjusts physics based on fling velocity:
+     * - Gentle swipes get controlled, precise scrolling
+     * - Aggressive swipes get long momentum scrolls
+     *
+     * **Best for:**
+     * - Apps wanting intuitive scroll behavior
+     * - Mixed content where precision and speed matter
+     * - User-friendly general purpose scrolling
+     *
+     * @param mode The adaptive mode preset to use.
+     * @param callbacks Optional fling lifecycle callbacks.
+     * @return A [FlingBehavior] that adapts to velocity.
+     */
+    @Composable
+    fun adaptive(
+        mode: AdaptiveMode = AdaptiveMode.Balanced,
+        callbacks: FlingCallbacks = FlingCallbacks.Empty
+    ): FlingBehavior = adaptiveFlingBehavior(
+        mode = mode,
+        callbacks = callbacks
+    )
+    
+    /**
+     * System-aware accessibility fling behavior.
+     *
+     * Automatically adapts to system accessibility settings:
+     * - Respects "Reduce Motion" settings
+     * - Uses appropriate physics for accessibility needs
+     *
+     * **Best for:**
+     * - Apps wanting accessibility compliance
+     * - Users who have enabled reduced motion
+     * - Inclusive design
+     *
+     * @return A [FlingBehavior] that respects system accessibility settings.
+     */
+    @Composable
+    fun accessibilityAware(): FlingBehavior = AccessibilityFlingPresets.systemAware()
+    
+    /**
+     * Reduced motion fling behavior for accessibility.
+     *
+     * Minimizes perceived motion while maintaining functionality.
+     *
+     * **Best for:**
+     * - Users sensitive to motion
+     * - Accessibility-focused UIs
+     * - Apps targeting users with vestibular disorders
+     *
+     * @return A [FlingBehavior] with minimal motion.
+     */
+    @Composable
+    fun reducedMotion(): FlingBehavior = AccessibilityFlingPresets.reducedMotion()
 }

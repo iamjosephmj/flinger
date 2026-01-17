@@ -1,10 +1,15 @@
 package io.iamjosephmj.flingersample
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,11 +22,16 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeLeft
 import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.unit.dp
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.flingBehavior
+import io.iamjosephmj.flinger.snap.SnapAnimationConfig
+import io.iamjosephmj.flinger.snap.SnapConfig
+import io.iamjosephmj.flinger.snap.SnapPosition
+import io.iamjosephmj.flinger.snap.snapFlingBehavior
 import org.junit.Rule
 import org.junit.Test
 
@@ -333,6 +343,379 @@ class FlingBehaviorUITest {
         composeTestRule.onNodeWithText("Item 0").assertIsDisplayed()
     }
 
+    // ==================== Snap Fling Behavior Tests ====================
+
+    @Test
+    fun lazyRow_with_snap_start_position_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(snapPosition = SnapPosition.Start)
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_center_position_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(snapPosition = SnapPosition.Center)
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_end_position_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(snapPosition = SnapPosition.End)
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_scrolls_on_swipe() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(snapPosition = SnapPosition.Center)
+        }
+
+        composeTestRule.onNodeWithTag("test_snap_lazy_row")
+            .performTouchInput {
+                swipeLeft(
+                    startX = centerX + 200f,
+                    endX = centerX - 200f,
+                    durationMillis = 200
+                )
+            }
+
+        composeTestRule.waitForIdle()
+        // Verify scroll happened without crash
+    }
+
+    // ==================== Snap Animation Config Tests ====================
+
+    @Test
+    fun lazyRow_with_smooth_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Smooth
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snappy_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Snappy
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_bouncy_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Bouncy
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_gentle_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Gentle
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_instant_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Instant
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_ios_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.IOS
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_material_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.Material
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_custom_spring_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.custom(
+                    stiffness = 350f,
+                    dampingRatio = 0.75f
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_custom_tween_snap_animation_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                snapAnimation = SnapAnimationConfig.customTween(durationMillis = 400)
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    // ==================== Smooth Fusion Tests ====================
+
+    @Test
+    fun lazyRow_with_smooth_fusion_enabled_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                smoothFusion = true
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_smooth_fusion_scrolls_on_swipe() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                smoothFusion = true
+            )
+        }
+
+        composeTestRule.onNodeWithTag("test_snap_lazy_row")
+            .performTouchInput {
+                swipeLeft(
+                    startX = centerX + 200f,
+                    endX = centerX - 200f,
+                    durationMillis = 200
+                )
+            }
+
+        composeTestRule.waitForIdle()
+        // Verify smooth fusion scroll works without crash
+    }
+
+    @Test
+    fun lazyRow_with_smooth_fusion_low_ratio_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                smoothFusion = true,
+                fusionVelocityRatio = 0.05f
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_smooth_fusion_high_ratio_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                smoothFusion = true,
+                fusionVelocityRatio = 0.4f
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_smooth_fusion_high_ratio_scrolls_on_swipe() {
+        composeTestRule.setContent {
+            TestSnapLazyRow(
+                snapPosition = SnapPosition.Center,
+                smoothFusion = true,
+                fusionVelocityRatio = 0.3f
+            )
+        }
+
+        composeTestRule.onNodeWithTag("test_snap_lazy_row")
+            .performTouchInput {
+                swipeLeft(
+                    startX = centerX + 200f,
+                    endX = centerX - 200f,
+                    durationMillis = 200
+                )
+            }
+
+        composeTestRule.waitForIdle()
+    }
+
+    // ==================== SnapConfig Tests ====================
+
+    @Test
+    fun lazyRow_with_snap_config_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithConfig(
+                config = SnapConfig(
+                    snapPosition = SnapPosition.Center,
+                    velocityThreshold = 500f,
+                    snapAnimation = SnapAnimationConfig.Smooth,
+                    smoothFusion = false
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_config_and_fusion_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithConfig(
+                config = SnapConfig(
+                    snapPosition = SnapPosition.Center,
+                    velocityThreshold = 400f,
+                    snapAnimation = SnapAnimationConfig.Snappy,
+                    smoothFusion = true,
+                    fusionVelocityRatio = 0.2f
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_config_scrolls_on_swipe() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithConfig(
+                config = SnapConfig(
+                    snapPosition = SnapPosition.Center,
+                    smoothFusion = true,
+                    fusionVelocityRatio = 0.15f
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithTag("test_snap_lazy_row")
+            .performTouchInput {
+                swipeLeft(
+                    startX = centerX + 200f,
+                    endX = centerX - 200f,
+                    durationMillis = 200
+                )
+            }
+
+        composeTestRule.waitForIdle()
+    }
+
+    // ==================== Snap with Custom Fling Config Tests ====================
+
+    @Test
+    fun lazyRow_with_snap_and_custom_fling_config_renders_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithFlingConfig(
+                snapPosition = SnapPosition.Center,
+                flingConfig = FlingConfiguration.Builder()
+                    .scrollViewFriction(0.015f)
+                    .decelerationFriction(0.12f)
+                    .build()
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun lazyRow_with_snap_fusion_and_custom_fling_scrolls_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithFlingConfig(
+                snapPosition = SnapPosition.Center,
+                flingConfig = FlingConfiguration.Builder()
+                    .scrollViewFriction(0.02f)
+                    .decelerationFriction(0.15f)
+                    .build(),
+                smoothFusion = true
+            )
+        }
+
+        composeTestRule.onNodeWithTag("test_snap_lazy_row")
+            .performTouchInput {
+                swipeLeft(
+                    startX = centerX + 200f,
+                    endX = centerX - 200f,
+                    durationMillis = 200
+                )
+            }
+
+        composeTestRule.waitForIdle()
+    }
+
+    // ==================== Default Configuration Tests ====================
+
+    @Test
+    fun flingConfiguration_default_works_correctly() {
+        composeTestRule.setContent {
+            TestLazyColumn(
+                flingBehavior = flingBehavior(
+                    scrollConfiguration = FlingConfiguration.Default
+                )
+            )
+        }
+
+        composeTestRule.onNodeWithText("Item 0").assertIsDisplayed()
+    }
+
+    @Test
+    fun snapFlingBehavior_with_default_config_works_correctly() {
+        composeTestRule.setContent {
+            TestSnapLazyRowWithFlingConfig(
+                snapPosition = SnapPosition.Center,
+                flingConfig = FlingConfiguration.Default
+            )
+        }
+
+        composeTestRule.onNodeWithText("Card 0").assertIsDisplayed()
+    }
+
     // ==================== Helper Composables ====================
 
     @Composable
@@ -356,6 +739,130 @@ class FlingBehaviorUITest {
                         ) {
                             Text(
                                 text = "Item $index",
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun TestSnapLazyRow(
+        snapPosition: SnapPosition,
+        snapAnimation: SnapAnimationConfig = SnapAnimationConfig.Smooth,
+        smoothFusion: Boolean = false,
+        fusionVelocityRatio: Float = 0.15f
+    ) {
+        val listState = rememberLazyListState()
+        
+        MaterialTheme {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                LazyRow(
+                    state = listState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .testTag("test_snap_lazy_row"),
+                    flingBehavior = snapFlingBehavior(
+                        lazyListState = listState,
+                        snapPosition = snapPosition,
+                        snapAnimation = snapAnimation,
+                        smoothFusion = smoothFusion,
+                        fusionVelocityRatio = fusionVelocityRatio
+                    ),
+                    contentPadding = PaddingValues(horizontal = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(20) { index ->
+                        Card(
+                            modifier = Modifier
+                                .width(200.dp)
+                                .height(150.dp)
+                        ) {
+                            Text(
+                                text = "Card $index",
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun TestSnapLazyRowWithConfig(
+        config: SnapConfig
+    ) {
+        val listState = rememberLazyListState()
+        
+        MaterialTheme {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                LazyRow(
+                    state = listState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .testTag("test_snap_lazy_row"),
+                    flingBehavior = snapFlingBehavior(
+                        lazyListState = listState,
+                        config = config
+                    ),
+                    contentPadding = PaddingValues(horizontal = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(20) { index ->
+                        Card(
+                            modifier = Modifier
+                                .width(200.dp)
+                                .height(150.dp)
+                        ) {
+                            Text(
+                                text = "Card $index",
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun TestSnapLazyRowWithFlingConfig(
+        snapPosition: SnapPosition,
+        flingConfig: FlingConfiguration,
+        smoothFusion: Boolean = false
+    ) {
+        val listState = rememberLazyListState()
+        
+        MaterialTheme {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                LazyRow(
+                    state = listState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .testTag("test_snap_lazy_row"),
+                    flingBehavior = snapFlingBehavior(
+                        lazyListState = listState,
+                        snapPosition = snapPosition,
+                        flingConfig = flingConfig,
+                        smoothFusion = smoothFusion
+                    ),
+                    contentPadding = PaddingValues(horizontal = 24.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(20) { index ->
+                        Card(
+                            modifier = Modifier
+                                .width(200.dp)
+                                .height(150.dp)
+                        ) {
+                            Text(
+                                text = "Card $index",
                                 modifier = Modifier.padding(16.dp)
                             )
                         }

@@ -33,13 +33,14 @@ import kotlin.math.sign
 /**
  * Spline based decay animation based on {@see FloatDecayAnimationSpec}
  *
+ * Performance optimized: Caches FlingInfo to avoid object allocation on every frame.
+ *
  *  @author Joseph James.
  */
 class SplineBasedFloatDecayAnimationSpec(
     density: Density,
     scrollConfiguration: FlingConfiguration
-) :
-    FloatDecayAnimationSpec {
+) : FloatDecayAnimationSpec {
 
     /*
      * Fling calculation.
@@ -53,7 +54,28 @@ class SplineBasedFloatDecayAnimationSpec(
      * This is the absolute value of a velocity threshold, below which the animation is
      * considered finished.
      */
-    override val absVelocityThreshold: Float by lazy { scrollConfiguration.absVelocityThreshold }
+    override val absVelocityThreshold: Float = scrollConfiguration.absVelocityThreshold
+
+    /*
+     * Cached FlingInfo to avoid allocation on every frame.
+     * The velocity is used as the cache key since FlingInfo depends only on velocity.
+     */
+    private var cachedFlingInfo: FlingCalculator.FlingInfo? = null
+    private var cachedVelocity: Float = Float.NaN
+
+    /**
+     * Returns cached FlingInfo if velocity matches, otherwise creates and caches new one.
+     */
+    private fun getCachedFlingInfo(velocity: Float): FlingCalculator.FlingInfo {
+        val cached = cachedFlingInfo
+        if (cached != null && cachedVelocity == velocity) {
+            return cached
+        }
+        return flingCalculator.flingInfo(velocity).also {
+            cachedFlingInfo = it
+            cachedVelocity = velocity
+        }
+    }
 
     /*
      * Distance that is to be covered by the fling.
@@ -74,7 +96,7 @@ class SplineBasedFloatDecayAnimationSpec(
         initialVelocity: Float
     ): Float {
         val playTimeMillis = playTimeNanos / 1_000_000L
-        return initialValue + flingCalculator.flingInfo(initialVelocity).position(playTimeMillis)
+        return initialValue + getCachedFlingInfo(initialVelocity).position(playTimeMillis)
     }
 
     @Suppress("MethodNameUnits")
@@ -88,6 +110,6 @@ class SplineBasedFloatDecayAnimationSpec(
         initialVelocity: Float
     ): Float {
         val playTimeMillis = playTimeNanos / 1_000_000L
-        return flingCalculator.flingInfo(initialVelocity).velocity(playTimeMillis)
+        return getCachedFlingInfo(initialVelocity).velocity(playTimeMillis)
     }
 }

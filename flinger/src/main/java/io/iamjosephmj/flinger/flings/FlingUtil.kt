@@ -31,30 +31,82 @@ import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalDensity
+import io.iamjosephmj.flinger.callbacks.FlingCallbacks
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 
 /**
- *  Simple utility class for Fling based decay animations.
+ * Creates a customizable fling behavior for scrollable composables.
  *
- *  @author Joseph James.
+ * This is the primary entry point for using Flinger's custom fling physics.
+ * It creates a [FlingBehavior] that can be passed to any scrollable composable
+ * like [LazyColumn], [LazyRow], or scrollable modifiers.
+ *
+ * ## Basic Usage
+ * ```kotlin
+ * LazyColumn(
+ *     flingBehavior = flingBehavior()
+ * ) {
+ *     items(100) { Text("Item $it") }
+ * }
+ * ```
+ *
+ * ## Custom Configuration
+ * ```kotlin
+ * LazyColumn(
+ *     flingBehavior = flingBehavior(
+ *         scrollConfiguration = FlingConfiguration.Builder()
+ *             .scrollViewFriction(0.04f)
+ *             .decelerationFriction(0.1f)
+ *             .build()
+ *     )
+ * ) {
+ *     items(100) { Text("Item $it") }
+ * }
+ * ```
+ *
+ * ## With Callbacks
+ * ```kotlin
+ * LazyColumn(
+ *     flingBehavior = flingBehavior(
+ *         callbacks = FlingCallbacks(
+ *             onFlingStart = { velocity -> Log.d("Fling", "Started: $velocity") },
+ *             onFlingEnd = { distance, cancelled -> Log.d("Fling", "Ended: $distance") }
+ *         )
+ *     )
+ * ) {
+ *     items(100) { Text("Item $it") }
+ * }
+ * ```
+ *
+ * @param scrollConfiguration The configuration for fling physics. Defaults to
+ *   a smooth, balanced configuration.
+ * @param callbacks Optional callbacks for fling lifecycle events.
+ * @return A [FlingBehavior] with the specified configuration.
+ *
+ * @author Joseph James
  */
-
 @Composable
 fun flingBehavior(
-    scrollConfiguration: FlingConfiguration =
-        FlingConfiguration.Builder()
-            .build()
+    scrollConfiguration: FlingConfiguration = FlingConfiguration.Default,
+    callbacks: FlingCallbacks = FlingCallbacks.Empty
 ): FlingBehavior {
     val flingSpec = rememberSplineBasedDecay<Float>(scrollConfiguration)
-    return remember(flingSpec) {
-        FlingerFlingBehavior(flingSpec)
+    return remember(flingSpec, callbacks) {
+        FlingerFlingBehavior(flingSpec, callbacks)
     }
 }
 
+/**
+ * Creates and remembers a spline-based decay animation spec.
+ *
+ * This function internally updates the calculation when density changes,
+ * but the reference to the returned spec remains stable across calls.
+ *
+ * @param scrollConfiguration The fling configuration to use.
+ * @return A [DecayAnimationSpec] configured with the specified settings.
+ */
 @Composable
 fun <T> rememberSplineBasedDecay(scrollConfiguration: FlingConfiguration): DecayAnimationSpec<T> {
-    // This function will internally update the calculation of fling decay when the density changes,
-    // but the reference to the returned spec will not change across calls.
     val density = LocalDensity.current
     return remember(density.density) {
         SplineBasedFloatDecayAnimationSpec(

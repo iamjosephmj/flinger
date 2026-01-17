@@ -30,6 +30,8 @@ import kotlin.math.ln
 /**
  * This class defines all the fling related parameters that can be tweaked by the user.
  *
+ * Performance optimized: Uses eager initialization for computed values.
+ *
  * @author Joseph James.
  */
 class FlingConfiguration private constructor(
@@ -44,10 +46,20 @@ class FlingConfiguration private constructor(
     private val splineEndTension: Float,
     val numberOfSplinePoints: Int
 ) {
+    // Eager initialization - these are always used in spline calculations
+    val splineP1: Float = splineStartTension * splineInflection
 
-    val splineP1: Float by lazy { splineStartTension * splineInflection }
+    val splineP2: Float = 1.0f - splineEndTension * (1.0f - splineInflection)
 
-    val splineP2: Float by lazy { 1.0f - splineEndTension * (1.0f - splineInflection) }
+    companion object {
+        /**
+         * Default FlingConfiguration instance.
+         * Use this instead of Builder().build() to avoid allocation on every call.
+         * 
+         * This is a singleton that provides reasonable default fling behavior.
+         */
+        val Default: FlingConfiguration = Builder().build()
+    }
 
     data class Builder(
         /*

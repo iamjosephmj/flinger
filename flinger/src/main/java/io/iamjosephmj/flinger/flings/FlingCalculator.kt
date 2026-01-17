@@ -35,6 +35,8 @@ import kotlin.math.sign
 /**
  * Configuration for Android-feel flinging motion at the given density.
  *
+ * Performance optimized: Uses eager initialization and allocation-free coefficient methods.
+ *
  * @param density density of the screen. Use LocalDensity to get current density in composition.
  * @param flingConfiguration this contain all parameters need for setting the scroll behaviour.
  *
@@ -44,10 +46,14 @@ class FlingCalculator(
     val density: Density,
     val flingConfiguration: FlingConfiguration
 ) {
+    // Eager initialization - these are always used, avoid lazy sync overhead
+    private val androidFlingSpline = AndroidFlingSpline(flingConfiguration = flingConfiguration)
 
-    private val androidFlingSpline: AndroidFlingSpline by lazy {
-        AndroidFlingSpline(flingConfiguration = flingConfiguration)
-    }
+    /**
+     * A density-specific coefficient adjusted to physical values.
+     * Eagerly initialized since it's always used.
+     */
+    private val magicPhysicalCoefficient: Float = computeDeceleration(density)
 
     /**
      * Compute the rate of deceleration based on pixel density, physical gravity
@@ -59,12 +65,6 @@ class FlingCalculator(
                 density *
                 160f *
                 friction
-
-
-    /**
-     * A density-specific coefficient adjusted to physical values.
-     */
-    private val magicPhysicalCoefficient: Float by lazy { computeDeceleration(density) }
 
     /**
      * Computes the rate of deceleration in pixels based on
@@ -120,6 +120,8 @@ class FlingCalculator(
     /**
      * Info about a fling started with [initialVelocity]. The units of [initialVelocity]
      * determine the distance units of [distance] and the time units of [duration].
+     *
+     * Performance optimized: Uses inline coefficient methods to avoid FlingResult allocation.
      */
     data class FlingInfo(
         val initialVelocity: Float,
@@ -127,16 +129,23 @@ class FlingCalculator(
         val duration: Long,
         val androidFlingSpline: AndroidFlingSpline
     ) {
+        // Pre-compute sign once to avoid repeated calls
+        private val velocitySign = sign(initialVelocity)
+        
+        // Pre-compute duration as float to avoid repeated conversion
+        private val durationFloat = duration.toFloat()
+
         fun position(time: Long): Float {
-            val splinePos = if (duration > 0) time / duration.toFloat() else 1f
-            return distance * sign(initialVelocity) *
-                    androidFlingSpline.flingPosition(splinePos).distanceCoefficient
+            val splinePos = if (duration > 0) time / durationFloat else 1f
+            // Use allocation-free coefficient method
+            return distance * velocitySign * androidFlingSpline.flingDistanceCoefficient(splinePos)
         }
 
         fun velocity(time: Long): Float {
-            val splinePos = if (duration > 0) time / duration.toFloat() else 1f
-            return androidFlingSpline.flingPosition(splinePos).velocityCoefficient *
-                    sign(initialVelocity) * distance / duration * 1000.0f
+            val splinePos = if (duration > 0) time / durationFloat else 1f
+            // Use allocation-free coefficient method
+            return androidFlingSpline.flingVelocityCoefficient(splinePos) *
+                    velocitySign * distance / duration * 1000.0f
         }
     }
 }
