@@ -27,8 +27,6 @@
 
 Experience Flinger's customizable scroll behaviors in action:
 
-https://github.com/user-attachments/assets/aab7374a-b275-468d-aa3a-9f62d0aedeac
-
 https://github.com/user-attachments/assets/f57c2071-ff15-4416-9bc3-fd5c85c4d956
 
 https://github.com/user-attachments/assets/b0ced30a-f6df-4407-a640-c85c57a9ba8c
