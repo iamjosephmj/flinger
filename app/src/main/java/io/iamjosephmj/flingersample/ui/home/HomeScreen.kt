@@ -19,9 +19,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Accessibility
+import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Compare
 import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.filled.Speed
+import androidx.compose.material.icons.filled.SwipeRight
 import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material.icons.filled.ViewCarousel
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -116,6 +121,51 @@ fun HomeScreen(navController: NavController) {
                     description = "Compare native Android scroll with Flinger behaviors",
                     icon = Icons.Default.Compare,
                     onClick = { navController.navigate("comparison") }
+                )
+            }
+            
+            item {
+                Text(
+                    text = "New Features",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+            
+            item {
+                NavigationCard(
+                    title = "Snap Gallery",
+                    description = "Snap-to-item behavior for carousels and galleries",
+                    icon = Icons.Default.ViewCarousel,
+                    onClick = { navController.navigate("snapDemo") }
+                )
+            }
+            
+            item {
+                NavigationCard(
+                    title = "Adaptive Fling",
+                    description = "Velocity-aware physics that adapts to your swipes",
+                    icon = Icons.Default.Speed,
+                    onClick = { navController.navigate("adaptiveDemo") }
+                )
+            }
+            
+            item {
+                NavigationCard(
+                    title = "Pager Physics",
+                    description = "Custom page-turn physics for HorizontalPager",
+                    icon = Icons.Default.SwipeRight,
+                    onClick = { navController.navigate("pagerDemo") }
+                )
+            }
+            
+            item {
+                NavigationCard(
+                    title = "Debug Overlay",
+                    description = "Real-time fling visualization for developers",
+                    icon = Icons.Default.BugReport,
+                    onClick = { navController.navigate("debugDemo") }
                 )
             }
             

@@ -30,6 +30,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import io.iamjosephmj.flingersample.ui.comparison.ComparisonScreen
+import io.iamjosephmj.flingersample.ui.demos.AdaptiveDemo
+import io.iamjosephmj.flingersample.ui.demos.DebugOverlayDemo
+import io.iamjosephmj.flingersample.ui.demos.PagerDemo
+import io.iamjosephmj.flingersample.ui.demos.SnapGalleryDemo
 import io.iamjosephmj.flingersample.ui.home.HomeScreen
 import io.iamjosephmj.flingersample.ui.playground.PlaygroundScreen
 import io.iamjosephmj.flingersample.ui.presets.PresetsGalleryScreen
@@ -44,6 +48,10 @@ import io.iamjosephmj.flingersample.ui.settings.RenderSettingsPage
  * - "playground" - Interactive parameter playground
  * - "presets" - Preset gallery with visual previews
  * - "comparison" - Side-by-side comparison screen
+ * - "snapDemo" - Snap-to-item gallery demo
+ * - "adaptiveDemo" - Velocity-aware adaptive fling demo
+ * - "pagerDemo" - Custom pager physics demo
+ * - "debugDemo" - Debug overlay visualization demo
  * - "scrollPage" - Legacy scroll demo page
  * - "Settings" - Legacy settings page
  */
@@ -53,11 +61,17 @@ fun CreateNavHost(navController: NavHostController) {
         navController = navController,
         startDestination = "home",
     ) {
-        // New screens
+        // Main screens
         composable("home") { HomeScreen(navController) }
         composable("playground") { PlaygroundScreen(navController) }
         composable("presets") { PresetsGalleryScreen(navController) }
         composable("comparison") { ComparisonScreen(navController) }
+        
+        // New feature demos
+        composable("snapDemo") { SnapGalleryDemo(navController) }
+        composable("adaptiveDemo") { AdaptiveDemo(navController) }
+        composable("pagerDemo") { PagerDemo(navController) }
+        composable("debugDemo") { DebugOverlayDemo(navController) }
         
         // Legacy screens (kept for backward compatibility)
         composable("scrollPage") { RenderScrollPage(navController) }

@@ -30,37 +30,80 @@ import androidx.compose.animation.core.DecayAnimationSpec
 import androidx.compose.animation.core.animateDecay
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollScope
+import io.iamjosephmj.flinger.callbacks.FlingCallbacks
 import kotlin.math.abs
 
 /**
+ * The default fling behavior implementation for Flinger.
  *
- * This is the default fling behaviour.
+ * This class performs decay-based fling animations with customizable physics
+ * and optional lifecycle callbacks for monitoring fling progress.
+ *
+ * @param flingDecay The decay animation specification that controls fling physics.
+ * @param callbacks Optional callbacks for fling lifecycle events (start, progress, end).
  *
  * @author Joseph James
  */
 class FlingerFlingBehavior(
-    private val flingDecay: DecayAnimationSpec<Float>
+    private val flingDecay: DecayAnimationSpec<Float>,
+    private val callbacks: FlingCallbacks = FlingCallbacks.Empty
 ) : FlingBehavior {
+    
     override suspend fun ScrollScope.performFling(initialVelocity: Float): Float {
-        // come up with the better threshold, but we need it since spline curve gives us NaNs
+        // Threshold to avoid spline curve NaN issues
         return if (abs(initialVelocity) > 1f) {
             var velocityLeft = initialVelocity
             var lastValue = 0f
+            var totalScrolled = 0f
+            var wasCancelled = false
+            var initialValue = 0f
+            var targetValue: Float? = null
+            
+            // Notify fling start
+            callbacks.onFlingStart?.invoke(initialVelocity)
+            
             AnimationState(
                 initialValue = 0f,
                 initialVelocity = initialVelocity,
             ).animateDecay(flingDecay) {
                 try {
+                    // Capture target value on first frame for progress calculation
+                    if (targetValue == null) {
+                        initialValue = value
+                        // Estimate target based on decay spec behavior
+                        targetValue = value + (velocity * 0.5f) // Approximation
+                    }
+                    
                     val delta = value - lastValue
                     val consumed = scrollBy(delta)
                     lastValue = value
+                    totalScrolled += abs(consumed)
                     velocityLeft = this.velocity
-                    // avoid rounding errors and stop if anything is unconsumed
-                    if (abs(delta - consumed) > 0.5f) this.cancelAnimation()
+                    
+                    // Calculate and report progress
+                    callbacks.onFlingProgress?.let { onProgress ->
+                        val progress = if (abs(initialVelocity) > 0.1f) {
+                            1f - (abs(velocityLeft) / abs(initialVelocity))
+                        } else {
+                            1f
+                        }.coerceIn(0f, 1f)
+                        onProgress(progress, velocityLeft)
+                    }
+                    
+                    // Avoid rounding errors and stop if anything is unconsumed
+                    if (abs(delta - consumed) > 0.5f) {
+                        wasCancelled = true
+                        this.cancelAnimation()
+                    }
                 } catch (e: Exception) {
+                    wasCancelled = true
                     this.cancelAnimation()
                 }
             }
+            
+            // Notify fling end
+            callbacks.onFlingEnd?.invoke(totalScrolled, wasCancelled)
+            
             velocityLeft
         } else {
             initialVelocity
