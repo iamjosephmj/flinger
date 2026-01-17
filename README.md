@@ -27,19 +27,15 @@
 
 Experience Flinger's customizable scroll behaviors in action:
 
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-1.mp4
+> **📹 Click the links below to watch the demo videos:**
 
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-2.mp4
+| | | |
+|:---:|:---:|:---:|
+| [▶️ Demo 1](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-1.mp4?raw=true) | [▶️ Demo 2](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-2.mp4?raw=true) | [▶️ Demo 3](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-3.mp4?raw=true) |
+| [▶️ Demo 4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-4.mp4?raw=true) | [▶️ Demo 5](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-5.mp4?raw=true) | [▶️ Demo 6](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-6.mp4?raw=true) |
+| | [▶️ Demo 7](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-7.mp4?raw=true) | |
 
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-3.mp4
-
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-4.mp4
-
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-5.mp4
-
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-6.mp4
-
-https://github.com/iamjosephmj/flinger/raw/main/repo-media/demo-video-7.mp4
+> 💡 **To enable inline video playback:** Upload videos via GitHub Issues/PR comments, then use the generated URLs here.
 
 ---
 
