@@ -77,8 +77,8 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     
-    // Flinger library (use project reference for development)
-    implementation(project(":flinger"))
+    // Flinger library from JitPack
+    implementation("com.github.iamjosephmj.flinger:flinger:2.0.0")
     
     // Debug tooling
     debugImplementation(libs.androidx.compose.ui.tooling)

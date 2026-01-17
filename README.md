@@ -27,6 +27,20 @@
   <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger-demo.gif" width="280" alt="Flinger Demo"/>
 </p>
 
+### Demo Videos
+
+Check out these demo videos showcasing Flinger's scroll behaviors in action:
+
+| Demo | Link |
+|:----:|:-----|
+| Demo 1 | [demo-video-1.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-1.mp4) |
+| Demo 2 | [demo-video-2.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-2.mp4) |
+| Demo 3 | [demo-video-3.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-3.mp4) |
+| Demo 4 | [demo-video-4.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-4.mp4) |
+| Demo 5 | [demo-video-5.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-5.mp4) |
+| Demo 6 | [demo-video-6.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-6.mp4) |
+| Demo 7 | [demo-video-7.mp4](https://github.com/iamjosephmj/flinger/blob/main/repo-media/demo-video-7.mp4) |
+
 ---
 
 ## Table of Contents
