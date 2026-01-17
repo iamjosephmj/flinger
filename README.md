@@ -27,17 +27,53 @@
 
 Experience Flinger's customizable scroll behaviors in action:
 
+<details open>
+<summary><b>📱 Scroll Presets Demo</b></summary>
+<br/>
+
 https://github.com/user-attachments/assets/f57c2071-ff15-4416-9bc3-fd5c85c4d956
+
+</details>
+
+<details>
+<summary><b>🎯 Snap Behavior</b></summary>
+<br/>
 
 https://github.com/user-attachments/assets/b0ced30a-f6df-4407-a640-c85c57a9ba8c
 
+</details>
+
+<details>
+<summary><b>⚡ Adaptive Fling</b></summary>
+<br/>
+
 https://github.com/user-attachments/assets/30f43308-0acd-4234-a996-8eaf585dcfe2
+
+</details>
+
+<details>
+<summary><b>🍎 iOS-Style Scrolling</b></summary>
+<br/>
 
 https://github.com/user-attachments/assets/2817852c-99b3-4c68-b3ae-12b8fedfa754
 
+</details>
+
+<details>
+<summary><b>🎨 Custom Physics</b></summary>
+<br/>
+
 https://github.com/user-attachments/assets/ca5b7666-8681-4590-b478-f5f29f79ae0d
 
+</details>
+
+<details>
+<summary><b>✨ Ultra Smooth</b></summary>
+<br/>
+
 https://github.com/user-attachments/assets/0b2752d3-cc17-4885-bc05-0383b8cd1c1b
+
+</details>
 
 ---
 
