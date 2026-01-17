@@ -80,9 +80,9 @@ fun FlingCurveCanvas(
         
         for (i in 0..samples) {
             val t = i.toFloat() / samples
-            val result = spline.flingPosition(t)
+            val distanceCoefficient = spline.flingDistanceCoefficient(t)
             val x = padding + t * graphWidth
-            val y = height - padding - result.distanceCoefficient * graphHeight
+            val y = height - padding - distanceCoefficient * graphHeight
             
             if (i == 0) {
                 positionPath.moveTo(x, y)
@@ -104,9 +104,9 @@ fun FlingCurveCanvas(
         // First pass to find max velocity
         for (i in 0..samples) {
             val t = i.toFloat() / samples
-            val result = spline.flingPosition(t)
-            if (result.velocityCoefficient > maxVelocity) {
-                maxVelocity = result.velocityCoefficient
+            val velocityCoefficient = spline.flingVelocityCoefficient(t)
+            if (velocityCoefficient > maxVelocity) {
+                maxVelocity = velocityCoefficient
             }
         }
         
@@ -114,9 +114,9 @@ fun FlingCurveCanvas(
         if (maxVelocity > 0) {
             for (i in 0..samples) {
                 val t = i.toFloat() / samples
-                val result = spline.flingPosition(t)
+                val velocityCoefficient = spline.flingVelocityCoefficient(t)
                 val x = padding + t * graphWidth
-                val normalizedVelocity = result.velocityCoefficient / maxVelocity
+                val normalizedVelocity = velocityCoefficient / maxVelocity
                 val y = height - padding - normalizedVelocity * graphHeight * 0.5f
                 
                 if (i == 0) {
@@ -176,9 +176,9 @@ fun MiniCurvePreview(
         
         for (i in 0..samples) {
             val t = i.toFloat() / samples
-            val result = spline.flingPosition(t)
+            val distanceCoefficient = spline.flingDistanceCoefficient(t)
             val x = padding + t * graphWidth
-            val y = height - padding - result.distanceCoefficient * graphHeight
+            val y = height - padding - distanceCoefficient * graphHeight
             
             if (i == 0) {
                 path.moveTo(x, y)
