@@ -15,7 +15,7 @@ navigationRuntimeKtx = "2.8.9"
 navigationCompose = "2.8.9"
 # Testing
 junitExt = "1.2.1"
-espressoCore = "3.6.1"
+espressoCore = "3.7.0"
 
 [libraries]
 # Core Android
