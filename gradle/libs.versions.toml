@@ -12,7 +12,7 @@ material = "1.7.8"
 mockitoCore = "5.20.0"
 truth = "1.4.5"
 navigationRuntimeKtx = "2.8.9"
-navigationCompose = "2.8.9"
+navigationCompose = "2.9.6"
 # Testing
 junitExt = "1.2.1"
 espressoCore = "3.6.1"
