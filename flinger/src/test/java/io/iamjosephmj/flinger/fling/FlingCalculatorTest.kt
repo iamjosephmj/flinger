@@ -71,16 +71,16 @@ class FlingCalculatorTest {
         assertThat(info.androidFlingSpline.deceleration(5f, config.decelerationFriction))
             .isEqualTo(1.7147983883554976)
 
-        assertThat(info.androidFlingSpline.flingPosition(5f).distanceCoefficient)
+        assertThat(info.androidFlingSpline.flingDistanceCoefficient(5f))
             .isEqualTo(1f)
 
-        assertThat(info.androidFlingSpline.flingPosition(10f).distanceCoefficient)
+        assertThat(info.androidFlingSpline.flingDistanceCoefficient(10f))
             .isEqualTo(1f)
 
-        assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
+        assertThat(info.androidFlingSpline.flingVelocityCoefficient(5f))
             .isEqualTo(0f)
 
-        assertThat(info.androidFlingSpline.flingPosition(5f).velocityCoefficient)
+        assertThat(info.androidFlingSpline.flingVelocityCoefficient(5f))
             .isEqualTo(0f)
     }
 }

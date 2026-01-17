@@ -37,8 +37,6 @@ import io.iamjosephmj.flingersample.ui.demos.SnapGalleryDemo
 import io.iamjosephmj.flingersample.ui.home.HomeScreen
 import io.iamjosephmj.flingersample.ui.playground.PlaygroundScreen
 import io.iamjosephmj.flingersample.ui.presets.PresetsGalleryScreen
-import io.iamjosephmj.flingersample.ui.scroll.RenderScrollPage
-import io.iamjosephmj.flingersample.ui.settings.RenderSettingsPage
 
 /**
  * Navigation setup for the Flinger sample app.
@@ -52,8 +50,6 @@ import io.iamjosephmj.flingersample.ui.settings.RenderSettingsPage
  * - "adaptiveDemo" - Velocity-aware adaptive fling demo
  * - "pagerDemo" - Custom pager physics demo
  * - "debugDemo" - Debug overlay visualization demo
- * - "scrollPage" - Legacy scroll demo page
- * - "Settings" - Legacy settings page
  */
 @Composable
 fun CreateNavHost(navController: NavHostController) {
@@ -67,14 +63,10 @@ fun CreateNavHost(navController: NavHostController) {
         composable("presets") { PresetsGalleryScreen(navController) }
         composable("comparison") { ComparisonScreen(navController) }
         
-        // New feature demos
+        // Feature demos
         composable("snapDemo") { SnapGalleryDemo(navController) }
         composable("adaptiveDemo") { AdaptiveDemo(navController) }
         composable("pagerDemo") { PagerDemo(navController) }
         composable("debugDemo") { DebugOverlayDemo(navController) }
-        
-        // Legacy screens (kept for backward compatibility)
-        composable("scrollPage") { RenderScrollPage(navController) }
-        composable("Settings") { RenderSettingsPage(navController) }
     }
 }

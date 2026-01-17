@@ -13,8 +13,8 @@ android {
         applicationId = "io.iamjosephmj.flingersample"
         minSdk = 21
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.4.0"
+        versionCode = 3
+        versionName = "2.0.0"
         
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

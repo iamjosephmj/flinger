@@ -9,75 +9,88 @@ import org.junit.Test
  */
 class AndroidFlingSplineTest {
 
-    // ==================== Fling Position Tests ====================
+    // ==================== Distance Coefficient Tests ====================
 
     @Test
-    fun `flingPosition at time 0 returns near zero distance coefficient`() {
+    fun `flingDistanceCoefficient at time 0 returns near zero`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(0f)
+        val distance = spline.flingDistanceCoefficient(0f)
         
-        assertThat(result.distanceCoefficient).isAtMost(0.01f)
+        assertThat(distance).isAtMost(0.01f)
     }
 
     @Test
-    fun `flingPosition at time 1 returns distance coefficient of 1`() {
+    fun `flingDistanceCoefficient at time 1 returns 1`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(1f)
+        val distance = spline.flingDistanceCoefficient(1f)
         
-        assertThat(result.distanceCoefficient).isEqualTo(1f)
+        assertThat(distance).isEqualTo(1f)
     }
 
     @Test
-    fun `flingPosition at time greater than 1 returns distance coefficient of 1`() {
+    fun `flingDistanceCoefficient at time greater than 1 returns 1`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(2f)
+        val distance = spline.flingDistanceCoefficient(2f)
         
-        assertThat(result.distanceCoefficient).isEqualTo(1f)
+        assertThat(distance).isEqualTo(1f)
     }
 
     @Test
-    fun `flingPosition at time greater than 1 returns velocity coefficient of 0`() {
+    fun `flingDistanceCoefficient at mid-time returns intermediate value`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(2f)
+        val distance = spline.flingDistanceCoefficient(0.5f)
         
-        assertThat(result.velocityCoefficient).isEqualTo(0f)
+        assertThat(distance).isGreaterThan(0f)
+        assertThat(distance).isLessThan(1f)
     }
 
     @Test
-    fun `flingPosition at mid-time returns intermediate distance coefficient`() {
-        val spline = createSpline()
-        
-        val result = spline.flingPosition(0.5f)
-        
-        assertThat(result.distanceCoefficient).isGreaterThan(0f)
-        assertThat(result.distanceCoefficient).isLessThan(1f)
-    }
-
-    @Test
-    fun `flingPosition distance coefficient increases monotonically with time`() {
+    fun `flingDistanceCoefficient increases monotonically with time`() {
         val spline = createSpline()
         
         var previousDistance = 0f
         for (t in listOf(0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1.0f)) {
-            val result = spline.flingPosition(t)
-            assertThat(result.distanceCoefficient).isAtLeast(previousDistance)
-            previousDistance = result.distanceCoefficient
+            val distance = spline.flingDistanceCoefficient(t)
+            assertThat(distance).isAtLeast(previousDistance)
+            previousDistance = distance
         }
     }
 
+    // ==================== Velocity Coefficient Tests ====================
+
     @Test
-    fun `flingPosition velocity coefficient is positive during fling`() {
+    fun `flingVelocityCoefficient at time greater than 1 returns 0`() {
+        val spline = createSpline()
+        
+        val velocity = spline.flingVelocityCoefficient(2f)
+        
+        assertThat(velocity).isEqualTo(0f)
+    }
+
+    @Test
+    fun `flingVelocityCoefficient is positive during fling`() {
         val spline = createSpline()
         
         // Check at various points during the fling (not at endpoints)
         for (t in listOf(0.1f, 0.3f, 0.5f, 0.7f, 0.9f)) {
-            val result = spline.flingPosition(t)
-            assertThat(result.velocityCoefficient).isAtLeast(0f)
+            val velocity = spline.flingVelocityCoefficient(t)
+            assertThat(velocity).isAtLeast(0f)
         }
+    }
+
+    @Test
+    fun `flingVelocityCoefficient decreases as time approaches 1`() {
+        val spline = createSpline()
+        
+        val velocityEarly = spline.flingVelocityCoefficient(0.2f)
+        val velocityLate = spline.flingVelocityCoefficient(0.9f)
+        
+        // Velocity should generally decrease as the fling decelerates
+        assertThat(velocityEarly).isGreaterThan(velocityLate)
     }
 
     // ==================== Deceleration Tests ====================
@@ -141,12 +154,11 @@ class AndroidFlingSplineTest {
             FlingConfiguration.Builder().splineInflection(0.3f).build()
         )
         
-        val resultLow = splineLow.flingPosition(0.5f)
-        val resultHigh = splineHigh.flingPosition(0.5f)
+        val distanceLow = splineLow.flingDistanceCoefficient(0.5f)
+        val distanceHigh = splineHigh.flingDistanceCoefficient(0.5f)
         
         // Different inflection should produce different curves
-        assertThat(resultLow.distanceCoefficient)
-            .isNotEqualTo(resultHigh.distanceCoefficient)
+        assertThat(distanceLow).isNotEqualTo(distanceHigh)
     }
 
     @Test
@@ -158,15 +170,14 @@ class AndroidFlingSplineTest {
             FlingConfiguration.Builder().splineStartTension(0.5f).build()
         )
         
-        val resultLow = splineLowTension.flingPosition(0.3f)
-        val resultHigh = splineHighTension.flingPosition(0.3f)
+        val distanceLow = splineLowTension.flingDistanceCoefficient(0.3f)
+        val distanceHigh = splineHighTension.flingDistanceCoefficient(0.3f)
         
-        assertThat(resultLow.distanceCoefficient)
-            .isNotEqualTo(resultHigh.distanceCoefficient)
+        assertThat(distanceLow).isNotEqualTo(distanceHigh)
     }
 
     @Test
-    fun `more spline points produces smoother curve`() {
+    fun `more spline points produces valid results`() {
         val splineFew = createSpline(
             FlingConfiguration.Builder().numberOfSplinePoints(10).build()
         )
@@ -175,55 +186,70 @@ class AndroidFlingSplineTest {
         )
         
         // Both should still produce valid results
-        val resultFew = splineFew.flingPosition(0.5f)
-        val resultMany = splineMany.flingPosition(0.5f)
+        val distanceFew = splineFew.flingDistanceCoefficient(0.5f)
+        val distanceMany = splineMany.flingDistanceCoefficient(0.5f)
         
-        assertThat(resultFew.distanceCoefficient).isGreaterThan(0f)
-        assertThat(resultMany.distanceCoefficient).isGreaterThan(0f)
+        assertThat(distanceFew).isGreaterThan(0f)
+        assertThat(distanceMany).isGreaterThan(0f)
     }
 
-    // ==================== FlingResult Tests ====================
+    // ==================== Consistency Tests ====================
 
     @Test
-    fun `FlingResult contains both distance and velocity coefficients`() {
+    fun `distance and velocity coefficients are consistent`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(0.5f)
+        // At time 0.5, both should be valid
+        val distance = spline.flingDistanceCoefficient(0.5f)
+        val velocity = spline.flingVelocityCoefficient(0.5f)
         
-        assertThat(result.distanceCoefficient).isNotNull()
-        assertThat(result.velocityCoefficient).isNotNull()
+        assertThat(distance).isGreaterThan(0f)
+        assertThat(distance).isLessThan(1f)
+        assertThat(velocity).isGreaterThan(0f)
     }
 
     @Test
-    fun `FlingResult data class equality works correctly`() {
-        val result1 = AndroidFlingSpline.FlingResult(0.5f, 0.3f)
-        val result2 = AndroidFlingSpline.FlingResult(0.5f, 0.3f)
-        val result3 = AndroidFlingSpline.FlingResult(0.6f, 0.3f)
+    fun `coefficients are reproducible with same input`() {
+        val spline = createSpline()
         
-        assertThat(result1).isEqualTo(result2)
-        assertThat(result1).isNotEqualTo(result3)
+        val distance1 = spline.flingDistanceCoefficient(0.5f)
+        val distance2 = spline.flingDistanceCoefficient(0.5f)
+        val velocity1 = spline.flingVelocityCoefficient(0.5f)
+        val velocity2 = spline.flingVelocityCoefficient(0.5f)
+        
+        assertThat(distance1).isEqualTo(distance2)
+        assertThat(velocity1).isEqualTo(velocity2)
     }
 
     // ==================== Edge Cases ====================
 
     @Test
-    fun `flingPosition handles very small time values`() {
+    fun `flingDistanceCoefficient handles very small time values`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(0.001f)
+        val distance = spline.flingDistanceCoefficient(0.001f)
         
-        assertThat(result.distanceCoefficient).isAtLeast(0f)
-        assertThat(result.distanceCoefficient).isAtMost(1f)
+        assertThat(distance).isAtLeast(0f)
+        assertThat(distance).isAtMost(1f)
     }
 
     @Test
-    fun `flingPosition handles time values just below 1`() {
+    fun `flingDistanceCoefficient handles time values just below 1`() {
         val spline = createSpline()
         
-        val result = spline.flingPosition(0.999f)
+        val distance = spline.flingDistanceCoefficient(0.999f)
         
-        assertThat(result.distanceCoefficient).isAtLeast(0.9f)
-        assertThat(result.distanceCoefficient).isAtMost(1f)
+        assertThat(distance).isAtLeast(0.9f)
+        assertThat(distance).isAtMost(1f)
+    }
+
+    @Test
+    fun `flingVelocityCoefficient handles very small time values`() {
+        val spline = createSpline()
+        
+        val velocity = spline.flingVelocityCoefficient(0.001f)
+        
+        assertThat(velocity).isAtLeast(0f)
     }
 
     @Test

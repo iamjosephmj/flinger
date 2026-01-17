@@ -37,6 +37,7 @@
 - [Usage Examples](#usage-examples)
 - [Configuration Parameters](#configuration-parameters)
 - [Preset Behaviors](#preset-behaviors)
+- [Advanced Features](#advanced-features)
 - [Sample App](#sample-app)
 - [Compatibility](#compatibility)
 - [Migration Guide](#migration-guide)
@@ -114,7 +115,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.iamjosephmj:flinger:1.3.0")
+    implementation("com.github.iamjosephmj:flinger:2.0.0")
 }
 ```
 
@@ -136,7 +137,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:flinger:1.3.0'
+    implementation 'com.github.iamjosephmj:flinger:2.0.0'
 }
 ```
 
@@ -146,7 +147,7 @@ Add to your `libs.versions.toml`:
 
 ```toml
 [versions]
-flinger = "1.3.0"
+flinger = "2.0.0"
 
 [libraries]
 flinger = { module = "com.github.iamjosephmj:flinger", version.ref = "flinger" }
@@ -183,28 +184,34 @@ LazyColumn(
 Flinger includes several pre-configured behaviors for common use cases:
 
 ```kotlin
-import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
+import io.iamjosephmj.flinger.behaviours.FlingPresets
 
 // Smooth, balanced scrolling (default)
-LazyColumn(flingBehavior = StockFlingBehaviours.smoothScroll())
+LazyColumn(flingBehavior = FlingPresets.smooth())
 
-// Higher friction for more controlled scrolling
-LazyColumn(flingBehavior = StockFlingBehaviours.presetOne())
+// iOS-style scrolling with higher friction
+LazyColumn(flingBehavior = FlingPresets.iOSStyle())
 
-// Modified spline for different feel
-LazyColumn(flingBehavior = StockFlingBehaviours.presetTwo())
+// Modified spline for unique feel
+LazyColumn(flingBehavior = FlingPresets.smoothCurve())
 
-// Quick deceleration
-LazyColumn(flingBehavior = StockFlingBehaviours.presetThree())
+// Quick deceleration for precision
+LazyColumn(flingBehavior = FlingPresets.quickStop())
 
 // Bouncy, playful feel
-LazyColumn(flingBehavior = StockFlingBehaviours.presetFour())
+LazyColumn(flingBehavior = FlingPresets.bouncy())
 
-// Long, floaty scrolls
-LazyColumn(flingBehavior = StockFlingBehaviours.presetFive())
+// Long, floaty scrolls for galleries
+LazyColumn(flingBehavior = FlingPresets.floaty())
+
+// Snappy, responsive feel
+LazyColumn(flingBehavior = FlingPresets.snappy())
+
+// Ultra-smooth for premium apps
+LazyColumn(flingBehavior = FlingPresets.ultraSmooth())
 
 // Native Android behavior (for comparison)
-LazyColumn(flingBehavior = StockFlingBehaviours.getAndroidNativeScroll())
+LazyColumn(flingBehavior = FlingPresets.androidNative())
 ```
 
 ### Custom Configuration
@@ -381,25 +388,27 @@ Flinger includes pre-configured presets for common scenarios:
 │  PRESET SCROLL DISTANCE COMPARISON                              │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  Native Android  ████████████░░░░░░░░░░░░  Standard distance    │
-│  smoothScroll()  ████████████████░░░░░░░░  Balanced, smooth     │
-│  presetOne()     ██████████░░░░░░░░░░░░░░  Higher friction      │
-│  presetTwo()     ████████████████████░░░░  Modified spline      │
-│  presetThree()   ██████░░░░░░░░░░░░░░░░░░  Quick stop           │
-│  presetFour()    ████████████████████████  Long, bouncy         │
-│  presetFive()    ████████████████████████  Floaty, maximum      │
+│  androidNative() ████████████░░░░░░░░░░░░  Standard distance    │
+│  smooth()        ████████████████░░░░░░░░  Balanced, smooth     │
+│  iOSStyle()      ██████████░░░░░░░░░░░░░░  Higher friction      │
+│  smoothCurve()   ████████████████████░░░░  Modified spline      │
+│  quickStop()     ██████░░░░░░░░░░░░░░░░░░  Quick stop           │
+│  bouncy()        ████████████████████████  Long, bouncy         │
+│  floaty()        ████████████████████████  Floaty, maximum      │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 | Preset | Best For | Key Settings | Feel |
 |:-------|:---------|:-------------|:-----|
-| `smoothScroll()` | General purpose | Default values | Balanced, smooth |
-| `presetOne()` | Controlled lists | `friction: 0.04` | More resistance |
-| `presetTwo()` | Visual content | `splineInflection: 0.16` | Unique curve |
-| `presetThree()` | Text/reading | `decelFriction: 0.5` | Quick stop |
-| `presetFour()` | Playful UIs | `decelFriction: 0.6, inflection: 0.4` | Bouncy |
-| `presetFive()` | Galleries | `friction: 0.09, decelFriction: 0.015` | Long glide |
+| `smooth()` | General purpose | Default values | Balanced, smooth |
+| `iOSStyle()` | Cross-platform | `friction: 0.04` | iOS-like resistance |
+| `smoothCurve()` | Visual content | `splineInflection: 0.16` | Unique curve |
+| `quickStop()` | Text/reading | `decelFriction: 0.5` | Quick stop |
+| `bouncy()` | Playful UIs | `decelFriction: 0.6, inflection: 0.4` | Bouncy |
+| `floaty()` | Galleries | `friction: 0.09, decelFriction: 0.015` | Long glide |
+| `snappy()` | E-commerce | `friction: 0.03, decelFriction: 0.2` | Responsive |
+| `ultraSmooth()` | Premium apps | `friction: 0.006, points: 150` | Buttery smooth |
 
 ### Creating Your Own Presets
 
@@ -427,6 +436,81 @@ object MyFlingPresets {
 
 ---
 
+## Advanced Features
+
+### Snap-to-Item Behavior
+
+Create carousel-like experiences where items snap into place:
+
+```kotlin
+import io.iamjosephmj.flinger.snap.snapFlingBehavior
+import io.iamjosephmj.flinger.snap.SnapPosition
+
+val listState = rememberLazyListState()
+
+LazyRow(
+    state = listState,
+    flingBehavior = snapFlingBehavior(
+        lazyListState = listState,
+        snapPosition = SnapPosition.Center,  // Snap to center, start, or end
+        smoothFusion = true,  // Smooth transition into snap
+        fusionVelocityRatio = 0.15f  // When to start blending
+    )
+) {
+    items(20) { PhotoCard(it) }
+}
+```
+
+### Adaptive Fling Behavior
+
+Automatically adjust physics based on fling velocity:
+
+```kotlin
+import io.iamjosephmj.flinger.adaptive.adaptiveFlingBehavior
+import io.iamjosephmj.flinger.adaptive.AdaptiveMode
+
+LazyColumn(
+    flingBehavior = adaptiveFlingBehavior(
+        mode = AdaptiveMode.Balanced  // or Precise, Momentum
+    )
+) {
+    items(100) { ListItem(it) }
+}
+```
+
+### Accessibility-Aware Presets
+
+Respect system accessibility settings:
+
+```kotlin
+import io.iamjosephmj.flinger.behaviours.FlingPresets
+
+// Automatically adapts to system "Reduce Motion" setting
+LazyColumn(flingBehavior = FlingPresets.accessibilityAware())
+
+// Explicitly reduced motion
+LazyColumn(flingBehavior = FlingPresets.reducedMotion())
+```
+
+### Fling Callbacks
+
+Monitor fling lifecycle events:
+
+```kotlin
+import io.iamjosephmj.flinger.callbacks.FlingCallbacks
+
+val callbacks = FlingCallbacks(
+    onFlingStart = { velocity -> println("Fling started: $velocity") },
+    onFlingEnd = { println("Fling ended") }
+)
+
+LazyColumn(
+    flingBehavior = flingBehavior(callbacks = callbacks)
+)
+```
+
+---
+
 ## Sample App
 
 Experience Flinger's capabilities firsthand with our sample app:
@@ -438,7 +522,9 @@ Experience Flinger's capabilities firsthand with our sample app:
 - **Interactive Playground** - Adjust all parameters in real-time
 - **Preset Gallery** - Compare all built-in presets side-by-side
 - **Native vs Flinger** - See the difference between default and customized scrolling
-- **Code Export** - Generate configuration code for your settings
+- **Snap Gallery Demo** - Experience snap-to-item behavior
+- **Pager Demo** - Custom pager physics
+- **Debug Overlay** - Visualize fling physics in real-time
 
 <p align="center">
   <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger-demo.gif" width="250" alt="Sample App Demo"/>
@@ -467,19 +553,27 @@ Experience Flinger's capabilities firsthand with our sample app:
 
 ## Migration Guide
 
-### From 1.2.x to 1.3.x
+### From 1.x to 2.0
 
-No breaking changes. Update your dependency version:
+Version 2.0 includes breaking changes to improve API consistency and performance. See [MIGRATION.md](MIGRATION.md) for detailed instructions.
+
+**Quick Summary:**
 
 ```kotlin
-// Old
-implementation("com.github.iamjosephmj:flinger:1.2.0")
+// OLD (1.x) - Deprecated and removed
+import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
+StockFlingBehaviours.smoothScroll()
+StockFlingBehaviours.presetOne()
+StockFlingBehaviours.presetTwo()
 
-// New
-implementation("com.github.iamjosephmj:flinger:1.3.0")
+// NEW (2.0) - Use FlingPresets
+import io.iamjosephmj.flinger.behaviours.FlingPresets
+FlingPresets.smooth()
+FlingPresets.iOSStyle()
+FlingPresets.smoothCurve()
 ```
 
-### Common Import
+### Common Imports
 
 ```kotlin
 // Core fling behavior
@@ -488,8 +582,15 @@ import io.iamjosephmj.flinger.flings.flingBehavior
 // Configuration builder
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 
-// Stock presets
-import io.iamjosephmj.flinger.bahaviours.StockFlingBehaviours
+// Preset behaviors (NEW in 2.0)
+import io.iamjosephmj.flinger.behaviours.FlingPresets
+
+// Snap behavior
+import io.iamjosephmj.flinger.snap.snapFlingBehavior
+import io.iamjosephmj.flinger.snap.SnapPosition
+
+// Adaptive behavior
+import io.iamjosephmj.flinger.adaptive.adaptiveFlingBehavior
 ```
 
 ---
@@ -519,7 +620,7 @@ We love contributions! Whether it's bug fixes, new features, or documentation im
 
 ### Contributing Presets
 
-Have a great fling configuration? Add it to `StockFlingBehaviours.kt`! Include:
+Have a great fling configuration? Add it to `FlingPresets.kt`! Include:
 - Descriptive function name
 - KDoc explaining the use case
 - Recommended scenarios
@@ -531,21 +632,28 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ## Roadmap
 
 ### Completed
+
 - [x] Custom fling configuration
 - [x] Multiple preset behaviors
 - [x] Support for all Lazy layouts
 - [x] Sample application
+- [x] Snap-to-item fling behavior
+- [x] Velocity-aware adaptive fling
+- [x] Fling event callbacks
+- [x] Accessibility presets
+- [x] Pager integration
+- [x] Debug visualization overlay
 
 ### In Progress
+
 - [ ] Kotlin DSL builder syntax
 - [ ] Enhanced documentation site
 
 ### Planned
-- [ ] Snap-to-item fling behavior
+
 - [ ] Compose Multiplatform support
-- [ ] Fling curve visualization composable
-- [ ] More real-world presets (iOS, Material You)
-- [ ] Integration with Pager components
+- [ ] More real-world presets (Material You)
+- [ ] Performance profiling tools
 
 ---
 

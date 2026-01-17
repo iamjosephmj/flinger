@@ -55,7 +55,6 @@ class AndroidFlingSpline(private val flingConfiguration: FlingConfiguration) {
 
     /**
      * Compute the distance coefficient at the given time.
-     * This is an allocation-free alternative to flingPosition().distanceCoefficient
      *
      * @param time progress through the fling animation from 0-1
      * @return distance coefficient from 0-1
@@ -74,7 +73,6 @@ class AndroidFlingSpline(private val flingConfiguration: FlingConfiguration) {
 
     /**
      * Compute the velocity coefficient at the given time.
-     * This is an allocation-free alternative to flingPosition().velocityCoefficient
      *
      * @param time progress through the fling animation from 0-1
      * @return velocity coefficient
@@ -91,42 +89,8 @@ class AndroidFlingSpline(private val flingConfiguration: FlingConfiguration) {
     }
 
     /**
-     * Compute an instantaneous fling position along the scroller spline.
-     *
-     * @param time progress through the fling animation from 0-1
-     * @deprecated Use [flingDistanceCoefficient] and [flingVelocityCoefficient] for better performance
-     */
-    @Deprecated(
-        "Use flingDistanceCoefficient() and flingVelocityCoefficient() to avoid allocation",
-        ReplaceWith("FlingResult(flingDistanceCoefficient(time), flingVelocityCoefficient(time))")
-    )
-    fun flingPosition(time: Float): FlingResult {
-        return FlingResult(
-            distanceCoefficient = flingDistanceCoefficient(time),
-            velocityCoefficient = flingVelocityCoefficient(time)
-        )
-    }
-
-    /**
      * The rate of deceleration along the spline motion given [velocity] and [friction].
      */
     fun deceleration(velocity: Float, friction: Float): Double =
         ln(flingConfiguration.splineInflection * abs(velocity) / friction.toDouble())
-
-    /**
-     * Result coefficients of a scroll computation
-     * @deprecated This data class creates allocations. Use inline coefficient methods instead.
-     */
-    @Deprecated("Use flingDistanceCoefficient() and flingVelocityCoefficient() instead")
-    data class FlingResult(
-        /**
-         * Linear distance traveled from 0-1, from source (0) to destination (1)
-         */
-        val distanceCoefficient: Float,
-        /**
-         * Instantaneous velocity coefficient at this point in the fling expressed in
-         * total distance per unit time
-         */
-        val velocityCoefficient: Float
-    )
 }
