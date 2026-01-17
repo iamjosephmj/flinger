@@ -33,7 +33,7 @@ jobs:
       
       - name: Upload Lint Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lint-reports
           path: |
@@ -42,7 +42,7 @@ jobs:
       
       - name: Upload Unit Test Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: unit-test-reports
           path: |
@@ -93,7 +93,7 @@ jobs:
       
       - name: Upload UI Test Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ui-test-reports
           path: app/build/reports/androidTests/
@@ -125,13 +125,13 @@ jobs:
         run: ./gradlew assembleRelease
       
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: app-debug
           path: app/build/outputs/apk/debug/*.apk
       
       - name: Upload Release APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: app-release
           path: app/build/outputs/apk/release/*.apk
