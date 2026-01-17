@@ -23,122 +23,64 @@
   <a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_%2367-blue?logo=Jetpack+Compose&logoColor=white" alt="jetc.dev Newsletter"/></a>
 </p>
 
-### 🎥 Demo Videos
+---
 
-Experience Flinger's customizable scroll behaviors in action:
+## ✨ Key Features
 
-<details open>
-<summary><b>📱 Playground</b></summary>
-<br/>
+| Feature | Description |
+|:--------|:------------|
+| **9+ Built-in Presets** | iOS-style, bouncy, floaty, snappy, ultra-smooth, and more |
+| **Full Physics Control** | Customize friction, gravity, tension, deceleration curves |
+| **Snap-to-Item** | Carousel/gallery snap behavior with smooth fusion |
+| **Adaptive Fling** | Velocity-aware physics that adapts to swipe intensity |
+| **Accessibility** | System-aware presets respecting "Reduce Motion" |
+| **Debug Overlay** | Real-time fling visualization for development |
+| **All Lazy Layouts** | Works with LazyColumn, LazyRow, Grids, and Pagers |
+
+---
+
+## 🎬 See It In Action
 
 https://github.com/user-attachments/assets/f57c2071-ff15-4416-9bc3-fd5c85c4d956
 
-</details>
+---
 
-<details>
-<summary><b>🎯 Snap Behavior</b></summary>
-<br/>
+## 🚀 Quick Start
 
-https://github.com/user-attachments/assets/b0ced30a-f6df-4407-a640-c85c57a9ba8c
+```kotlin
+// Just add flingBehavior to any scrollable Composable
+LazyColumn(
+    flingBehavior = flingBehavior()  // That's it!
+) {
+    items(100) { Text("Item $it") }
+}
+```
 
-</details>
+**Or use a preset:**
 
-<details>
-<summary><b>⚡ Compare</b></summary>
-<br/>
-
-https://github.com/user-attachments/assets/30f43308-0acd-4234-a996-8eaf585dcfe2
-
-</details>
-
-<details>
-<summary><b>🍎 Custom Physics</b></summary>
-<br/>
-
-https://github.com/user-attachments/assets/2817852c-99b3-4c68-b3ae-12b8fedfa754
-
-</details>
-
-<details>
-<summary><b>🎨 Pager Demo</b></summary>
-<br/>
-
-https://github.com/user-attachments/assets/ca5b7666-8681-4590-b478-f5f29f79ae0d
-
-</details>
-
-<details>
-<summary><b>✨ Debug View</b></summary>
-<br/>
-
-https://github.com/user-attachments/assets/0b2752d3-cc17-4885-bc05-0383b8cd1c1b
-
-</details>
+```kotlin
+LazyColumn(flingBehavior = FlingPresets.iOSStyle())  // iOS-like scroll
+LazyColumn(flingBehavior = FlingPresets.bouncy())    // Playful bounce
+LazyColumn(flingBehavior = FlingPresets.floaty())    // Long glide
+```
 
 ---
 
 ## Table of Contents
 
-- [Why Flinger?](#why-flinger)
-- [Quick Start](#quick-start)
 - [Installation](#installation)
+- [Why Flinger?](#why-flinger)
 - [Usage Examples](#usage-examples)
 - [Configuration Parameters](#configuration-parameters)
 - [Preset Behaviors](#preset-behaviors)
 - [Advanced Features](#advanced-features)
-- [Sample App](#sample-app)
+- [Sample App & Demos](#sample-app--demos)
 - [Compatibility](#compatibility)
 - [Migration Guide](#migration-guide)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 - [Community & Support](#community--support)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
-
----
-
-## Why Flinger?
-
-Android's default fling behavior uses fixed physics that can't be customized. Flinger gives you complete control over scroll momentum, letting you create unique, polished scroll experiences.
-
-| Default Compose Fling | With Flinger |
-|:---------------------:|:------------:|
-| Fixed scroll physics | **Fully customizable** |
-| One-size-fits-all | **Platform-specific feel** (iOS, custom) |
-| No control over deceleration | **Fine-tune friction, gravity, tension** |
-| Hard to create unique UX | **Create signature scroll experiences** |
-
-### Use Cases
-
-- **Cross-platform apps** - Match iOS scroll physics for consistency
-- **Photo galleries** - Create buttery-smooth, long-glide scrolling
-- **Text-heavy lists** - Build snappy, precise interactions with quick stops
-- **Branded experiences** - Design unique scroll behaviors that match your app's personality
-- **Games & creative apps** - Implement physics-based scrolling effects
-
----
-
-## Quick Start
-
-Get up and running in under 5 minutes:
-
-```kotlin
-// 1. Add the dependency (see Installation section)
-
-// 2. Import the library
-import io.iamjosephmj.flinger.flings.flingBehavior
-
-// 3. Use in any scrollable Composable
-LazyColumn(
-    flingBehavior = flingBehavior()  // Smooth, customizable fling
-) {
-    items(100) { index ->
-        Text("Item $index")
-    }
-}
-```
-
-That's it! Your `LazyColumn` now uses Flinger's smooth scroll physics.
 
 ---
 
@@ -208,6 +150,27 @@ dependencies {
     implementation(libs.flinger)
 }
 ```
+
+---
+
+## Why Flinger?
+
+Android's default fling behavior uses fixed physics that can't be customized. Flinger gives you complete control over scroll momentum, letting you create unique, polished scroll experiences.
+
+| Default Compose Fling | With Flinger |
+|:---------------------:|:------------:|
+| Fixed scroll physics | **Fully customizable** |
+| One-size-fits-all | **Platform-specific feel** (iOS, custom) |
+| No control over deceleration | **Fine-tune friction, gravity, tension** |
+| Hard to create unique UX | **Create signature scroll experiences** |
+
+### Use Cases
+
+- **Cross-platform apps** - Match iOS scroll physics for consistency
+- **Photo galleries** - Create buttery-smooth, long-glide scrolling
+- **Text-heavy lists** - Build snappy, precise interactions with quick stops
+- **Branded experiences** - Design unique scroll behaviors that match your app's personality
+- **Games & creative apps** - Implement physics-based scrolling effects
 
 ---
 
@@ -559,13 +522,13 @@ LazyColumn(
 
 ---
 
-## Sample App
+## Sample App & Demos
 
 Experience Flinger's capabilities firsthand with our sample app:
 
 **[Download Sample APK](https://github.com/iamjosephmj/flinger/tree/main/apk)**
 
-### Features
+### App Features
 
 - **Interactive Playground** - Adjust all parameters in real-time
 - **Preset Gallery** - Compare all built-in presets side-by-side
@@ -573,6 +536,48 @@ Experience Flinger's capabilities firsthand with our sample app:
 - **Snap Gallery Demo** - Experience snap-to-item behavior
 - **Pager Demo** - Custom pager physics
 - **Debug Overlay** - Visualize fling physics in real-time
+
+### Demo Videos
+
+<details>
+<summary><b>🎯 Snap Behavior</b></summary>
+<br/>
+
+https://github.com/user-attachments/assets/b0ced30a-f6df-4407-a640-c85c57a9ba8c
+
+</details>
+
+<details>
+<summary><b>⚡ Side-by-Side Comparison</b></summary>
+<br/>
+
+https://github.com/user-attachments/assets/30f43308-0acd-4234-a996-8eaf585dcfe2
+
+</details>
+
+<details>
+<summary><b>🍎 Custom Physics</b></summary>
+<br/>
+
+https://github.com/user-attachments/assets/2817852c-99b3-4c68-b3ae-12b8fedfa754
+
+</details>
+
+<details>
+<summary><b>🎨 Pager Demo</b></summary>
+<br/>
+
+https://github.com/user-attachments/assets/ca5b7666-8681-4590-b478-f5f29f79ae0d
+
+</details>
+
+<details>
+<summary><b>✨ Debug Overlay</b></summary>
+<br/>
+
+https://github.com/user-attachments/assets/0b2752d3-cc17-4885-bc05-0383b8cd1c1b
+
+</details>
 
 ---
 
