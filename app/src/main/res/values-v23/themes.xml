@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Aurora Theme - Dark theme only -->
+    <!-- Aurora Theme - Dark theme only (API 23+ additions) -->
     <style name="Theme.Flinger" parent="Theme.AppCompat.NoActionBar">
         <!-- Primary brand colors -->
         <item name="colorPrimary">@color/aurora_cyan</item>
@@ -13,5 +13,8 @@
         <!-- Status bar and navigation bar for edge-to-edge -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <!-- API 23+ light status bar icons (false = light icons for dark theme) -->
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
