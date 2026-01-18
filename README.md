@@ -105,7 +105,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.iamjosephmj:flinger:2.0.0")
+    implementation("com.github.iamjosephmj:flinger:2.0.2")
 }
 ```
 
