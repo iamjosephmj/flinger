@@ -6,8 +6,12 @@
 
 package io.iamjosephmj.flingersample.ui.presets
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -26,6 +30,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +45,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -47,6 +55,10 @@ import androidx.navigation.NavController
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flingersample.ui.components.MiniCurvePreview
+import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
+import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
+import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
 
 /**
  * Data class representing a preset for display.
@@ -56,6 +68,7 @@ data class PresetInfo(
     val description: String,
     val bestFor: String,
     val config: FlingConfiguration,
+    val gradient: List<Color>,
     val getFlingBehavior: @Composable () -> FlingBehavior
 )
 
@@ -72,6 +85,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 description = "Balanced, smooth scrolling with default parameters",
                 bestFor = "General purpose, most list UIs",
                 config = FlingConfiguration.Builder().build(),
+                gradient = listOf(AuroraCyan, AuroraViolet),
                 getFlingBehavior = { FlingPresets.smooth() }
             ),
             PresetInfo(
@@ -79,6 +93,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 description = "Higher friction mimicking iOS scroll physics",
                 bestFor = "Cross-platform apps, photo browsers",
                 config = FlingConfiguration.Builder().scrollViewFriction(0.04f).build(),
+                gradient = listOf(Color(0xFF007AFF), Color(0xFF5856D6)),
                 getFlingBehavior = { FlingPresets.iOSStyle() }
             ),
             PresetInfo(
@@ -86,6 +101,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 description = "High deceleration for precise control",
                 bestFor = "Text-heavy content, settings screens",
                 config = FlingConfiguration.Builder().decelerationFriction(0.5f).build(),
+                gradient = listOf(Color(0xFFFF512F), Color(0xFFDD2476)),
                 getFlingBehavior = { FlingPresets.quickStop() }
             ),
             PresetInfo(
@@ -96,6 +112,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                     .decelerationFriction(0.6f)
                     .splineInflection(0.4f)
                     .build(),
+                gradient = listOf(Color(0xFFFF6B6B), AuroraMagenta),
                 getFlingBehavior = { FlingPresets.bouncy() }
             ),
             PresetInfo(
@@ -106,6 +123,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                     .scrollViewFriction(0.09f)
                     .decelerationFriction(0.015f)
                     .build(),
+                gradient = listOf(AuroraCyan, AuroraMagenta, Color(0xFFFFAA00)),
                 getFlingBehavior = { FlingPresets.floaty() }
             ),
             PresetInfo(
@@ -116,6 +134,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                     .scrollViewFriction(0.03f)
                     .decelerationFriction(0.2f)
                     .build(),
+                gradient = listOf(AuroraMagenta, Color(0xFFE91E8C)),
                 getFlingBehavior = { FlingPresets.snappy() }
             ),
             PresetInfo(
@@ -127,6 +146,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                     .decelerationFriction(0.05f)
                     .numberOfSplinePoints(150)
                     .build(),
+                gradient = listOf(AuroraCyan, AuroraViolet, AuroraMagenta),
                 getFlingBehavior = { FlingPresets.ultraSmooth() }
             ),
             PresetInfo(
@@ -136,6 +156,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 config = FlingConfiguration.Builder()
                     .splineInflection(0.16f)
                     .build(),
+                gradient = listOf(AuroraViolet, Color(0xFF6246D8)),
                 getFlingBehavior = { FlingPresets.smoothCurve() }
             ),
             PresetInfo(
@@ -143,6 +164,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 description = "Default Android fling behavior",
                 bestFor = "Baseline comparison",
                 config = FlingConfiguration.Builder().build(),
+                gradient = listOf(Color(0xFF4CAF50), Color(0xFF2E7D32)),
                 getFlingBehavior = { FlingPresets.androidNative() }
             )
         )
@@ -151,21 +173,28 @@ fun PresetsGalleryScreen(navController: NavController) {
     var selectedPreset by remember { mutableStateOf<PresetInfo?>(null) }
     val currentFlingBehavior = selectedPreset?.getFlingBehavior?.invoke() ?: FlingPresets.smooth()
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Preset Gallery") },
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+    TranslucentBackground {
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "Preset Gallery",
+                            color = MaterialTheme.colorScheme.tertiary
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.navigateUp() }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+                    )
                 )
-            )
-        }
-    ) { paddingValues ->
+            }
+        ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -175,12 +204,21 @@ fun PresetsGalleryScreen(navController: NavController) {
             if (selectedPreset != null) {
                 SelectedPresetHeader(preset = selectedPreset!!)
             } else {
-                Text(
-                    text = "Select a preset to try it",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(16.dp)
-                )
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
+                    )
+                ) {
+                    Text(
+                        text = "↑ Select a preset to try it",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
             
             // List with selected fling behavior
@@ -196,7 +234,8 @@ fun PresetsGalleryScreen(navController: NavController) {
                     Text(
                         text = "Available Presets",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
@@ -212,9 +251,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Scroll this list to feel the selected preset!",
+                        text = "↓ Scroll this list to feel the selected preset",
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = AuroraCyan,
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
                 }
@@ -225,6 +264,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 }
             }
         }
+        }
     }
 }
 
@@ -234,28 +274,29 @@ private fun SelectedPresetHeader(preset: PresetInfo) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .background(Brush.linearGradient(preset.gradient))
+                .padding(20.dp)
         ) {
-            Text(
-                text = "Active: ${preset.name}",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = preset.description,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
-            )
+            Column {
+                Text(
+                    text = "Active: ${preset.name}",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = preset.description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.White.copy(alpha = 0.9f)
+                )
+            }
         }
     }
 }
@@ -266,16 +307,27 @@ private fun PresetCard(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val scale by animateFloatAsState(
+        targetValue = if (isSelected) 1.02f else 1f,
+        animationSpec = tween(200),
+        label = "card_scale"
+    )
+    
     Card(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .scale(scale),
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) 
-                MaterialTheme.colorScheme.secondaryContainer 
+                MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.9f)
             else 
-                MaterialTheme.colorScheme.surfaceVariant
+                MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f)
         ),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = if (isSelected) 6.dp else 2.dp
+        )
     ) {
         Row(
             modifier = Modifier
@@ -283,21 +335,19 @@ private fun PresetCard(
                 .padding(16.dp),
             verticalAlignment = Alignment.Top
         ) {
-            // Mini curve preview
+            // Mini curve preview with gradient
             Card(
                 modifier = Modifier.width(100.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 ),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(12.dp)
             ) {
                 MiniCurvePreview(
                     config = preset.config,
                     modifier = Modifier.padding(8.dp),
-                    curveColor = if (isSelected)
-                        MaterialTheme.colorScheme.secondary
-                    else
-                        MaterialTheme.colorScheme.primary
+                    curveColor = preset.gradient.first(),
+                    animated = isSelected
                 )
             }
             
@@ -313,14 +363,24 @@ private fun PresetCard(
                         fontWeight = FontWeight.SemiBold,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.weight(1f, fill = false)
+                        modifier = Modifier.weight(1f, fill = false),
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     if (isSelected) {
                         Spacer(modifier = Modifier.width(8.dp))
                         FilterChip(
                             selected = true,
                             onClick = {},
-                            label = { Text("Active", style = MaterialTheme.typography.labelSmall) }
+                            label = { 
+                                Text(
+                                    "Active", 
+                                    style = MaterialTheme.typography.labelSmall
+                                ) 
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = preset.gradient.first(),
+                                selectedLabelColor = Color.White
+                            )
                         )
                     }
                 }
@@ -336,7 +396,7 @@ private fun PresetCard(
                 Text(
                     text = "Best for: ${preset.bestFor}",
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.primary,
+                    color = preset.gradient.first(),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -352,8 +412,9 @@ private fun TestScrollCard(index: Int) {
             .fillMaxWidth()
             .height(60.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)
+        ),
+        shape = RoundedCornerShape(12.dp)
     ) {
         Row(
             modifier = Modifier
@@ -363,7 +424,8 @@ private fun TestScrollCard(index: Int) {
         ) {
             Text(
                 text = "Test Item ${index + 1}",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

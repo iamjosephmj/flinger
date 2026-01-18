@@ -37,6 +37,7 @@ import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.VerticalDivider
@@ -47,12 +48,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.iamjosephmj.flinger.behaviours.FlingPresets
+import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
+import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
+import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
 
 /**
  * Side-by-side comparison screen to compare different fling behaviors.
@@ -77,21 +85,28 @@ fun ComparisonScreen(navController: NavController) {
     val leftFlingBehavior = presetOptions[leftPresetIndex].second()
     val rightFlingBehavior = presetOptions[rightPresetIndex].second()
     
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Side-by-Side Comparison") },
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+    TranslucentBackground {
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    title = { 
+                        Text(
+                            "Side-by-Side Comparison",
+                            color = MaterialTheme.colorScheme.secondary
+                        ) 
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.navigateUp() }) {
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+                    )
                 )
-            )
-        }
-    ) { paddingValues ->
+            }
+        ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -102,17 +117,27 @@ fun ComparisonScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
-                Text(
-                    text = "Scroll both lists to feel the difference between behaviors!",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    modifier = Modifier.padding(16.dp),
-                    textAlign = TextAlign.Center
-                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Brush.linearGradient(
+                                listOf(AuroraCyan.copy(alpha = 0.2f), AuroraViolet.copy(alpha = 0.2f))
+                            )
+                        )
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = "Scroll both lists to feel the difference between behaviors!",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
             }
             
             // Preset selectors
@@ -127,6 +152,7 @@ fun ComparisonScreen(navController: NavController) {
                     options = presetOptions.map { it.first },
                     selectedIndex = leftPresetIndex,
                     onSelectionChange = { leftPresetIndex = it },
+                    accentColor = AuroraCyan,
                     modifier = Modifier.weight(1f)
                 )
                 PresetDropdown(
@@ -134,6 +160,7 @@ fun ComparisonScreen(navController: NavController) {
                     options = presetOptions.map { it.first },
                     selectedIndex = rightPresetIndex,
                     onSelectionChange = { rightPresetIndex = it },
+                    accentColor = AuroraMagenta,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -151,28 +178,41 @@ fun ComparisonScreen(navController: NavController) {
                 ComparisonPanel(
                     title = presetOptions[leftPresetIndex].first,
                     flingBehavior = leftFlingBehavior,
-                    backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+                    gradientColors = listOf(AuroraCyan.copy(alpha = 0.1f), AuroraViolet.copy(alpha = 0.05f)),
+                    headerGradient = listOf(AuroraCyan, AuroraViolet),
                     modifier = Modifier.weight(1f)
                 )
                 
-                // Divider
-                VerticalDivider(
+                // Animated Divider
+                Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .padding(horizontal = 8.dp),
-                    color = MaterialTheme.colorScheme.outline
+                        .width(2.dp)
+                        .padding(horizontal = 4.dp, vertical = 8.dp)
+                        .clip(RoundedCornerShape(1.dp))
+                        .background(
+                            Brush.verticalGradient(
+                                listOf(
+                                    AuroraCyan,
+                                    AuroraViolet,
+                                    AuroraMagenta
+                                )
+                            )
+                        )
                 )
                 
                 // Right panel
                 ComparisonPanel(
                     title = presetOptions[rightPresetIndex].first,
                     flingBehavior = rightFlingBehavior,
-                    backgroundColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f),
+                    gradientColors = listOf(AuroraMagenta.copy(alpha = 0.1f), AuroraViolet.copy(alpha = 0.05f)),
+                    headerGradient = listOf(AuroraMagenta, AuroraViolet),
                     modifier = Modifier.weight(1f)
                 )
             }
             
             Spacer(modifier = Modifier.height(16.dp))
+        }
         }
     }
 }
@@ -184,6 +224,7 @@ private fun PresetDropdown(
     options: List<String>,
     selectedIndex: Int,
     onSelectionChange: (Int) -> Unit,
+    accentColor: Color,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -192,7 +233,8 @@ private fun PresetDropdown(
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = accentColor,
+            fontWeight = FontWeight.SemiBold
         )
         Spacer(modifier = Modifier.height(4.dp))
         ExposedDropdownMenuBox(
@@ -207,7 +249,14 @@ private fun PresetDropdown(
                 modifier = Modifier
                     .menuAnchor(MenuAnchorType.PrimaryNotEditable)
                     .fillMaxWidth(),
-                textStyle = MaterialTheme.typography.bodySmall
+                textStyle = MaterialTheme.typography.bodySmall,
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    focusedIndicatorColor = accentColor,
+                    unfocusedIndicatorColor = accentColor.copy(alpha = 0.5f)
+                ),
+                shape = RoundedCornerShape(12.dp)
             )
             ExposedDropdownMenu(
                 expanded = expanded,
@@ -215,7 +264,13 @@ private fun PresetDropdown(
             ) {
                 options.forEachIndexed { index, option ->
                     DropdownMenuItem(
-                        text = { Text(option, style = MaterialTheme.typography.bodySmall) },
+                        text = { 
+                            Text(
+                                option, 
+                                style = MaterialTheme.typography.bodySmall,
+                                color = if (index == selectedIndex) accentColor else MaterialTheme.colorScheme.onSurface
+                            ) 
+                        },
                         onClick = {
                             onSelectionChange(index)
                             expanded = false
@@ -231,7 +286,8 @@ private fun PresetDropdown(
 private fun ComparisonPanel(
     title: String,
     flingBehavior: FlingBehavior,
-    backgroundColor: androidx.compose.ui.graphics.Color,
+    gradientColors: List<Color>,
+    headerGradient: List<Color>,
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
@@ -240,13 +296,13 @@ private fun ComparisonPanel(
         modifier = modifier
             .fillMaxHeight()
     ) {
-        // Panel header
+        // Panel header with gradient
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp)
+                    brush = Brush.linearGradient(headerGradient),
+                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                 )
                 .padding(12.dp),
             contentAlignment = Alignment.Center
@@ -255,7 +311,7 @@ private fun ComparisonPanel(
                 text = title,
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = Color.White,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -268,8 +324,8 @@ private fun ComparisonPanel(
                 .fillMaxWidth()
                 .weight(1f)
                 .background(
-                    color = backgroundColor,
-                    shape = RoundedCornerShape(bottomStart = 12.dp, bottomEnd = 12.dp)
+                    brush = Brush.verticalGradient(gradientColors),
+                    shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
                 ),
             flingBehavior = flingBehavior,
             verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -289,9 +345,9 @@ private fun ComparisonItem(index: Int) {
             .fillMaxWidth()
             .height(48.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(10.dp)
     ) {
         Box(
             modifier = Modifier
@@ -301,7 +357,8 @@ private fun ComparisonItem(index: Int) {
         ) {
             Text(
                 text = "Item ${index + 1}",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

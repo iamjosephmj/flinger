@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import io.iamjosephmj.flingersample.ui.theme.FlingerTheme
@@ -45,7 +46,13 @@ import io.iamjosephmj.flingersample.ui.utils.CreateNavHost
  * - Interactive fling parameter playground
  * - Preset gallery with visual previews
  * - Side-by-side comparison with native Android scroll
- * - Legacy custom configuration screen
+ * - Snap-to-item gallery demo
+ * - Adaptive fling demo
+ * - Pager physics demo
+ * - Debug overlay visualization
+ *
+ * Features the Aurora theme - a dark-mode-first design with electric
+ * cyan and magenta accents inspired by physics/motion visualization.
  *
  * @author Joseph James
  */
@@ -53,7 +60,13 @@ class LandingActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Enable edge-to-edge display
         enableEdgeToEdge()
+        
+        // Set the decor to fit system windows for proper edge-to-edge
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        
         setContent {
             FlingerTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {

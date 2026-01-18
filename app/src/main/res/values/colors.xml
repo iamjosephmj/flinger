@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Aurora Theme - Primary Colors (Electric Cyan) -->
+    <color name="aurora_cyan">#FF00E5CC</color>
+    <color name="aurora_cyan_light">#FF5EFFF0</color>
+    <color name="aurora_cyan_dark">#FF00B3A0</color>
+    
+    <!-- Aurora Theme - Secondary Colors (Magenta/Pink) -->
+    <color name="aurora_magenta">#FFFF3CAC</color>
+    <color name="aurora_magenta_light">#FFFF7ACE</color>
+    <color name="aurora_magenta_dark">#FFD61A8A</color>
+    
+    <!-- Aurora Theme - Tertiary Colors (Violet) -->
+    <color name="aurora_violet">#FF785EF0</color>
+    <color name="aurora_violet_light">#FFA18FF5</color>
+    <color name="aurora_violet_dark">#FF5A3FD6</color>
+    
+    <!-- Aurora Theme - Background Colors -->
+    <color name="aurora_background_dark">#FF0D0D12</color>
+    <color name="aurora_background_light">#FFF5F5F8</color>
+    
+    <!-- Aurora Theme - Surface Colors -->
+    <color name="aurora_surface_dark">#FF161621</color>
+    <color name="aurora_surface_light">#FFFFFFFF</color>
+    <color name="aurora_surface_variant_dark">#FF1E1E2E</color>
+    <color name="aurora_surface_variant_light">#FFE8E8EE</color>
+    
+    <!-- Aurora Theme - On Colors -->
+    <color name="aurora_on_background_dark">#FFE8E8F0</color>
+    <color name="aurora_on_background_light">#FF1A1A24</color>
+    <color name="aurora_on_surface_dark">#FFE8E8F0</color>
+    <color name="aurora_on_surface_light">#FF1A1A24</color>
+    <color name="aurora_on_surface_variant_dark">#FFA0A0B0</color>
+    <color name="aurora_on_surface_variant_light">#FF606070</color>
+    
+    <!-- Aurora Theme - Outline Colors -->
+    <color name="aurora_outline_dark">#FF2E2E40</color>
+    <color name="aurora_outline_light">#FFD0D0D8</color>
+    
+    <!-- Aurora Theme - Error Colors -->
+    <color name="aurora_error">#FFFF6B6B</color>
+    <color name="aurora_error_light">#FFB3261E</color>
+    
+    <!-- Legacy colors (kept for backward compatibility) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

@@ -32,14 +32,18 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -54,11 +58,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.snap.SnapAnimationConfig
 import io.iamjosephmj.flinger.snap.SnapPosition
 import io.iamjosephmj.flinger.snap.snapFlingBehavior
-import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.ui.components.GradientPresets
+import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
+import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
+import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
 
 /**
  * Demo screen showcasing pager-like behavior with custom fling physics.
@@ -115,12 +124,20 @@ fun PagerDemo(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Pager-Style Demo") },
+                title = { 
+                    Text(
+                        "Pager-Style Demo",
+                        color = AuroraViolet
+                    ) 
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
             )
         }
     ) { paddingValues ->
@@ -134,7 +151,9 @@ fun PagerDemo(navController: NavController) {
             Text(
                 text = "Fling Physics",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(16.dp)
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(16.dp),
+                color = MaterialTheme.colorScheme.onSurface
             )
             
             Row(
@@ -147,7 +166,11 @@ fun PagerDemo(navController: NavController) {
                     FilterChip(
                         selected = selectedPreset == preset,
                         onClick = { selectedPreset = preset },
-                        label = { Text(preset) }
+                        label = { Text(preset) },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = AuroraViolet,
+                            selectedLabelColor = Color.White
+                        )
                     )
                 }
             }
@@ -158,7 +181,9 @@ fun PagerDemo(navController: NavController) {
             Text(
                 text = "Snap Animation",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                color = MaterialTheme.colorScheme.onSurface
             )
             
             Spacer(modifier = Modifier.height(8.dp))
@@ -174,7 +199,11 @@ fun PagerDemo(navController: NavController) {
                     FilterChip(
                         selected = selectedSnapAnimation == anim,
                         onClick = { selectedSnapAnimation = anim },
-                        label = { Text(anim) }
+                        label = { Text(anim) },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = AuroraCyan,
+                            selectedLabelColor = Color.White
+                        )
                     )
                 }
             }
@@ -182,73 +211,95 @@ fun PagerDemo(navController: NavController) {
             Spacer(modifier = Modifier.height(12.dp))
             
             // Smooth Fusion toggle
-            Row(
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
-                    Text(
-                        text = "Smooth Fusion",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Text(
-                        text = "Snap starts when velocity decays",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Switch(
-                    checked = smoothFusionEnabled,
-                    onCheckedChange = { smoothFusionEnabled = it }
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
                 )
-            }
-            
-            // Fusion ratio slider (only visible when fusion is enabled)
-            if (smoothFusionEnabled) {
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Column(
+            ) {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                         Text(
-                            text = "Fusion Point",
-                            style = MaterialTheme.typography.bodyMedium
+                            text = "Smooth Fusion",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold,
+                            color = if (smoothFusionEnabled) AuroraMagenta else MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "${(fusionRatio * 100).toInt()}% velocity",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.primary
+                            text = "Snap starts when velocity decays",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                    Slider(
-                        value = fusionRatio,
-                        onValueChange = { fusionRatio = it },
-                        valueRange = 0.05f..0.4f,
-                        steps = 6
+                    Switch(
+                        checked = smoothFusionEnabled,
+                        onCheckedChange = { smoothFusionEnabled = it },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = AuroraMagenta,
+                            checkedTrackColor = AuroraMagenta.copy(alpha = 0.5f)
+                        )
                     )
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                }
+                
+                // Fusion ratio slider (only visible when fusion is enabled)
+                if (smoothFusionEnabled) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .padding(bottom = 16.dp)
                     ) {
-                        Text(
-                            text = "Earlier (smoother)",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Fusion Point",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = "${(fusionRatio * 100).toInt()}% velocity",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = AuroraMagenta,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                        Slider(
+                            value = fusionRatio,
+                            onValueChange = { fusionRatio = it },
+                            valueRange = 0.05f..0.4f,
+                            steps = 6,
+                            colors = SliderDefaults.colors(
+                                thumbColor = AuroraMagenta,
+                                activeTrackColor = AuroraMagenta,
+                                inactiveTrackColor = AuroraMagenta.copy(alpha = 0.2f)
+                            )
                         )
-                        Text(
-                            text = "Later (snappier)",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Earlier (smoother)",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Text(
+                                text = "Later (snappier)",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
                 }
             }
@@ -282,24 +333,25 @@ fun PagerDemo(navController: NavController) {
             
             Spacer(modifier = Modifier.height(16.dp))
             
-            // Page indicators
+            // Page indicators with glow
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(10) { index ->
                     val isSelected = currentPage == index
+                    val dotColor = if (isSelected) {
+                        GradientPresets.forIndex(index).first()
+                    } else {
+                        MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                    }
+                    
                     Box(
                         modifier = Modifier
                             .padding(4.dp)
-                            .size(if (isSelected) 10.dp else 8.dp)
+                            .size(if (isSelected) 12.dp else 8.dp)
                             .clip(CircleShape)
-                            .background(
-                                if (isSelected) 
-                                    MaterialTheme.colorScheme.primary
-                                else 
-                                    MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
-                            )
+                            .background(dotColor)
                     )
                 }
             }
@@ -311,26 +363,38 @@ fun PagerDemo(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                shape = RoundedCornerShape(20.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "How it works",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "Pager-like behavior using snap fling physics:\n\n" +
-                                "• Standard: Balanced transitions\n" +
-                                "• iOS: Higher resistance\n" +
-                                "• Snappy: Quick page turns\n" +
-                                "• Smooth: Gliding transitions\n\n" +
-                                "Smooth Fusion: Snap starts while still scrolling.",
-                        style = MaterialTheme.typography.bodySmall
-                    )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Brush.linearGradient(
+                                listOf(AuroraViolet, AuroraMagenta)
+                            )
+                        )
+                        .padding(20.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = "How it works",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Pager-like behavior using snap fling physics:\n\n" +
+                                    "• Standard: Balanced transitions\n" +
+                                    "• iOS: Higher resistance, familiar feel\n" +
+                                    "• Snappy: Quick page turns\n" +
+                                    "• Smooth: Gliding transitions\n\n" +
+                                    "Smooth Fusion: Snap starts while still scrolling.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White.copy(alpha = 0.9f)
+                        )
+                    }
                 }
             }
             
@@ -344,18 +408,7 @@ private fun PagerCard(
     page: Int,
     modifier: Modifier = Modifier
 ) {
-    val gradients = listOf(
-        listOf(Color(0xFF667eea), Color(0xFF764ba2)),
-        listOf(Color(0xFF11998e), Color(0xFF38ef7d)),
-        listOf(Color(0xFFee0979), Color(0xFFff6a00)),
-        listOf(Color(0xFF654ea3), Color(0xFFeaafc8)),
-        listOf(Color(0xFF00c6ff), Color(0xFF0072ff)),
-        listOf(Color(0xFFf857a6), Color(0xFFff5858)),
-        listOf(Color(0xFF4776E6), Color(0xFF8E54E9)),
-        listOf(Color(0xFFFC466B), Color(0xFF3F5EFB)),
-        listOf(Color(0xFF11998e), Color(0xFF38ef7d)),
-        listOf(Color(0xFFFF512F), Color(0xFFDD2476))
-    )
+    val gradient = GradientPresets.forIndex(page)
     
     Card(
         modifier = modifier.height(260.dp),
@@ -366,7 +419,7 @@ private fun PagerCard(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
-                    brush = Brush.linearGradient(gradients[page])
+                    brush = Brush.linearGradient(gradient)
                 ),
             contentAlignment = Alignment.Center
         ) {
