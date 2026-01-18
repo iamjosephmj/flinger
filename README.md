@@ -2,8 +2,6 @@
   <img src="https://github.com/iamjosephmj/flinger/blob/main/repo-media/flinger.jpeg" width="600" alt="Flinger Banner"/>
 </p>
 
-<h1 align="center">Flinger</h1>
-
 <p align="center">
   <b>Customizable Fling Physics for Jetpack Compose</b><br/>
   Take full control of scroll momentum in LazyColumn, LazyRow, Pagers, and more.
