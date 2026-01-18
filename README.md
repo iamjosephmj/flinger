@@ -82,6 +82,14 @@ LazyColumn(flingBehavior = FlingPresets.floaty())    // Long glide
 - [License](#license)
 - [Privacy](#privacy)
 
+### Additional Documentation
+
+| Document | Description |
+|:---------|:------------|
+| [Physics Tuning Guide](docs/PHYSICS_TUNING.md) | Deep dive into all physics parameters with visual diagrams and recipes |
+| [Migration Guide](MIGRATION.md) | Upgrade from 1.x to 2.0 |
+| [Contributing](CONTRIBUTING.md) | How to contribute to Flinger |
+
 ---
 
 ## Installation
@@ -227,7 +235,7 @@ LazyColumn(flingBehavior = FlingPresets.androidNative())
 
 ### Custom Configuration
 
-Fine-tune every aspect of the fling physics:
+Fine-tune fling physics with the configuration builder:
 
 ```kotlin
 import io.iamjosephmj.flinger.configs.FlingConfiguration
@@ -236,36 +244,9 @@ import io.iamjosephmj.flinger.flings.flingBehavior
 LazyColumn(
     flingBehavior = flingBehavior(
         scrollConfiguration = FlingConfiguration.Builder()
-            // Friction applied during scrolling (lower = longer scroll distance)
-            .scrollViewFriction(0.008f)
-            
-            // Minimum velocity to trigger a fling (0 = any velocity triggers fling)
-            .absVelocityThreshold(0f)
-            
-            // Simulated gravitational force affecting scroll
-            .gravitationalForce(9.80665f)
-            
-            // Physical constant for density calculations
-            .inchesPerMeter(39.37f)
-            
-            // Rate at which scroll decelerates
-            .decelerationRate(2.358201f)
-            
-            // Friction applied during deceleration phase
-            .decelerationFriction(0.09f)
-            
-            // Point where acceleration transitions to deceleration
-            .splineInflection(0.1f)
-            
-            // Controls initial momentum curve
-            .splineStartTension(0.1f)
-            
-            // Controls final momentum curve
-            .splineEndTension(1.0f)
-            
-            // Resolution of the spline curve (higher = smoother)
-            .numberOfSplinePoints(100)
-            
+            .scrollViewFriction(0.008f)      // Lower = longer scroll
+            .decelerationFriction(0.09f)     // Higher = quicker stop
+            .splineInflection(0.1f)          // Higher = bouncier
             .build()
     )
 ) {
@@ -274,6 +255,8 @@ LazyColumn(
     }
 }
 ```
+
+> 💡 **Tip:** See the **[Physics Tuning Guide](docs/PHYSICS_TUNING.md)** for detailed explanations of all parameters and ready-to-use recipes for common scenarios like iOS-style, photo galleries, and snappy UIs.
 
 ### Works With All Lazy Layouts
 
@@ -345,48 +328,29 @@ fun DynamicFlingList(isPrecisionMode: Boolean) {
 
 ## Configuration Parameters
 
-| Parameter | Default | Range | Description |
-|:----------|:-------:|:-----:|:------------|
-| `scrollViewFriction` | `0.008` | 0.001 - 0.1 | Resistance during active scrolling. **Lower values** = longer scroll distances |
-| `absVelocityThreshold` | `0` | 0 - 100 | Minimum velocity required to trigger a fling. `0` means any velocity works |
-| `gravitationalForce` | `9.80665` | 1 - 20 | Simulated gravity affecting momentum. Earth's gravity is ~9.8 |
-| `inchesPerMeter` | `39.37` | - | Physical constant, rarely needs changing |
-| `decelerationRate` | `2.358201` | 1 - 5 | How quickly the scroll decelerates. **Higher values** = faster stopping |
-| `decelerationFriction` | `0.09` | 0.01 - 1.0 | Friction during deceleration phase. **Higher values** = quicker stop |
-| `splineInflection` | `0.1` | 0.01 - 0.5 | Where the scroll curve transitions. Affects mid-scroll feel |
-| `splineStartTension` | `0.1` | 0.01 - 1.0 | Initial momentum curve. Affects launch feel |
-| `splineEndTension` | `1.0` | 0.1 - 2.0 | Final momentum curve. Affects landing feel |
-| `numberOfSplinePoints` | `100` | 50 - 500 | Spline resolution. Higher = smoother but more computation |
+The most commonly adjusted parameters:
 
-### Visual Guide: How Parameters Affect Scrolling
+| Parameter | Default | What It Does |
+|:----------|:-------:|:-------------|
+| `scrollViewFriction` | `0.008` | **Primary friction control.** Lower = longer scroll distance |
+| `decelerationFriction` | `0.09` | **Stopping behavior.** Higher = quicker stop |
+| `splineInflection` | `0.1` | **Curve shape.** Higher = bouncier feel |
 
-```
-Scroll Distance vs. Friction
-                                    
- Distance │                         
-    ↑     │ ╲                        Low friction (0.008)
-          │  ╲ ╲                     
-          │   ╲  ╲                   
-          │    ╲   ╲                 Medium friction (0.04)
-          │     ╲    ╲               
-          │      ╲     ╲ ╲           High friction (0.1)
-          │       ╲      ╲ ╲         
-          └────────────────────→ Time
+All parameters at a glance:
 
+| Parameter | Default | Quick Description |
+|:----------|:-------:|:------------------|
+| `scrollViewFriction` | `0.008` | Resistance during scrolling |
+| `decelerationFriction` | `0.09` | Friction during deceleration |
+| `splineInflection` | `0.1` | Momentum curve transition point |
+| `splineStartTension` | `0.1` | Launch feel (initial momentum) |
+| `splineEndTension` | `1.0` | Landing feel (final momentum) |
+| `decelerationRate` | `2.358` | Overall deceleration speed |
+| `gravitationalForce` | `9.8` | Simulated gravity |
+| `absVelocityThreshold` | `0` | Minimum velocity to trigger fling |
+| `numberOfSplinePoints` | `100` | Animation smoothness |
 
-Deceleration Curves
-                                    
- Velocity │                         
-    ↑     │╲                         
-          │ ╲                        Fast decel (high friction)
-          │  ╲                       
-          │   ╲ ╲                    
-          │    ╲  ╲                  Medium decel
-          │     ╲   ╲ ╲              
-          │      ╲    ╲  ╲           Slow decel (low friction)
-          │       ╲     ╲   ╲        
-          └────────────────────→ Time
-```
+> 📖 **Want to master these parameters?** See the **[Physics Tuning Guide](docs/PHYSICS_TUNING.md)** for detailed explanations, visual diagrams, and tuning recipes.
 
 ---
 
@@ -394,56 +358,42 @@ Deceleration Curves
 
 Flinger includes pre-configured presets for common scenarios:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│  PRESET SCROLL DISTANCE COMPARISON                              │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  androidNative() ████████████░░░░░░░░░░░░  Standard distance    │
-│  smooth()        ████████████████░░░░░░░░  Balanced, smooth     │
-│  iOSStyle()      ██████████░░░░░░░░░░░░░░  Higher friction      │
-│  smoothCurve()   ████████████████████░░░░  Modified spline      │
-│  quickStop()     ██████░░░░░░░░░░░░░░░░░░  Quick stop           │
-│  bouncy()        ████████████████████████  Long, bouncy         │
-│  floaty()        ████████████████████████  Floaty, maximum      │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-| Preset | Best For | Key Settings | Feel |
-|:-------|:---------|:-------------|:-----|
-| `smooth()` | General purpose | Default values | Balanced, smooth |
-| `iOSStyle()` | Cross-platform | `friction: 0.04` | iOS-like resistance |
-| `smoothCurve()` | Visual content | `splineInflection: 0.16` | Unique curve |
-| `quickStop()` | Text/reading | `decelFriction: 0.5` | Quick stop |
-| `bouncy()` | Playful UIs | `decelFriction: 0.6, inflection: 0.4` | Bouncy |
-| `floaty()` | Galleries | `friction: 0.09, decelFriction: 0.015` | Long glide |
-| `snappy()` | E-commerce | `friction: 0.03, decelFriction: 0.2` | Responsive |
-| `ultraSmooth()` | Premium apps | `friction: 0.006, points: 150` | Buttery smooth |
+| Preset | Best For | Feel |
+|:-------|:---------|:-----|
+| `smooth()` | General purpose | Balanced, natural |
+| `iOSStyle()` | Cross-platform apps | iOS-like, controlled |
+| `quickStop()` | Text & reading | Precise, quick stop |
+| `floaty()` | Photo galleries | Long, gliding scrolls |
+| `bouncy()` | Games & playful UIs | Bouncy, responsive |
+| `snappy()` | E-commerce | Quick, responsive |
+| `ultraSmooth()` | Premium apps | Buttery smooth |
+| `smoothCurve()` | Creative apps | Unique curve feel |
+| `androidNative()` | Comparison | Stock Android |
 
 ### Creating Your Own Presets
 
 ```kotlin
 object MyFlingPresets {
     @Composable
-    fun iOSStyle() = flingBehavior(
+    fun galleryScroll() = flingBehavior(
         scrollConfiguration = FlingConfiguration.Builder()
-            .scrollViewFriction(0.02f)
-            .decelerationFriction(0.04f)
-            .splineInflection(0.15f)
+            .scrollViewFriction(0.006f)    // Long, floaty scrolls
+            .decelerationFriction(0.02f)   // Smooth deceleration
             .build()
     )
     
     @Composable
-    fun snappyList() = flingBehavior(
+    fun precisionList() = flingBehavior(
         scrollConfiguration = FlingConfiguration.Builder()
-            .scrollViewFriction(0.05f)
-            .decelerationFriction(0.3f)
-            .absVelocityThreshold(50f)
+            .scrollViewFriction(0.05f)     // Shorter scrolls
+            .decelerationFriction(0.3f)    // Quick stop
+            .absVelocityThreshold(30f)     // Ignore tiny swipes
             .build()
     )
 }
 ```
+
+> 📖 **More recipes** in the **[Physics Tuning Guide](docs/PHYSICS_TUNING.md#tuning-recipes)** — includes iOS-style, bouncy, ultra-premium, and accessibility configurations.
 
 ---
 
@@ -692,6 +642,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - [x] Accessibility presets
 - [x] Pager integration
 - [x] Debug visualization overlay
+- [x] Physics tuning documentation
 
 ### In Progress
 
