@@ -646,6 +646,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### In Progress
 
+- [ ] Fix Debug Overlay
 - [ ] Kotlin DSL builder syntax
 - [ ] Enhanced documentation site
 
