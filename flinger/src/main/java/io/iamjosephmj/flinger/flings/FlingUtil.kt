@@ -108,7 +108,7 @@ fun flingBehavior(
 @Composable
 fun <T> rememberSplineBasedDecay(scrollConfiguration: FlingConfiguration): DecayAnimationSpec<T> {
     val density = LocalDensity.current
-    return remember(density.density) {
+    return remember(density.density, scrollConfiguration) {
         SplineBasedFloatDecayAnimationSpec(
             density,
             scrollConfiguration
