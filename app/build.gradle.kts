@@ -78,7 +78,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     
     // Flinger library (local project dependency)
-    implementation(project(":flinger"))
+    implementation(libs.flinger)
     
     // Debug tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
