@@ -45,6 +45,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -107,25 +108,19 @@ fun PlaygroundScreen(navController: NavController) {
     // Category selection
     var selectedCategory by remember { mutableStateOf("All") }
     
-    // Build configuration from current state
-    val currentConfig = remember(
-        scrollFriction, decelerationFriction, gravitationalForce, inchesPerMeter,
-        decelerationRate, splineInflection, splineStartTension, splineEndTension,
-        numberOfSplinePoints, absVelocityThreshold
-    ) {
-        FlingConfiguration.Builder()
-            .scrollViewFriction(scrollFriction)
-            .decelerationFriction(decelerationFriction)
-            .gravitationalForce(gravitationalForce)
-            .inchesPerMeter(inchesPerMeter)
-            .decelerationRate(decelerationRate)
-            .splineInflection(splineInflection)
-            .splineStartTension(splineStartTension)
-            .splineEndTension(splineEndTension)
-            .numberOfSplinePoints(numberOfSplinePoints)
-            .absVelocityThreshold(absVelocityThreshold)
-            .build()
-    }
+    // Build configuration from current state - NO remember to ensure it updates every recomposition
+    val currentConfig = FlingConfiguration.Builder()
+        .scrollViewFriction(scrollFriction)
+        .decelerationFriction(decelerationFriction)
+        .gravitationalForce(gravitationalForce)
+        .inchesPerMeter(inchesPerMeter)
+        .decelerationRate(decelerationRate)
+        .splineInflection(splineInflection)
+        .splineStartTension(splineStartTension)
+        .splineEndTension(splineEndTension)
+        .numberOfSplinePoints(numberOfSplinePoints)
+        .absVelocityThreshold(absVelocityThreshold)
+        .build()
     
     fun resetToDefaults() {
         scrollFriction = 0.008f
@@ -234,14 +229,21 @@ fun PlaygroundScreen(navController: NavController) {
                 }
                 
                 // Parameters + Preview List
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                    flingBehavior = flingBehavior(scrollConfiguration = currentConfig),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                // Use key() to force LazyColumn recreation when fling config changes
+                // This is necessary because the library's flingBehavior() uses remember internally
+                key(
+                    scrollFriction, decelerationFriction, gravitationalForce, inchesPerMeter,
+                    decelerationRate, splineInflection, splineStartTension, splineEndTension,
+                    numberOfSplinePoints, absVelocityThreshold
                 ) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                        flingBehavior = flingBehavior(scrollConfiguration = currentConfig),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
                     // =========================================================
                     // FRICTION PARAMETERS
                     // =========================================================
@@ -413,7 +415,8 @@ fun PlaygroundScreen(navController: NavController) {
                     item {
                         Spacer(modifier = Modifier.height(32.dp))
                     }
-                }
+                    }
+                } // End of key() wrapper
             }
         }
     }

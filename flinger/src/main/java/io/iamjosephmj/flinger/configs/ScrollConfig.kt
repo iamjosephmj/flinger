@@ -51,6 +51,35 @@ class FlingConfiguration private constructor(
 
     val splineP2: Float = 1.0f - splineEndTension * (1.0f - splineInflection)
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is FlingConfiguration) return false
+        return scrollFriction == other.scrollFriction &&
+                absVelocityThreshold == other.absVelocityThreshold &&
+                gravitationalForce == other.gravitationalForce &&
+                inchesPerMeter == other.inchesPerMeter &&
+                decelerationFriction == other.decelerationFriction &&
+                decelerationRate == other.decelerationRate &&
+                splineInflection == other.splineInflection &&
+                splineStartTension == other.splineStartTension &&
+                splineEndTension == other.splineEndTension &&
+                numberOfSplinePoints == other.numberOfSplinePoints
+    }
+
+    override fun hashCode(): Int {
+        var result = scrollFriction.hashCode()
+        result = 31 * result + absVelocityThreshold.hashCode()
+        result = 31 * result + gravitationalForce.hashCode()
+        result = 31 * result + inchesPerMeter.hashCode()
+        result = 31 * result + decelerationFriction.hashCode()
+        result = 31 * result + decelerationRate.hashCode()
+        result = 31 * result + splineInflection.hashCode()
+        result = 31 * result + splineStartTension.hashCode()
+        result = 31 * result + splineEndTension.hashCode()
+        result = 31 * result + numberOfSplinePoints
+        return result
+    }
+
     companion object {
         /**
          * Default FlingConfiguration instance.
