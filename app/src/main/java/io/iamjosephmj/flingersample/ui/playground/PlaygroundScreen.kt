@@ -6,7 +6,11 @@
 
 package io.iamjosephmj.flingersample.ui.playground
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,16 +18,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Speed
@@ -34,6 +43,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -58,7 +68,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.iamjosephmj.flinger.configs.FlingConfiguration
@@ -72,43 +81,33 @@ import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
 import kotlin.math.ln
 
 /**
- * Interactive playground for tuning ALL fling parameters in real-time.
+ * Interactive playground for tuning fling parameters in real-time.
  * 
- * Parameters are organized into categories:
- * - Friction: scrollFriction, decelerationFriction
- * - Physics: gravitationalForce, inchesPerMeter, decelerationRate
- * - Spline: splineInflection, splineStartTension, splineEndTension, numberOfSplinePoints
- * - Threshold: absVelocityThreshold
+ * Clean layout with:
+ * - Collapsible curve visualization
+ * - Compact parameter sliders
+ * - Bottom horizontal scroll strip for testing
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaygroundScreen(navController: NavController) {
-    // =========================================================================
-    // ALL FlingConfiguration Parameters
-    // =========================================================================
-    
-    // Friction Parameters
+    // State for all parameters
     var scrollFriction by remember { mutableFloatStateOf(0.008f) }
     var decelerationFriction by remember { mutableFloatStateOf(0.09f) }
-    
-    // Physics Parameters
     var gravitationalForce by remember { mutableFloatStateOf(9.80665f) }
     var inchesPerMeter by remember { mutableFloatStateOf(39.37f) }
     var decelerationRate by remember { mutableFloatStateOf((ln(0.78) / ln(0.9)).toFloat()) }
-    
-    // Spline Parameters
     var splineInflection by remember { mutableFloatStateOf(0.1f) }
     var splineStartTension by remember { mutableFloatStateOf(0.1f) }
     var splineEndTension by remember { mutableFloatStateOf(1.0f) }
     var numberOfSplinePoints by remember { mutableIntStateOf(100) }
-    
-    // Threshold Parameters
     var absVelocityThreshold by remember { mutableFloatStateOf(0f) }
     
-    // Category selection
-    var selectedCategory by remember { mutableStateOf("All") }
+    // UI state
+    var selectedCategory by remember { mutableStateOf("Friction") }
+    var showCurve by remember { mutableStateOf(true) }
     
-    // Build configuration from current state - NO remember to ensure it updates every recomposition
+    // Build configuration
     val currentConfig = FlingConfiguration.Builder()
         .scrollViewFriction(scrollFriction)
         .decelerationFriction(decelerationFriction)
@@ -143,6 +142,7 @@ fun PlaygroundScreen(navController: NavController) {
                     title = { 
                         Text(
                             "Fling Playground",
+                            style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.primary
                         ) 
                     },
@@ -159,13 +159,13 @@ fun PlaygroundScreen(navController: NavController) {
                         IconButton(onClick = { resetToDefaults() }) {
                             Icon(
                                 Icons.Default.Refresh, 
-                                contentDescription = "Reset to defaults",
+                                contentDescription = "Reset",
                                 tint = MaterialTheme.colorScheme.secondary
                             )
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+                        containerColor = Color.Transparent
                     )
                 )
             }
@@ -175,18 +175,20 @@ fun PlaygroundScreen(navController: NavController) {
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                // Fling Curve Visualization
+                // =====================================================
+                // COLLAPSIBLE CURVE VISUALIZATION
+                // =====================================================
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                        .clickable { showCurve = !showCurve },
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f)
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
                     ),
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                    shape = RoundedCornerShape(16.dp)
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.padding(12.dp)) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -194,27 +196,46 @@ fun PlaygroundScreen(navController: NavController) {
                         ) {
                             Text(
                                 text = "Fling Curve",
-                                style = MaterialTheme.typography.titleMedium,
+                                style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.primary
                             )
-                            // Legend
-                            Row {
-                                LegendItem(color = AuroraCyan, label = "Position")
-                                Spacer(modifier = Modifier.width(12.dp))
-                                LegendItem(color = AuroraMagenta, label = "Velocity", dashed = true)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                LegendDot(color = AuroraCyan)
+                                Text("Pos", style = MaterialTheme.typography.labelSmall, 
+                                     color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Spacer(modifier = Modifier.width(8.dp))
+                                LegendDot(color = AuroraMagenta)
+                                Text("Vel", style = MaterialTheme.typography.labelSmall,
+                                     color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Icon(
+                                    if (showCurve) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                                    contentDescription = "Toggle",
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.size(20.dp)
+                                )
                             }
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        FlingCurveCanvas(
-                            config = currentConfig,
-                            modifier = Modifier.fillMaxWidth(),
-                            animated = false
-                        )
+                        AnimatedVisibility(
+                            visible = showCurve,
+                            enter = expandVertically(),
+                            exit = shrinkVertically()
+                        ) {
+                            FlingCurveCanvas(
+                                config = currentConfig,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp),
+                                animated = false
+                            )
+                        }
                     }
                 }
                 
-                // Category Filter Chips
+                // =====================================================
+                // CATEGORY CHIPS
+                // =====================================================
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -222,387 +243,304 @@ fun PlaygroundScreen(navController: NavController) {
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    CategoryChip("All", Icons.Default.Tune, selectedCategory) { selectedCategory = it }
-                    CategoryChip("Friction", Icons.Default.Speed, selectedCategory) { selectedCategory = it }
-                    CategoryChip("Physics", Icons.Default.Science, selectedCategory) { selectedCategory = it }
-                    CategoryChip("Spline", Icons.Default.Timeline, selectedCategory) { selectedCategory = it }
+                    CompactChip("Friction", Icons.Default.Speed, selectedCategory == "Friction") { 
+                        selectedCategory = "Friction" 
+                    }
+                    CompactChip("Physics", Icons.Default.Science, selectedCategory == "Physics") { 
+                        selectedCategory = "Physics" 
+                    }
+                    CompactChip("Spline", Icons.Default.Timeline, selectedCategory == "Spline") { 
+                        selectedCategory = "Spline" 
+                    }
+                    CompactChip("All", Icons.Default.Tune, selectedCategory == "All") { 
+                        selectedCategory = "All" 
+                    }
                 }
                 
-                // Parameters + Preview List
-                // Use key() to force LazyColumn recreation when fling config changes
-                // This is necessary because the library's flingBehavior() uses remember internally
-                key(
-                    scrollFriction, decelerationFriction, gravitationalForce, inchesPerMeter,
-                    decelerationRate, splineInflection, splineStartTension, splineEndTension,
-                    numberOfSplinePoints, absVelocityThreshold
+                // =====================================================
+                // PARAMETERS (Single scrollable list)
+                // =====================================================
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-                        flingBehavior = flingBehavior(scrollConfiguration = currentConfig),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                    // =========================================================
-                    // FRICTION PARAMETERS
-                    // =========================================================
+                    // FRICTION
                     if (selectedCategory == "All" || selectedCategory == "Friction") {
+                        item { SectionLabel("Friction", AuroraCyan) }
                         item {
-                            CategoryHeader(
-                                title = "Friction Parameters",
-                                icon = Icons.Default.Speed,
-                                color = AuroraCyan
-                            )
-                        }
-                        
-                        item {
-                            ParameterSlider(
-                                label = "Scroll View Friction",
+                            CompactSlider(
+                                label = "Scroll Friction",
                                 value = scrollFriction,
                                 onValueChange = { scrollFriction = it },
                                 valueRange = 0.001f..0.1f,
-                                description = "Friction applied to scroll. Lower = longer scroll distance.",
                                 accentColor = AuroraCyan
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
+                            CompactSlider(
                                 label = "Deceleration Friction",
                                 value = decelerationFriction,
                                 onValueChange = { decelerationFriction = it },
                                 valueRange = 0.01f..1.0f,
-                                description = "Friction during deceleration. Higher = quicker stop.",
                                 accentColor = AuroraCyan
                             )
                         }
                     }
                     
-                    // =========================================================
-                    // PHYSICS PARAMETERS
-                    // =========================================================
+                    // PHYSICS
                     if (selectedCategory == "All" || selectedCategory == "Physics") {
+                        item { SectionLabel("Physics", AuroraViolet) }
                         item {
-                            CategoryHeader(
-                                title = "Physics Parameters",
-                                icon = Icons.Default.Science,
-                                color = AuroraViolet
-                            )
-                        }
-                        
-                        item {
-                            ParameterSlider(
-                                label = "Gravitational Force",
+                            CompactSlider(
+                                label = "Gravity",
                                 value = gravitationalForce,
                                 onValueChange = { gravitationalForce = it },
                                 valueRange = 1f..20f,
-                                description = "Gravitational obstruction (default: 9.80665 m/s²).",
                                 accentColor = AuroraViolet
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
-                                label = "Inches Per Meter",
+                            CompactSlider(
+                                label = "Inches/Meter",
                                 value = inchesPerMeter,
                                 onValueChange = { inchesPerMeter = it },
                                 valueRange = 10f..100f,
-                                description = "Screen density factor (default: 39.37 in/m).",
                                 accentColor = AuroraViolet
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
-                                label = "Deceleration Rate",
+                            CompactSlider(
+                                label = "Decel Rate",
                                 value = decelerationRate,
                                 onValueChange = { decelerationRate = it },
                                 valueRange = 0.5f..10f,
-                                description = "Rate of velocity decay. Higher = steeper curve.",
                                 accentColor = AuroraViolet
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
+                            CompactSlider(
                                 label = "Velocity Threshold",
                                 value = absVelocityThreshold,
                                 onValueChange = { absVelocityThreshold = it },
                                 valueRange = 0f..100f,
-                                description = "Min velocity to continue animation. 0 = use default.",
                                 accentColor = AuroraViolet
                             )
                         }
                     }
                     
-                    // =========================================================
-                    // SPLINE PARAMETERS
-                    // =========================================================
+                    // SPLINE
                     if (selectedCategory == "All" || selectedCategory == "Spline") {
+                        item { SectionLabel("Spline", AuroraMagenta) }
                         item {
-                            CategoryHeader(
-                                title = "Spline Parameters",
-                                icon = Icons.Default.Timeline,
-                                color = AuroraMagenta
-                            )
-                        }
-                        
-                        item {
-                            ParameterSlider(
-                                label = "Spline Inflection",
+                            CompactSlider(
+                                label = "Inflection",
                                 value = splineInflection,
                                 onValueChange = { splineInflection = it },
                                 valueRange = 0.01f..0.5f,
-                                description = "Where start/end tension lines cross. Affects curve shape.",
                                 accentColor = AuroraMagenta
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
-                                label = "Spline Start Tension",
+                            CompactSlider(
+                                label = "Start Tension",
                                 value = splineStartTension,
                                 onValueChange = { splineStartTension = it },
                                 valueRange = 0.01f..1.0f,
-                                description = "Initial momentum at start of fling.",
                                 accentColor = AuroraMagenta
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
-                                label = "Spline End Tension",
+                            CompactSlider(
+                                label = "End Tension",
                                 value = splineEndTension,
                                 onValueChange = { splineEndTension = it },
                                 valueRange = 0.1f..2.0f,
-                                description = "Final momentum as fling ends.",
                                 accentColor = AuroraMagenta
                             )
                         }
-                        
                         item {
-                            ParameterSlider(
+                            CompactSlider(
                                 label = "Spline Points",
                                 value = numberOfSplinePoints.toFloat(),
                                 onValueChange = { numberOfSplinePoints = it.toInt() },
                                 valueRange = 10f..500f,
-                                description = "Number of sampling points. Higher = smoother curve.",
                                 accentColor = AuroraMagenta
                             )
                         }
                     }
                     
-                    // =========================================================
-                    // PREVIEW SECTION
-                    // =========================================================
-                    item {
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            text = "↓ Scroll Preview - Test your configuration",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        )
-                    }
+                    item { Spacer(modifier = Modifier.height(8.dp)) }
+                }
+                
+                // =====================================================
+                // BOTTOM TEST STRIP (Horizontal scroll with custom fling)
+                // =====================================================
+                HorizontalDivider(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+                )
+                
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                ) {
+                    Text(
+                        text = "← Swipe to test fling →",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                    )
                     
-                    // Preview items with gradient backgrounds
-                    items(15) { index ->
-                        PreviewCard(index = index)
+                    key(
+                        scrollFriction, decelerationFriction, gravitationalForce, inchesPerMeter,
+                        decelerationRate, splineInflection, splineStartTension, splineEndTension,
+                        numberOfSplinePoints, absVelocityThreshold
+                    ) {
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(100.dp),
+                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            flingBehavior = flingBehavior(scrollConfiguration = currentConfig)
+                        ) {
+                            items(40) { index ->
+                                TestCard(index = index)
+                            }
+                        }
                     }
-                    
-                    item {
-                        Spacer(modifier = Modifier.height(32.dp))
-                    }
-                    }
-                } // End of key() wrapper
+                }
             }
         }
     }
 }
 
 @Composable
-private fun LegendItem(
-    color: Color,
-    label: String,
-    dashed: Boolean = false
-) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(
-            modifier = Modifier
-                .width(16.dp)
-                .height(if (dashed) 2.dp else 3.dp)
-                .clip(RoundedCornerShape(1.dp))
-                .background(color.copy(alpha = if (dashed) 0.5f else 1f))
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall,
-            color = color.copy(alpha = 0.8f)
-        )
-    }
+private fun LegendDot(color: Color) {
+    Box(
+        modifier = Modifier
+            .size(8.dp)
+            .clip(RoundedCornerShape(4.dp))
+            .background(color)
+            .padding(end = 4.dp)
+    )
+    Spacer(modifier = Modifier.width(4.dp))
 }
 
 @Composable
-private fun CategoryChip(
-    category: String,
+private fun CompactChip(
+    label: String,
     icon: ImageVector,
-    selectedCategory: String,
-    onSelect: (String) -> Unit
+    selected: Boolean,
+    onClick: () -> Unit
 ) {
     FilterChip(
-        selected = selectedCategory == category,
-        onClick = { onSelect(category) },
-        label = { Text(category) },
+        selected = selected,
+        onClick = onClick,
+        label = { Text(label, style = MaterialTheme.typography.labelMedium) },
         leadingIcon = {
-            Icon(
-                icon,
-                contentDescription = null,
-                modifier = Modifier.padding(end = 4.dp)
-            )
+            Icon(icon, contentDescription = null, modifier = Modifier.size(16.dp))
         },
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = MaterialTheme.colorScheme.primary,
             selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
             selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimary
-        )
+        ),
+        modifier = Modifier.height(32.dp)
     )
 }
 
 @Composable
-private fun CategoryHeader(
-    title: String,
-    icon: ImageVector,
-    color: Color
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp, bottom = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            icon,
-            contentDescription = null,
-            tint = color,
-            modifier = Modifier.padding(end = 8.dp)
-        )
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = color
-        )
-    }
+private fun SectionLabel(title: String, color: Color) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.labelLarge,
+        fontWeight = FontWeight.Bold,
+        color = color,
+        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+    )
 }
 
 @Composable
-private fun PreviewCard(index: Int) {
-    val gradient = GradientPresets.forIndex(index)
-    
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Brush.linearGradient(gradient))
-                .padding(16.dp),
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Text(
-                text = "Preview Item ${index + 1}",
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Medium,
-                color = Color.White
-            )
-        }
-    }
-}
-
-@Composable
-private fun ParameterSlider(
+private fun CompactSlider(
     label: String,
     value: Float,
     onValueChange: (Float) -> Unit,
     valueRange: ClosedFloatingPointRange<Float>,
-    description: String,
-    accentColor: Color = AuroraCyan
+    accentColor: Color
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.85f)
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)
         ),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            // Label + Value
+            Column(modifier = Modifier.width(100.dp)) {
                 Text(
                     text = label,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f, fill = false),
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = if (value >= 10f) String.format("%.2f", value) else String.format("%.4f", value),
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelSmall,
                     color = accentColor,
                     fontWeight = FontWeight.Bold
                 )
             }
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(8.dp))
+            
+            // Slider
             Slider(
                 value = value,
                 onValueChange = onValueChange,
                 valueRange = valueRange,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.weight(1f),
                 colors = SliderDefaults.colors(
                     thumbColor = accentColor,
                     activeTrackColor = accentColor,
                     inactiveTrackColor = accentColor.copy(alpha = 0.2f)
                 )
             )
-            // Min/Max labels
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = String.format("%.2f", valueRange.start),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                )
-                Text(
-                    text = String.format("%.2f", valueRange.endInclusive),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                )
-            }
+        }
+    }
+}
+
+@Composable
+private fun TestCard(index: Int) {
+    val gradient = GradientPresets.forIndex(index)
+    
+    Card(
+        modifier = Modifier
+            .width(120.dp)
+            .fillMaxHeight(),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Brush.linearGradient(gradient)),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "${index + 1}",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.White.copy(alpha = 0.9f)
+            )
         }
     }
 }
