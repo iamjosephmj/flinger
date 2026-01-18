@@ -127,7 +127,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:flinger:2.0.0'
+    implementation 'com.github.iamjosephmj:flinger:2.0.2'
 }
 ```
 
@@ -137,7 +137,7 @@ Add to your `libs.versions.toml`:
 
 ```toml
 [versions]
-flinger = "2.0.0"
+flinger = "2.0.2"
 
 [libraries]
 flinger = { module = "com.github.iamjosephmj:flinger", version.ref = "flinger" }
