@@ -190,6 +190,7 @@ fun snapFlingBehavior(
  * - Pre-computes absolute velocity values
  * - Removed try-catch from animation hot path
  * - Uses minByOrNull for cleaner snap offset calculation
+ * - Smart boundary detection prevents freezing at list edges
  */
 private class SnapFlingBehaviorImpl(
     private val lazyListState: LazyListState,
@@ -201,6 +202,44 @@ private class SnapFlingBehaviorImpl(
     private val fusionVelocityRatio: Float,
     private val callbacks: FlingCallbacks
 ) : FlingBehavior {
+    
+    /**
+     * Detects if the list is at the start boundary.
+     */
+    private fun isAtStartBoundary(): Boolean {
+        val layoutInfo = lazyListState.layoutInfo
+        val visibleItems = layoutInfo.visibleItemsInfo
+        if (visibleItems.isEmpty()) return true
+        
+        val firstItem = visibleItems.first()
+        return firstItem.index == 0 && firstItem.offset >= layoutInfo.viewportStartOffset
+    }
+    
+    /**
+     * Detects if the list is at the end boundary.
+     */
+    private fun isAtEndBoundary(): Boolean {
+        val layoutInfo = lazyListState.layoutInfo
+        val visibleItems = layoutInfo.visibleItemsInfo
+        if (visibleItems.isEmpty()) return true
+        
+        val lastItem = visibleItems.last()
+        val totalItems = layoutInfo.totalItemsCount
+        return lastItem.index == totalItems - 1 && 
+            lastItem.offset + lastItem.size <= layoutInfo.viewportEndOffset
+    }
+    
+    /**
+     * Checks if snap should be skipped because we're at a boundary
+     * and the snap would try to scroll past it.
+     */
+    private fun shouldSkipSnapAtBoundary(snapOffset: Float): Boolean {
+        // If snap would scroll backwards (negative) and we're at start, skip
+        if (snapOffset < -0.5f && isAtStartBoundary()) return true
+        // If snap would scroll forwards (positive) and we're at end, skip
+        if (snapOffset > 0.5f && isAtEndBoundary()) return true
+        return false
+    }
     
     override suspend fun ScrollScope.performFling(initialVelocity: Float): Float {
         // Notify fling start
@@ -235,7 +274,8 @@ private class SnapFlingBehaviorImpl(
         // Notify fling end
         callbacks.onFlingEnd?.invoke(totalScrolled, wasCancelled)
         
-        return 0f // After snap, velocity should be 0
+        // Return remaining velocity if cancelled at boundary so normal scroll can handle it
+        return if (wasCancelled) velocityLeft else 0f
     }
     
     /**
@@ -291,6 +331,12 @@ private class SnapFlingBehaviorImpl(
         val snapOffset = calculateSnapOffset()
         val absSnapOffset = abs(snapOffset)
         
+        // Skip snap if at boundary and snap would go past it - return velocity for normal scroll
+        if (shouldSkipSnapAtBoundary(snapOffset)) {
+            onProgress(totalScrolled, velocityLeft, false)
+            return
+        }
+        
         if (absSnapOffset > 0.5f) {
             var snapScrolled = 0f
             val absVelocityLeft = abs(velocityLeft)
@@ -324,6 +370,7 @@ private class SnapFlingBehaviorImpl(
                     onProgressCallback(0.7f + snapProgress * 0.3f, velocity)
                 }
                 
+                // Cancel immediately if scroll can't be consumed (hit boundary mid-snap)
                 val unconsumed = abs(delta - consumed)
                 if (unconsumed > 0.5f) {
                     wasCancelled = true
@@ -398,6 +445,12 @@ private class SnapFlingBehaviorImpl(
         val snapOffset = calculateSnapOffset()
         val absSnapOffset = abs(snapOffset)
         
+        // Skip snap if at boundary and snap would go past it - return velocity for normal scroll
+        if (shouldSkipSnapAtBoundary(snapOffset)) {
+            onProgress(totalScrolled, velocityLeft, false)
+            return
+        }
+        
         if (absSnapOffset > 0.5f) {
             var snapScrolled = 0f
             val absVelocityLeft = abs(velocityLeft)
@@ -435,6 +488,7 @@ private class SnapFlingBehaviorImpl(
                     onProgressCallback(0.75f + snapProgress * 0.25f, velocity)
                 }
                 
+                // Cancel immediately if scroll can't be consumed (hit boundary mid-snap)
                 val unconsumed = abs(delta - consumed)
                 if (unconsumed > 0.5f) {
                     wasCancelled = true
