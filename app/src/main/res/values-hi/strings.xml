@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">वापस</string>
+    <string name="action_reset">रीसेट करें</string>
+    <string name="action_toggle">टॉगल करें</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Compose के लिए अनुकूलन योग्य फ्लिंग भौतिकी</string>
+    <string name="home_core_features">मुख्य विशेषताएं</string>
+    <string name="home_feature_demos">फीचर डेमो</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Joseph James द्वारा ❤️ के साथ बनाया गया</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">फ्लिंग प्लेग्राउंड</string>
+    <string name="nav_fling_playground_desc">सभी फ्लिंग पैरामीटर को इंटरएक्टिव रूप से समायोजित करें और परिणाम रीयल-टाइम में देखें</string>
+    <string name="nav_preset_gallery">प्रीसेट गैलरी</string>
+    <string name="nav_preset_gallery_desc">लाइव पूर्वावलोकन के साथ सभी बिल्ट-इन प्रीसेट ब्राउज़ करें और आज़माएं</string>
+    <string name="nav_side_by_side_comparison">साइड-बाय-साइड तुलना</string>
+    <string name="nav_side_by_side_comparison_desc">नेटिव Android स्क्रॉल की तुलना Flinger व्यवहार से करें</string>
+    <string name="nav_snap_gallery">स्नैप गैलरी</string>
+    <string name="nav_snap_gallery_desc">कैरोसेल और गैलरी के लिए स्नैप-टू-आइटम व्यवहार</string>
+    <string name="nav_adaptive_fling">एडाप्टिव फ्लिंग</string>
+    <string name="nav_adaptive_fling_desc">वेग-जागरूक भौतिकी जो आपकी स्वाइप के अनुकूल होती है</string>
+    <string name="nav_pager_physics">पेजर भौतिकी</string>
+    <string name="nav_pager_physics_desc">HorizontalPager के लिए कस्टम पेज-टर्न भौतिकी</string>
+    <string name="nav_debug_overlay">डीबग ओवरले</string>
+    <string name="nav_debug_overlay_desc">डेवलपर्स के लिए रीयल-टाइम फ्लिंग विज़ुअलाइज़ेशन</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">फ्लिंग प्लेग्राउंड</string>
+    <string name="playground_fling_curve">फ्लिंग कर्व</string>
+    <string name="playground_legend_pos">स्थिति</string>
+    <string name="playground_legend_vel">वेग</string>
+    <string name="playground_swipe_test">← फ्लिंग परीक्षण के लिए स्वाइप करें →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">घर्षण</string>
+    <string name="category_physics">भौतिकी</string>
+    <string name="category_spline">स्प्लाइन</string>
+    <string name="category_all">सभी</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">स्क्रॉल घर्षण</string>
+    <string name="param_deceleration_friction">मंदी घर्षण</string>
+    <string name="param_gravity">गुरुत्वाकर्षण</string>
+    <string name="param_inches_meter">इंच/मीटर</string>
+    <string name="param_decel_rate">मंदी दर</string>
+    <string name="param_velocity_threshold">वेग थ्रेशहोल्ड</string>
+    <string name="param_inflection">मोड़</string>
+    <string name="param_start_tension">प्रारंभ तनाव</string>
+    <string name="param_end_tension">अंत तनाव</string>
+    <string name="param_spline_points">स्प्लाइन बिंदु</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">साइड-बाय-साइड तुलना</string>
+    <string name="comparison_instruction">व्यवहार के बीच अंतर महसूस करने के लिए दोनों सूचियों को स्क्रॉल करें!</string>
+    <string name="comparison_left_panel">बाएं पैनल</string>
+    <string name="comparison_right_panel">दाएं पैनल</string>
+    <string name="comparison_item">आइटम %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android नेटिव</string>
+    <string name="preset_smooth">स्मूद</string>
+    <string name="preset_ios_style">iOS स्टाइल</string>
+    <string name="preset_quick_stop">क्विक स्टॉप</string>
+    <string name="preset_bouncy">बाउंसी</string>
+    <string name="preset_floaty">फ्लोटी</string>
+    <string name="preset_snappy">स्नैपी</string>
+    <string name="preset_ultra_smooth">अल्ट्रा स्मूद</string>
+    <string name="preset_smooth_curve">स्मूद कर्व</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">डिफ़ॉल्ट पैरामीटर के साथ संतुलित, स्मूद स्क्रॉलिंग</string>
+    <string name="preset_ios_desc">iOS स्क्रॉल भौतिकी की नकल करने वाला उच्च घर्षण</string>
+    <string name="preset_quick_stop_desc">सटीक नियंत्रण के लिए उच्च मंदी</string>
+    <string name="preset_bouncy_desc">संशोधित स्प्लाइन के साथ चंचल, उत्तरदायी अनुभव</string>
+    <string name="preset_floaty_desc">कम घर्षण के साथ लंबी दूरी की ग्लाइडिंग</string>
+    <string name="preset_snappy_desc">नियंत्रित गति के साथ त्वरित प्रतिक्रिया</string>
+    <string name="preset_ultra_smooth_desc">विस्तारित गति के साथ प्रीमियम अनुभव</string>
+    <string name="preset_smooth_curve_desc">अद्वितीय अनुभव के लिए संशोधित स्प्लाइन</string>
+    <string name="preset_android_native_desc">डिफ़ॉल्ट Android फ्लिंग व्यवहार</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">सामान्य उद्देश्य, अधिकांश सूची UI</string>
+    <string name="best_for_cross_platform">क्रॉस-प्लेटफ़ॉर्म ऐप्स, फोटो ब्राउज़र</string>
+    <string name="best_for_text">टेक्स्ट-भारी सामग्री, सेटिंग्स स्क्रीन</string>
+    <string name="best_for_games">गेम्स, बच्चों के ऐप्स, चंचल UI</string>
+    <string name="best_for_galleries">फोटो गैलरी, सोशल फीड्स</string>
+    <string name="best_for_ecommerce">ई-कॉमर्स, चैट ऐप्स</string>
+    <string name="best_for_luxury">लक्जरी ऐप्स, रीडिंग ऐप्स</string>
+    <string name="best_for_creative">रचनात्मक ऐप्स, प्रयोग</string>
+    <string name="best_for_baseline">बेसलाइन तुलना</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">प्रीसेट गैलरी</string>
+    <string name="presets_select_prompt">↑ आज़माने के लिए एक प्रीसेट चुनें</string>
+    <string name="presets_available">उपलब्ध प्रीसेट</string>
+    <string name="presets_scroll_test">↓ चयनित प्रीसेट का परीक्षण करने के लिए इस सूची को स्क्रॉल करें</string>
+    <string name="presets_test_item">परीक्षण आइटम %1$d</string>
+    <string name="presets_active">सक्रिय: %1$s</string>
+    <string name="presets_active_chip">सक्रिय</string>
+    <string name="presets_best_for">इसके लिए सर्वश्रेष्ठ: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">स्नैप गैलरी डेमो</string>
+    <string name="snap_position">स्नैप स्थिति</string>
+    <string name="snap_animation">स्नैप एनीमेशन</string>
+    <string name="snap_smooth_fusion">स्मूद फ्यूजन</string>
+    <string name="snap_fusion_desc">वेग क्षय होने पर स्नैप शुरू होता है</string>
+    <string name="snap_fusion_point">फ्यूजन बिंदु</string>
+    <string name="snap_fusion_velocity">%1$d%% वेग</string>
+    <string name="snap_fusion_earlier">पहले (अधिक स्मूद)</string>
+    <string name="snap_fusion_later">बाद में (अधिक स्नैपी)</string>
+    <string name="snap_swipe_prompt">↔ स्नैप व्यवहार देखने के लिए स्वाइप करें</string>
+    <string name="snap_swipe_fusion_prompt">↔ फ्यूजन प्रभाव देखने के लिए धीमी स्वाइप करें</string>
+    <string name="snap_card">कार्ड %1$d</string>
+    <string name="snap_card_desc">नेविगेट करने के लिए स्वाइप करें</string>
+    <string name="snap_how_it_works">यह कैसे काम करता है</string>
+    <string name="snap_how_it_works_desc">स्नैप एनीमेशन नियंत्रित करता है कि आइटम कैसे स्थिति में बैठते हैं। प्रत्येक प्रीसेट विभिन्न भौतिकी का उपयोग करता है:\n\n• स्प्रिंग-आधारित: कठोरता + डैम्पिंग अनुपात\n• ट्वीन-आधारित: अवधि + ईज़िंग कर्व\n\nस्मूद फ्यूजन: वेग थ्रेशहोल्ड से नीचे गिरने पर स्नैप शुरू होता है।</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">स्मूद: कोमल, तरल स्नैप बिना बाउंस के। अधिकांश कैरोसेल और गैलरी के लिए सर्वश्रेष्ठ।</string>
+    <string name="snap_anim_snappy">स्नैपी: त्वरित, उत्तरदायी स्नैप। तेज-तर्रार UI और इंटरएक्टिव सूचियों के लिए बढ़िया।</string>
+    <string name="snap_anim_bouncy">बाउंसी: हल्के ओवरशूट के साथ चंचल स्नैप। गेम्स और मजेदार UI के लिए बिल्कुल सही।</string>
+    <string name="snap_anim_gentle">जेंटल: बहुत धीमा, आरामदायक स्नैप। लग्जरी/प्रीमियम ऐप्स के लिए आदर्श।</string>
+    <string name="snap_anim_ios">iOS: Apple-शैली एनीमेशन। क्रॉस-प्लेटफ़ॉर्म उपयोगकर्ताओं के लिए परिचित अनुभव।</string>
+    <string name="snap_anim_material">Material: Google Material Design टाइमिंग। आधुनिक और सुसंगत।</string>
+    <string name="snap_anim_instant">इंस्टेंट: लगभग त्वरित स्नैप। यूटिलिटी ऐप्स या सुलभता के लिए सर्वश्रेष्ठ।</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">एडाप्टिव फ्लिंग डेमो</string>
+    <string name="adaptive_mode">एडाप्टिव मोड</string>
+    <string name="adaptive_swipe_prompt">↓ कोमल बनाम आक्रामक स्वाइप आज़माएं</string>
+    <string name="adaptive_item">आइटम %1$d</string>
+    <string name="adaptive_item_desc">एडाप्टिव व्यवहार देखने के लिए विभिन्न वेग से स्क्रॉल करें</string>
+    <string name="adaptive_how_it_works">यह कैसे काम करता है</string>
+    <string name="adaptive_how_it_works_desc">एडाप्टिव फ्लिंग वेग के आधार पर विभिन्न भौतिकी का उपयोग करता है:\n\n• कोमल स्वाइप → सटीक, नियंत्रित स्क्रॉलिंग\n• आक्रामक स्वाइप → लंबे गति स्क्रॉल\n\nप्रत्येक मोड इन व्यवहारों को अलग तरह से संतुलित करता है।</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">संतुलित: कोमल स्वाइप के लिए नियंत्रित, आक्रामक स्वाइप के लिए अधिक गति। सामान्य उपयोग के लिए सर्वश्रेष्ठ।</string>
+    <string name="adaptive_precision">प्रिसिजन: नियंत्रण को प्राथमिकता देता है। आक्रामक स्वाइप भी तेजी से रुकती हैं। टेक्स्ट-भारी सामग्री के लिए सर्वश्रेष्ठ।</string>
+    <string name="adaptive_momentum">मोमेंटम: दूरी को प्राथमिकता देता है। स्वाइप अधिक दूर तक यात्रा करती हैं। गैलरी और फीड के लिए सर्वश्रेष्ठ।</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">पेजर-स्टाइल डेमो</string>
+    <string name="pager_fling_physics">फ्लिंग भौतिकी</string>
+    <string name="pager_standard">स्टैंडर्ड</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">पेज %1$d</string>
+    <string name="pager_swipe_desc">पेज भौतिकी देखने के लिए स्वाइप करें</string>
+    <string name="pager_how_it_works">यह कैसे काम करता है</string>
+    <string name="pager_how_it_works_desc">स्नैप फ्लिंग भौतिकी का उपयोग करके पेजर-जैसा व्यवहार:\n\n• स्टैंडर्ड: संतुलित संक्रमण\n• iOS: उच्च प्रतिरोध, परिचित अनुभव\n• स्नैपी: त्वरित पेज टर्न\n• स्मूद: ग्लाइडिंग संक्रमण\n\nस्मूद फ्यूजन: स्क्रॉल करते समय स्नैप शुरू होता है।</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">डीबग ओवरले डेमो</string>
+    <string name="debug_options">डीबग विकल्प</string>
+    <string name="debug_overlay">डीबग ओवरले</string>
+    <string name="debug_show_velocity">वेग दिखाएं</string>
+    <string name="debug_show_curve">कर्व दिखाएं</string>
+    <string name="debug_show_metrics">मेट्रिक्स दिखाएं</string>
+    <string name="debug_scroll_prompt">↓ रीयल-टाइम में डीबग जानकारी देखने के लिए स्क्रॉल करें</string>
+    <string name="debug_item">डीबग आइटम %1$d</string>
+    <string name="debug_item_desc">रीयल-टाइम डीबग विज़ुअलाइज़ेशन देखने के लिए फ्लिंग करें</string>
+    <string name="debug_overlay_info">डीबग ओवरले जानकारी</string>
+    <string name="debug_overlay_info_desc">डीबग ओवरले रीयल-टाइम फ्लिंग डेटा दिखाता है:\n\n• वेग: वर्तमान स्क्रॉल वेग\n• कर्व: मंदी कर्व विज़ुअलाइज़ेशन\n• मेट्रिक्स: फ्रेम समय, यात्रा की गई दूरी\n\nअपने फ्लिंग व्यवहार को डीबग और ट्यून करने के लिए इसका उपयोग करें।</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">समय →</string>
+    <string name="curve_label_distance">दूरी</string>
+</resources>

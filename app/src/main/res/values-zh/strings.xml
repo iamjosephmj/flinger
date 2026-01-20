@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">返回</string>
+    <string name="action_reset">重置</string>
+    <string name="action_toggle">切换</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Compose可自定义的滑动物理效果</string>
+    <string name="home_core_features">核心功能</string>
+    <string name="home_feature_demos">功能演示</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">由Joseph James用❤️制作</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">滑动游乐场</string>
+    <string name="nav_fling_playground_desc">交互式调整所有滑动参数并实时查看结果</string>
+    <string name="nav_preset_gallery">预设画廊</string>
+    <string name="nav_preset_gallery_desc">浏览并尝试所有内置预设，并提供实时预览</string>
+    <string name="nav_side_by_side_comparison">并排比较</string>
+    <string name="nav_side_by_side_comparison_desc">比较原生Android滚动与Flinger行为</string>
+    <string name="nav_snap_gallery">吸附画廊</string>
+    <string name="nav_snap_gallery_desc">轮播和画廊的吸附行为</string>
+    <string name="nav_adaptive_fling">自适应滑动</string>
+    <string name="nav_adaptive_fling_desc">适应您滑动的速度感知物理</string>
+    <string name="nav_pager_physics">分页器物理</string>
+    <string name="nav_pager_physics_desc">HorizontalPager的自定义翻页物理</string>
+    <string name="nav_debug_overlay">调试覆盖层</string>
+    <string name="nav_debug_overlay_desc">开发者实时滑动可视化</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">滑动游乐场</string>
+    <string name="playground_fling_curve">滑动曲线</string>
+    <string name="playground_legend_pos">位置</string>
+    <string name="playground_legend_vel">速度</string>
+    <string name="playground_swipe_test">← 滑动以测试滑动效果 →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">摩擦</string>
+    <string name="category_physics">物理</string>
+    <string name="category_spline">样条</string>
+    <string name="category_all">全部</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">滚动摩擦</string>
+    <string name="param_deceleration_friction">减速摩擦</string>
+    <string name="param_gravity">重力</string>
+    <string name="param_inches_meter">英寸/米</string>
+    <string name="param_decel_rate">减速率</string>
+    <string name="param_velocity_threshold">速度阈值</string>
+    <string name="param_inflection">拐点</string>
+    <string name="param_start_tension">起始张力</string>
+    <string name="param_end_tension">结束张力</string>
+    <string name="param_spline_points">样条点</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">并排比较</string>
+    <string name="comparison_instruction">滚动两个列表以感受行为之间的差异！</string>
+    <string name="comparison_left_panel">左侧面板</string>
+    <string name="comparison_right_panel">右侧面板</string>
+    <string name="comparison_item">项目 %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android原生</string>
+    <string name="preset_smooth">流畅</string>
+    <string name="preset_ios_style">iOS风格</string>
+    <string name="preset_quick_stop">快速停止</string>
+    <string name="preset_bouncy">弹跳</string>
+    <string name="preset_floaty">飘浮</string>
+    <string name="preset_snappy">敏捷</string>
+    <string name="preset_ultra_smooth">超流畅</string>
+    <string name="preset_smooth_curve">流畅曲线</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">使用默认参数的平衡流畅滚动</string>
+    <string name="preset_ios_desc">模仿iOS滚动物理的更高摩擦</string>
+    <string name="preset_quick_stop_desc">高减速度以实现精确控制</string>
+    <string name="preset_bouncy_desc">修改样条的俏皮响应感</string>
+    <string name="preset_floaty_desc">低摩擦的长距离滑行</string>
+    <string name="preset_snappy_desc">受控动量的快速响应</string>
+    <string name="preset_ultra_smooth_desc">延长动量的高级感</string>
+    <string name="preset_smooth_curve_desc">独特感觉的修改样条</string>
+    <string name="preset_android_native_desc">默认Android滑动行为</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">通用用途、大多数列表UI</string>
+    <string name="best_for_cross_platform">跨平台应用、照片浏览器</string>
+    <string name="best_for_text">文本密集内容、设置屏幕</string>
+    <string name="best_for_games">游戏、儿童应用、俏皮UI</string>
+    <string name="best_for_galleries">照片画廊、社交动态</string>
+    <string name="best_for_ecommerce">电子商务、聊天应用</string>
+    <string name="best_for_luxury">奢侈品应用、阅读应用</string>
+    <string name="best_for_creative">创意应用、实验</string>
+    <string name="best_for_baseline">基准比较</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">预设画廊</string>
+    <string name="presets_select_prompt">↑ 选择预设以尝试</string>
+    <string name="presets_available">可用预设</string>
+    <string name="presets_scroll_test">↓ 滚动此列表以测试所选预设</string>
+    <string name="presets_test_item">测试项目 %1$d</string>
+    <string name="presets_active">活动: %1$s</string>
+    <string name="presets_active_chip">活动</string>
+    <string name="presets_best_for">最适合: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">吸附画廊演示</string>
+    <string name="snap_position">吸附位置</string>
+    <string name="snap_animation">吸附动画</string>
+    <string name="snap_smooth_fusion">平滑融合</string>
+    <string name="snap_fusion_desc">速度衰减时吸附开始</string>
+    <string name="snap_fusion_point">融合点</string>
+    <string name="snap_fusion_velocity">%1$d%%速度</string>
+    <string name="snap_fusion_earlier">更早（更流畅）</string>
+    <string name="snap_fusion_later">更晚（更敏捷）</string>
+    <string name="snap_swipe_prompt">↔ 滑动以查看吸附行为</string>
+    <string name="snap_swipe_fusion_prompt">↔ 尝试慢速滑动以查看融合效果</string>
+    <string name="snap_card">卡片 %1$d</string>
+    <string name="snap_card_desc">滑动导航</string>
+    <string name="snap_how_it_works">工作原理</string>
+    <string name="snap_how_it_works_desc">吸附动画控制项目如何归位。每个预设使用不同的物理：\n\n• 弹簧基础：刚度 + 阻尼比\n• 补间基础：持续时间 + 缓动曲线\n\n平滑融合：速度低于阈值时吸附开始。</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">流畅：柔和流畅的吸附，无弹跳。最适合大多数轮播和画廊。</string>
+    <string name="snap_anim_snappy">敏捷：快速响应的吸附。非常适合快节奏UI和交互式列表。</string>
+    <string name="snap_anim_bouncy">弹跳：带有轻微超调的俏皮吸附。非常适合游戏和有趣的UI。</string>
+    <string name="snap_anim_gentle">温和：非常慢且放松的吸附。非常适合奢侈/高级应用。</string>
+    <string name="snap_anim_ios">iOS：Apple风格动画。跨平台用户熟悉的感觉。</string>
+    <string name="snap_anim_material">Material：Google Material Design时序。现代且一致。</string>
+    <string name="snap_anim_instant">即时：近乎即时的吸附。最适合实用程序应用或辅助功能。</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">自适应滑动演示</string>
+    <string name="adaptive_mode">自适应模式</string>
+    <string name="adaptive_swipe_prompt">↓ 尝试温和 vs 激烈的滑动</string>
+    <string name="adaptive_item">项目 %1$d</string>
+    <string name="adaptive_item_desc">以不同速度滚动以查看自适应行为</string>
+    <string name="adaptive_how_it_works">工作原理</string>
+    <string name="adaptive_how_it_works_desc">自适应滑动根据速度使用不同的物理：\n\n• 温和滑动 → 精确、可控的滚动\n• 激烈滑动 → 长动量滚动\n\n每种模式以不同方式平衡这些行为。</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">平衡：温和滑动可控，激烈滑动更多动量。最适合一般用途。</string>
+    <string name="adaptive_precision">精确：优先控制。即使激烈滑动也快速停止。最适合文本密集内容。</string>
+    <string name="adaptive_momentum">动量：优先距离。滑动行进更远。最适合画廊和动态。</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">分页器风格演示</string>
+    <string name="pager_fling_physics">滑动物理</string>
+    <string name="pager_standard">标准</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">页面 %1$d</string>
+    <string name="pager_swipe_desc">滑动以查看页面物理</string>
+    <string name="pager_how_it_works">工作原理</string>
+    <string name="pager_how_it_works_desc">使用吸附滑动物理的分页器式行为：\n\n• 标准：平衡过渡\n• iOS：更高阻力、熟悉感觉\n• 敏捷：快速翻页\n• 流畅：滑行过渡\n\n平滑融合：滚动时吸附开始。</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">调试覆盖层演示</string>
+    <string name="debug_options">调试选项</string>
+    <string name="debug_overlay">调试覆盖层</string>
+    <string name="debug_show_velocity">显示速度</string>
+    <string name="debug_show_curve">显示曲线</string>
+    <string name="debug_show_metrics">显示指标</string>
+    <string name="debug_scroll_prompt">↓ 滚动以实时查看调试信息</string>
+    <string name="debug_item">调试项目 %1$d</string>
+    <string name="debug_item_desc">滑动以查看实时调试可视化</string>
+    <string name="debug_overlay_info">调试覆盖层信息</string>
+    <string name="debug_overlay_info_desc">调试覆盖层显示实时滑动数据：\n\n• 速度：当前滚动速度\n• 曲线：减速曲线可视化\n• 指标：帧时间、行进距离\n\n用于调试和调整滑动行为。</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">时间 →</string>
+    <string name="curve_label_distance">距离</string>
+</resources>

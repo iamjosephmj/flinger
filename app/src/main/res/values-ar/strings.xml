@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">رجوع</string>
+    <string name="action_reset">إعادة تعيين</string>
+    <string name="action_toggle">تبديل</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">فيزياء الانزلاق القابلة للتخصيص لـ Compose</string>
+    <string name="home_core_features">الميزات الأساسية</string>
+    <string name="home_feature_demos">عروض الميزات</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">صُنع بـ ❤️ بواسطة Joseph James</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">ساحة لعب الانزلاق</string>
+    <string name="nav_fling_playground_desc">اضبط جميع معاملات الانزلاق بشكل تفاعلي وشاهد النتائج في الوقت الفعلي</string>
+    <string name="nav_preset_gallery">معرض الإعدادات المسبقة</string>
+    <string name="nav_preset_gallery_desc">تصفح وجرب جميع الإعدادات المسبقة المدمجة مع معاينات مباشرة</string>
+    <string name="nav_side_by_side_comparison">مقارنة جنبًا إلى جنب</string>
+    <string name="nav_side_by_side_comparison_desc">قارن التمرير الأصلي لـ Android مع سلوكيات Flinger</string>
+    <string name="nav_snap_gallery">معرض الالتقاط</string>
+    <string name="nav_snap_gallery_desc">سلوك الالتقاط للدوارات والمعارض</string>
+    <string name="nav_adaptive_fling">انزلاق تكيفي</string>
+    <string name="nav_adaptive_fling_desc">فيزياء حساسة للسرعة تتكيف مع حركاتك</string>
+    <string name="nav_pager_physics">فيزياء الصفحات</string>
+    <string name="nav_pager_physics_desc">فيزياء قلب الصفحات المخصصة لـ HorizontalPager</string>
+    <string name="nav_debug_overlay">تراكب التصحيح</string>
+    <string name="nav_debug_overlay_desc">تصور الانزلاق في الوقت الفعلي للمطورين</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">ساحة لعب الانزلاق</string>
+    <string name="playground_fling_curve">منحنى الانزلاق</string>
+    <string name="playground_legend_pos">الموضع</string>
+    <string name="playground_legend_vel">السرعة</string>
+    <string name="playground_swipe_test">← اسحب لاختبار الانزلاق →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">الاحتكاك</string>
+    <string name="category_physics">الفيزياء</string>
+    <string name="category_spline">المنحنى</string>
+    <string name="category_all">الكل</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">احتكاك التمرير</string>
+    <string name="param_deceleration_friction">احتكاك التباطؤ</string>
+    <string name="param_gravity">الجاذبية</string>
+    <string name="param_inches_meter">بوصة/متر</string>
+    <string name="param_decel_rate">معدل التباطؤ</string>
+    <string name="param_velocity_threshold">عتبة السرعة</string>
+    <string name="param_inflection">الانعطاف</string>
+    <string name="param_start_tension">التوتر الابتدائي</string>
+    <string name="param_end_tension">التوتر النهائي</string>
+    <string name="param_spline_points">نقاط المنحنى</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">مقارنة جنبًا إلى جنب</string>
+    <string name="comparison_instruction">قم بتمرير كلا القائمتين لتشعر بالفرق بين السلوكيات!</string>
+    <string name="comparison_left_panel">اللوحة اليسرى</string>
+    <string name="comparison_right_panel">اللوحة اليمنى</string>
+    <string name="comparison_item">العنصر %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android الأصلي</string>
+    <string name="preset_smooth">سلس</string>
+    <string name="preset_ios_style">نمط iOS</string>
+    <string name="preset_quick_stop">توقف سريع</string>
+    <string name="preset_bouncy">مرن</string>
+    <string name="preset_floaty">عائم</string>
+    <string name="preset_snappy">سريع</string>
+    <string name="preset_ultra_smooth">سلس للغاية</string>
+    <string name="preset_smooth_curve">منحنى سلس</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">تمرير سلس ومتوازن مع المعاملات الافتراضية</string>
+    <string name="preset_ios_desc">احتكاك أعلى يحاكي فيزياء تمرير iOS</string>
+    <string name="preset_quick_stop_desc">تباطؤ عالٍ للتحكم الدقيق</string>
+    <string name="preset_bouncy_desc">شعور مرح ومستجيب مع منحنى معدّل</string>
+    <string name="preset_floaty_desc">انزلاق لمسافات طويلة مع احتكاك منخفض</string>
+    <string name="preset_snappy_desc">استجابة سريعة مع زخم محكوم</string>
+    <string name="preset_ultra_smooth_desc">شعور متميز مع زخم ممتد</string>
+    <string name="preset_smooth_curve_desc">منحنى معدّل لشعور فريد</string>
+    <string name="preset_android_native_desc">سلوك الانزلاق الافتراضي لـ Android</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">الاستخدام العام، معظم واجهات القوائم</string>
+    <string name="best_for_cross_platform">تطبيقات متعددة المنصات، متصفحات الصور</string>
+    <string name="best_for_text">المحتوى الكثيف بالنصوص، شاشات الإعدادات</string>
+    <string name="best_for_games">الألعاب، تطبيقات الأطفال، الواجهات المرحة</string>
+    <string name="best_for_galleries">معارض الصور، الخلاصات الاجتماعية</string>
+    <string name="best_for_ecommerce">التجارة الإلكترونية، تطبيقات الدردشة</string>
+    <string name="best_for_luxury">التطبيقات الفاخرة، تطبيقات القراءة</string>
+    <string name="best_for_creative">التطبيقات الإبداعية، التجريب</string>
+    <string name="best_for_baseline">مقارنة أساسية</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">معرض الإعدادات المسبقة</string>
+    <string name="presets_select_prompt">↑ حدد إعدادًا مسبقًا لتجربته</string>
+    <string name="presets_available">الإعدادات المسبقة المتاحة</string>
+    <string name="presets_scroll_test">↓ قم بتمرير هذه القائمة لاختبار الإعداد المسبق المحدد</string>
+    <string name="presets_test_item">عنصر الاختبار %1$d</string>
+    <string name="presets_active">نشط: %1$s</string>
+    <string name="presets_active_chip">نشط</string>
+    <string name="presets_best_for">الأفضل لـ: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">عرض معرض الالتقاط</string>
+    <string name="snap_position">موضع الالتقاط</string>
+    <string name="snap_animation">رسوم الالتقاط المتحركة</string>
+    <string name="snap_smooth_fusion">الاندماج السلس</string>
+    <string name="snap_fusion_desc">يبدأ الالتقاط عندما تتناقص السرعة</string>
+    <string name="snap_fusion_point">نقطة الاندماج</string>
+    <string name="snap_fusion_velocity">%1$d%% سرعة</string>
+    <string name="snap_fusion_earlier">مبكرًا (أكثر سلاسة)</string>
+    <string name="snap_fusion_later">متأخرًا (أكثر سرعة)</string>
+    <string name="snap_swipe_prompt">↔ اسحب لرؤية سلوك الالتقاط</string>
+    <string name="snap_swipe_fusion_prompt">↔ جرب سحبًا بطيئًا لرؤية تأثير الاندماج</string>
+    <string name="snap_card">البطاقة %1$d</string>
+    <string name="snap_card_desc">اسحب للتنقل</string>
+    <string name="snap_how_it_works">كيف يعمل</string>
+    <string name="snap_how_it_works_desc">تتحكم رسوم الالتقاط المتحركة في كيفية استقرار العناصر في مكانها. يستخدم كل إعداد مسبق فيزياء مختلفة:\n\n• قائم على الزنبرك: الصلابة + نسبة التخميد\n• قائم على التوين: المدة + منحنى التسهيل\n\nالاندماج السلس: يبدأ الالتقاط عندما تنخفض السرعة عن العتبة.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">سلس: التقاط لطيف وسلس بدون ارتداد. الأفضل لمعظم الدوارات والمعارض.</string>
+    <string name="snap_anim_snappy">سريع: التقاط سريع ومستجيب. رائع لواجهات المستخدم السريعة والقوائم التفاعلية.</string>
+    <string name="snap_anim_bouncy">مرن: التقاط مرح مع تجاوز طفيف. مثالي للألعاب والواجهات الممتعة.</string>
+    <string name="snap_anim_gentle">لطيف: التقاط بطيء جدًا ومريح. مثالي للتطبيقات الفاخرة/المتميزة.</string>
+    <string name="snap_anim_ios">iOS: رسوم متحركة بنمط Apple. شعور مألوف لمستخدمي المنصات المتعددة.</string>
+    <string name="snap_anim_material">Material: توقيت Material Design من Google. حديث ومتسق.</string>
+    <string name="snap_anim_instant">فوري: التقاط شبه فوري. الأفضل لتطبيقات الأدوات المساعدة أو إمكانية الوصول.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">عرض الانزلاق التكيفي</string>
+    <string name="adaptive_mode">الوضع التكيفي</string>
+    <string name="adaptive_swipe_prompt">↓ جرب السحبات اللطيفة مقابل العدوانية</string>
+    <string name="adaptive_item">العنصر %1$d</string>
+    <string name="adaptive_item_desc">قم بالتمرير بسرعات مختلفة لرؤية السلوك التكيفي</string>
+    <string name="adaptive_how_it_works">كيف يعمل</string>
+    <string name="adaptive_how_it_works_desc">يستخدم الانزلاق التكيفي فيزياء مختلفة بناءً على السرعة:\n\n• السحبات اللطيفة → تمرير دقيق ومحكوم\n• السحبات العدوانية → تمرير بزخم طويل\n\nكل وضع يوازن هذه السلوكيات بشكل مختلف.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">متوازن: محكوم للسحبات اللطيفة، زخم أكبر للسحبات العدوانية. الأفضل للاستخدام العام.</string>
+    <string name="adaptive_precision">دقة: يعطي الأولوية للتحكم. حتى السحبات العدوانية تتوقف بسرعة. الأفضل للمحتوى الكثيف بالنصوص.</string>
+    <string name="adaptive_momentum">زخم: يعطي الأولوية للمسافة. تنتقل السحبات لمسافة أبعد. الأفضل للمعارض والخلاصات.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">عرض نمط الصفحات</string>
+    <string name="pager_fling_physics">فيزياء الانزلاق</string>
+    <string name="pager_standard">قياسي</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">الصفحة %1$d</string>
+    <string name="pager_swipe_desc">اسحب لرؤية فيزياء الصفحة</string>
+    <string name="pager_how_it_works">كيف يعمل</string>
+    <string name="pager_how_it_works_desc">سلوك شبيه بالصفحات باستخدام فيزياء الالتقاط:\n\n• قياسي: انتقالات متوازنة\n• iOS: مقاومة أعلى، شعور مألوف\n• سريع: تقليبات صفحات سريعة\n• سلس: انتقالات انزلاقية\n\nالاندماج السلس: يبدأ الالتقاط أثناء التمرير.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">عرض تراكب التصحيح</string>
+    <string name="debug_options">خيارات التصحيح</string>
+    <string name="debug_overlay">تراكب التصحيح</string>
+    <string name="debug_show_velocity">إظهار السرعة</string>
+    <string name="debug_show_curve">إظهار المنحنى</string>
+    <string name="debug_show_metrics">إظهار المقاييس</string>
+    <string name="debug_scroll_prompt">↓ قم بالتمرير لرؤية معلومات التصحيح في الوقت الفعلي</string>
+    <string name="debug_item">عنصر التصحيح %1$d</string>
+    <string name="debug_item_desc">اسحب لرؤية تصور التصحيح في الوقت الفعلي</string>
+    <string name="debug_overlay_info">معلومات تراكب التصحيح</string>
+    <string name="debug_overlay_info_desc">يُظهر تراكب التصحيح بيانات الانزلاق في الوقت الفعلي:\n\n• السرعة: سرعة التمرير الحالية\n• المنحنى: تصور منحنى التباطؤ\n• المقاييس: أوقات الإطار، المسافة المقطوعة\n\nاستخدم هذا لتصحيح وضبط سلوك الانزلاق الخاص بك.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">الوقت →</string>
+    <string name="curve_label_distance">المسافة</string>
+</resources>
