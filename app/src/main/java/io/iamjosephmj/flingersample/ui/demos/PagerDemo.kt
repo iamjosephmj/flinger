@@ -55,10 +55,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.snap.SnapAnimationConfig
 import io.iamjosephmj.flinger.snap.SnapPosition
@@ -126,13 +128,13 @@ fun PagerDemo(navController: NavController) {
             TopAppBar(
                 title = { 
                     Text(
-                        "Pager-Style Demo",
+                        stringResource(R.string.pager_demo_title),
                         color = AuroraViolet
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -149,7 +151,7 @@ fun PagerDemo(navController: NavController) {
         ) {
             // Preset selector
             Text(
-                text = "Fling Physics",
+                text = stringResource(R.string.pager_fling_physics),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(16.dp),
@@ -179,7 +181,7 @@ fun PagerDemo(navController: NavController) {
             
             // Snap animation selector
             Text(
-                text = "Snap Animation",
+                text = stringResource(R.string.snap_animation),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -229,13 +231,13 @@ fun PagerDemo(navController: NavController) {
                 ) {
                     Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                         Text(
-                            text = "Smooth Fusion",
+                            text = stringResource(R.string.snap_smooth_fusion),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = if (smoothFusionEnabled) AuroraMagenta else MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "Snap starts when velocity decays",
+                            text = stringResource(R.string.snap_fusion_desc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -263,12 +265,12 @@ fun PagerDemo(navController: NavController) {
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Fusion Point",
+                                text = stringResource(R.string.snap_fusion_point),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "${(fusionRatio * 100).toInt()}% velocity",
+                                text = stringResource(R.string.snap_fusion_velocity, (fusionRatio * 100).toInt()),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = AuroraMagenta,
                                 fontWeight = FontWeight.SemiBold
@@ -290,12 +292,12 @@ fun PagerDemo(navController: NavController) {
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Earlier (smoother)",
+                                text = stringResource(R.string.snap_fusion_earlier),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Text(
-                                text = "Later (snappier)",
+                                text = stringResource(R.string.snap_fusion_later),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -378,19 +380,14 @@ fun PagerDemo(navController: NavController) {
                 ) {
                     Column {
                         Text(
-                            text = "How it works",
+                            text = stringResource(R.string.pager_how_it_works),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Pager-like behavior using snap fling physics:\n\n" +
-                                    "• Standard: Balanced transitions\n" +
-                                    "• iOS: Higher resistance, familiar feel\n" +
-                                    "• Snappy: Quick page turns\n" +
-                                    "• Smooth: Gliding transitions\n\n" +
-                                    "Smooth Fusion: Snap starts while still scrolling.",
+                            text = stringResource(R.string.pager_how_it_works_desc),
                             style = MaterialTheme.typography.bodyMedium,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -427,14 +424,14 @@ private fun PagerCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Page ${page + 1}",
+                    text = stringResource(R.string.pager_page, page + 1),
                     style = MaterialTheme.typography.displaySmall,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Swipe to see page physics",
+                    text = stringResource(R.string.pager_swipe_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.White.copy(alpha = 0.8f),
                     textAlign = TextAlign.Center

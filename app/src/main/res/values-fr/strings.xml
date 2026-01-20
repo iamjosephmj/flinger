@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">Retour</string>
+    <string name="action_reset">Réinitialiser</string>
+    <string name="action_toggle">Basculer</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Physique de défilement personnalisable pour Compose</string>
+    <string name="home_core_features">Fonctionnalités principales</string>
+    <string name="home_feature_demos">Démonstrations de fonctionnalités</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Fait avec ❤️ par Joseph James</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">Aire de jeu Fling</string>
+    <string name="nav_fling_playground_desc">Ajustez de manière interactive tous les paramètres de défilement et voyez les résultats en temps réel</string>
+    <string name="nav_preset_gallery">Galerie de préréglages</string>
+    <string name="nav_preset_gallery_desc">Parcourez et essayez tous les préréglages intégrés avec aperçus en direct</string>
+    <string name="nav_side_by_side_comparison">Comparaison côte à côte</string>
+    <string name="nav_side_by_side_comparison_desc">Comparez le défilement natif Android avec les comportements Flinger</string>
+    <string name="nav_snap_gallery">Galerie de magnétisme</string>
+    <string name="nav_snap_gallery_desc">Comportement d\'accrochage pour les carrousels et les galeries</string>
+    <string name="nav_adaptive_fling">Défilement adaptatif</string>
+    <string name="nav_adaptive_fling_desc">Physique sensible à la vélocité qui s\'adapte à vos balayages</string>
+    <string name="nav_pager_physics">Physique de pagination</string>
+    <string name="nav_pager_physics_desc">Physique personnalisée pour HorizontalPager</string>
+    <string name="nav_debug_overlay">Superposition de débogage</string>
+    <string name="nav_debug_overlay_desc">Visualisation du défilement en temps réel pour les développeurs</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">Aire de jeu Fling</string>
+    <string name="playground_fling_curve">Courbe de défilement</string>
+    <string name="playground_legend_pos">Pos</string>
+    <string name="playground_legend_vel">Vél</string>
+    <string name="playground_swipe_test">← Balayez pour tester le défilement →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">Friction</string>
+    <string name="category_physics">Physique</string>
+    <string name="category_spline">Spline</string>
+    <string name="category_all">Tout</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">Friction de défilement</string>
+    <string name="param_deceleration_friction">Friction de décélération</string>
+    <string name="param_gravity">Gravité</string>
+    <string name="param_inches_meter">Pouces/Mètre</string>
+    <string name="param_decel_rate">Taux de décélération</string>
+    <string name="param_velocity_threshold">Seuil de vélocité</string>
+    <string name="param_inflection">Inflexion</string>
+    <string name="param_start_tension">Tension de départ</string>
+    <string name="param_end_tension">Tension finale</string>
+    <string name="param_spline_points">Points de spline</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">Comparaison côte à côte</string>
+    <string name="comparison_instruction">Faites défiler les deux listes pour ressentir la différence entre les comportements !</string>
+    <string name="comparison_left_panel">Panneau gauche</string>
+    <string name="comparison_right_panel">Panneau droit</string>
+    <string name="comparison_item">Élément %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android natif</string>
+    <string name="preset_smooth">Fluide</string>
+    <string name="preset_ios_style">Style iOS</string>
+    <string name="preset_quick_stop">Arrêt rapide</string>
+    <string name="preset_bouncy">Rebondissant</string>
+    <string name="preset_floaty">Flottant</string>
+    <string name="preset_snappy">Vif</string>
+    <string name="preset_ultra_smooth">Ultra fluide</string>
+    <string name="preset_smooth_curve">Courbe fluide</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">Défilement fluide et équilibré avec paramètres par défaut</string>
+    <string name="preset_ios_desc">Friction plus élevée imitant la physique de défilement iOS</string>
+    <string name="preset_quick_stop_desc">Décélération élevée pour un contrôle précis</string>
+    <string name="preset_bouncy_desc">Sensation ludique et réactive avec spline modifiée</string>
+    <string name="preset_floaty_desc">Glissement longue distance avec faible friction</string>
+    <string name="preset_snappy_desc">Réponse rapide avec élan contrôlé</string>
+    <string name="preset_ultra_smooth_desc">Sensation premium avec élan prolongé</string>
+    <string name="preset_smooth_curve_desc">Spline modifiée pour une sensation unique</string>
+    <string name="preset_android_native_desc">Comportement de défilement Android par défaut</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">Usage général, la plupart des interfaces de liste</string>
+    <string name="best_for_cross_platform">Applications multiplateformes, navigateurs de photos</string>
+    <string name="best_for_text">Contenu textuel dense, écrans de paramètres</string>
+    <string name="best_for_games">Jeux, applications pour enfants, interfaces ludiques</string>
+    <string name="best_for_galleries">Galeries de photos, flux sociaux</string>
+    <string name="best_for_ecommerce">E-commerce, applications de chat</string>
+    <string name="best_for_luxury">Applications de luxe, applications de lecture</string>
+    <string name="best_for_creative">Applications créatives, expérimentation</string>
+    <string name="best_for_baseline">Comparaison de référence</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">Galerie de préréglages</string>
+    <string name="presets_select_prompt">↑ Sélectionnez un préréglage pour l\'essayer</string>
+    <string name="presets_available">Préréglages disponibles</string>
+    <string name="presets_scroll_test">↓ Faites défiler cette liste pour tester le préréglage sélectionné</string>
+    <string name="presets_test_item">Élément de test %1$d</string>
+    <string name="presets_active">Actif : %1$s</string>
+    <string name="presets_active_chip">Actif</string>
+    <string name="presets_best_for">Idéal pour : %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">Démo de galerie magnétique</string>
+    <string name="snap_position">Position d\'accrochage</string>
+    <string name="snap_animation">Animation d\'accrochage</string>
+    <string name="snap_smooth_fusion">Fusion fluide</string>
+    <string name="snap_fusion_desc">L\'accrochage commence lorsque la vélocité décroît</string>
+    <string name="snap_fusion_point">Point de fusion</string>
+    <string name="snap_fusion_velocity">%1$d%% de vélocité</string>
+    <string name="snap_fusion_earlier">Plus tôt (plus fluide)</string>
+    <string name="snap_fusion_later">Plus tard (plus vif)</string>
+    <string name="snap_swipe_prompt">↔ Balayez pour voir le comportement d\'accrochage</string>
+    <string name="snap_swipe_fusion_prompt">↔ Essayez un balayage lent pour voir l\'effet de fusion</string>
+    <string name="snap_card">Carte %1$d</string>
+    <string name="snap_card_desc">Balayez pour naviguer</string>
+    <string name="snap_how_it_works">Comment ça marche</string>
+    <string name="snap_how_it_works_desc">L\'animation d\'accrochage contrôle la façon dont les éléments se positionnent. Chaque préréglage utilise une physique différente :\n\n• Basé sur ressort : Rigidité + coefficient d\'amortissement\n• Basé sur tween : Durée + courbe d\'accélération\n\nFusion fluide : L\'accrochage commence lorsque la vélocité décroît sous un seuil.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">Fluide : Accrochage doux et fluide sans rebond. Idéal pour la plupart des carrousels et galeries.</string>
+    <string name="snap_anim_snappy">Vif : Accrochage rapide et réactif. Parfait pour les interfaces rapides et les listes interactives.</string>
+    <string name="snap_anim_bouncy">Rebondissant : Accrochage ludique avec léger dépassement. Parfait pour les jeux et les interfaces amusantes.</string>
+    <string name="snap_anim_gentle">Doux : Accrochage très lent et détendu. Idéal pour les applications de luxe/premium.</string>
+    <string name="snap_anim_ios">iOS : Animation de style Apple. Sensation familière pour les utilisateurs multiplateformes.</string>
+    <string name="snap_anim_material">Material : Timing Material Design de Google. Moderne et cohérent.</string>
+    <string name="snap_anim_instant">Instantané : Accrochage quasi instantané. Idéal pour les applications utilitaires ou l\'accessibilité.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">Démo de défilement adaptatif</string>
+    <string name="adaptive_mode">Mode adaptatif</string>
+    <string name="adaptive_swipe_prompt">↓ Essayez des balayages doux vs agressifs</string>
+    <string name="adaptive_item">Élément %1$d</string>
+    <string name="adaptive_item_desc">Faites défiler avec différentes vélocités pour voir le comportement adaptatif</string>
+    <string name="adaptive_how_it_works">Comment ça marche</string>
+    <string name="adaptive_how_it_works_desc">Le défilement adaptatif utilise une physique différente selon la vélocité :\n\n• Balayages doux → défilement précis et contrôlé\n• Balayages agressifs → défilements avec élan prolongé\n\nChaque mode équilibre ces comportements différemment.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">Équilibré : Contrôlé pour les balayages doux, plus d\'élan pour les balayages agressifs. Idéal pour un usage général.</string>
+    <string name="adaptive_precision">Précision : Privilégie le contrôle. Même les balayages agressifs s\'arrêtent rapidement. Idéal pour le contenu textuel dense.</string>
+    <string name="adaptive_momentum">Élan : Privilégie la distance. Les balayages parcourent plus de distance. Idéal pour les galeries et les flux.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">Démo de style paginé</string>
+    <string name="pager_fling_physics">Physique de défilement</string>
+    <string name="pager_standard">Standard</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">Page %1$d</string>
+    <string name="pager_swipe_desc">Balayez pour voir la physique de pagination</string>
+    <string name="pager_how_it_works">Comment ça marche</string>
+    <string name="pager_how_it_works_desc">Comportement de type paginé utilisant la physique d\'accrochage :\n\n• Standard : Transitions équilibrées\n• iOS : Résistance plus élevée, sensation familière\n• Vif : Changements de page rapides\n• Fluide : Transitions glissantes\n\nFusion fluide : L\'accrochage commence pendant le défilement.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">Démo de superposition de débogage</string>
+    <string name="debug_options">Options de débogage</string>
+    <string name="debug_overlay">Superposition de débogage</string>
+    <string name="debug_show_velocity">Afficher la vélocité</string>
+    <string name="debug_show_curve">Afficher la courbe</string>
+    <string name="debug_show_metrics">Afficher les métriques</string>
+    <string name="debug_scroll_prompt">↓ Faites défiler pour voir les informations de débogage en temps réel</string>
+    <string name="debug_item">Élément de débogage %1$d</string>
+    <string name="debug_item_desc">Faites défiler pour voir la visualisation de débogage en temps réel</string>
+    <string name="debug_overlay_info">Info de superposition de débogage</string>
+    <string name="debug_overlay_info_desc">La superposition de débogage affiche les données de défilement en temps réel :\n\n• Vélocité : Vélocité de défilement actuelle\n• Courbe : Visualisation de la courbe de décélération\n• Métriques : Temps de frame, distance parcourue\n\nUtilisez ceci pour déboguer et ajuster votre comportement de défilement.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">Temps →</string>
+    <string name="curve_label_distance">Distance</string>
+</resources>

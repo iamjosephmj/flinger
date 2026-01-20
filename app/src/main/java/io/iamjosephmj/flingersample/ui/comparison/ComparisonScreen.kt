@@ -52,10 +52,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
@@ -69,14 +71,14 @@ import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
 @Composable
 fun ComparisonScreen(navController: NavController) {
     val presetOptions = listOf(
-        "Android Native" to @Composable { FlingPresets.androidNative() },
-        "Smooth" to @Composable { FlingPresets.smooth() },
-        "iOS Style" to @Composable { FlingPresets.iOSStyle() },
-        "Quick Stop" to @Composable { FlingPresets.quickStop() },
-        "Bouncy" to @Composable { FlingPresets.bouncy() },
-        "Floaty" to @Composable { FlingPresets.floaty() },
-        "Snappy" to @Composable { FlingPresets.snappy() },
-        "Ultra Smooth" to @Composable { FlingPresets.ultraSmooth() }
+        stringResource(R.string.preset_android_native) to @Composable { FlingPresets.androidNative() },
+        stringResource(R.string.preset_smooth) to @Composable { FlingPresets.smooth() },
+        stringResource(R.string.preset_ios_style) to @Composable { FlingPresets.iOSStyle() },
+        stringResource(R.string.preset_quick_stop) to @Composable { FlingPresets.quickStop() },
+        stringResource(R.string.preset_bouncy) to @Composable { FlingPresets.bouncy() },
+        stringResource(R.string.preset_floaty) to @Composable { FlingPresets.floaty() },
+        stringResource(R.string.preset_snappy) to @Composable { FlingPresets.snappy() },
+        stringResource(R.string.preset_ultra_smooth) to @Composable { FlingPresets.ultraSmooth() }
     )
     
     var leftPresetIndex by remember { mutableStateOf(0) } // Android Native
@@ -92,13 +94,13 @@ fun ComparisonScreen(navController: NavController) {
                 TopAppBar(
                     title = { 
                         Text(
-                            "Side-by-Side Comparison",
+                            stringResource(R.string.comparison_title),
                             color = MaterialTheme.colorScheme.secondary
                         ) 
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigateUp() }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -131,7 +133,7 @@ fun ComparisonScreen(navController: NavController) {
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = "Scroll both lists to feel the difference between behaviors!",
+                        text = stringResource(R.string.comparison_instruction),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Center,
@@ -148,7 +150,7 @@ fun ComparisonScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 PresetDropdown(
-                    label = "Left Panel",
+                    label = stringResource(R.string.comparison_left_panel),
                     options = presetOptions.map { it.first },
                     selectedIndex = leftPresetIndex,
                     onSelectionChange = { leftPresetIndex = it },
@@ -156,7 +158,7 @@ fun ComparisonScreen(navController: NavController) {
                     modifier = Modifier.weight(1f)
                 )
                 PresetDropdown(
-                    label = "Right Panel",
+                    label = stringResource(R.string.comparison_right_panel),
                     options = presetOptions.map { it.first },
                     selectedIndex = rightPresetIndex,
                     onSelectionChange = { rightPresetIndex = it },
@@ -356,7 +358,7 @@ private fun ComparisonItem(index: Int) {
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = "Item ${index + 1}",
+                text = stringResource(R.string.comparison_item, index + 1),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurface
             )

@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">뒤로</string>
+    <string name="action_reset">재설정</string>
+    <string name="action_toggle">전환</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Compose용 맞춤형 플링 물리</string>
+    <string name="home_core_features">핵심 기능</string>
+    <string name="home_feature_demos">기능 데모</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Joseph James가 ❤️로 제작</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">플링 플레이그라운드</string>
+    <string name="nav_fling_playground_desc">모든 플링 매개변수를 대화식으로 조정하고 실시간으로 결과 확인</string>
+    <string name="nav_preset_gallery">프리셋 갤러리</string>
+    <string name="nav_preset_gallery_desc">라이브 미리보기로 모든 내장 프리셋 탐색 및 시도</string>
+    <string name="nav_side_by_side_comparison">나란히 비교</string>
+    <string name="nav_side_by_side_comparison_desc">네이티브 Android 스크롤과 Flinger 동작 비교</string>
+    <string name="nav_snap_gallery">스냅 갤러리</string>
+    <string name="nav_snap_gallery_desc">캐러셀 및 갤러리용 스냅 동작</string>
+    <string name="nav_adaptive_fling">적응형 플링</string>
+    <string name="nav_adaptive_fling_desc">스와이프에 적응하는 속도 인식 물리</string>
+    <string name="nav_pager_physics">페이저 물리</string>
+    <string name="nav_pager_physics_desc">HorizontalPager용 맞춤 페이지 넘김 물리</string>
+    <string name="nav_debug_overlay">디버그 오버레이</string>
+    <string name="nav_debug_overlay_desc">개발자용 실시간 플링 시각화</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">플링 플레이그라운드</string>
+    <string name="playground_fling_curve">플링 곡선</string>
+    <string name="playground_legend_pos">위치</string>
+    <string name="playground_legend_vel">속도</string>
+    <string name="playground_swipe_test">← 스와이프하여 플링 테스트 →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">마찰</string>
+    <string name="category_physics">물리</string>
+    <string name="category_spline">스플라인</string>
+    <string name="category_all">모두</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">스크롤 마찰</string>
+    <string name="param_deceleration_friction">감속 마찰</string>
+    <string name="param_gravity">중력</string>
+    <string name="param_inches_meter">인치/미터</string>
+    <string name="param_decel_rate">감속 비율</string>
+    <string name="param_velocity_threshold">속도 임계값</string>
+    <string name="param_inflection">변곡</string>
+    <string name="param_start_tension">시작 장력</string>
+    <string name="param_end_tension">종료 장력</string>
+    <string name="param_spline_points">스플라인 포인트</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">나란히 비교</string>
+    <string name="comparison_instruction">두 목록을 스크롤하여 동작의 차이를 느껴보세요!</string>
+    <string name="comparison_left_panel">왼쪽 패널</string>
+    <string name="comparison_right_panel">오른쪽 패널</string>
+    <string name="comparison_item">항목 %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android 네이티브</string>
+    <string name="preset_smooth">부드러움</string>
+    <string name="preset_ios_style">iOS 스타일</string>
+    <string name="preset_quick_stop">빠른 정지</string>
+    <string name="preset_bouncy">통통 튀는</string>
+    <string name="preset_floaty">떠다니는</string>
+    <string name="preset_snappy">날렵한</string>
+    <string name="preset_ultra_smooth">울트라 부드러움</string>
+    <string name="preset_smooth_curve">부드러운 곡선</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">기본 매개변수로 균형 잡힌 부드러운 스크롤</string>
+    <string name="preset_ios_desc">iOS 스크롤 물리를 모방한 높은 마찰</string>
+    <string name="preset_quick_stop_desc">정확한 제어를 위한 높은 감속</string>
+    <string name="preset_bouncy_desc">수정된 스플라인으로 재미있고 반응적인 느낌</string>
+    <string name="preset_floaty_desc">낮은 마찰로 장거리 글라이딩</string>
+    <string name="preset_snappy_desc">제어된 모멘텀으로 빠른 응답</string>
+    <string name="preset_ultra_smooth_desc">확장된 모멘텀으로 프리미엄 느낌</string>
+    <string name="preset_smooth_curve_desc">독특한 느낌을 위한 수정된 스플라인</string>
+    <string name="preset_android_native_desc">기본 Android 플링 동작</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">일반 용도, 대부분의 목록 UI</string>
+    <string name="best_for_cross_platform">크로스 플랫폼 앱, 사진 브라우저</string>
+    <string name="best_for_text">텍스트 중심 콘텐츠, 설정 화면</string>
+    <string name="best_for_games">게임, 어린이 앱, 재미있는 UI</string>
+    <string name="best_for_galleries">사진 갤러리, 소셜 피드</string>
+    <string name="best_for_ecommerce">전자상거래, 채팅 앱</string>
+    <string name="best_for_luxury">럭셔리 앱, 읽기 앱</string>
+    <string name="best_for_creative">크리에이티브 앱, 실험</string>
+    <string name="best_for_baseline">기준선 비교</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">프리셋 갤러리</string>
+    <string name="presets_select_prompt">↑ 프리셋을 선택하여 시도하세요</string>
+    <string name="presets_available">사용 가능한 프리셋</string>
+    <string name="presets_scroll_test">↓ 이 목록을 스크롤하여 선택한 프리셋 테스트</string>
+    <string name="presets_test_item">테스트 항목 %1$d</string>
+    <string name="presets_active">활성: %1$s</string>
+    <string name="presets_active_chip">활성</string>
+    <string name="presets_best_for">최적 용도: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">스냅 갤러리 데모</string>
+    <string name="snap_position">스냅 위치</string>
+    <string name="snap_animation">스냅 애니메이션</string>
+    <string name="snap_smooth_fusion">부드러운 융합</string>
+    <string name="snap_fusion_desc">속도가 감소하면 스냅 시작</string>
+    <string name="snap_fusion_point">융합 지점</string>
+    <string name="snap_fusion_velocity">%1$d%% 속도</string>
+    <string name="snap_fusion_earlier">일찍 (더 부드럽게)</string>
+    <string name="snap_fusion_later">늦게 (더 날렵하게)</string>
+    <string name="snap_swipe_prompt">↔ 스와이프하여 스냅 동작 확인</string>
+    <string name="snap_swipe_fusion_prompt">↔ 느린 스와이프를 시도하여 융합 효과 확인</string>
+    <string name="snap_card">카드 %1$d</string>
+    <string name="snap_card_desc">스와이프하여 탐색</string>
+    <string name="snap_how_it_works">작동 방식</string>
+    <string name="snap_how_it_works_desc">스냅 애니메이션은 항목이 위치에 정착하는 방식을 제어합니다. 각 프리셋은 다른 물리 사용:\n\n• 스프링 기반: 강성 + 감쇠 비율\n• 트윈 기반: 지속 시간 + 이징 곡선\n\n부드러운 융합: 속도가 임계값 아래로 떨어지면 스냅 시작.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">부드러움: 튕김 없이 부드럽고 유동적인 스냅. 대부분의 캐러셀과 갤러리에 가장 적합.</string>
+    <string name="snap_anim_snappy">날렵함: 빠르고 반응적인 스냅. 빠른 속도의 UI 및 대화형 목록에 적합.</string>
+    <string name="snap_anim_bouncy">통통 튀는: 약간의 오버슈트가 있는 재미있는 스냅. 게임 및 재미있는 UI에 완벽.</string>
+    <string name="snap_anim_gentle">부드러움: 매우 느리고 편안한 스냅. 럭셔리/프리미엄 앱에 이상적.</string>
+    <string name="snap_anim_ios">iOS: Apple 스타일 애니메이션. 크로스 플랫폼 사용자에게 친숙한 느낌.</string>
+    <string name="snap_anim_material">Material: Google Material Design 타이밍. 현대적이고 일관성 있음.</string>
+    <string name="snap_anim_instant">즉시: 거의 즉각적인 스냅. 유틸리티 앱 또는 접근성에 가장 적합.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">적응형 플링 데모</string>
+    <string name="adaptive_mode">적응형 모드</string>
+    <string name="adaptive_swipe_prompt">↓ 부드러운 스와이프 vs 격렬한 스와이프 시도</string>
+    <string name="adaptive_item">항목 %1$d</string>
+    <string name="adaptive_item_desc">다른 속도로 스크롤하여 적응형 동작 확인</string>
+    <string name="adaptive_how_it_works">작동 방식</string>
+    <string name="adaptive_how_it_works_desc">적응형 플링은 속도에 따라 다른 물리 사용:\n\n• 부드러운 스와이프 → 정확하고 제어된 스크롤\n• 격렬한 스와이프 → 긴 모멘텀 스크롤\n\n각 모드는 이러한 동작을 다르게 균형 조정.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">균형: 부드러운 스와이프에는 제어, 격렬한 스와이프에는 더 많은 모멘텀. 일반 사용에 가장 적합.</string>
+    <string name="adaptive_precision">정밀: 제어 우선. 격렬한 스와이프도 빠르게 정지. 텍스트 중심 콘텐츠에 가장 적합.</string>
+    <string name="adaptive_momentum">모멘텀: 거리 우선. 스와이프가 더 멀리 이동. 갤러리 및 피드에 가장 적합.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">페이저 스타일 데모</string>
+    <string name="pager_fling_physics">플링 물리</string>
+    <string name="pager_standard">표준</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">페이지 %1$d</string>
+    <string name="pager_swipe_desc">스와이프하여 페이지 물리 확인</string>
+    <string name="pager_how_it_works">작동 방식</string>
+    <string name="pager_how_it_works_desc">스냅 플링 물리를 사용한 페이저 유사 동작:\n\n• 표준: 균형 잡힌 전환\n• iOS: 더 높은 저항, 친숙한 느낌\n• 날렵함: 빠른 페이지 넘김\n• 부드러움: 글라이딩 전환\n\n부드러운 융합: 스크롤 중에 스냅 시작.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">디버그 오버레이 데모</string>
+    <string name="debug_options">디버그 옵션</string>
+    <string name="debug_overlay">디버그 오버레이</string>
+    <string name="debug_show_velocity">속도 표시</string>
+    <string name="debug_show_curve">곡선 표시</string>
+    <string name="debug_show_metrics">메트릭 표시</string>
+    <string name="debug_scroll_prompt">↓ 스크롤하여 실시간 디버그 정보 확인</string>
+    <string name="debug_item">디버그 항목 %1$d</string>
+    <string name="debug_item_desc">플링하여 실시간 디버그 시각화 확인</string>
+    <string name="debug_overlay_info">디버그 오버레이 정보</string>
+    <string name="debug_overlay_info_desc">디버그 오버레이는 실시간 플링 데이터 표시:\n\n• 속도: 현재 스크롤 속도\n• 곡선: 감속 곡선 시각화\n• 메트릭: 프레임 시간, 이동 거리\n\n플링 동작의 디버깅 및 조정에 사용.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">시간 →</string>
+    <string name="curve_label_distance">거리</string>
+</resources>

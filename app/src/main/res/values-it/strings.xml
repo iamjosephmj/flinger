@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">Indietro</string>
+    <string name="action_reset">Ripristina</string>
+    <string name="action_toggle">Attiva/Disattiva</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Fisica di scorrimento personalizzabile per Compose</string>
+    <string name="home_core_features">Funzionalità principali</string>
+    <string name="home_feature_demos">Demo delle funzionalità</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Fatto con ❤️ da Joseph James</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">Area di gioco Fling</string>
+    <string name="nav_fling_playground_desc">Regola interattivamente tutti i parametri di fling e vedi i risultati in tempo reale</string>
+    <string name="nav_preset_gallery">Galleria di preimpostazioni</string>
+    <string name="nav_preset_gallery_desc">Sfoglia e prova tutte le preimpostazioni integrate con anteprime dal vivo</string>
+    <string name="nav_side_by_side_comparison">Confronto affiancato</string>
+    <string name="nav_side_by_side_comparison_desc">Confronta lo scorrimento nativo Android con i comportamenti Flinger</string>
+    <string name="nav_snap_gallery">Galleria snap</string>
+    <string name="nav_snap_gallery_desc">Comportamento di aggancio per caroselli e gallerie</string>
+    <string name="nav_adaptive_fling">Fling adattivo</string>
+    <string name="nav_adaptive_fling_desc">Fisica sensibile alla velocità che si adatta ai tuoi gesti</string>
+    <string name="nav_pager_physics">Fisica del pager</string>
+    <string name="nav_pager_physics_desc">Fisica personalizzata per HorizontalPager</string>
+    <string name="nav_debug_overlay">Overlay di debug</string>
+    <string name="nav_debug_overlay_desc">Visualizzazione fling in tempo reale per sviluppatori</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">Area di gioco Fling</string>
+    <string name="playground_fling_curve">Curva di fling</string>
+    <string name="playground_legend_pos">Pos</string>
+    <string name="playground_legend_vel">Vel</string>
+    <string name="playground_swipe_test">← Scorri per testare il fling →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">Attrito</string>
+    <string name="category_physics">Fisica</string>
+    <string name="category_spline">Spline</string>
+    <string name="category_all">Tutto</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">Attrito di scorrimento</string>
+    <string name="param_deceleration_friction">Attrito di decelerazione</string>
+    <string name="param_gravity">Gravità</string>
+    <string name="param_inches_meter">Pollici/Metro</string>
+    <string name="param_decel_rate">Tasso di decelerazione</string>
+    <string name="param_velocity_threshold">Soglia di velocità</string>
+    <string name="param_inflection">Inflessione</string>
+    <string name="param_start_tension">Tensione iniziale</string>
+    <string name="param_end_tension">Tensione finale</string>
+    <string name="param_spline_points">Punti spline</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">Confronto affiancato</string>
+    <string name="comparison_instruction">Scorri entrambe le liste per sentire la differenza tra i comportamenti!</string>
+    <string name="comparison_left_panel">Pannello sinistro</string>
+    <string name="comparison_right_panel">Pannello destro</string>
+    <string name="comparison_item">Elemento %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android nativo</string>
+    <string name="preset_smooth">Fluido</string>
+    <string name="preset_ios_style">Stile iOS</string>
+    <string name="preset_quick_stop">Arresto rapido</string>
+    <string name="preset_bouncy">Rimbalzante</string>
+    <string name="preset_floaty">Fluttuante</string>
+    <string name="preset_snappy">Scattante</string>
+    <string name="preset_ultra_smooth">Ultra fluido</string>
+    <string name="preset_smooth_curve">Curva fluida</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">Scorrimento fluido ed equilibrato con parametri predefiniti</string>
+    <string name="preset_ios_desc">Attrito maggiore che imita la fisica di scorrimento iOS</string>
+    <string name="preset_quick_stop_desc">Decelerazione elevata per un controllo preciso</string>
+    <string name="preset_bouncy_desc">Sensazione giocosa e reattiva con spline modificata</string>
+    <string name="preset_floaty_desc">Scivolamento a lunga distanza con basso attrito</string>
+    <string name="preset_snappy_desc">Risposta rapida con slancio controllato</string>
+    <string name="preset_ultra_smooth_desc">Sensazione premium con slancio esteso</string>
+    <string name="preset_smooth_curve_desc">Spline modificata per una sensazione unica</string>
+    <string name="preset_android_native_desc">Comportamento fling predefinito di Android</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">Uso generico, la maggior parte delle interfacce a lista</string>
+    <string name="best_for_cross_platform">App multipiattaforma, browser di foto</string>
+    <string name="best_for_text">Contenuti ricchi di testo, schermate impostazioni</string>
+    <string name="best_for_games">Giochi, app per bambini, interfacce giocose</string>
+    <string name="best_for_galleries">Gallerie fotografiche, feed social</string>
+    <string name="best_for_ecommerce">E-commerce, app di chat</string>
+    <string name="best_for_luxury">App di lusso, app di lettura</string>
+    <string name="best_for_creative">App creative, sperimentazione</string>
+    <string name="best_for_baseline">Confronto di base</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">Galleria di preimpostazioni</string>
+    <string name="presets_select_prompt">↑ Seleziona una preimpostazione per provarla</string>
+    <string name="presets_available">Preimpostazioni disponibili</string>
+    <string name="presets_scroll_test">↓ Scorri questa lista per testare la preimpostazione selezionata</string>
+    <string name="presets_test_item">Elemento di test %1$d</string>
+    <string name="presets_active">Attivo: %1$s</string>
+    <string name="presets_active_chip">Attivo</string>
+    <string name="presets_best_for">Ideale per: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">Demo galleria snap</string>
+    <string name="snap_position">Posizione snap</string>
+    <string name="snap_animation">Animazione snap</string>
+    <string name="snap_smooth_fusion">Fusione fluida</string>
+    <string name="snap_fusion_desc">Lo snap inizia quando la velocità diminuisce</string>
+    <string name="snap_fusion_point">Punto di fusione</string>
+    <string name="snap_fusion_velocity">%1$d%% di velocità</string>
+    <string name="snap_fusion_earlier">Prima (più fluido)</string>
+    <string name="snap_fusion_later">Dopo (più scattante)</string>
+    <string name="snap_swipe_prompt">↔ Scorri per vedere il comportamento snap</string>
+    <string name="snap_swipe_fusion_prompt">↔ Prova uno scorrimento lento per vedere l\'effetto fusione</string>
+    <string name="snap_card">Scheda %1$d</string>
+    <string name="snap_card_desc">Scorri per navigare</string>
+    <string name="snap_how_it_works">Come funziona</string>
+    <string name="snap_how_it_works_desc">L\'animazione snap controlla come gli elementi si posizionano. Ogni preimpostazione usa fisica diversa:\n\n• Basato su molla: Rigidità + rapporto di smorzamento\n• Basato su tween: Durata + curva di accelerazione\n\nFusione fluida: Lo snap inizia quando la velocità scende sotto una soglia.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">Fluido: Snap delicato e fluido senza rimbalzo. Ideale per la maggior parte dei caroselli e gallerie.</string>
+    <string name="snap_anim_snappy">Scattante: Snap rapido e reattivo. Ottimo per interfacce veloci e liste interattive.</string>
+    <string name="snap_anim_bouncy">Rimbalzante: Snap giocoso con leggero superamento. Perfetto per giochi e interfacce divertenti.</string>
+    <string name="snap_anim_gentle">Delicato: Snap molto lento e rilassato. Ideale per app di lusso/premium.</string>
+    <string name="snap_anim_ios">iOS: Animazione in stile Apple. Sensazione familiare per utenti multipiattaforma.</string>
+    <string name="snap_anim_material">Material: Tempistica Material Design di Google. Moderno e coerente.</string>
+    <string name="snap_anim_instant">Istantaneo: Snap quasi istantaneo. Ideale per app di utilità o accessibilità.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">Demo fling adattivo</string>
+    <string name="adaptive_mode">Modalità adattiva</string>
+    <string name="adaptive_swipe_prompt">↓ Prova scorrimenti delicati vs aggressivi</string>
+    <string name="adaptive_item">Elemento %1$d</string>
+    <string name="adaptive_item_desc">Scorri con velocità diverse per vedere il comportamento adattivo</string>
+    <string name="adaptive_how_it_works">Come funziona</string>
+    <string name="adaptive_how_it_works_desc">Il fling adattivo usa fisica diversa in base alla velocità:\n\n• Scorrimenti delicati → scorrimento preciso e controllato\n• Scorrimenti aggressivi → scorrimenti con slancio prolungato\n\nOgni modalità bilancia questi comportamenti in modo diverso.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">Bilanciato: Controllato per scorrimenti delicati, più slancio per scorrimenti aggressivi. Ideale per uso generale.</string>
+    <string name="adaptive_precision">Precisione: Dà priorità al controllo. Anche gli scorrimenti aggressivi si fermano rapidamente. Ideale per contenuti ricchi di testo.</string>
+    <string name="adaptive_momentum">Slancio: Dà priorità alla distanza. Gli scorrimenti viaggiano più lontano. Ideale per gallerie e feed.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">Demo stile pager</string>
+    <string name="pager_fling_physics">Fisica fling</string>
+    <string name="pager_standard">Standard</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">Pagina %1$d</string>
+    <string name="pager_swipe_desc">Scorri per vedere la fisica delle pagine</string>
+    <string name="pager_how_it_works">Come funziona</string>
+    <string name="pager_how_it_works_desc">Comportamento tipo pager usando fisica snap fling:\n\n• Standard: Transizioni bilanciate\n• iOS: Resistenza maggiore, sensazione familiare\n• Scattante: Cambi pagina rapidi\n• Fluido: Transizioni scorrevoli\n\nFusione fluida: Lo snap inizia durante lo scorrimento.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">Demo overlay di debug</string>
+    <string name="debug_options">Opzioni di debug</string>
+    <string name="debug_overlay">Overlay di debug</string>
+    <string name="debug_show_velocity">Mostra velocità</string>
+    <string name="debug_show_curve">Mostra curva</string>
+    <string name="debug_show_metrics">Mostra metriche</string>
+    <string name="debug_scroll_prompt">↓ Scorri per vedere le info di debug in tempo reale</string>
+    <string name="debug_item">Elemento debug %1$d</string>
+    <string name="debug_item_desc">Fling per vedere la visualizzazione debug in tempo reale</string>
+    <string name="debug_overlay_info">Info overlay di debug</string>
+    <string name="debug_overlay_info_desc">L\'overlay di debug mostra i dati fling in tempo reale:\n\n• Velocità: Velocità di scorrimento corrente\n• Curva: Visualizzazione curva di decelerazione\n• Metriche: Tempi frame, distanza percorsa\n\nUsa questo per il debug e la messa a punto del tuo comportamento fling.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">Tempo →</string>
+    <string name="curve_label_distance">Distanza</string>
+</resources>

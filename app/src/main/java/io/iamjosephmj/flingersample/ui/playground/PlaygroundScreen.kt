@@ -67,9 +67,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.flingBehavior
 import io.iamjosephmj.flingersample.ui.components.FlingCurveCanvas
@@ -141,7 +143,7 @@ fun PlaygroundScreen(navController: NavController) {
                 TopAppBar(
                     title = { 
                         Text(
-                            "Fling Playground",
+                            stringResource(R.string.playground_title),
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.primary
                         ) 
@@ -150,7 +152,7 @@ fun PlaygroundScreen(navController: NavController) {
                         IconButton(onClick = { navController.navigateUp() }) {
                             Icon(
                                 Icons.AutoMirrored.Filled.ArrowBack, 
-                                contentDescription = "Back",
+                                contentDescription = stringResource(R.string.action_back),
                                 tint = MaterialTheme.colorScheme.onSurface
                             )
                         }
@@ -159,7 +161,7 @@ fun PlaygroundScreen(navController: NavController) {
                         IconButton(onClick = { resetToDefaults() }) {
                             Icon(
                                 Icons.Default.Refresh, 
-                                contentDescription = "Reset",
+                                contentDescription = stringResource(R.string.action_reset),
                                 tint = MaterialTheme.colorScheme.secondary
                             )
                         }
@@ -195,23 +197,23 @@ fun PlaygroundScreen(navController: NavController) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Fling Curve",
+                                text = stringResource(R.string.playground_fling_curve),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 LegendDot(color = AuroraCyan)
-                                Text("Pos", style = MaterialTheme.typography.labelSmall, 
+                                Text(stringResource(R.string.playground_legend_pos), style = MaterialTheme.typography.labelSmall, 
                                      color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 LegendDot(color = AuroraMagenta)
-                                Text("Vel", style = MaterialTheme.typography.labelSmall,
+                                Text(stringResource(R.string.playground_legend_vel), style = MaterialTheme.typography.labelSmall,
                                      color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Icon(
                                     if (showCurve) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                                    contentDescription = "Toggle",
+                                    contentDescription = stringResource(R.string.action_toggle),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.size(20.dp)
                                 )
@@ -243,16 +245,16 @@ fun PlaygroundScreen(navController: NavController) {
                         .padding(horizontal = 16.dp, vertical = 8.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    CompactChip("Friction", Icons.Default.Speed, selectedCategory == "Friction") { 
+                    CompactChip(stringResource(R.string.category_friction), Icons.Default.Speed, selectedCategory == "Friction") { 
                         selectedCategory = "Friction" 
                     }
-                    CompactChip("Physics", Icons.Default.Science, selectedCategory == "Physics") { 
+                    CompactChip(stringResource(R.string.category_physics), Icons.Default.Science, selectedCategory == "Physics") { 
                         selectedCategory = "Physics" 
                     }
-                    CompactChip("Spline", Icons.Default.Timeline, selectedCategory == "Spline") { 
+                    CompactChip(stringResource(R.string.category_spline), Icons.Default.Timeline, selectedCategory == "Spline") { 
                         selectedCategory = "Spline" 
                     }
-                    CompactChip("All", Icons.Default.Tune, selectedCategory == "All") { 
+                    CompactChip(stringResource(R.string.category_all), Icons.Default.Tune, selectedCategory == "All") { 
                         selectedCategory = "All" 
                     }
                 }
@@ -269,10 +271,10 @@ fun PlaygroundScreen(navController: NavController) {
                 ) {
                     // FRICTION
                     if (selectedCategory == "All" || selectedCategory == "Friction") {
-                        item { SectionLabel("Friction", AuroraCyan) }
+                        item { SectionLabel(stringResource(R.string.category_friction), AuroraCyan) }
                         item {
                             CompactSlider(
-                                label = "Scroll Friction",
+                                label = stringResource(R.string.param_scroll_friction),
                                 value = scrollFriction,
                                 onValueChange = { scrollFriction = it },
                                 valueRange = 0.001f..0.1f,
@@ -281,7 +283,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Deceleration Friction",
+                                label = stringResource(R.string.param_deceleration_friction),
                                 value = decelerationFriction,
                                 onValueChange = { decelerationFriction = it },
                                 valueRange = 0.01f..1.0f,
@@ -292,10 +294,10 @@ fun PlaygroundScreen(navController: NavController) {
                     
                     // PHYSICS
                     if (selectedCategory == "All" || selectedCategory == "Physics") {
-                        item { SectionLabel("Physics", AuroraViolet) }
+                        item { SectionLabel(stringResource(R.string.category_physics), AuroraViolet) }
                         item {
                             CompactSlider(
-                                label = "Gravity",
+                                label = stringResource(R.string.param_gravity),
                                 value = gravitationalForce,
                                 onValueChange = { gravitationalForce = it },
                                 valueRange = 1f..20f,
@@ -304,7 +306,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Inches/Meter",
+                                label = stringResource(R.string.param_inches_meter),
                                 value = inchesPerMeter,
                                 onValueChange = { inchesPerMeter = it },
                                 valueRange = 10f..100f,
@@ -313,7 +315,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Decel Rate",
+                                label = stringResource(R.string.param_decel_rate),
                                 value = decelerationRate,
                                 onValueChange = { decelerationRate = it },
                                 valueRange = 0.5f..10f,
@@ -322,7 +324,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Velocity Threshold",
+                                label = stringResource(R.string.param_velocity_threshold),
                                 value = absVelocityThreshold,
                                 onValueChange = { absVelocityThreshold = it },
                                 valueRange = 0f..100f,
@@ -333,10 +335,10 @@ fun PlaygroundScreen(navController: NavController) {
                     
                     // SPLINE
                     if (selectedCategory == "All" || selectedCategory == "Spline") {
-                        item { SectionLabel("Spline", AuroraMagenta) }
+                        item { SectionLabel(stringResource(R.string.category_spline), AuroraMagenta) }
                         item {
                             CompactSlider(
-                                label = "Inflection",
+                                label = stringResource(R.string.param_inflection),
                                 value = splineInflection,
                                 onValueChange = { splineInflection = it },
                                 valueRange = 0.01f..0.5f,
@@ -345,7 +347,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Start Tension",
+                                label = stringResource(R.string.param_start_tension),
                                 value = splineStartTension,
                                 onValueChange = { splineStartTension = it },
                                 valueRange = 0.01f..1.0f,
@@ -354,7 +356,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "End Tension",
+                                label = stringResource(R.string.param_end_tension),
                                 value = splineEndTension,
                                 onValueChange = { splineEndTension = it },
                                 valueRange = 0.1f..2.0f,
@@ -363,7 +365,7 @@ fun PlaygroundScreen(navController: NavController) {
                         }
                         item {
                             CompactSlider(
-                                label = "Spline Points",
+                                label = stringResource(R.string.param_spline_points),
                                 value = numberOfSplinePoints.toFloat(),
                                 onValueChange = { numberOfSplinePoints = it.toInt() },
                                 valueRange = 10f..500f,
@@ -389,7 +391,7 @@ fun PlaygroundScreen(navController: NavController) {
                         .padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = "← Swipe to test fling →",
+                        text = stringResource(R.string.playground_swipe_test),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)

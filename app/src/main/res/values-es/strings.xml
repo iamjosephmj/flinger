@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">Atrás</string>
+    <string name="action_reset">Restablecer</string>
+    <string name="action_toggle">Alternar</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Física de Deslizamiento Personalizable para Compose</string>
+    <string name="home_core_features">Características Principales</string>
+    <string name="home_feature_demos">Demostraciones de Funciones</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Hecho con ❤️ por Joseph James</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">Área de Pruebas de Deslizamiento</string>
+    <string name="nav_fling_playground_desc">Ajusta interactivamente todos los parámetros de deslizamiento y ve los resultados en tiempo real</string>
+    <string name="nav_preset_gallery">Galería de Preajustes</string>
+    <string name="nav_preset_gallery_desc">Explora y prueba todos los preajustes integrados con vistas previas en vivo</string>
+    <string name="nav_side_by_side_comparison">Comparación Lado a Lado</string>
+    <string name="nav_side_by_side_comparison_desc">Compara el desplazamiento nativo de Android con los comportamientos de Flinger</string>
+    <string name="nav_snap_gallery">Galería de Ajuste</string>
+    <string name="nav_snap_gallery_desc">Comportamiento de ajuste a elemento para carruseles y galerías</string>
+    <string name="nav_adaptive_fling">Deslizamiento Adaptativo</string>
+    <string name="nav_adaptive_fling_desc">Física consciente de la velocidad que se adapta a tus deslizamientos</string>
+    <string name="nav_pager_physics">Física de Paginador</string>
+    <string name="nav_pager_physics_desc">Física personalizada de cambio de página para HorizontalPager</string>
+    <string name="nav_debug_overlay">Superposición de Depuración</string>
+    <string name="nav_debug_overlay_desc">Visualización de deslizamiento en tiempo real para desarrolladores</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">Área de Pruebas de Deslizamiento</string>
+    <string name="playground_fling_curve">Curva de Deslizamiento</string>
+    <string name="playground_legend_pos">Pos</string>
+    <string name="playground_legend_vel">Vel</string>
+    <string name="playground_swipe_test">← Desliza para probar →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">Fricción</string>
+    <string name="category_physics">Física</string>
+    <string name="category_spline">Spline</string>
+    <string name="category_all">Todo</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">Fricción de Desplazamiento</string>
+    <string name="param_deceleration_friction">Fricción de Deceleración</string>
+    <string name="param_gravity">Gravedad</string>
+    <string name="param_inches_meter">Pulgadas/Metro</string>
+    <string name="param_decel_rate">Tasa de Deceleración</string>
+    <string name="param_velocity_threshold">Umbral de Velocidad</string>
+    <string name="param_inflection">Inflexión</string>
+    <string name="param_start_tension">Tensión Inicial</string>
+    <string name="param_end_tension">Tensión Final</string>
+    <string name="param_spline_points">Puntos de Spline</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">Comparación Lado a Lado</string>
+    <string name="comparison_instruction">¡Desplázate por ambas listas para sentir la diferencia entre comportamientos!</string>
+    <string name="comparison_left_panel">Panel Izquierdo</string>
+    <string name="comparison_right_panel">Panel Derecho</string>
+    <string name="comparison_item">Elemento %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android Nativo</string>
+    <string name="preset_smooth">Suave</string>
+    <string name="preset_ios_style">Estilo iOS</string>
+    <string name="preset_quick_stop">Parada Rápida</string>
+    <string name="preset_bouncy">Rebotante</string>
+    <string name="preset_floaty">Flotante</string>
+    <string name="preset_snappy">Rápido</string>
+    <string name="preset_ultra_smooth">Ultra Suave</string>
+    <string name="preset_smooth_curve">Curva Suave</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">Desplazamiento suave y equilibrado con parámetros predeterminados</string>
+    <string name="preset_ios_desc">Mayor fricción imitando la física de desplazamiento de iOS</string>
+    <string name="preset_quick_stop_desc">Alta deceleración para un control preciso</string>
+    <string name="preset_bouncy_desc">Sensación lúdica y receptiva con spline modificado</string>
+    <string name="preset_floaty_desc">Deslizamiento de larga distancia con baja fricción</string>
+    <string name="preset_snappy_desc">Respuesta rápida con impulso controlado</string>
+    <string name="preset_ultra_smooth_desc">Sensación premium con impulso extendido</string>
+    <string name="preset_smooth_curve_desc">Spline modificado para una sensación única</string>
+    <string name="preset_android_native_desc">Comportamiento de deslizamiento predeterminado de Android</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">Uso general, la mayoría de interfaces de lista</string>
+    <string name="best_for_cross_platform">Aplicaciones multiplataforma, navegadores de fotos</string>
+    <string name="best_for_text">Contenido con mucho texto, pantallas de configuración</string>
+    <string name="best_for_games">Juegos, aplicaciones para niños, interfaces lúdicas</string>
+    <string name="best_for_galleries">Galerías de fotos, feeds sociales</string>
+    <string name="best_for_ecommerce">Comercio electrónico, aplicaciones de chat</string>
+    <string name="best_for_luxury">Aplicaciones de lujo, aplicaciones de lectura</string>
+    <string name="best_for_creative">Aplicaciones creativas, experimentación</string>
+    <string name="best_for_baseline">Comparación de referencia</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">Galería de Preajustes</string>
+    <string name="presets_select_prompt">↑ Selecciona un preajuste para probarlo</string>
+    <string name="presets_available">Preajustes Disponibles</string>
+    <string name="presets_scroll_test">↓ Desplázate por esta lista para sentir el preajuste seleccionado</string>
+    <string name="presets_test_item">Elemento de Prueba %1$d</string>
+    <string name="presets_active">Activo: %1$s</string>
+    <string name="presets_active_chip">Activo</string>
+    <string name="presets_best_for">Mejor para: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">Demostración de Galería de Ajuste</string>
+    <string name="snap_position">Posición de Ajuste</string>
+    <string name="snap_animation">Animación de Ajuste</string>
+    <string name="snap_smooth_fusion">Fusión Suave</string>
+    <string name="snap_fusion_desc">El ajuste comienza cuando la velocidad disminuye</string>
+    <string name="snap_fusion_point">Punto de Fusión</string>
+    <string name="snap_fusion_velocity">%1$d%% velocidad</string>
+    <string name="snap_fusion_earlier">Antes (más suave)</string>
+    <string name="snap_fusion_later">Después (más rápido)</string>
+    <string name="snap_swipe_prompt">↔ Desliza para ver el comportamiento de ajuste</string>
+    <string name="snap_swipe_fusion_prompt">↔ Intenta un deslizamiento lento para ver el efecto de fusión</string>
+    <string name="snap_card">Tarjeta %1$d</string>
+    <string name="snap_card_desc">Desliza para navegar</string>
+    <string name="snap_how_it_works">Cómo funciona</string>
+    <string name="snap_how_it_works_desc">La animación de ajuste controla cómo los elementos se asientan en posición. Cada preajuste usa física diferente:\n\n• Basado en resorte: Rigidez + relación de amortiguación\n• Basado en interpolación: Duración + curva de suavizado\n\nFusión Suave: El ajuste comienza cuando la velocidad disminuye por debajo de un umbral.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">Suave: Ajuste suave y fluido sin rebote. Mejor para la mayoría de carruseles y galerías.</string>
+    <string name="snap_anim_snappy">Rápido: Ajuste rápido y receptivo. Excelente para interfaces rápidas y listas interactivas.</string>
+    <string name="snap_anim_bouncy">Rebotante: Ajuste lúdico con ligero sobrepaso. Perfecto para juegos e interfaces divertidas.</string>
+    <string name="snap_anim_gentle">Suave: Ajuste muy lento y relajado. Ideal para aplicaciones de lujo/premium.</string>
+    <string name="snap_anim_ios">iOS: Animación estilo Apple. Sensación familiar para usuarios multiplataforma.</string>
+    <string name="snap_anim_material">Material: Temporización de Google Material Design. Moderno y consistente.</string>
+    <string name="snap_anim_instant">Instantáneo: Ajuste casi instantáneo. Mejor para aplicaciones de utilidad o accesibilidad.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">Demostración de Deslizamiento Adaptativo</string>
+    <string name="adaptive_mode">Modo Adaptativo</string>
+    <string name="adaptive_swipe_prompt">↓ Prueba deslizamientos suaves vs agresivos</string>
+    <string name="adaptive_item">Elemento %1$d</string>
+    <string name="adaptive_item_desc">Desplázate con diferentes velocidades para ver el comportamiento adaptativo</string>
+    <string name="adaptive_how_it_works">Cómo funciona</string>
+    <string name="adaptive_how_it_works_desc">El deslizamiento adaptativo usa física diferente según la velocidad:\n\n• Deslizamientos suaves → desplazamiento preciso y controlado\n• Deslizamientos agresivos → desplazamientos largos con impulso\n\nCada modo equilibra estos comportamientos de manera diferente.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">Equilibrado: Controlado para deslizamientos suaves, más impulso para deslizamientos agresivos. Mejor para uso general.</string>
+    <string name="adaptive_precision">Precisión: Prioriza el control. Incluso los deslizamientos agresivos se detienen rápidamente. Mejor para contenido con mucho texto.</string>
+    <string name="adaptive_momentum">Impulso: Prioriza la distancia. Los deslizamientos viajan más lejos. Mejor para galerías y feeds.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">Demostración Estilo Paginador</string>
+    <string name="pager_fling_physics">Física de Deslizamiento</string>
+    <string name="pager_standard">Estándar</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">Página %1$d</string>
+    <string name="pager_swipe_desc">Desliza para ver la física de las páginas</string>
+    <string name="pager_how_it_works">Cómo funciona</string>
+    <string name="pager_how_it_works_desc">Comportamiento tipo paginador usando física de ajuste de deslizamiento:\n\n• Estándar: Transiciones equilibradas\n• iOS: Mayor resistencia, sensación familiar\n• Rápido: Cambios de página rápidos\n• Suave: Transiciones deslizantes\n\nFusión Suave: El ajuste comienza mientras todavía se desplaza.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">Demostración de Superposición de Depuración</string>
+    <string name="debug_options">Opciones de Depuración</string>
+    <string name="debug_overlay">Superposición de Depuración</string>
+    <string name="debug_show_velocity">Mostrar Velocidad</string>
+    <string name="debug_show_curve">Mostrar Curva</string>
+    <string name="debug_show_metrics">Mostrar Métricas</string>
+    <string name="debug_scroll_prompt">↓ Desplázate para ver información de depuración en tiempo real</string>
+    <string name="debug_item">Elemento de Depuración %1$d</string>
+    <string name="debug_item_desc">Desliza para ver visualización de depuración en tiempo real</string>
+    <string name="debug_overlay_info">Información de Superposición de Depuración</string>
+    <string name="debug_overlay_info_desc">La superposición de depuración muestra datos de deslizamiento en tiempo real:\n\n• Velocidad: Velocidad de desplazamiento actual\n• Curva: Visualización de curva de deceleración\n• Métricas: Tiempos de fotograma, distancia recorrida\n\nÚsalo para depurar y ajustar tu comportamiento de deslizamiento.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">Tiempo →</string>
+    <string name="curve_label_distance">Distancia</string>
+</resources>

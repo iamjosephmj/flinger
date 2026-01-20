@@ -1,0 +1,175 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Flinger</string>
+    
+    <!-- Common Actions -->
+    <string name="action_back">Voltar</string>
+    <string name="action_reset">Redefinir</string>
+    <string name="action_toggle">Alternar</string>
+    
+    <!-- Home Screen -->
+    <string name="home_title">✦ FLINGER</string>
+    <string name="home_subtitle">Física de deslizamento personalizável para Compose</string>
+    <string name="home_core_features">Recursos principais</string>
+    <string name="home_feature_demos">Demonstrações de recursos</string>
+    <string name="home_version">Flinger v2.0.0</string>
+    <string name="home_made_by">Feito com ❤️ por Joseph James</string>
+    
+    <!-- Navigation Items -->
+    <string name="nav_fling_playground">Área de teste Fling</string>
+    <string name="nav_fling_playground_desc">Ajuste interativamente todos os parâmetros de fling e veja os resultados em tempo real</string>
+    <string name="nav_preset_gallery">Galeria de predefinições</string>
+    <string name="nav_preset_gallery_desc">Navegue e experimente todas as predefinições integradas com visualizações ao vivo</string>
+    <string name="nav_side_by_side_comparison">Comparação lado a lado</string>
+    <string name="nav_side_by_side_comparison_desc">Compare a rolagem nativa do Android com comportamentos Flinger</string>
+    <string name="nav_snap_gallery">Galeria snap</string>
+    <string name="nav_snap_gallery_desc">Comportamento de encaixe para carrosséis e galerias</string>
+    <string name="nav_adaptive_fling">Fling adaptativo</string>
+    <string name="nav_adaptive_fling_desc">Física sensível à velocidade que se adapta aos seus gestos</string>
+    <string name="nav_pager_physics">Física do pager</string>
+    <string name="nav_pager_physics_desc">Física personalizada para HorizontalPager</string>
+    <string name="nav_debug_overlay">Sobreposição de depuração</string>
+    <string name="nav_debug_overlay_desc">Visualização de fling em tempo real para desenvolvedores</string>
+    
+    <!-- Playground Screen -->
+    <string name="playground_title">Área de teste Fling</string>
+    <string name="playground_fling_curve">Curva de fling</string>
+    <string name="playground_legend_pos">Pos</string>
+    <string name="playground_legend_vel">Vel</string>
+    <string name="playground_swipe_test">← Deslize para testar o fling →</string>
+    
+    <!-- Categories -->
+    <string name="category_friction">Fricção</string>
+    <string name="category_physics">Física</string>
+    <string name="category_spline">Spline</string>
+    <string name="category_all">Tudo</string>
+    
+    <!-- Parameters -->
+    <string name="param_scroll_friction">Fricção de rolagem</string>
+    <string name="param_deceleration_friction">Fricção de desaceleração</string>
+    <string name="param_gravity">Gravidade</string>
+    <string name="param_inches_meter">Polegadas/Metro</string>
+    <string name="param_decel_rate">Taxa de desaceleração</string>
+    <string name="param_velocity_threshold">Limite de velocidade</string>
+    <string name="param_inflection">Inflexão</string>
+    <string name="param_start_tension">Tensão inicial</string>
+    <string name="param_end_tension">Tensão final</string>
+    <string name="param_spline_points">Pontos spline</string>
+    
+    <!-- Comparison Screen -->
+    <string name="comparison_title">Comparação lado a lado</string>
+    <string name="comparison_instruction">Role ambas as listas para sentir a diferença entre os comportamentos!</string>
+    <string name="comparison_left_panel">Painel esquerdo</string>
+    <string name="comparison_right_panel">Painel direito</string>
+    <string name="comparison_item">Item %1$d</string>
+    
+    <!-- Presets -->
+    <string name="preset_android_native">Android nativo</string>
+    <string name="preset_smooth">Suave</string>
+    <string name="preset_ios_style">Estilo iOS</string>
+    <string name="preset_quick_stop">Parada rápida</string>
+    <string name="preset_bouncy">Saltitante</string>
+    <string name="preset_floaty">Flutuante</string>
+    <string name="preset_snappy">Rápido</string>
+    <string name="preset_ultra_smooth">Ultra suave</string>
+    <string name="preset_smooth_curve">Curva suave</string>
+    
+    <!-- Preset Descriptions -->
+    <string name="preset_smooth_desc">Rolagem suave e equilibrada com parâmetros padrão</string>
+    <string name="preset_ios_desc">Fricção maior imitando a física de rolagem do iOS</string>
+    <string name="preset_quick_stop_desc">Alta desaceleração para controle preciso</string>
+    <string name="preset_bouncy_desc">Sensação lúdica e responsiva com spline modificada</string>
+    <string name="preset_floaty_desc">Deslizamento de longa distância com baixa fricção</string>
+    <string name="preset_snappy_desc">Resposta rápida com impulso controlado</string>
+    <string name="preset_ultra_smooth_desc">Sensação premium com impulso estendido</string>
+    <string name="preset_smooth_curve_desc">Spline modificada para sensação única</string>
+    <string name="preset_android_native_desc">Comportamento fling padrão do Android</string>
+    
+    <!-- Best For -->
+    <string name="best_for_general">Uso geral, a maioria das interfaces de lista</string>
+    <string name="best_for_cross_platform">Apps multiplataforma, navegadores de fotos</string>
+    <string name="best_for_text">Conteúdo rico em texto, telas de configurações</string>
+    <string name="best_for_games">Jogos, apps infantis, interfaces lúdicas</string>
+    <string name="best_for_galleries">Galerias de fotos, feeds sociais</string>
+    <string name="best_for_ecommerce">E-commerce, apps de chat</string>
+    <string name="best_for_luxury">Apps de luxo, apps de leitura</string>
+    <string name="best_for_creative">Apps criativos, experimentação</string>
+    <string name="best_for_baseline">Comparação de base</string>
+    
+    <!-- Presets Gallery Screen -->
+    <string name="presets_gallery_title">Galeria de predefinições</string>
+    <string name="presets_select_prompt">↑ Selecione uma predefinição para experimentá-la</string>
+    <string name="presets_available">Predefinições disponíveis</string>
+    <string name="presets_scroll_test">↓ Role esta lista para testar a predefinição selecionada</string>
+    <string name="presets_test_item">Item de teste %1$d</string>
+    <string name="presets_active">Ativo: %1$s</string>
+    <string name="presets_active_chip">Ativo</string>
+    <string name="presets_best_for">Ideal para: %1$s</string>
+    
+    <!-- Snap Gallery Demo -->
+    <string name="snap_demo_title">Demo de galeria snap</string>
+    <string name="snap_position">Posição snap</string>
+    <string name="snap_animation">Animação snap</string>
+    <string name="snap_smooth_fusion">Fusão suave</string>
+    <string name="snap_fusion_desc">O snap começa quando a velocidade diminui</string>
+    <string name="snap_fusion_point">Ponto de fusão</string>
+    <string name="snap_fusion_velocity">%1$d%% de velocidade</string>
+    <string name="snap_fusion_earlier">Mais cedo (mais suave)</string>
+    <string name="snap_fusion_later">Mais tarde (mais rápido)</string>
+    <string name="snap_swipe_prompt">↔ Deslize para ver o comportamento snap</string>
+    <string name="snap_swipe_fusion_prompt">↔ Tente um deslize lento para ver o efeito de fusão</string>
+    <string name="snap_card">Cartão %1$d</string>
+    <string name="snap_card_desc">Deslize para navegar</string>
+    <string name="snap_how_it_works">Como funciona</string>
+    <string name="snap_how_it_works_desc">A animação snap controla como os itens se encaixam. Cada predefinição usa física diferente:\n\n• Baseado em mola: Rigidez + razão de amortecimento\n• Baseado em tween: Duração + curva de aceleração\n\nFusão suave: O snap começa quando a velocidade cai abaixo de um limite.</string>
+    
+    <!-- Snap Animation Descriptions -->
+    <string name="snap_anim_smooth">Suave: Encaixe suave e fluido sem salto. Ideal para a maioria dos carrosséis e galerias.</string>
+    <string name="snap_anim_snappy">Rápido: Encaixe rápido e responsivo. Ótimo para interfaces rápidas e listas interativas.</string>
+    <string name="snap_anim_bouncy">Saltitante: Encaixe lúdico com leve ultrapassagem. Perfeito para jogos e interfaces divertidas.</string>
+    <string name="snap_anim_gentle">Suave: Encaixe muito lento e relaxado. Ideal para apps de luxo/premium.</string>
+    <string name="snap_anim_ios">iOS: Animação estilo Apple. Sensação familiar para usuários multiplataforma.</string>
+    <string name="snap_anim_material">Material: Timing Material Design do Google. Moderno e consistente.</string>
+    <string name="snap_anim_instant">Instantâneo: Encaixe quase instantâneo. Ideal para apps utilitários ou acessibilidade.</string>
+    
+    <!-- Adaptive Demo -->
+    <string name="adaptive_demo_title">Demo de fling adaptativo</string>
+    <string name="adaptive_mode">Modo adaptativo</string>
+    <string name="adaptive_swipe_prompt">↓ Tente deslizes suaves vs agressivos</string>
+    <string name="adaptive_item">Item %1$d</string>
+    <string name="adaptive_item_desc">Role com velocidades diferentes para ver o comportamento adaptativo</string>
+    <string name="adaptive_how_it_works">Como funciona</string>
+    <string name="adaptive_how_it_works_desc">O fling adaptativo usa física diferente com base na velocidade:\n\n• Deslizes suaves → rolagem precisa e controlada\n• Deslizes agressivos → rolagens com impulso prolongado\n\nCada modo equilibra esses comportamentos de forma diferente.</string>
+    
+    <!-- Adaptive Mode Descriptions -->
+    <string name="adaptive_balanced">Equilibrado: Controlado para deslizes suaves, mais impulso para deslizes agressivos. Ideal para uso geral.</string>
+    <string name="adaptive_precision">Precisão: Prioriza o controle. Até deslizes agressivos param rapidamente. Ideal para conteúdo rico em texto.</string>
+    <string name="adaptive_momentum">Impulso: Prioriza a distância. Os deslizes viajam mais longe. Ideal para galerias e feeds.</string>
+    
+    <!-- Pager Demo -->
+    <string name="pager_demo_title">Demo de estilo pager</string>
+    <string name="pager_fling_physics">Física fling</string>
+    <string name="pager_standard">Padrão</string>
+    <string name="pager_ios">iOS</string>
+    <string name="pager_page">Página %1$d</string>
+    <string name="pager_swipe_desc">Deslize para ver a física de páginas</string>
+    <string name="pager_how_it_works">Como funciona</string>
+    <string name="pager_how_it_works_desc">Comportamento tipo pager usando física snap fling:\n\n• Padrão: Transições equilibradas\n• iOS: Resistência maior, sensação familiar\n• Rápido: Mudanças de página rápidas\n• Suave: Transições deslizantes\n\nFusão suave: O snap começa durante a rolagem.</string>
+    
+    <!-- Debug Overlay Demo -->
+    <string name="debug_demo_title">Demo de sobreposição de depuração</string>
+    <string name="debug_options">Opções de depuração</string>
+    <string name="debug_overlay">Sobreposição de depuração</string>
+    <string name="debug_show_velocity">Mostrar velocidade</string>
+    <string name="debug_show_curve">Mostrar curva</string>
+    <string name="debug_show_metrics">Mostrar métricas</string>
+    <string name="debug_scroll_prompt">↓ Role para ver informações de depuração em tempo real</string>
+    <string name="debug_item">Item de depuração %1$d</string>
+    <string name="debug_item_desc">Fling para ver a visualização de depuração em tempo real</string>
+    <string name="debug_overlay_info">Info de sobreposição de depuração</string>
+    <string name="debug_overlay_info_desc">A sobreposição de depuração mostra dados fling em tempo real:\n\n• Velocidade: Velocidade de rolagem atual\n• Curva: Visualização da curva de desaceleração\n• Métricas: Tempos de frame, distância percorrida\n\nUse isso para depuração e ajuste do seu comportamento fling.</string>
+    
+    <!-- Curve Canvas Labels -->
+    <string name="curve_label_time">Tempo →</string>
+    <string name="curve_label_distance">Distância</string>
+</resources>
