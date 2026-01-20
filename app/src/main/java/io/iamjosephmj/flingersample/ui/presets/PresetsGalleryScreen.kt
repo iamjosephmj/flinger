@@ -80,97 +80,95 @@ data class PresetInfo(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PresetsGalleryScreen(navController: NavController) {
-    val presets = remember {
-        listOf(
-            PresetInfo(
-                name = stringResource(R.string.preset_smooth),
-                description = stringResource(R.string.preset_smooth_desc),
-                bestFor = stringResource(R.string.best_for_general),
-                config = FlingConfiguration.Builder().build(),
-                gradient = listOf(AuroraCyan, AuroraViolet),
-                getFlingBehavior = { FlingPresets.smooth() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_ios_style),
-                description = stringResource(R.string.preset_ios_desc),
-                bestFor = stringResource(R.string.best_for_cross_platform),
-                config = FlingConfiguration.Builder().scrollViewFriction(0.04f).build(),
-                gradient = listOf(Color(0xFF007AFF), Color(0xFF5856D6)),
-                getFlingBehavior = { FlingPresets.iOSStyle() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_quick_stop),
-                description = stringResource(R.string.preset_quick_stop_desc),
-                bestFor = stringResource(R.string.best_for_text),
-                config = FlingConfiguration.Builder().decelerationFriction(0.5f).build(),
-                gradient = listOf(Color(0xFFFF512F), Color(0xFFDD2476)),
-                getFlingBehavior = { FlingPresets.quickStop() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_bouncy),
-                description = stringResource(R.string.preset_bouncy_desc),
-                bestFor = stringResource(R.string.best_for_games),
-                config = FlingConfiguration.Builder()
-                    .decelerationFriction(0.6f)
-                    .splineInflection(0.4f)
-                    .build(),
-                gradient = listOf(Color(0xFFFF6B6B), AuroraMagenta),
-                getFlingBehavior = { FlingPresets.bouncy() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_floaty),
-                description = stringResource(R.string.preset_floaty_desc),
-                bestFor = stringResource(R.string.best_for_galleries),
-                config = FlingConfiguration.Builder()
-                    .scrollViewFriction(0.09f)
-                    .decelerationFriction(0.015f)
-                    .build(),
-                gradient = listOf(AuroraCyan, AuroraMagenta, Color(0xFFFFAA00)),
-                getFlingBehavior = { FlingPresets.floaty() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_snappy),
-                description = stringResource(R.string.preset_snappy_desc),
-                bestFor = stringResource(R.string.best_for_ecommerce),
-                config = FlingConfiguration.Builder()
-                    .scrollViewFriction(0.03f)
-                    .decelerationFriction(0.2f)
-                    .build(),
-                gradient = listOf(AuroraMagenta, Color(0xFFE91E8C)),
-                getFlingBehavior = { FlingPresets.snappy() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_ultra_smooth),
-                description = stringResource(R.string.preset_ultra_smooth_desc),
-                bestFor = stringResource(R.string.best_for_luxury),
-                config = FlingConfiguration.Builder()
-                    .scrollViewFriction(0.006f)
-                    .decelerationFriction(0.05f)
-                    .numberOfSplinePoints(150)
-                    .build(),
-                gradient = listOf(AuroraCyan, AuroraViolet, AuroraMagenta),
-                getFlingBehavior = { FlingPresets.ultraSmooth() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_smooth_curve),
-                description = stringResource(R.string.preset_smooth_curve_desc),
-                bestFor = stringResource(R.string.best_for_creative),
-                config = FlingConfiguration.Builder()
-                    .splineInflection(0.16f)
-                    .build(),
-                gradient = listOf(AuroraViolet, Color(0xFF6246D8)),
-                getFlingBehavior = { FlingPresets.smoothCurve() }
-            ),
-            PresetInfo(
-                name = stringResource(R.string.preset_android_native),
-                description = stringResource(R.string.preset_android_native_desc),
-                bestFor = stringResource(R.string.best_for_baseline),
-                config = FlingConfiguration.Builder().build(),
-                gradient = listOf(Color(0xFF4CAF50), Color(0xFF2E7D32)),
-                getFlingBehavior = { FlingPresets.androidNative() }
-            )
+    val presets = listOf(
+        PresetInfo(
+            name = stringResource(R.string.preset_smooth),
+            description = stringResource(R.string.preset_smooth_desc),
+            bestFor = stringResource(R.string.best_for_general),
+            config = FlingConfiguration.Builder().build(),
+            gradient = listOf(AuroraCyan, AuroraViolet),
+            getFlingBehavior = { FlingPresets.smooth() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_ios_style),
+            description = stringResource(R.string.preset_ios_desc),
+            bestFor = stringResource(R.string.best_for_cross_platform),
+            config = FlingConfiguration.Builder().scrollViewFriction(0.04f).build(),
+            gradient = listOf(Color(0xFF007AFF), Color(0xFF5856D6)),
+            getFlingBehavior = { FlingPresets.iOSStyle() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_quick_stop),
+            description = stringResource(R.string.preset_quick_stop_desc),
+            bestFor = stringResource(R.string.best_for_text),
+            config = FlingConfiguration.Builder().decelerationFriction(0.5f).build(),
+            gradient = listOf(Color(0xFFFF512F), Color(0xFFDD2476)),
+            getFlingBehavior = { FlingPresets.quickStop() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_bouncy),
+            description = stringResource(R.string.preset_bouncy_desc),
+            bestFor = stringResource(R.string.best_for_games),
+            config = FlingConfiguration.Builder()
+                .decelerationFriction(0.6f)
+                .splineInflection(0.4f)
+                .build(),
+            gradient = listOf(Color(0xFFFF6B6B), AuroraMagenta),
+            getFlingBehavior = { FlingPresets.bouncy() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_floaty),
+            description = stringResource(R.string.preset_floaty_desc),
+            bestFor = stringResource(R.string.best_for_galleries),
+            config = FlingConfiguration.Builder()
+                .scrollViewFriction(0.09f)
+                .decelerationFriction(0.015f)
+                .build(),
+            gradient = listOf(AuroraCyan, AuroraMagenta, Color(0xFFFFAA00)),
+            getFlingBehavior = { FlingPresets.floaty() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_snappy),
+            description = stringResource(R.string.preset_snappy_desc),
+            bestFor = stringResource(R.string.best_for_ecommerce),
+            config = FlingConfiguration.Builder()
+                .scrollViewFriction(0.03f)
+                .decelerationFriction(0.2f)
+                .build(),
+            gradient = listOf(AuroraMagenta, Color(0xFFE91E8C)),
+            getFlingBehavior = { FlingPresets.snappy() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_ultra_smooth),
+            description = stringResource(R.string.preset_ultra_smooth_desc),
+            bestFor = stringResource(R.string.best_for_luxury),
+            config = FlingConfiguration.Builder()
+                .scrollViewFriction(0.006f)
+                .decelerationFriction(0.05f)
+                .numberOfSplinePoints(150)
+                .build(),
+            gradient = listOf(AuroraCyan, AuroraViolet, AuroraMagenta),
+            getFlingBehavior = { FlingPresets.ultraSmooth() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_smooth_curve),
+            description = stringResource(R.string.preset_smooth_curve_desc),
+            bestFor = stringResource(R.string.best_for_creative),
+            config = FlingConfiguration.Builder()
+                .splineInflection(0.16f)
+                .build(),
+            gradient = listOf(AuroraViolet, Color(0xFF6246D8)),
+            getFlingBehavior = { FlingPresets.smoothCurve() }
+        ),
+        PresetInfo(
+            name = stringResource(R.string.preset_android_native),
+            description = stringResource(R.string.preset_android_native_desc),
+            bestFor = stringResource(R.string.best_for_baseline),
+            config = FlingConfiguration.Builder().build(),
+            gradient = listOf(Color(0xFF4CAF50), Color(0xFF2E7D32)),
+            getFlingBehavior = { FlingPresets.androidNative() }
         )
-    }
+    )
     
     var selectedPreset by remember { mutableStateOf<PresetInfo?>(null) }
     val currentFlingBehavior = selectedPreset?.getFlingBehavior?.invoke() ?: FlingPresets.smooth()
