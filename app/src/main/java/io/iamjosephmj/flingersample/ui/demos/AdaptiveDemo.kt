@@ -251,9 +251,3 @@ fun getModeDescriptionComposable(mode: AdaptiveMode): String = when (mode) {
     AdaptiveMode.Precision -> stringResource(R.string.adaptive_precision)
     AdaptiveMode.Momentum -> stringResource(R.string.adaptive_momentum)
 }
-
-private fun getModeDescription(mode: AdaptiveMode): String = when (mode) {
-    AdaptiveMode.Balanced -> "Balanced: Controlled for gentle swipes, more momentum for aggressive swipes. Best for general use."
-    AdaptiveMode.Precision -> "Precision: Prioritizes control. Even aggressive swipes stop quickly. Best for text-heavy content."
-    AdaptiveMode.Momentum -> "Momentum: Prioritizes distance. Swipes travel farther. Best for galleries and feeds."
-}

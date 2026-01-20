@@ -364,17 +364,6 @@ fun SnapGalleryDemo(navController: NavController) {
     }
 }
 
-private fun getAnimationDescription(animation: String): String = when (animation) {
-    "Smooth" -> "Smooth: Gentle, fluid snap with no bounce. Best for most carousels and galleries."
-    "Snappy" -> "Snappy: Quick, responsive snap. Great for fast-paced UIs and interactive lists."
-    "Bouncy" -> "Bouncy: Playful snap with slight overshoot. Perfect for games and fun UIs."
-    "Gentle" -> "Gentle: Very slow, relaxed snap. Ideal for luxury/premium apps."
-    "iOS" -> "iOS: Apple-style animation. Familiar feel for cross-platform users."
-    "Material" -> "Material: Google Material Design timing. Modern and consistent."
-    "Instant" -> "Instant: Near-instant snap. Best for utility apps or accessibility."
-    else -> ""
-}
-
 @Composable
 fun getAnimationDescriptionComposable(animation: String): String = when (animation) {
     "Smooth" -> stringResource(R.string.snap_anim_smooth)
