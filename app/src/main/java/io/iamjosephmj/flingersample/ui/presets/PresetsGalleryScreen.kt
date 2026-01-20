@@ -80,6 +80,7 @@ data class PresetInfo(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PresetsGalleryScreen(navController: NavController) {
+    // Note: presets list uses stringResource which requires recomposition on locale change
     val presets = listOf(
         PresetInfo(
             name = stringResource(R.string.preset_smooth),

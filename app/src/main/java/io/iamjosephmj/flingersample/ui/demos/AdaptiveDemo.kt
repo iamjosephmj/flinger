@@ -146,7 +146,7 @@ fun AdaptiveDemo(navController: NavController) {
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = getModeDescriptionComposable(selectedMode),
+                        text = getModeDescription(selectedMode),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -245,8 +245,12 @@ private fun AdaptiveListItem(index: Int, accentColor: Color) {
     }
 }
 
+/**
+ * Composable helper to get the mode description string resource.
+ * Returns a String for use in Text composables.
+ */
 @Composable
-fun getModeDescriptionComposable(mode: AdaptiveMode): String = when (mode) {
+private fun getModeDescription(mode: AdaptiveMode): String = when (mode) {
     AdaptiveMode.Balanced -> stringResource(R.string.adaptive_balanced)
     AdaptiveMode.Precision -> stringResource(R.string.adaptive_precision)
     AdaptiveMode.Momentum -> stringResource(R.string.adaptive_momentum)

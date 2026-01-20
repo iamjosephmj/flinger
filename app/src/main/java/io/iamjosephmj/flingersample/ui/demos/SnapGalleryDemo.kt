@@ -187,7 +187,7 @@ fun SnapGalleryDemo(navController: NavController) {
                 )
             ) {
                 Text(
-                    text = getAnimationDescriptionComposable(selectedAnimation),
+                    text = getAnimationDescription(selectedAnimation),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(12.dp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -364,8 +364,12 @@ fun SnapGalleryDemo(navController: NavController) {
     }
 }
 
+/**
+ * Composable helper to get the animation description string resource.
+ * Returns a String for use in Text composables.
+ */
 @Composable
-fun getAnimationDescriptionComposable(animation: String): String = when (animation) {
+private fun getAnimationDescription(animation: String): String = when (animation) {
     "Smooth" -> stringResource(R.string.snap_anim_smooth)
     "Snappy" -> stringResource(R.string.snap_anim_snappy)
     "Bouncy" -> stringResource(R.string.snap_anim_bouncy)
