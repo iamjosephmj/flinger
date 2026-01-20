@@ -31,11 +31,13 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.spline.AndroidFlingSpline
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
@@ -60,6 +62,9 @@ fun FlingCurveCanvas(
     val spline = remember(config) { AndroidFlingSpline(config) }
     val textMeasurer = rememberTextMeasurer()
     val axisColor = MaterialTheme.colorScheme.onSurface
+    
+    val timeLabel = stringResource(R.string.curve_label_time)
+    val distLabel = stringResource(R.string.curve_label_distance)
     
     val infiniteTransition = rememberInfiniteTransition(label = "curve_glow")
     val glowAlpha by infiniteTransition.animateFloat(
@@ -237,7 +242,6 @@ fun FlingCurveCanvas(
         // Draw axis labels
         if (showLabels) {
             // Time label (X-axis)
-            val timeLabel = "Time →"
             val timeMeasured = textMeasurer.measure(
                 text = timeLabel,
                 style = TextStyle(fontSize = 10.sp)
@@ -256,7 +260,6 @@ fun FlingCurveCanvas(
             )
             
             // Distance label (Y-axis) - rotated would be ideal but keeping horizontal for simplicity
-            val distLabel = "Distance"
             drawText(
                 textMeasurer = textMeasurer,
                 text = distLabel,

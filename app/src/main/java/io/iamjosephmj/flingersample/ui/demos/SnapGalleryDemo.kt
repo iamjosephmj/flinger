@@ -51,9 +51,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.snap.SnapAnimationConfig
 import io.iamjosephmj.flinger.snap.SnapPosition
 import io.iamjosephmj.flinger.snap.snapFlingBehavior
@@ -92,13 +94,13 @@ fun SnapGalleryDemo(navController: NavController) {
             TopAppBar(
                 title = { 
                     Text(
-                        "Snap Gallery Demo",
+                        stringResource(R.string.snap_demo_title),
                         color = AuroraCyan
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -115,7 +117,7 @@ fun SnapGalleryDemo(navController: NavController) {
         ) {
             // Snap position selector
             Text(
-                text = "Snap Position",
+                text = stringResource(R.string.snap_position),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -145,7 +147,7 @@ fun SnapGalleryDemo(navController: NavController) {
             
             // Animation style selector
             Text(
-                text = "Snap Animation",
+                text = stringResource(R.string.snap_animation),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -185,7 +187,7 @@ fun SnapGalleryDemo(navController: NavController) {
                 )
             ) {
                 Text(
-                    text = getAnimationDescription(selectedAnimation),
+                    text = getAnimationDescriptionComposable(selectedAnimation),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(12.dp),
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -213,13 +215,13 @@ fun SnapGalleryDemo(navController: NavController) {
                 ) {
                     Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
                         Text(
-                            text = "Smooth Fusion",
+                            text = stringResource(R.string.snap_smooth_fusion),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold,
                             color = if (smoothFusionEnabled) AuroraMagenta else MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "Snap starts when velocity decays",
+                            text = stringResource(R.string.snap_fusion_desc),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -247,12 +249,12 @@ fun SnapGalleryDemo(navController: NavController) {
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Fusion Point",
+                                text = stringResource(R.string.snap_fusion_point),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "${(fusionRatio * 100).toInt()}% velocity",
+                                text = stringResource(R.string.snap_fusion_velocity, (fusionRatio * 100).toInt()),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = AuroraMagenta,
                                 fontWeight = FontWeight.SemiBold
@@ -274,12 +276,12 @@ fun SnapGalleryDemo(navController: NavController) {
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Earlier (smoother)",
+                                text = stringResource(R.string.snap_fusion_earlier),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Text(
-                                text = "Later (snappier)",
+                                text = stringResource(R.string.snap_fusion_later),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -292,7 +294,7 @@ fun SnapGalleryDemo(navController: NavController) {
             
             // Gallery with snap behavior
             Text(
-                text = if (smoothFusionEnabled) "↔ Try a slow swipe to see the fusion effect" else "↔ Swipe to see snap behavior",
+                text = if (smoothFusionEnabled) stringResource(R.string.snap_swipe_fusion_prompt) else stringResource(R.string.snap_swipe_prompt),
                 style = MaterialTheme.typography.bodyMedium,
                 color = AuroraCyan,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -342,18 +344,14 @@ fun SnapGalleryDemo(navController: NavController) {
                 ) {
                     Column {
                         Text(
-                            text = "How it works",
+                            text = stringResource(R.string.snap_how_it_works),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "The snap animation controls how items settle into position. " +
-                                    "Each preset uses different physics:\n\n" +
-                                    "• Spring-based: Stiffness + damping ratio\n" +
-                                    "• Tween-based: Duration + easing curve\n\n" +
-                                    "Smooth Fusion: Snap starts when velocity decays below a threshold.",
+                            text = stringResource(R.string.snap_how_it_works_desc),
                             style = MaterialTheme.typography.bodyMedium,
                             color = Color.White.copy(alpha = 0.9f)
                         )
@@ -374,6 +372,18 @@ private fun getAnimationDescription(animation: String): String = when (animation
     "iOS" -> "iOS: Apple-style animation. Familiar feel for cross-platform users."
     "Material" -> "Material: Google Material Design timing. Modern and consistent."
     "Instant" -> "Instant: Near-instant snap. Best for utility apps or accessibility."
+    else -> ""
+}
+
+@Composable
+fun getAnimationDescriptionComposable(animation: String): String = when (animation) {
+    "Smooth" -> stringResource(R.string.snap_anim_smooth)
+    "Snappy" -> stringResource(R.string.snap_anim_snappy)
+    "Bouncy" -> stringResource(R.string.snap_anim_bouncy)
+    "Gentle" -> stringResource(R.string.snap_anim_gentle)
+    "iOS" -> stringResource(R.string.snap_anim_ios)
+    "Material" -> stringResource(R.string.snap_anim_material)
+    "Instant" -> stringResource(R.string.snap_anim_instant)
     else -> ""
 }
 
@@ -399,14 +409,14 @@ private fun GalleryCard(
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "Card ${index + 1}",
+                    text = stringResource(R.string.snap_card, index + 1),
                     style = MaterialTheme.typography.headlineMedium,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Swipe to navigate",
+                    text = stringResource(R.string.snap_card_desc),
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.8f)
                 )

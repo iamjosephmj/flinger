@@ -48,10 +48,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flingersample.ui.components.MiniCurvePreview
@@ -81,33 +83,33 @@ fun PresetsGalleryScreen(navController: NavController) {
     val presets = remember {
         listOf(
             PresetInfo(
-                name = "Smooth",
-                description = "Balanced, smooth scrolling with default parameters",
-                bestFor = "General purpose, most list UIs",
+                name = stringResource(R.string.preset_smooth),
+                description = stringResource(R.string.preset_smooth_desc),
+                bestFor = stringResource(R.string.best_for_general),
                 config = FlingConfiguration.Builder().build(),
                 gradient = listOf(AuroraCyan, AuroraViolet),
                 getFlingBehavior = { FlingPresets.smooth() }
             ),
             PresetInfo(
-                name = "iOS Style",
-                description = "Higher friction mimicking iOS scroll physics",
-                bestFor = "Cross-platform apps, photo browsers",
+                name = stringResource(R.string.preset_ios_style),
+                description = stringResource(R.string.preset_ios_desc),
+                bestFor = stringResource(R.string.best_for_cross_platform),
                 config = FlingConfiguration.Builder().scrollViewFriction(0.04f).build(),
                 gradient = listOf(Color(0xFF007AFF), Color(0xFF5856D6)),
                 getFlingBehavior = { FlingPresets.iOSStyle() }
             ),
             PresetInfo(
-                name = "Quick Stop",
-                description = "High deceleration for precise control",
-                bestFor = "Text-heavy content, settings screens",
+                name = stringResource(R.string.preset_quick_stop),
+                description = stringResource(R.string.preset_quick_stop_desc),
+                bestFor = stringResource(R.string.best_for_text),
                 config = FlingConfiguration.Builder().decelerationFriction(0.5f).build(),
                 gradient = listOf(Color(0xFFFF512F), Color(0xFFDD2476)),
                 getFlingBehavior = { FlingPresets.quickStop() }
             ),
             PresetInfo(
-                name = "Bouncy",
-                description = "Playful, responsive feel with modified spline",
-                bestFor = "Games, children's apps, playful UIs",
+                name = stringResource(R.string.preset_bouncy),
+                description = stringResource(R.string.preset_bouncy_desc),
+                bestFor = stringResource(R.string.best_for_games),
                 config = FlingConfiguration.Builder()
                     .decelerationFriction(0.6f)
                     .splineInflection(0.4f)
@@ -116,9 +118,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 getFlingBehavior = { FlingPresets.bouncy() }
             ),
             PresetInfo(
-                name = "Floaty",
-                description = "Long-distance gliding with low friction",
-                bestFor = "Photo galleries, social feeds",
+                name = stringResource(R.string.preset_floaty),
+                description = stringResource(R.string.preset_floaty_desc),
+                bestFor = stringResource(R.string.best_for_galleries),
                 config = FlingConfiguration.Builder()
                     .scrollViewFriction(0.09f)
                     .decelerationFriction(0.015f)
@@ -127,9 +129,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 getFlingBehavior = { FlingPresets.floaty() }
             ),
             PresetInfo(
-                name = "Snappy",
-                description = "Quick response with controlled momentum",
-                bestFor = "E-commerce, chat apps",
+                name = stringResource(R.string.preset_snappy),
+                description = stringResource(R.string.preset_snappy_desc),
+                bestFor = stringResource(R.string.best_for_ecommerce),
                 config = FlingConfiguration.Builder()
                     .scrollViewFriction(0.03f)
                     .decelerationFriction(0.2f)
@@ -138,9 +140,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 getFlingBehavior = { FlingPresets.snappy() }
             ),
             PresetInfo(
-                name = "Ultra Smooth",
-                description = "Premium feel with extended momentum",
-                bestFor = "Luxury apps, reading apps",
+                name = stringResource(R.string.preset_ultra_smooth),
+                description = stringResource(R.string.preset_ultra_smooth_desc),
+                bestFor = stringResource(R.string.best_for_luxury),
                 config = FlingConfiguration.Builder()
                     .scrollViewFriction(0.006f)
                     .decelerationFriction(0.05f)
@@ -150,9 +152,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 getFlingBehavior = { FlingPresets.ultraSmooth() }
             ),
             PresetInfo(
-                name = "Smooth Curve",
-                description = "Modified spline for unique feel",
-                bestFor = "Creative apps, experimentation",
+                name = stringResource(R.string.preset_smooth_curve),
+                description = stringResource(R.string.preset_smooth_curve_desc),
+                bestFor = stringResource(R.string.best_for_creative),
                 config = FlingConfiguration.Builder()
                     .splineInflection(0.16f)
                     .build(),
@@ -160,9 +162,9 @@ fun PresetsGalleryScreen(navController: NavController) {
                 getFlingBehavior = { FlingPresets.smoothCurve() }
             ),
             PresetInfo(
-                name = "Android Native",
-                description = "Default Android fling behavior",
-                bestFor = "Baseline comparison",
+                name = stringResource(R.string.preset_android_native),
+                description = stringResource(R.string.preset_android_native_desc),
+                bestFor = stringResource(R.string.best_for_baseline),
                 config = FlingConfiguration.Builder().build(),
                 gradient = listOf(Color(0xFF4CAF50), Color(0xFF2E7D32)),
                 getFlingBehavior = { FlingPresets.androidNative() }
@@ -180,13 +182,13 @@ fun PresetsGalleryScreen(navController: NavController) {
                 TopAppBar(
                     title = { 
                         Text(
-                            "Preset Gallery",
+                            stringResource(R.string.presets_gallery_title),
                             color = MaterialTheme.colorScheme.tertiary
                         ) 
                     },
                     navigationIcon = {
                         IconButton(onClick = { navController.navigateUp() }) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                         }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -213,7 +215,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                     )
                 ) {
                     Text(
-                        text = "↑ Select a preset to try it",
+                        text = stringResource(R.string.presets_select_prompt),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(16.dp)
@@ -232,7 +234,7 @@ fun PresetsGalleryScreen(navController: NavController) {
             ) {
                 item {
                     Text(
-                        text = "Available Presets",
+                        text = stringResource(R.string.presets_available),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSurface
@@ -251,7 +253,7 @@ fun PresetsGalleryScreen(navController: NavController) {
                 item {
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "↓ Scroll this list to feel the selected preset",
+                        text = stringResource(R.string.presets_scroll_test),
                         style = MaterialTheme.typography.bodySmall,
                         color = AuroraCyan,
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -285,7 +287,7 @@ private fun SelectedPresetHeader(preset: PresetInfo) {
         ) {
             Column {
                 Text(
-                    text = "Active: ${preset.name}",
+                    text = stringResource(R.string.presets_active, preset.name),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -373,7 +375,7 @@ private fun PresetCard(
                             onClick = {},
                             label = { 
                                 Text(
-                                    "Active", 
+                                    stringResource(R.string.presets_active_chip), 
                                     style = MaterialTheme.typography.labelSmall
                                 ) 
                             },
@@ -394,7 +396,7 @@ private fun PresetCard(
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Best for: ${preset.bestFor}",
+                    text = stringResource(R.string.presets_best_for, preset.bestFor),
                     style = MaterialTheme.typography.labelSmall,
                     color = preset.gradient.first(),
                     maxLines = 1,
@@ -423,7 +425,7 @@ private fun TestScrollCard(index: Int) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Test Item ${index + 1}",
+                text = stringResource(R.string.presets_test_item, index + 1),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )

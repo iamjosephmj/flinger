@@ -40,9 +40,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.adaptive.AdaptiveMode
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flingersample.ui.components.GradientPresets
@@ -70,13 +72,13 @@ fun AdaptiveDemo(navController: NavController) {
             TopAppBar(
                 title = { 
                     Text(
-                        "Adaptive Fling Demo",
+                        stringResource(R.string.adaptive_demo_title),
                         color = modeColor
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -92,7 +94,7 @@ fun AdaptiveDemo(navController: NavController) {
         ) {
             // Mode selector
             Text(
-                text = "Adaptive Mode",
+                text = stringResource(R.string.adaptive_mode),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(16.dp),
@@ -144,7 +146,7 @@ fun AdaptiveDemo(navController: NavController) {
                         .padding(16.dp)
                 ) {
                     Text(
-                        text = getModeDescription(selectedMode),
+                        text = getModeDescriptionComposable(selectedMode),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -154,7 +156,7 @@ fun AdaptiveDemo(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             
             Text(
-                text = "↓ Try gentle vs aggressive swipes",
+                text = stringResource(R.string.adaptive_swipe_prompt),
                 style = MaterialTheme.typography.bodyMedium,
                 color = modeColor,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -192,17 +194,14 @@ fun AdaptiveDemo(navController: NavController) {
                         ) {
                             Column {
                                 Text(
-                                    text = "How it works",
+                                    text = stringResource(R.string.adaptive_how_it_works),
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
-                                    text = "Adaptive fling uses different physics based on velocity:\n\n" +
-                                            "• Gentle swipes → precise, controlled scrolling\n" +
-                                            "• Aggressive swipes → long momentum scrolls\n\n" +
-                                            "Each mode balances these behaviors differently.",
+                                    text = stringResource(R.string.adaptive_how_it_works_desc),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = Color.White.copy(alpha = 0.9f)
                                 )
@@ -232,18 +231,25 @@ private fun AdaptiveListItem(index: Int, accentColor: Color) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Item ${index + 1}",
+                text = stringResource(R.string.adaptive_item, index + 1),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = accentColor
             )
             Text(
-                text = "Scroll with different velocities to see adaptive behavior",
+                text = stringResource(R.string.adaptive_item_desc),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
+}
+
+@Composable
+fun getModeDescriptionComposable(mode: AdaptiveMode): String = when (mode) {
+    AdaptiveMode.Balanced -> stringResource(R.string.adaptive_balanced)
+    AdaptiveMode.Precision -> stringResource(R.string.adaptive_precision)
+    AdaptiveMode.Momentum -> stringResource(R.string.adaptive_momentum)
 }
 
 private fun getModeDescription(mode: AdaptiveMode): String = when (mode) {

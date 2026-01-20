@@ -52,10 +52,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
 import io.iamjosephmj.flingersample.ui.components.GlowingIcon
@@ -80,22 +82,22 @@ fun HomeScreen(navController: NavController) {
     // Navigation items
     val coreFeatures = listOf(
         NavItem(
-            title = "Fling Playground",
-            description = "Interactively adjust all fling parameters and see the results in real-time",
+            title = stringResource(R.string.nav_fling_playground),
+            description = stringResource(R.string.nav_fling_playground_desc),
             icon = Icons.Default.Tune,
             route = "playground",
             accentColor = primaryColor
         ),
         NavItem(
-            title = "Preset Gallery",
-            description = "Browse and try all built-in presets with live previews",
+            title = stringResource(R.string.nav_preset_gallery),
+            description = stringResource(R.string.nav_preset_gallery_desc),
             icon = Icons.Default.GridView,
             route = "presets",
             accentColor = tertiaryColor
         ),
         NavItem(
-            title = "Side-by-Side Comparison",
-            description = "Compare native Android scroll with Flinger behaviors",
+            title = stringResource(R.string.nav_side_by_side_comparison),
+            description = stringResource(R.string.nav_side_by_side_comparison_desc),
             icon = Icons.Default.Compare,
             route = "comparison",
             accentColor = secondaryColor
@@ -104,29 +106,29 @@ fun HomeScreen(navController: NavController) {
     
     val demoFeatures = listOf(
         NavItem(
-            title = "Snap Gallery",
-            description = "Snap-to-item behavior for carousels and galleries",
+            title = stringResource(R.string.nav_snap_gallery),
+            description = stringResource(R.string.nav_snap_gallery_desc),
             icon = Icons.Default.ViewCarousel,
             route = "snapDemo",
             accentColor = primaryColor
         ),
         NavItem(
-            title = "Adaptive Fling",
-            description = "Velocity-aware physics that adapts to your swipes",
+            title = stringResource(R.string.nav_adaptive_fling),
+            description = stringResource(R.string.nav_adaptive_fling_desc),
             icon = Icons.Default.Speed,
             route = "adaptiveDemo",
             accentColor = tertiaryColor
         ),
         NavItem(
-            title = "Pager Physics",
-            description = "Custom page-turn physics for HorizontalPager",
+            title = stringResource(R.string.nav_pager_physics),
+            description = stringResource(R.string.nav_pager_physics_desc),
             icon = Icons.Default.SwipeRight,
             route = "pagerDemo",
             accentColor = secondaryColor
         ),
         NavItem(
-            title = "Debug Overlay",
-            description = "Real-time fling visualization for developers",
+            title = stringResource(R.string.nav_debug_overlay),
+            description = stringResource(R.string.nav_debug_overlay_desc),
             icon = Icons.Default.BugReport,
             route = "debugDemo",
             accentColor = primaryColor
@@ -142,13 +144,13 @@ fun HomeScreen(navController: NavController) {
                     title = {
                         Column {
                             Text(
-                                text = "✦ FLINGER",
+                                text = stringResource(R.string.home_title),
                                 style = MaterialTheme.typography.headlineLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )
                             Text(
-                                text = "Customizable Fling Physics for Compose",
+                                text = stringResource(R.string.home_subtitle),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -172,7 +174,7 @@ fun HomeScreen(navController: NavController) {
             ) {
                 item {
                     SectionHeader(
-                        title = "Core Features",
+                        title = stringResource(R.string.home_core_features),
                         index = 0
                     )
                 }
@@ -188,7 +190,7 @@ fun HomeScreen(navController: NavController) {
                 item {
                     Spacer(modifier = Modifier.height(8.dp))
                     SectionHeader(
-                        title = "Feature Demos",
+                        title = stringResource(R.string.home_feature_demos),
                         index = coreFeatures.size + 1
                     )
                 }
@@ -353,12 +355,12 @@ private fun VersionInfo(index: Int) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Flinger v2.0.0",
+            text = stringResource(R.string.home_version),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
         )
         Text(
-            text = "Made with ❤️ by Joseph James",
+            text = stringResource(R.string.home_made_by),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
             textAlign = TextAlign.Center

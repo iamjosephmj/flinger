@@ -40,9 +40,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.debug.FlingerDebugOverlay
 import io.iamjosephmj.flingersample.ui.components.GradientPresets
@@ -67,13 +69,13 @@ fun DebugOverlayDemo(navController: NavController) {
             TopAppBar(
                 title = { 
                     Text(
-                        "Debug Overlay Demo",
+                        stringResource(R.string.debug_demo_title),
                         color = AuroraMagenta
                     ) 
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.action_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -99,7 +101,7 @@ fun DebugOverlayDemo(navController: NavController) {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Debug Options",
+                        text = stringResource(R.string.debug_options),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Bold,
                         color = AuroraMagenta
@@ -107,25 +109,25 @@ fun DebugOverlayDemo(navController: NavController) {
                     Spacer(modifier = Modifier.height(12.dp))
                     
                     ToggleRow(
-                        label = "Debug Overlay", 
+                        label = stringResource(R.string.debug_overlay), 
                         checked = debugEnabled, 
                         onCheckedChange = { debugEnabled = it },
                         accentColor = AuroraCyan
                     )
                     ToggleRow(
-                        label = "Show Velocity", 
+                        label = stringResource(R.string.debug_show_velocity), 
                         checked = showVelocity, 
                         onCheckedChange = { showVelocity = it },
                         accentColor = AuroraViolet
                     )
                     ToggleRow(
-                        label = "Show Curve", 
+                        label = stringResource(R.string.debug_show_curve), 
                         checked = showCurve, 
                         onCheckedChange = { showCurve = it },
                         accentColor = AuroraMagenta
                     )
                     ToggleRow(
-                        label = "Show Metrics", 
+                        label = stringResource(R.string.debug_show_metrics), 
                         checked = showMetrics, 
                         onCheckedChange = { showMetrics = it },
                         accentColor = AuroraCyan
@@ -134,7 +136,7 @@ fun DebugOverlayDemo(navController: NavController) {
             }
             
             Text(
-                text = "↓ Scroll to see debug info in real-time",
+                text = stringResource(R.string.debug_scroll_prompt),
                 style = MaterialTheme.typography.bodyMedium,
                 color = AuroraCyan,
                 modifier = Modifier.padding(horizontal = 16.dp)
@@ -180,18 +182,14 @@ fun DebugOverlayDemo(navController: NavController) {
                             ) {
                                 Column {
                                     Text(
-                                        text = "Debug Overlay Info",
+                                        text = stringResource(R.string.debug_overlay_info),
                                         style = MaterialTheme.typography.titleMedium,
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White
                                     )
                                     Spacer(modifier = Modifier.height(8.dp))
                                     Text(
-                                        text = "The debug overlay shows real-time fling data:\n\n" +
-                                                "• Velocity: Current scroll velocity\n" +
-                                                "• Curve: Deceleration curve visualization\n" +
-                                                "• Metrics: Frame times, distance traveled\n\n" +
-                                                "Use this for debugging and tuning your fling behavior.",
+                                        text = stringResource(R.string.debug_overlay_info_desc),
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = Color.White.copy(alpha = 0.9f)
                                     )
@@ -266,13 +264,13 @@ private fun DebugListItem(index: Int) {
                 modifier = Modifier.padding(start = 12.dp)
             ) {
                 Text(
-                    text = "Debug Item ${index + 1}",
+                    text = stringResource(R.string.debug_item, index + 1),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = gradient.first()
                 )
                 Text(
-                    text = "Fling to see real-time debug visualization",
+                    text = stringResource(R.string.debug_item_desc),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
