@@ -67,7 +67,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "io.iamjosephmj.flinger"
                 artifactId = "flinger"
-                version = "2.0.2"
+                version = "2.1.0"
             }
         }
     }

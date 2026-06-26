@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [2.1.0] - 2026-06-26
+
 ### Added
 - Comprehensive README with detailed documentation
 - CONTRIBUTING.md with contribution guidelines
@@ -116,6 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Release Date | Highlights |
 |---------|--------------|------------|
+| 2.1.0 | 2026-06-26 | Sub-ms fling smoothness, single JitPack artifact, debug overlay removed |
 | 1.3.0 | 2024-01-15 | Compose BOM 2024+, Kotlin 2.0 |
 | 1.2.0 | 2023-06-20 | New config options, improved defaults |
 | 1.1.0 | 2022-11-10 | Stock presets, sample app |
@@ -161,7 +166,8 @@ No breaking changes. New configuration options are optional with sensible defaul
 
 ---
 
-[Unreleased]: https://github.com/iamjosephmj/flinger/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/iamjosephmj/flinger/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/iamjosephmj/flinger/compare/2.0.2...2.1.0
 [1.3.0]: https://github.com/iamjosephmj/flinger/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/iamjosephmj/flinger/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/iamjosephmj/flinger/compare/v1.0.0...v1.1.0
