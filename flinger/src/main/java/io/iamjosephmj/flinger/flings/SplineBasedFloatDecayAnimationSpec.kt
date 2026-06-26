@@ -95,7 +95,9 @@ class SplineBasedFloatDecayAnimationSpec(
         initialValue: Float,
         initialVelocity: Float
     ): Float {
-        val playTimeMillis = playTimeNanos / 1_000_000L
+        // Keep fractional-millisecond precision: truncating nanos to whole ms makes
+        // consecutive frames on 90/120Hz displays sample the spline unevenly (jitter).
+        val playTimeMillis = playTimeNanos / 1_000_000f
         return initialValue + getCachedFlingInfo(initialVelocity).position(playTimeMillis)
     }
 
@@ -109,7 +111,7 @@ class SplineBasedFloatDecayAnimationSpec(
         initialValue: Float,
         initialVelocity: Float
     ): Float {
-        val playTimeMillis = playTimeNanos / 1_000_000L
+        val playTimeMillis = playTimeNanos / 1_000_000f
         return getCachedFlingInfo(initialVelocity).velocity(playTimeMillis)
     }
 }

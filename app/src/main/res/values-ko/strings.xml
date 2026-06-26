@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">스와이프에 적응하는 속도 인식 물리</string>
     <string name="nav_pager_physics">페이저 물리</string>
     <string name="nav_pager_physics_desc">HorizontalPager용 맞춤 페이지 넘김 물리</string>
-    <string name="nav_debug_overlay">디버그 오버레이</string>
-    <string name="nav_debug_overlay_desc">개발자용 실시간 플링 시각화</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">플링 플레이그라운드</string>

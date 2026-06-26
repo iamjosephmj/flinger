@@ -135,17 +135,32 @@ class FlingCalculator(
         // Pre-compute duration as float to avoid repeated conversion
         private val durationFloat = duration.toFloat()
 
-        fun position(time: Long): Float {
+        /**
+         * Position at [time] milliseconds. Accepts a fractional millisecond so the
+         * spline can be sampled at the exact frame time (sub-millisecond precision),
+         * which keeps motion smooth on high-refresh-rate (90/120Hz) displays.
+         */
+        fun position(time: Float): Float {
             val splinePos = if (duration > 0) time / durationFloat else 1f
             // Use allocation-free coefficient method
             return distance * velocitySign * androidFlingSpline.flingDistanceCoefficient(splinePos)
         }
 
-        fun velocity(time: Long): Float {
+        /** Backward-compatible whole-millisecond overload. */
+        fun position(time: Long): Float = position(time.toFloat())
+
+        /**
+         * Velocity at [time] milliseconds. Accepts a fractional millisecond for the
+         * same sub-millisecond sampling precision as [position].
+         */
+        fun velocity(time: Float): Float {
             val splinePos = if (duration > 0) time / durationFloat else 1f
             // Use allocation-free coefficient method
             return androidFlingSpline.flingVelocityCoefficient(splinePos) *
                     velocitySign * distance / duration * 1000.0f
         }
+
+        /** Backward-compatible whole-millisecond overload. */
+        fun velocity(time: Long): Float = velocity(time.toFloat())
     }
 }

@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">适应您滑动的速度感知物理</string>
     <string name="nav_pager_physics">分页器物理</string>
     <string name="nav_pager_physics_desc">HorizontalPager的自定义翻页物理</string>
-    <string name="nav_debug_overlay">调试覆盖层</string>
-    <string name="nav_debug_overlay_desc">开发者实时滑动可视化</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">滑动游乐场</string>

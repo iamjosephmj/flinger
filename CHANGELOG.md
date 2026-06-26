@@ -23,9 +23,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed presets to descriptive names (e.g., `presetOne` → `iOSStyle`)
 - Updated compileSdk to 35
 - Added Material3 support
+- Fling sampling now uses sub-millisecond precision for smoother motion on high-refresh-rate (90/120Hz) displays
+- JitPack now distributes a single `flinger` artifact (removed the separate `flinger-debug` publication)
+
+### Removed
+- Debug overlay (`FlingerDebugOverlay`, `FlingMetrics`) and its sample app demo screen
 
 ### Fixed
 - Fixed documentation showing incorrect class name (`ScrollViewConfiguration` → `FlingConfiguration`)
+- Fling no longer swallows coroutine cancellation, so grabbing the list mid-fling hands off cleanly
 
 ---
 

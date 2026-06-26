@@ -31,6 +31,7 @@ import androidx.compose.animation.core.animateDecay
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollScope
 import io.iamjosephmj.flinger.callbacks.FlingCallbacks
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.math.abs
 
 /**
@@ -56,24 +57,15 @@ class FlingerFlingBehavior(
             var lastValue = 0f
             var totalScrolled = 0f
             var wasCancelled = false
-            var initialValue = 0f
-            var targetValue: Float? = null
-            
+
             // Notify fling start
             callbacks.onFlingStart?.invoke(initialVelocity)
-            
+
             AnimationState(
                 initialValue = 0f,
                 initialVelocity = initialVelocity,
             ).animateDecay(flingDecay) {
                 try {
-                    // Capture target value on first frame for progress calculation
-                    if (targetValue == null) {
-                        initialValue = value
-                        // Estimate target based on decay spec behavior
-                        targetValue = value + (velocity * 0.5f) // Approximation
-                    }
-                    
                     val delta = value - lastValue
                     val consumed = scrollBy(delta)
                     lastValue = value
@@ -95,6 +87,10 @@ class FlingerFlingBehavior(
                         wasCancelled = true
                         this.cancelAnimation()
                     }
+                } catch (e: CancellationException) {
+                    // Don't swallow cooperative cancellation (e.g. the user grabbed
+                    // the list mid-fling) - let it propagate so the new gesture wins.
+                    throw e
                 } catch (e: Exception) {
                     wasCancelled = true
                     this.cancelAnimation()
