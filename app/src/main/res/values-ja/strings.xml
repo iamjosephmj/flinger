@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">スワイプに適応する速度対応物理</string>
     <string name="nav_pager_physics">ページャー物理</string>
     <string name="nav_pager_physics_desc">HorizontalPager用のカスタムページ送り物理</string>
-    <string name="nav_debug_overlay">デバッグオーバーレイ</string>
-    <string name="nav_debug_overlay_desc">開発者向けリアルタイムフリング可視化</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">フリングプレイグラウンド</string>

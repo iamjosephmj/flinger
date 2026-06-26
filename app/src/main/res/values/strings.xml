@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">Velocity-aware physics that adapts to your swipes</string>
     <string name="nav_pager_physics">Pager Physics</string>
     <string name="nav_pager_physics_desc">Custom page-turn physics for HorizontalPager</string>
-    <string name="nav_debug_overlay">Debug Overlay</string>
-    <string name="nav_debug_overlay_desc">Real-time fling visualization for developers</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">Fling Playground</string>

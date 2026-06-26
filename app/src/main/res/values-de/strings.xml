@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">Geschwindigkeitssensitive Physik, die sich an Ihre Wischgesten anpasst</string>
     <string name="nav_pager_physics">Pager-Physik</string>
     <string name="nav_pager_physics_desc">Benutzerdefinierte Seitenumschlag-Physik für HorizontalPager</string>
-    <string name="nav_debug_overlay">Debug-Overlay</string>
-    <string name="nav_debug_overlay_desc">Echtzeit-Fling-Visualisierung für Entwickler</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">Fling-Spielplatz</string>

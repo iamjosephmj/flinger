@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">Physique sensible à la vélocité qui s\'adapte à vos balayages</string>
     <string name="nav_pager_physics">Physique de pagination</string>
     <string name="nav_pager_physics_desc">Physique personnalisée pour HorizontalPager</string>
-    <string name="nav_debug_overlay">Superposition de débogage</string>
-    <string name="nav_debug_overlay_desc">Visualisation du défilement en temps réel pour les développeurs</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">Aire de jeu Fling</string>

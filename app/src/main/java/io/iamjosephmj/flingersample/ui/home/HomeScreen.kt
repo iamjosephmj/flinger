@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Compare
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Speed
@@ -125,13 +124,6 @@ fun HomeScreen(navController: NavController) {
             icon = Icons.Default.SwipeRight,
             route = "pagerDemo",
             accentColor = secondaryColor
-        ),
-        NavItem(
-            title = stringResource(R.string.nav_debug_overlay),
-            description = stringResource(R.string.nav_debug_overlay_desc),
-            icon = Icons.Default.BugReport,
-            route = "debugDemo",
-            accentColor = primaryColor
         )
     )
     

@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">Física consciente de la velocidad que se adapta a tus deslizamientos</string>
     <string name="nav_pager_physics">Física de Paginador</string>
     <string name="nav_pager_physics_desc">Física personalizada de cambio de página para HorizontalPager</string>
-    <string name="nav_debug_overlay">Superposición de Depuración</string>
-    <string name="nav_debug_overlay_desc">Visualización de deslizamiento en tiempo real para desarrolladores</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">Área de Pruebas de Deslizamiento</string>

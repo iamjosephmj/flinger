@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">वेग-जागरूक भौतिकी जो आपकी स्वाइप के अनुकूल होती है</string>
     <string name="nav_pager_physics">पेजर भौतिकी</string>
     <string name="nav_pager_physics_desc">HorizontalPager के लिए कस्टम पेज-टर्न भौतिकी</string>
-    <string name="nav_debug_overlay">डीबग ओवरले</string>
-    <string name="nav_debug_overlay_desc">डेवलपर्स के लिए रीयल-टाइम फ्लिंग विज़ुअलाइज़ेशन</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">फ्लिंग प्लेग्राउंड</string>

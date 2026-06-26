@@ -28,8 +28,6 @@
     <string name="nav_adaptive_fling_desc">فيزياء حساسة للسرعة تتكيف مع حركاتك</string>
     <string name="nav_pager_physics">فيزياء الصفحات</string>
     <string name="nav_pager_physics_desc">فيزياء قلب الصفحات المخصصة لـ HorizontalPager</string>
-    <string name="nav_debug_overlay">تراكب التصحيح</string>
-    <string name="nav_debug_overlay_desc">تصور الانزلاق في الوقت الفعلي للمطورين</string>
     
     <!-- Playground Screen -->
     <string name="playground_title">ساحة لعب الانزلاق</string>

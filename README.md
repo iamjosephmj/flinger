@@ -33,7 +33,6 @@
 | **Snap-to-Item** | Carousel/gallery snap behavior with smooth fusion |
 | **Adaptive Fling** | Velocity-aware physics that adapts to swipe intensity |
 | **Accessibility** | System-aware presets respecting "Reduce Motion" |
-| **Debug Overlay** | Real-time fling visualization for development |
 | **All Lazy Layouts** | Works with LazyColumn, LazyRow, Grids, and Pagers |
 
 ---
@@ -485,7 +484,6 @@ Experience Flinger's capabilities firsthand with our sample app:
 - **Native vs Flinger** - See the difference between default and customized scrolling
 - **Snap Gallery Demo** - Experience snap-to-item behavior
 - **Pager Demo** - Custom pager physics
-- **Debug Overlay** - Visualize fling physics in real-time
 
 ### Demo Videos
 
@@ -518,14 +516,6 @@ https://github.com/user-attachments/assets/2817852c-99b3-4c68-b3ae-12b8fedfa754
 <br/>
 
 https://github.com/user-attachments/assets/ca5b7666-8681-4590-b478-f5f29f79ae0d
-
-</details>
-
-<details>
-<summary><b>✨ Debug Overlay</b></summary>
-<br/>
-
-https://github.com/user-attachments/assets/0b2752d3-cc17-4885-bc05-0383b8cd1c1b
 
 </details>
 
@@ -646,7 +636,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### In Progress
 
-- [ ] Fix Debug Overlay
 - [ ] Kotlin DSL builder syntax
 - [ ] Enhanced documentation site
 
