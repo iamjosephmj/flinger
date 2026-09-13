@@ -1,103 +1,139 @@
 # Physics Tuning Guide
 
-This guide provides detailed explanations of Flinger's physics parameters, helping you understand how each one affects scroll behavior and how to tune them for your specific use case.
+Flinger replaces Compose's default fling physics with the same spline-based
+decay model Android's `OverScroller` uses — but with every parameter open for
+tuning. This guide explains what each parameter actually does inside the
+engine, with diagrams generated from the library's own math, and gives you
+recipes for common scroll "feels".
+
+All diagrams below are **computed from the real implementation**, not
+hand-drawn. The curves you see are what the code produces.
 
 ---
 
 ## Table of Contents
 
-- [Overview: How Fling Physics Work](#overview-how-fling-physics-work)
-- [Friction Parameters](#friction-parameters)
+- [The big picture](#the-big-picture)
+- [The spline curve](#the-spline-curve)
+- [Parameter reference](#parameter-reference)
   - [scrollViewFriction](#scrollviewfriction)
   - [decelerationFriction](#decelerationfriction)
-- [Physics Parameters](#physics-parameters)
   - [gravitationalForce](#gravitationalforce)
-  - [inchesPerMeter](#inchespermeter)
   - [decelerationRate](#decelerationrate)
+  - [inchesPerMeter](#inchespermeter)
   - [absVelocityThreshold](#absvelocitythreshold)
-- [Spline Curve Parameters](#spline-curve-parameters)
   - [splineInflection](#splineinflection)
   - [splineStartTension](#splinestarttension)
   - [splineEndTension](#splineendtension)
   - [numberOfSplinePoints](#numberofsplinepoints)
-- [Tuning Recipes](#tuning-recipes)
+- [How parameters interact](#how-parameters-interact)
+- [Tuning recipes](#tuning-recipes)
 - [Troubleshooting](#troubleshooting)
+- [Regenerating the diagrams](#regenerating-the-diagrams)
 
 ---
 
-## Overview: How Fling Physics Work
+## The big picture
 
-When a user flings a scrollable list, Flinger calculates the scroll trajectory using a **spline-based deceleration curve**. This is the same approach Android's native `OverScroller` uses, but with full parameter customization.
+When the user lifts their finger, Flinger turns the release velocity into a
+complete trajectory **up front** — duration and total distance are decided
+before the first frame is drawn. Each animation frame then just looks up
+"how far along the trajectory should I be at time t?"
 
-The fling animation consists of two phases:
+![How one frame of a fling is computed](images/fling-pipeline.svg)
+
+Concretely, a fling with release velocity `v₀` is summarized by three numbers:
+
+**1. A physical friction coefficient** — combines gravity, screen density and
+the deceleration friction into one number (this mirrors the
+`PHYSICAL_COEF` in Android's `Scroller`):
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    FLING LIFECYCLE                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  PHASE 1: Launch          │  PHASE 2: Deceleration          │
-│  ─────────────────────────┼───────────────────────────────  │
-│                           │                                 │
-│  User releases finger     │  Momentum gradually decreases   │
-│  Initial velocity applied │  Friction slows scroll          │
-│  splineStartTension       │  splineEndTension controls      │
-│  controls this curve      │  this curve                     │
-│                           │                                 │
-│         ╱╲                │           ╲                     │
-│        ╱  ╲               │            ╲                    │
-│       ╱    ╲──────────────┼─────────────╲───────────────    │
-│                           │                                 │
-│     ◀── splineInflection ─┼─▶                               │
-│         (transition point)│                                 │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+physicalCoef = gravitationalForce · inchesPerMeter · density · 160 · decelerationFriction
 ```
 
-Each parameter controls a different aspect of this animation.
+**2. A deceleration exponent** `l` — how quickly the fling loses speed,
+relative to the release velocity:
+
+```
+l = ln( splineInflection · |v₀| / (scrollViewFriction · physicalCoef) )
+```
+
+**3. Duration `T` and total distance `D`** of the whole fling:
+
+```
+T = 1000 · e^( l / (decelerationRate − 1) )          (milliseconds)
+D = scrollViewFriction · physicalCoef · e^( decelerationRate / (decelerationRate − 1) · l )
+```
+
+From that point on, the normalized spline curve (see
+[the next section](#the-spline-curve)) stretches over `T` milliseconds and `D`
+pixels, so the actual on-screen position at time `t` is
+`position(t) = D · spline(t / T)`.
+
+Here is what a single default fling looks like in practice — released at
+8000 px/s on a 420 dpi screen. Note that the velocity (orange) decays
+**monotonically** from the very first frame: a fling never speeds up.
+What changes over time is only how quickly it bleeds speed:
+
+![Anatomy of one fling](images/fling-anatomy.svg)
+
+The whole trajectory is deterministic: same velocity, same configuration,
+same stopping point. That is why tuning Flinger is really about tuning the
+*shape* of this curve.
 
 ---
 
-## Friction Parameters
+## The spline curve
 
-Friction determines how much resistance is applied to the scroll motion.
+The normalized spline is a single ease-out curve from `(0, 0)` to `(1, 1)`.
+Its initial slope matches the release velocity, and it flattens out as the
+scroll comes to rest — the classic "fast start, long tail" fling feel.
+
+![The normalized spline curve](images/spline-shape.svg)
+
+The curve is built once per configuration as a lookup table of
+`numberOfSplinePoints` samples (see `SplineUtils.computeSplineInfo`). Its
+shape is controlled by three parameters that work like the two tension
+handles and an anchor of a Bézier-style curve:
+
+| Parameter | What it shapes |
+|:----------|:---------------|
+| `splineStartTension` | curvature of the **early** part of the curve |
+| `splineEndTension` | curvature of the **late** part of the curve |
+| `splineInflection` | **where** early hands over to late (and, separately, enters the `l` formula above — it has a physical effect too, not just a visual one) |
+
+Internally the two control points handed to the curve builder are
+`splineP1 = splineStartTension · splineInflection` and
+`splineP2 = 1 − splineEndTension · (1 − splineInflection)`, so the three
+parameters are not fully independent — raising the inflection also moves both
+control points.
+
+---
+
+## Parameter reference
 
 ### scrollViewFriction
 
-Controls resistance during the **active scroll phase** — the primary factor determining how far a fling will travel.
+Resistance applied while computing the fling trajectory. It appears **twice**
+in the math — inside the exponent `l` and as a multiplier of the distance —
+which makes it the single most effective knob for "how far does one fling
+travel?" Lower friction means a fling of the same release velocity travels
+farther and lasts longer.
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `0.008` |
-| **Range** | `0.001` - `0.1` |
-| **Unit** | Coefficient (dimensionless) |
+| **Sensible range** | `0.001` – `0.1` |
+| **Unit** | dimensionless coefficient |
 
-#### Effect of Changing
+![scrollViewFriction: position over time](images/scroll-friction.svg)
 
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (0.001-0.006) | Scroll travels much farther, feels "slippery" | Photo galleries, long content feeds |
-| **Default** (0.008) | Balanced feel | General purpose lists |
-| **Higher** (0.02-0.1) | Scroll stops quickly, more controlled | Precision selection, text-heavy content |
-
-#### Visual Comparison
-
-```
-Scroll Distance vs. scrollViewFriction
-                                    
- Distance │                         
-    ↑     │ ╲                        
-          │  ╲                       friction = 0.004 (low)
-          │   ╲  ╲                   
-          │    ╲   ╲                 friction = 0.008 (default)
-          │     ╲    ╲               
-          │      ╲     ╲ ╲           friction = 0.04 (high)
-          │       ╲      ╲ ╲         
-          │        ╲       ╲ ╲       
-          └────────────────────→ Time
-```
-
-#### Example
+| Value | Measured effect (v₀ = 8000 px/s, 420 dpi) | Feels like |
+|:------|:------------------------------------------|:-----------|
+| `0.004` | T ≈ 6.9 s, D ≈ 5 500 px | slippery, long glides |
+| `0.008` (default) | T ≈ 4.1 s, D ≈ 3 300 px | balanced |
+| `0.04` | T ≈ 1.3 s, D ≈ 1 000 px | controlled, stops quickly |
 
 ```kotlin
 // Long, floaty scrolls for a photo gallery
@@ -115,78 +151,59 @@ FlingConfiguration.Builder()
 
 ### decelerationFriction
 
-Controls resistance during the **deceleration phase** — how aggressively the scroll slows down once it starts decelerating.
+Friction folded into the physical coefficient. Unlike `scrollViewFriction`,
+it scales the coefficient *linearly* — halving it roughly halves the distance
+and, more visibly, changes how abruptly the tail of the fling dies out. This
+is the best knob for "how gently does the scroll land?"
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `0.09` |
-| **Range** | `0.01` - `1.0` |
-| **Unit** | Coefficient (dimensionless) |
+| **Sensible range** | `0.01` – `1.0` |
+| **Unit** | dimensionless coefficient |
 
-#### Effect of Changing
+![decelerationFriction: velocity over time](images/deceleration-friction.svg)
 
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (0.01-0.05) | Gradual, smooth deceleration | Premium feel, galleries |
-| **Default** (0.09) | Natural deceleration | General purpose |
-| **Higher** (0.2-1.0) | Abrupt stop, bouncy feel | Playful UIs, quick selection |
-
-#### Visual Comparison
-
-```
-Velocity Decay During Deceleration
-                                    
- Velocity │                         
-    ↑     │╲                         
-          │ ╲                        decelerationFriction = 0.5 (high)
-          │  ╲  ╲                    
-          │   ╲   ╲                  decelerationFriction = 0.09 (default)
-          │    ╲    ╲  ╲             
-          │     ╲     ╲   ╲          decelerationFriction = 0.02 (low)
-          │      ╲      ╲    ╲       
-          │       ╲       ╲     ╲    
-          └────────────────────────→ Time
-```
-
-#### Example
+| Value | Measured effect (v₀ = 8000 px/s, 420 dpi) | Feels like |
+|:------|:------------------------------------------|:-----------|
+| `0.02` | T ≈ 12.5 s, D ≈ 10 000 px | gradual, premium glide |
+| `0.09` (default) | T ≈ 4.1 s, D ≈ 3 300 px | natural |
+| `0.5` | T ≈ 1.2 s, D ≈ 930 px | abrupt, decisive stop |
 
 ```kotlin
 // Ultra-smooth premium feel
 FlingConfiguration.Builder()
     .decelerationFriction(0.02f)
     .build()
-
-// Bouncy, playful feel
-FlingConfiguration.Builder()
-    .decelerationFriction(0.6f)
-    .build()
 ```
+
+Because `decelerationFriction` lives inside the same physical coefficient as
+`gravitationalForce` and screen density, the *absolute* effect of this
+parameter depends on the device — a low-density screen gets a physically
+shorter fling from the same value. That is intentional: it is what keeps the
+feel consistent with real-world physical units.
 
 ---
 
-## Physics Parameters
-
-These parameters simulate real-world physics properties.
-
 ### gravitationalForce
 
-Simulates gravitational pull affecting the scroll momentum. Based on Earth's gravity (~9.8 m/s²).
+Simulated gravity in m/s². It is one of the multipliers of the physical
+coefficient, so raising it makes every fling shorter and heavier — exactly
+like the scroll surface having "more gravity".
 
 | Property | Value |
 |:---------|:------|
-| **Default** | `9.80665` |
-| **Range** | `1.0` - `20.0` |
-| **Unit** | m/s² (meters per second squared) |
+| **Default** | `9.80665` (Earth) |
+| **Sensible range** | `1.0` – `20.0` |
+| **Unit** | m/s² |
 
-#### Effect of Changing
+![gravitationalForce: position over time](images/gravity.svg)
 
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (1-5) | "Moon gravity" — scroll feels lighter, floatier | Dreamy/fantasy UIs |
-| **Default** (9.8) | Earth-like physics | Standard behavior |
-| **Higher** (15-20) | "Heavy gravity" — scroll feels heavier, more grounded | Industrial/serious UIs |
-
-#### Example
+| Value | Feels like |
+|:------|:-----------|
+| `1` – `5` | moon gravity — floaty, dreamy UIs |
+| `9.8` (default) | Earth-like physics |
+| `15` – `20` | heavy gravity — grounded, serious UIs |
 
 ```kotlin
 // Floaty, low-gravity feel
@@ -197,39 +214,26 @@ FlingConfiguration.Builder()
 
 ---
 
-### inchesPerMeter
-
-Physical constant for converting between metric and imperial units in DPI calculations. **Rarely needs changing.**
-
-| Property | Value |
-|:---------|:------|
-| **Default** | `39.37` |
-| **Range** | Fixed constant |
-| **Unit** | inches/meter |
-
-This is the actual physical conversion factor (1 meter = 39.37 inches). Only modify this if you're doing something unusual with screen density calculations.
-
----
-
 ### decelerationRate
 
-The exponential rate at which velocity decreases. Controls the overall "shape" of the deceleration curve.
+The exponential rate in both the duration and distance formulas. It controls
+the **shape of the decay**: values close to 1 stretch the tail enormously
+(the fling technically runs for a very long time at very low speed), while
+high values kill the fling early.
 
 | Property | Value |
 |:---------|:------|
-| **Default** | `2.358201` (computed as `ln(0.78) / ln(0.9)`) |
-| **Range** | `1.0` - `5.0` |
-| **Unit** | Exponential coefficient |
+| **Default** | `ln(0.78) / ln(0.9) ≈ 2.358` |
+| **Sensible range** | `1.5` – `5.0` |
+| **Unit** | exponential coefficient |
 
-#### Effect of Changing
+![decelerationRate: position over time](images/deceleration-rate.svg)
 
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (1.0-1.5) | Very gradual deceleration, long scrolls | Infinite scroll feeds |
-| **Default** (~2.36) | Natural deceleration curve | General purpose |
-| **Higher** (3.0-5.0) | Rapid deceleration, shorter scrolls | Precise control |
-
-#### Example
+| Value | Measured effect (v₀ = 8000 px/s, 420 dpi) | Feels like |
+|:------|:------------------------------------------|:-----------|
+| `1.5` | T ≈ 47 s (!), D ≈ 37 600 px | near-endless momentum |
+| `2.358` (default) | T ≈ 4.1 s, D ≈ 3 300 px | natural |
+| `4.0` | T ≈ 1.9 s, D ≈ 1 500 px | rapid stop |
 
 ```kotlin
 // Extended momentum for content discovery
@@ -238,30 +242,52 @@ FlingConfiguration.Builder()
     .build()
 ```
 
+The default is the same value Android's `Scroller` uses: it comes from the
+observation that a fling should lose 78% of its velocity over the time in
+which a "90% decay" reference fling loses 10%.
+
+> **Careful:** because `T` grows *exponentially* as the rate approaches 1,
+> values below ~1.5 produce flings that nominally run for tens of seconds.
+> The motion is imperceptible near the end, but the animation keeps the list
+> busy — pair low rates with `absVelocityThreshold` to cut the tail off.
+
+---
+
+### inchesPerMeter
+
+The physical conversion factor between screen density and real-world units
+(1 m = 39.37 in). It is a constant of the physical model, not a tuning knob.
+
+| Property | Value |
+|:---------|:------|
+| **Default** | `39.37` |
+| **Range** | fixed constant |
+| **Unit** | inches per meter |
+
+Leave it alone unless you are deliberately distorting the physical model
+(for example, simulating a "bigger world" on the same screen).
+
 ---
 
 ### absVelocityThreshold
 
-The minimum velocity (in pixels/second) required to trigger a fling. Below this threshold, the scroll stops immediately.
+The velocity (in px/s) below which an animation is considered finished. The
+default `0` means a fling always plays out to the end; a positive value
+terminates the animation as soon as its residual speed drops under the
+threshold.
+
+This is the cleanest way to prevent the near-invisible "tail" of long flings
+(from low `decelerationRate` or low frictions) from blocking new gestures,
+and to ignore tiny accidental swipes entirely.
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `0` |
-| **Range** | `0` - `100+` |
-| **Unit** | pixels/second |
-
-#### Effect of Changing
-
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **0** (default) | Any velocity triggers a fling | Smooth, responsive |
-| **10-50** | Very slow swipes are ignored | Prevent accidental flings |
-| **50-100+** | Only deliberate swipes trigger fling | Accessibility, precision |
-
-#### Example
+| **Sensible range** | `0` – `100` |
+| **Unit** | pixels / second |
 
 ```kotlin
-// Require intentional swipes
+// Require intentional swipes, cut off slow tails
 FlingConfiguration.Builder()
     .absVelocityThreshold(50f)
     .build()
@@ -269,50 +295,32 @@ FlingConfiguration.Builder()
 
 ---
 
-## Spline Curve Parameters
-
-The spline curve defines the exact shape of the scroll animation. These are **advanced parameters** that control the mathematical curve used to interpolate position over time.
-
 ### splineInflection
 
-The point where the scroll transitions from the "launch" phase to the "landing" phase. Think of it as the "peak" of the momentum curve.
+The point where the start-tension part of the spline hands over to the
+end-tension part. Visually it shifts *when* the curve commits to decelerating:
+
+![splineInflection: normalized spline curve](images/spline-inflection.svg)
+
+It also appears directly in the exponent `l`, so changing it changes fling
+**distance and duration too**, not just the curve shape. This is the parameter
+most people get surprised by: raising the inflection makes flings *shorter*
+at equal release velocity, because it pushes `l` down.
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `0.1` |
-| **Range** | `0.01` - `0.5` |
-| **Unit** | Normalized position (0-1) |
+| **Sensible range** | `0.01` – `0.5` |
+| **Unit** | normalized position (0–1) |
 
-#### How It Works
-
-```
-Momentum Curve with Different Inflection Points
-                                                
-                    ╱╲  inflection = 0.4 (late transition)
-                   ╱  ╲                          
-                  ╱    ╲                         
-            ╱╲   ╱      ╲                        
-           ╱  ╲ ╱        ╲    inflection = 0.16 (mid)
-          ╱    ╲          ╲                      
-     ╱╲  ╱                 ╲                     
-    ╱  ╲╱                   ╲    inflection = 0.1 (default, early)
-   ╱                         ╲                   
-  ╱                           ╲                  
- ──────────────────────────────────────────────→ Time
-```
-
-#### Effect of Changing
-
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (0.01-0.08) | Very quick transition, mostly deceleration | Snappy, responsive |
-| **Default** (0.1) | Early transition, balanced | General purpose |
-| **Higher** (0.2-0.5) | Extended launch phase, delayed deceleration | Bouncy, playful |
-
-#### Example
+| Value | Feels like |
+|:------|:-----------|
+| `0.01` – `0.08` | quick hand-over, mostly deceleration curve — snappy |
+| `0.1` (default) | the Android-native balance |
+| `0.2` – `0.5` | extended early curve, distinctly different feel — playful |
 
 ```kotlin
-// Bouncy feel with extended launch phase
+// Distinct, bouncy curve signature
 FlingConfiguration.Builder()
     .splineInflection(0.4f)
     .build()
@@ -322,92 +330,46 @@ FlingConfiguration.Builder()
 
 ### splineStartTension
 
-Controls the curvature of the **launch phase** — how the scroll accelerates immediately after the finger lifts.
+Curvature of the early portion of the spline. Higher values pull the early
+curve flatter before speed picks up, lower values keep the start of the curve
+tight and straight. (Recall the control point is
+`startTension · inflection`.)
+
+![splineStartTension: normalized spline curve](images/start-tension.svg)
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `0.1` |
-| **Range** | `0.01` - `1.0` |
-| **Unit** | Tension coefficient |
+| **Sensible range** | `0.01` – `1.0` |
+| **Unit** | tension coefficient |
 
-#### How It Works
-
-The start tension affects the initial momentum. Higher values create a more aggressive initial acceleration, while lower values create a gentler start.
-
-```
-Launch Phase Curves
-                                                
- Position │         ╱                            
-          │        ╱   tension = 0.5 (high - aggressive start)
-          │       ╱                              
-          │      ╱  ╱                            
-          │     ╱  ╱   tension = 0.1 (default)
-          │    ╱  ╱                              
-          │   ╱  ╱  ╱                            
-          │  ╱  ╱  ╱   tension = 0.01 (low - gentle start)
-          │ ╱  ╱  ╱                              
-          │╱  ╱  ╱                               
-          └────────────────────────────────────→ Time
-```
-
-#### Effect of Changing
-
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (0.01-0.05) | Gentle, gradual launch | Elegant, refined feel |
-| **Default** (0.1) | Natural launch momentum | General purpose |
-| **Higher** (0.3-1.0) | Aggressive, snappy launch | Responsive, energetic UIs |
-
-#### Example
-
-```kotlin
-// Aggressive, snappy launch
-FlingConfiguration.Builder()
-    .splineStartTension(0.5f)
-    .build()
-```
+| Value | Feels like |
+|:------|:-----------|
+| `0.01` – `0.05` | gentle, refined launch |
+| `0.1` (default) | Android-native |
+| `0.3` – `1.0` | eager, energetic launch |
 
 ---
 
 ### splineEndTension
 
-Controls the curvature of the **landing phase** — how the scroll decelerates as it approaches its final position.
+Curvature of the late portion of the spline — how the scroll "lands".
+Lower values stretch a long, soft landing; higher values bring the curve
+down decisively.
+
+![splineEndTension: normalized spline curve](images/end-tension.svg)
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `1.0` |
-| **Range** | `0.1` - `2.0` |
-| **Unit** | Tension coefficient |
+| **Sensible range** | `0.1` – `2.0` |
+| **Unit** | tension coefficient |
 
-#### How It Works
-
-The end tension affects how the scroll "lands." Higher values create a more abrupt stop, while lower values create a gradual, smooth landing.
-
-```
-Landing Phase Curves
-                                                
- Velocity │                                      
-          │╲                                     
-          │ ╲                                    
-          │  ╲  tension = 1.5 (high - abrupt stop)
-          │   ╲  ╲                               
-          │    ╲   ╲  tension = 1.0 (default)
-          │     ╲    ╲                           
-          │      ╲     ╲  ╲  tension = 0.5 (low - gradual)
-          │       ╲      ╲   ╲                   
-          │        ╲       ╲    ╲                
-          └────────────────────────────────────→ Time
-```
-
-#### Effect of Changing
-
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (0.1-0.5) | Extended, gradual landing | Smooth, premium feel |
-| **Default** (1.0) | Natural landing | General purpose |
-| **Higher** (1.5-2.0) | Quick, decisive landing | Precise positioning |
-
-#### Example
+| Value | Feels like |
+|:------|:-----------|
+| `0.1` – `0.5` | extended, gradual landing — premium |
+| `1.0` (default) | Android-native landing |
+| `1.5` – `2.0` | quick, decisive landing — precise positioning |
 
 ```kotlin
 // Smooth, gradual landing
@@ -420,65 +382,92 @@ FlingConfiguration.Builder()
 
 ### numberOfSplinePoints
 
-The resolution of the spline curve — how many sample points are used to compute the animation curve.
+Resolution of the precomputed spline lookup table. The spline is sampled once
+and linearly interpolated between samples; this parameter is the sample count.
+
+![numberOfSplinePoints: resolution of the lookup table](images/spline-points.svg)
+
+At the default `100` the linear interpolation error is already visually
+imperceptible. Lower values are marginally cheaper to build (the table is
+computed once per configuration, not per frame), so this is **not** a
+smoothness knob in practice — it only matters if you change spline parameters
+frequently at runtime.
 
 | Property | Value |
 |:---------|:------|
 | **Default** | `100` |
-| **Range** | `50` - `500` |
-| **Unit** | Sample points |
-
-#### Effect of Changing
-
-| Value | Effect | Use Case |
-|:------|:-------|:---------|
-| **Lower** (50-80) | Slightly less smooth, better performance | Low-end devices |
-| **Default** (100) | Good balance of smoothness and performance | General purpose |
-| **Higher** (150-500) | Silky smooth curves, more computation | Premium devices, smooth UX |
-
-#### Example
-
-```kotlin
-// Ultra-smooth for premium devices
-FlingConfiguration.Builder()
-    .numberOfSplinePoints(150)
-    .build()
-```
+| **Sensible range** | `50` – `500` |
+| **Unit** | sample points |
 
 ---
 
-## Tuning Recipes
+## How parameters interact
 
-Here are complete configurations for common use cases:
+Two things are worth internalizing before tuning, because they explain most
+surprises:
 
-### iOS-Style Scroll
+1. **Both frictions live in one product.**
+   `scrollViewFriction · decelerationFriction · gravitationalForce · density`
+   all multiply into the physical coefficient, and `scrollViewFriction` appears
+   once more inside the exponent. If you lower one friction and see a much
+   bigger change than expected, check whether the other friction is also
+   amplifying it.
 
-Higher friction with controlled momentum, similar to iOS scroll physics.
+2. **`splineInflection` does double duty.** It shapes the spline *and* scales
+   fling distance/duration through `l`. If you only want a visual curve
+   change without changing how far flings travel, compensate by adjusting
+   `scrollViewFriction` alongside it.
+
+A quick reference, all measured at v₀ = 8000 px/s and 420 dpi (default
+configuration otherwise):
+
+| Change | Duration | Distance |
+|:-------|:---------|:---------|
+| default | ≈ 4.1 s | ≈ 3 300 px |
+| `scrollViewFriction` 0.008 → 0.004 | × 1.7 longer | × 1.7 farther |
+| `scrollViewFriction` 0.008 → 0.04 | ÷ 3.3 shorter | ÷ 3.3 shorter |
+| `decelerationFriction` 0.09 → 0.02 | × 3 longer | × 3 farther |
+| `decelerationFriction` 0.09 → 0.5 | ÷ 3.5 shorter | ÷ 3.5 shorter |
+| `decelerationRate` 2.36 → 1.5 | × 11 longer | × 11 farther |
+| `decelerationRate` 2.36 → 4.0 | ÷ 2.2 shorter | ÷ 2.2 shorter |
+
+---
+
+## Tuning recipes
+
+Complete configurations for common use cases. For ready-made behaviors you
+can drop straight into a composable, also see
+[FlingPresets](../flinger/src/main/java/io/iamjosephmj/flinger/behaviours/FlingPresets.kt)
+(`FlingPresets.smooth()`, `FlingPresets.iOSStyle()`, `FlingPresets.floaty()`,
+`FlingPresets.quickStop()`, `FlingPresets.bouncy()`, `FlingPresets.ultraSmooth()`,
+…).
+
+### iOS-style scroll
+
+Higher friction with controlled momentum:
 
 ```kotlin
 FlingConfiguration.Builder()
-    .scrollViewFriction(0.04f)
-    .decelerationFriction(0.04f)
-    .splineInflection(0.15f)
+    .scrollViewFriction(0.04f)   // same as FlingPresets.iOSStyle()
     .build()
 ```
 
-### Photo Gallery (Floaty)
+### Photo gallery (floaty)
 
-Long, gliding scrolls perfect for browsing visual content.
+Long, gliding scrolls for visual content:
 
 ```kotlin
 FlingConfiguration.Builder()
     .scrollViewFriction(0.006f)
     .decelerationFriction(0.015f)
     .gravitationalForce(7.0f)
-    .numberOfSplinePoints(150)
+    .absVelocityThreshold(2f)    // trim the very slow tail
     .build()
 ```
 
-### Quick Selection (Snappy)
+### Quick selection (snappy)
 
-Fast, responsive scrolling for lists requiring precise selection.
+Fast, responsive scrolling for lists that need precise selection:
 
 ```kotlin
 FlingConfiguration.Builder()
@@ -489,9 +478,9 @@ FlingConfiguration.Builder()
     .build()
 ```
 
-### Bouncy/Playful
+### Bouncy / playful
 
-Fun, bouncy scrolling for games or playful UIs.
+An unusual curve signature for games and playful UIs:
 
 ```kotlin
 FlingConfiguration.Builder()
@@ -501,9 +490,9 @@ FlingConfiguration.Builder()
     .build()
 ```
 
-### Ultra-Premium
+### Ultra-premium
 
-Buttery smooth scrolling for luxury/premium apps.
+Buttery smooth scrolling with a soft landing:
 
 ```kotlin
 FlingConfiguration.Builder()
@@ -514,16 +503,18 @@ FlingConfiguration.Builder()
     .build()
 ```
 
-### Accessibility / Reduced Motion
+### Accessibility / reduced motion
 
-Minimal, controlled scrolling for users sensitive to motion.
+Minimal, controlled scrolling. Note that Flinger also ships
+system-aware presets (`FlingPresets.accessibilityAware()`,
+`FlingPresets.reducedMotion()`) that respect the device's reduce-motion
+settings:
 
 ```kotlin
 FlingConfiguration.Builder()
     .scrollViewFriction(0.08f)
     .decelerationFriction(0.5f)
     .absVelocityThreshold(30f)
-    .numberOfSplinePoints(80)
     .build()
 ```
 
@@ -531,40 +522,58 @@ FlingConfiguration.Builder()
 
 ## Troubleshooting
 
-### Scroll feels too slow/heavy
+**Scroll feels too slow / heavy**
+- Decrease `scrollViewFriction` (try 0.004–0.006)
+- Decrease `decelerationFriction` (try 0.02–0.05)
+- Decrease `gravitationalForce` (try 5.0–7.0)
 
-- **Decrease** `scrollViewFriction` (try 0.004-0.006)
-- **Decrease** `decelerationFriction` (try 0.02-0.05)
-- **Decrease** `gravitationalForce` (try 5.0-7.0)
+**Scroll feels too slippery / uncontrolled**
+- Increase `scrollViewFriction` (try 0.03–0.05)
+- Increase `decelerationFriction` (try 0.15–0.3)
+- Set `absVelocityThreshold` to filter accidental swipes
 
-### Scroll feels too slippery/uncontrolled
+**Scroll stops too abruptly**
+- Decrease `decelerationFriction` (try 0.02–0.05)
+- Decrease `splineEndTension` (try 0.5–0.7)
+- Decrease `splineInflection` (try 0.05–0.08) — and note this *also* lengthens
+  flings via the exponent
 
-- **Increase** `scrollViewFriction` (try 0.03-0.05)
-- **Increase** `decelerationFriction` (try 0.15-0.3)
-- Set `absVelocityThreshold` to filter out accidental swipes
+**Fling animation lingers after motion is invisible**
+- Increase `absVelocityThreshold` (try 20–50) to end the animation early
+- Raise `decelerationRate` (values close to 1 create very long tails)
 
-### Scroll stops too abruptly
+**Scroll start feels wrong**
+- Adjust `splineStartTension`: lower for a gentler start, higher for a more
+  eager one
+- Adjust `splineInflection` to move the point where deceleration takes over
 
-- **Decrease** `decelerationFriction` (try 0.02-0.05)
-- **Decrease** `splineEndTension` (try 0.5-0.7)
-- **Increase** `splineInflection` (try 0.15-0.2)
+**Animation looks choppy**
+- Choppy flings are almost never a spline-resolution problem — check frame
+  rate and how often the configuration (and therefore the lookup table) is
+  rebuilt. `numberOfSplinePoints` only affects one-time table construction.
 
-### Scroll start feels wrong
+---
 
-- Adjust `splineStartTension`:
-  - **Lower** for gentler start
-  - **Higher** for more aggressive start
-- Adjust `splineInflection` to change when deceleration kicks in
+## Regenerating the diagrams
 
-### Animation looks choppy
+Every diagram in this document is produced by
+[`docs/tools/generate_diagrams.py`](tools/generate_diagrams.py), a
+dependency-free Python script that ports `SplineUtils`, `AndroidFlingSpline`
+and `FlingCalculator` and plots their real output:
 
-- **Increase** `numberOfSplinePoints` (try 150-200)
-- Check device performance — complex animations may need simpler configs on older devices
+```bash
+python3 docs/tools/generate_diagrams.py
+```
+
+If you change the physics engine, regenerate so the documentation stays
+honest.
 
 ---
 
 ## Further Reading
 
-- [Main README](../README.md) - Quick start and usage examples
-- [FlingPresets.kt](../flinger/src/main/java/io/iamjosephmj/flinger/behaviours/FlingPresets.kt) - Pre-built configurations
-- [Android OverScroller](https://developer.android.com/reference/android/widget/OverScroller) - The original Android implementation that inspired this library
+- [Main README](../README.md) — quick start and usage examples
+- [FlingPresets.kt](../flinger/src/main/java/io/iamjosephmj/flinger/behaviours/FlingPresets.kt) — pre-built configurations
+- [FlingCalculator.kt](../flinger/src/main/java/io/iamjosephmj/flinger/flings/FlingCalculator.kt) — duration/distance math
+- [AndroidFlingSpline.kt](../flinger/src/main/java/io/iamjosephmj/flinger/spline/AndroidFlingSpline.kt) — the spline lookup
+- [Android OverScroller](https://developer.android.com/reference/android/widget/OverScroller) — the native implementation that inspired this library

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 460" font-family="Helvetica,Arial,sans-serif">
+<rect width="780" height="460" fill="#ffffff"/>
+<text x="390.0" y="30.0" font-size="17" font-weight="bold" text-anchor="middle" fill="#24292f" >Anatomy of one fling (default config, v₀ = 8000 px/s, 420 dpi)</text>
+<line x1="86.0" y1="52.0" x2="112.0" y2="52.0" stroke="#0969da" stroke-width="3.0" stroke-linecap="round"/>
+<text x="119.0" y="56.5" font-size="12.5" font-weight="normal" text-anchor="start" fill="#24292f" >position (px, left axis)</text>
+<line x1="303.4" y1="52.0" x2="329.4" y2="52.0" stroke="#bc4c00" stroke-width="3.0" stroke-linecap="round"/>
+<text x="336.4" y="56.5" font-size="12.5" font-weight="normal" text-anchor="start" fill="#24292f" >velocity (px/s, right axis)</text>
+<line x1="86.0" y1="398.0" x2="756.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="76.0" y="402.0" font-size="12" font-weight="normal" text-anchor="end" fill="#57606a" >0</text>
+<line x1="86.0" y1="312.5" x2="756.0" y2="312.5" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="76.0" y="316.5" font-size="12" font-weight="normal" text-anchor="end" fill="#57606a" >891</text>
+<line x1="86.0" y1="227.0" x2="756.0" y2="227.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="76.0" y="231.0" font-size="12" font-weight="normal" text-anchor="end" fill="#57606a" >2k</text>
+<line x1="86.0" y1="141.5" x2="756.0" y2="141.5" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="76.0" y="145.5" font-size="12" font-weight="normal" text-anchor="end" fill="#57606a" >3k</text>
+<line x1="86.0" y1="56.0" x2="756.0" y2="56.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="76.0" y="60.0" font-size="12" font-weight="normal" text-anchor="end" fill="#57606a" >4k</text>
+<line x1="86.0" y1="56.0" x2="86.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="86.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >0ms</text>
+<line x1="220.0" y1="56.0" x2="220.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="220.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >841ms</text>
+<line x1="354.0" y1="56.0" x2="354.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="354.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >1.7s</text>
+<line x1="488.0" y1="56.0" x2="488.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="488.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >2.5s</text>
+<line x1="622.0" y1="56.0" x2="622.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="622.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >3.4s</text>
+<line x1="756.0" y1="56.0" x2="756.0" y2="398.0" stroke="#d8dee4" stroke-width="1.0" stroke-linecap="round"/>
+<text x="756.0" y="418.0" font-size="12" font-weight="normal" text-anchor="middle" fill="#57606a" >4.2s</text>
+<line x1="86.0" y1="56.0" x2="86.0" y2="398.0" stroke="#57606a" stroke-width="1.6" stroke-linecap="round"/>
+<line x1="86.0" y1="398.0" x2="756.0" y2="398.0" stroke="#57606a" stroke-width="1.6" stroke-linecap="round"/>
+<text x="390.0" y="442.0" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#24292f" >time since finger lift</text>
+<text x="24.0" y="227.0" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#24292f" transform="rotate(-90 24 227.0)">position (px)</text>
+<text x="766.0" y="402.0" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >0</text>
+<text x="766.0" y="316.5" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >2k</text>
+<text x="766.0" y="231.0" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >3k</text>
+<text x="766.0" y="145.5" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >5k</text>
+<text x="766.0" y="60.0" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >7k</text>
+<text x="766.0" y="48.0" font-size="12" font-weight="normal" text-anchor="start" fill="#57606a" >px/s</text>
+<rect x="86.0" y="56.0" width="197.1" height="342.0" fill="#0969da" fill-opacity="0.05"/>
+<text x="94.0" y="74.0" font-size="12.5" font-weight="bold" text-anchor="start" fill="#0969da" >high-speed glide</text>
+<text x="291.1" y="74.0" font-size="12.5" font-weight="bold" text-anchor="start" fill="#57606a" >deceleration tail</text>
+<polyline points="86.0,398.0 90.9,379.3 95.9,364.1 102.4,347.8 107.3,337.2 112.3,327.5 118.8,316.0 123.8,308.1 128.7,300.7 135.3,291.4 140.2,284.8 145.1,278.5 151.7,270.6 156.6,265.1 163.2,257.9 168.1,252.8 173.0,247.9 179.6,241.6 184.5,237.1 189.5,232.7 196.0,227.1 201.0,223.1 205.9,219.1 212.4,214.1 217.4,210.4 223.9,205.7 228.9,202.3 233.8,198.9 240.4,194.6 245.3,191.5 250.2,188.4 256.8,184.5 261.7,181.6 266.6,178.8 273.2,175.2 278.1,172.6 284.7,169.2 289.6,166.7 294.6,164.2 301.1,161.1 306.0,158.8 311.0,156.5 317.5,153.6 322.5,151.5 327.4,149.4 334.0,146.7 338.9,144.8 343.8,142.9 350.4,140.4 355.3,138.6 361.9,136.2 366.8,134.5 371.7,132.8 378.3,130.6 383.2,129.0 388.2,127.5 394.7,125.5 399.7,124.0 404.6,122.6 411.1,120.7 416.1,119.3 422.6,117.6 427.6,116.3 432.5,115.0 439.1,113.4 444.0,112.2 448.9,111.1 455.5,109.6 460.4,108.5 465.3,107.4 471.9,106.0 476.8,105.0 483.4,103.7 488.3,102.8 493.3,101.9 499.8,100.7 504.7,99.8 509.7,99.0 516.2,97.9 521.2,97.1 526.1,96.4 532.7,95.4 537.6,94.7 542.5,94.0 549.1,93.1 554.0,92.5 560.6,91.7 565.5,91.1 570.4,90.5 577.0,89.8 581.9,89.3 586.9,88.7 593.4,88.1 598.4,87.6 603.3,87.2 609.8,86.6 614.8,86.2 621.3,85.7 626.3,85.3 631.2,85.0 637.8,84.6 642.7,84.3 647.6,84.0 654.2,83.6 659.1,83.4 664.0,83.1 670.6,82.8 675.5,82.6 682.1,82.4 687.0,82.2 692.0,82.1 698.5,81.9 703.5,81.8 708.4,81.7 714.9,81.6 719.9,81.5 724.8,81.4 731.4,81.4 736.3,81.3 742.9,81.3" fill="none" stroke="#0969da" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="86.0,81.3 90.9,81.3 95.9,169.7 102.4,209.6 107.3,233.9 112.3,251.3 118.8,264.5 123.8,264.5 128.7,275.1 135.3,283.8 140.2,291.4 145.1,297.9 151.7,303.5 156.6,303.5 163.2,308.4 168.1,313.1 173.0,317.1 179.6,320.8 184.5,324.1 189.5,324.1 196.0,327.4 201.0,330.2 205.9,333.0 212.4,335.5 217.4,337.8 223.9,340.1 228.9,340.1 233.8,342.1 240.4,344.2 245.3,346.1 250.2,347.8 256.8,349.5 261.7,349.5 266.6,351.1 273.2,352.7 278.1,354.1 284.7,355.6 289.6,356.9 294.6,356.9 301.1,358.2 306.0,359.5 311.0,360.7 317.5,361.8 322.5,362.9 327.4,362.9 334.0,364.0 338.9,365.0 343.8,366.1 350.4,367.1 355.3,368.0 361.9,368.9 366.8,368.9 371.7,369.8 378.3,370.6 383.2,371.5 388.2,372.4 394.7,373.1 399.7,373.1 404.6,373.9 411.1,374.6 416.1,375.4 422.6,376.1 427.6,376.8 432.5,376.8 439.1,377.4 444.0,378.1 448.9,378.8 455.5,379.4 460.4,379.4 465.3,380.0 471.9,380.6 476.8,381.2 483.4,381.8 488.3,382.4 493.3,382.9 499.8,383.5 504.7,383.5 509.7,384.0 516.2,384.5 521.2,385.0 526.1,385.5 532.7,386.0 537.6,386.0 542.5,386.5 549.1,387.0 554.0,387.5 560.6,387.9 565.5,388.4 570.4,388.4 577.0,388.8 581.9,389.2 586.9,389.7 593.4,390.1 598.4,390.5 603.3,390.5 609.8,390.9 614.8,391.3 621.3,391.7 626.3,392.1 631.2,392.5 637.8,392.8 642.7,392.8 647.6,393.2 654.2,393.6 659.1,393.9 664.0,394.3 670.6,394.6 675.5,394.6 682.1,395.0 687.0,395.3 692.0,395.6 698.5,396.0 703.5,396.3 708.4,396.3 714.9,396.6 719.9,396.9 724.8,397.2 731.4,397.5 736.3,397.8 742.9,398.0" fill="none" stroke="#bc4c00" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<line x1="86.0" y1="81.3" x2="756.0" y2="81.3" stroke="#57606a" stroke-width="1.0" stroke-dasharray="4 4" stroke-linecap="round"/>
+<text x="750.0" y="73.3" font-size="12.5" font-weight="normal" text-anchor="end" fill="#24292f" >total distance D = 3.3k px</text>
+<text x="736.9" y="53.3" font-size="12.5" font-weight="normal" text-anchor="end" fill="#24292f" >duration T = 4125 ms</text>
+<circle cx="86.0" cy="398.0" r="4.0" fill="#bc4c00" stroke="#ffffff" stroke-width="1.5"/>
+<text x="96.0" y="418.0" font-size="12.5" font-weight="normal" text-anchor="start" fill="#bc4c00" >starts at v₀ = 6283 px/s</text>
+</svg>
