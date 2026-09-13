@@ -112,7 +112,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.iamjosephmj:flinger:2.1.0")
+    implementation("com.github.iamjosephmj:flinger:2.1.1")
 }
 ```
 
@@ -134,7 +134,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.iamjosephmj:flinger:2.1.0'
+    implementation 'com.github.iamjosephmj:flinger:2.1.1'
 }
 ```
 
@@ -144,7 +144,7 @@ Add to your `libs.versions.toml`:
 
 ```toml
 [versions]
-flinger = "2.1.0"
+flinger = "2.1.1"
 
 [libraries]
 flinger = { module = "com.github.iamjosephmj:flinger", version.ref = "flinger" }

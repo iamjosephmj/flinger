@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.1.1] - 2026-09-13
+
+### Fixed
+- Snap flings no longer swallow leftover velocity at list edges: when a snap
+  fling (standard or smooth fusion) hit the start or end boundary, the skipped
+  snap phase reported no cancellation and `performFling` returned zero, so the
+  remaining decay velocity never reached parent nested-scroll connections. The
+  boundary hit is now reported and the leftover velocity is dispatched via
+  `onPostFling`, matching the platform fling contract — restoring overscroll
+  effects (e.g. Squishy) when flinging into a list edge.
+
+---
+
 ## [2.1.0] - 2026-06-26
 
 ### Added
