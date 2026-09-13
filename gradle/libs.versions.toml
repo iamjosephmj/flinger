@@ -2,7 +2,7 @@
 agp = "8.13.2"
 core = "1.7.0"
 flinger = "2.1.0"
-squishy = "2.2.0"
+squishy = "2.2.1"
 junit = "4.13.2"
 kotlin = "2.2.20"
 coreKtx = "1.15.0"
