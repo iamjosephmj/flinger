@@ -331,9 +331,12 @@ private class SnapFlingBehaviorImpl(
         val snapOffset = calculateSnapOffset()
         val absSnapOffset = abs(snapOffset)
         
-        // Skip snap if at boundary and snap would go past it - return velocity for normal scroll
+        // Skip snap if at boundary and snap would go past it. Report the boundary
+        // hit so performFling returns the remaining velocity, which the scrollable
+        // then dispatches onPostFling to parent nested-scroll connections
+        // (e.g. Squishy overscroll) instead of swallowing it.
         if (shouldSkipSnapAtBoundary(snapOffset)) {
-            onProgress(totalScrolled, velocityLeft, false)
+            onProgress(totalScrolled, velocityLeft, true)
             return
         }
         
@@ -445,9 +448,12 @@ private class SnapFlingBehaviorImpl(
         val snapOffset = calculateSnapOffset()
         val absSnapOffset = abs(snapOffset)
         
-        // Skip snap if at boundary and snap would go past it - return velocity for normal scroll
+        // Skip snap if at boundary and snap would go past it. Report the boundary
+        // hit so performFling returns the remaining velocity, which the scrollable
+        // then dispatches onPostFling to parent nested-scroll connections
+        // (e.g. Squishy overscroll) instead of swallowing it.
         if (shouldSkipSnapAtBoundary(snapOffset)) {
-            onProgress(totalScrolled, velocityLeft, false)
+            onProgress(totalScrolled, velocityLeft, true)
             return
         }
         
