@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -53,11 +54,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
 import io.iamjosephmj.flinger.configs.FlingConfiguration
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flingersample.ui.components.MiniCurvePreview
+import io.iamjosephmj.flingersample.ui.components.SquishyOverscrollArea
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.components.rememberSquishyOverscrollState
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
 import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
 import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
@@ -80,6 +83,8 @@ data class PresetInfo(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PresetsGalleryScreen(navController: NavController) {
+    val squishyOverscrollState = rememberSquishyOverscrollState()
+
     // Note: presets list uses stringResource which requires recomposition on locale change
     val presets = listOf(
         PresetInfo(
@@ -223,45 +228,48 @@ fun PresetsGalleryScreen(navController: NavController) {
             }
             
             // List with selected fling behavior
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                flingBehavior = currentFlingBehavior
+            SquishyOverscrollArea(
+                state = squishyOverscrollState,
+                modifier = Modifier.fillMaxWidth().weight(1f)
             ) {
-                item {
-                    Text(
-                        text = stringResource(R.string.presets_available),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    flingBehavior = currentFlingBehavior
+                ) {
+                    item {
+                        Text(
+                            text = stringResource(R.string.presets_available),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
                 
-                items(presets) { preset ->
-                    PresetCard(
-                        preset = preset,
-                        isSelected = selectedPreset == preset,
-                        onClick = { selectedPreset = preset }
-                    )
-                }
+                    items(presets) { preset ->
+                        PresetCard(
+                            preset = preset,
+                            isSelected = selectedPreset == preset,
+                            onClick = { selectedPreset = preset }
+                        )
+                    }
                 
-                item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = stringResource(R.string.presets_scroll_test),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = AuroraCyan,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                }
+                    item {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = stringResource(R.string.presets_scroll_test),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = AuroraCyan,
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        )
+                    }
                 
-                // Extra items to allow scrolling
-                items(20) { index ->
-                    TestScrollCard(index = index)
+                    // Extra items to allow scrolling
+                    items(20) { index ->
+                        TestScrollCard(index = index)
+                    }
                 }
             }
         }

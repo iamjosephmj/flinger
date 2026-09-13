@@ -26,6 +26,8 @@
     <string name="nav_snap_gallery_desc">Snap-to-item behavior for carousels and galleries</string>
     <string name="nav_adaptive_fling">Adaptive Fling</string>
     <string name="nav_adaptive_fling_desc">Velocity-aware physics that adapts to your swipes</string>
+    <string name="nav_squishy_overscroll">Squishy Overscroll</string>
+    <string name="nav_squishy_overscroll_desc">Rubber-band edge bounces powered by Squishy</string>
     <string name="nav_pager_physics">Pager Physics</string>
     <string name="nav_pager_physics_desc">Custom page-turn physics for HorizontalPager</string>
     
@@ -154,6 +156,15 @@
     <string name="pager_how_it_works">How it works</string>
     <string name="pager_how_it_works_desc">Pager-like behavior using snap fling physics:\n\n• Standard: Balanced transitions\n• iOS: Higher resistance, familiar feel\n• Snappy: Quick page turns\n• Smooth: Gliding transitions\n\nSmooth Fusion: Snap starts while still scrolling.</string>
     
+    <!-- Squishy Overscroll Demo -->
+    <string name="squishy_demo_title">Squishy Overscroll Demo</string>
+    <string name="squishy_visual">Overscroll Effect</string>
+    <string name="squishy_swipe_prompt">↓ Scroll past the top or bottom edge to feel the bounce</string>
+    <string name="squishy_item">Item %1$d</string>
+    <string name="squishy_item_desc">Overscroll an edge to see the effect in action</string>
+    <string name="squishy_how_it_works">How it works</string>
+    <string name="squishy_how_it_works_desc">Flinger drives the scroll physics, and Squishy turns whatever velocity is left over at the edges into a rubber-band bounce on the container:\n\n• PushDown: the list shifts with your pull\n• Zoom: the list shrinks as it stretches\n• Tilt: the list tips toward the edge\n• Fade: the list dims under tension\n• Rotate: the list rocks around its axis\n\nEach effect uses the same rubber-band curve, so they all spring back to rest.</string>
+
     <!-- Debug Overlay Demo -->
     <string name="debug_demo_title">Debug Overlay Demo</string>
     <string name="debug_options">Debug Options</string>

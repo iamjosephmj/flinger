@@ -7,6 +7,7 @@
 package io.iamjosephmj.flingersample.ui.demos
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,13 +61,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.snap.SnapAnimationConfig
 import io.iamjosephmj.flinger.snap.SnapPosition
 import io.iamjosephmj.flinger.snap.snapFlingBehavior
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flingersample.ui.components.GradientPresets
+import io.iamjosephmj.flingersample.ui.components.SquishyOverscrollArea
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.components.rememberSquishyOverscrollState
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
 import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
 import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
@@ -83,6 +86,10 @@ fun PagerDemo(navController: NavController) {
     var smoothFusionEnabled by remember { mutableStateOf(false) }
     var fusionRatio by remember { mutableStateOf(0.15f) }
     val listState = rememberLazyListState()
+
+    // Child overscroll states (container stays frozen, items move)
+    val verticalOverscrollState = rememberSquishyOverscrollState()
+    val carouselOverscrollState = rememberSquishyOverscrollState(orientation = Orientation.Horizontal)
     
     // Track current page based on scroll position
     val currentPage by remember {
@@ -143,255 +150,262 @@ fun PagerDemo(navController: NavController) {
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .verticalScroll(rememberScrollState())
-        ) {
-            // Preset selector
-            Text(
-                text = stringResource(R.string.pager_fling_physics),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(16.dp),
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            
-            Row(
+        SquishyOverscrollArea(state = verticalOverscrollState, modifier = Modifier.fillMaxSize()) {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .verticalScroll(rememberScrollState())
             ) {
-                listOf("Standard", "iOS", "Snappy", "Smooth").forEach { preset ->
-                    FilterChip(
-                        selected = selectedPreset == preset,
-                        onClick = { selectedPreset = preset },
-                        label = { Text(preset) },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = AuroraViolet,
-                            selectedLabelColor = Color.White
-                        )
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            // Snap animation selector
-            Text(
-                text = stringResource(R.string.snap_animation),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                listOf("Smooth", "Snappy", "Bouncy", "Gentle", "iOS", "Material").forEach { anim ->
-                    FilterChip(
-                        selected = selectedSnapAnimation == anim,
-                        onClick = { selectedSnapAnimation = anim },
-                        label = { Text(anim) },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = AuroraCyan,
-                            selectedLabelColor = Color.White
-                        )
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(12.dp))
-            
-            // Smooth Fusion toggle
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
+                // Preset selector
+                Text(
+                    text = stringResource(R.string.pager_fling_physics),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(16.dp),
+                    color = MaterialTheme.colorScheme.onSurface
                 )
-            ) {
+            
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
-                        Text(
-                            text = stringResource(R.string.snap_smooth_fusion),
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.SemiBold,
-                            color = if (smoothFusionEnabled) AuroraMagenta else MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = stringResource(R.string.snap_fusion_desc),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                    listOf("Standard", "iOS", "Snappy", "Smooth").forEach { preset ->
+                        FilterChip(
+                            selected = selectedPreset == preset,
+                            onClick = { selectedPreset = preset },
+                            label = { Text(preset) },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = AuroraViolet,
+                                selectedLabelColor = Color.White
+                            )
                         )
                     }
-                    Switch(
-                        checked = smoothFusionEnabled,
-                        onCheckedChange = { smoothFusionEnabled = it },
-                        colors = SwitchDefaults.colors(
-                            checkedThumbColor = AuroraMagenta,
-                            checkedTrackColor = AuroraMagenta.copy(alpha = 0.5f)
-                        )
-                    )
                 }
-                
-                // Fusion ratio slider (only visible when fusion is enabled)
-                if (smoothFusionEnabled) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                            .padding(bottom = 16.dp)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = stringResource(R.string.snap_fusion_point),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                            Text(
-                                text = stringResource(R.string.snap_fusion_velocity, (fusionRatio * 100).toInt()),
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = AuroraMagenta,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                        Slider(
-                            value = fusionRatio,
-                            onValueChange = { fusionRatio = it },
-                            valueRange = 0.05f..0.4f,
-                            steps = 6,
-                            colors = SliderDefaults.colors(
-                                thumbColor = AuroraMagenta,
-                                activeTrackColor = AuroraMagenta,
-                                inactiveTrackColor = AuroraMagenta.copy(alpha = 0.2f)
-                            )
-                        )
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                text = stringResource(R.string.snap_fusion_earlier),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Text(
-                                text = stringResource(R.string.snap_fusion_later),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-                }
-            }
             
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
             
-            // Pager-like carousel with custom snap behavior
-            LazyRow(
-                state = listState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(280.dp),
-                flingBehavior = snapFlingBehavior(
-                    lazyListState = listState,
-                    snapPosition = SnapPosition.Center,
-                    flingConfig = flingConfig,
-                    snapAnimation = snapAnimation,
-                    smoothFusion = smoothFusionEnabled,
-                    fusionVelocityRatio = fusionRatio
-                ),
-                contentPadding = PaddingValues(horizontal = 48.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(10) { page ->
-                    PagerCard(
-                        page = page,
-                        modifier = Modifier.width(280.dp)
-                    )
-                }
-            }
+                // Snap animation selector
+                Text(
+                    text = stringResource(R.string.snap_animation),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(8.dp))
             
-            // Page indicators with glow
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                repeat(10) { index ->
-                    val isSelected = currentPage == index
-                    val dotColor = if (isSelected) {
-                        GradientPresets.forIndex(index).first()
-                    } else {
-                        MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
-                    }
-                    
-                    Box(
-                        modifier = Modifier
-                            .padding(4.dp)
-                            .size(if (isSelected) 12.dp else 8.dp)
-                            .clip(CircleShape)
-                            .background(dotColor)
-                    )
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            // Info card
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                shape = RoundedCornerShape(20.dp),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-            ) {
-                Box(
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(
-                            Brush.linearGradient(
-                                listOf(AuroraViolet, AuroraMagenta)
+                        .horizontalScroll(rememberScrollState())
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    listOf("Smooth", "Snappy", "Bouncy", "Gentle", "iOS", "Material").forEach { anim ->
+                        FilterChip(
+                            selected = selectedSnapAnimation == anim,
+                            onClick = { selectedSnapAnimation = anim },
+                            label = { Text(anim) },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = AuroraCyan,
+                                selectedLabelColor = Color.White
                             )
                         )
-                        .padding(20.dp)
+                    }
+                }
+            
+                Spacer(modifier = Modifier.height(12.dp))
+            
+                // Smooth Fusion toggle
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
+                    )
                 ) {
-                    Column {
-                        Text(
-                            text = stringResource(R.string.pager_how_it_works),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = stringResource(R.string.pager_how_it_works_desc),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = Color.White.copy(alpha = 0.9f)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                            Text(
+                                text = stringResource(R.string.snap_smooth_fusion),
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                color = if (smoothFusionEnabled) AuroraMagenta else MaterialTheme.colorScheme.onSurface
+                            )
+                            Text(
+                                text = stringResource(R.string.snap_fusion_desc),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Switch(
+                            checked = smoothFusionEnabled,
+                            onCheckedChange = { smoothFusionEnabled = it },
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = AuroraMagenta,
+                                checkedTrackColor = AuroraMagenta.copy(alpha = 0.5f)
+                            )
                         )
                     }
+                
+                    // Fusion ratio slider (only visible when fusion is enabled)
+                    if (smoothFusionEnabled) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                                .padding(bottom = 16.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.snap_fusion_point),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Text(
+                                    text = stringResource(R.string.snap_fusion_velocity, (fusionRatio * 100).toInt()),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = AuroraMagenta,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                            Slider(
+                                value = fusionRatio,
+                                onValueChange = { fusionRatio = it },
+                                valueRange = 0.05f..0.4f,
+                                steps = 6,
+                                colors = SliderDefaults.colors(
+                                    thumbColor = AuroraMagenta,
+                                    activeTrackColor = AuroraMagenta,
+                                    inactiveTrackColor = AuroraMagenta.copy(alpha = 0.2f)
+                                )
+                            )
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.snap_fusion_earlier),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = stringResource(R.string.snap_fusion_later),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                }
+            
+                Spacer(modifier = Modifier.height(16.dp))
+            
+                // Pager-like carousel with custom snap behavior
+                SquishyOverscrollArea(
+                    state = carouselOverscrollState,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    LazyRow(
+                        state = listState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(280.dp),
+                        flingBehavior = snapFlingBehavior(
+                            lazyListState = listState,
+                            snapPosition = SnapPosition.Center,
+                            flingConfig = flingConfig,
+                            snapAnimation = snapAnimation,
+                            smoothFusion = smoothFusionEnabled,
+                            fusionVelocityRatio = fusionRatio
+                        ),
+                        contentPadding = PaddingValues(horizontal = 48.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(10) { page ->
+                            PagerCard(
+                                page = page,
+                                modifier = Modifier.width(280.dp)
+                            )
+                        }
+                    }
+                }
+            
+                Spacer(modifier = Modifier.height(16.dp))
+            
+                // Page indicators with glow
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    repeat(10) { index ->
+                        val isSelected = currentPage == index
+                        val dotColor = if (isSelected) {
+                            GradientPresets.forIndex(index).first()
+                        } else {
+                            MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                        }
+                    
+                        Box(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .size(if (isSelected) 12.dp else 8.dp)
+                                .clip(CircleShape)
+                                .background(dotColor)
+                        )
+                    }
+                }
+            
+                Spacer(modifier = Modifier.height(16.dp))
+            
+                // Info card
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(AuroraViolet, AuroraMagenta)
+                                )
+                            )
+                            .padding(20.dp)
+                    ) {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.pager_how_it_works),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = stringResource(R.string.pager_how_it_works_desc),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = Color.White.copy(alpha = 0.9f)
+                            )
+                        }
+        }
                 }
             }
             

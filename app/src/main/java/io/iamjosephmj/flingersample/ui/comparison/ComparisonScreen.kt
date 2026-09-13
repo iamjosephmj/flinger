@@ -51,15 +51,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
+import io.iamjosephmj.flingersample.R
+import io.iamjosephmj.flingersample.ui.components.SquishyOverscrollArea
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.components.rememberSquishyOverscrollState
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
 import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
 import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
@@ -293,6 +295,7 @@ private fun ComparisonPanel(
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
+    val squishyOverscrollState = rememberSquishyOverscrollState()
     
     Column(
         modifier = modifier
@@ -320,21 +323,22 @@ private fun ComparisonPanel(
         }
         
         // Scrollable list
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .background(
-                    brush = Brush.verticalGradient(gradientColors),
-                    shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
-                ),
-            flingBehavior = flingBehavior,
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp)
-        ) {
-            items(50) { index ->
-                ComparisonItem(index = index)
+        SquishyOverscrollArea(state = squishyOverscrollState, modifier = Modifier.fillMaxWidth().weight(1f)) {
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.verticalGradient(gradientColors),
+                        shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
+                    ),
+                flingBehavior = flingBehavior,
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(8.dp)
+            ) {
+                items(50) { index ->
+                    ComparisonItem(index = index)
+                }
             }
         }
     }

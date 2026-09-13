@@ -11,6 +11,7 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -71,12 +72,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.configs.FlingConfiguration
 import io.iamjosephmj.flinger.flings.flingBehavior
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flingersample.ui.components.FlingCurveCanvas
 import io.iamjosephmj.flingersample.ui.components.GradientPresets
+import io.iamjosephmj.flingersample.ui.components.SquishyOverscrollArea
 import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.components.rememberSquishyOverscrollState
 import io.iamjosephmj.flingersample.ui.theme.AuroraCyan
 import io.iamjosephmj.flingersample.ui.theme.AuroraMagenta
 import io.iamjosephmj.flingersample.ui.theme.AuroraViolet
@@ -108,6 +111,10 @@ fun PlaygroundScreen(navController: NavController) {
     // UI state
     var selectedCategory by remember { mutableStateOf("Friction") }
     var showCurve by remember { mutableStateOf(true) }
+
+    // Child overscroll states (vertical for the controls, horizontal for the preview row)
+    val listOverscrollState = rememberSquishyOverscrollState()
+    val rowOverscrollState = rememberSquishyOverscrollState(orientation = Orientation.Horizontal)
     
     // Build configuration
     val currentConfig = FlingConfiguration.Builder()
@@ -262,119 +269,122 @@ fun PlaygroundScreen(navController: NavController) {
                 // =====================================================
                 // PARAMETERS (Single scrollable list)
                 // =====================================================
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                SquishyOverscrollArea(
+                    state = listOverscrollState,
+                    modifier = Modifier.fillMaxWidth().weight(1f)
                 ) {
-                    // FRICTION
-                    if (selectedCategory == "All" || selectedCategory == "Friction") {
-                        item { SectionLabel(stringResource(R.string.category_friction), AuroraCyan) }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_scroll_friction),
-                                value = scrollFriction,
-                                onValueChange = { scrollFriction = it },
-                                valueRange = 0.001f..0.1f,
-                                accentColor = AuroraCyan
-                            )
+                    LazyColumn(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        // FRICTION
+                        if (selectedCategory == "All" || selectedCategory == "Friction") {
+                            item { SectionLabel(stringResource(R.string.category_friction), AuroraCyan) }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_scroll_friction),
+                                    value = scrollFriction,
+                                    onValueChange = { scrollFriction = it },
+                                    valueRange = 0.001f..0.1f,
+                                    accentColor = AuroraCyan
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_deceleration_friction),
+                                    value = decelerationFriction,
+                                    onValueChange = { decelerationFriction = it },
+                                    valueRange = 0.01f..1.0f,
+                                    accentColor = AuroraCyan
+                                )
+                            }
                         }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_deceleration_friction),
-                                value = decelerationFriction,
-                                onValueChange = { decelerationFriction = it },
-                                valueRange = 0.01f..1.0f,
-                                accentColor = AuroraCyan
-                            )
-                        }
-                    }
                     
-                    // PHYSICS
-                    if (selectedCategory == "All" || selectedCategory == "Physics") {
-                        item { SectionLabel(stringResource(R.string.category_physics), AuroraViolet) }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_gravity),
-                                value = gravitationalForce,
-                                onValueChange = { gravitationalForce = it },
-                                valueRange = 1f..20f,
-                                accentColor = AuroraViolet
-                            )
+                        // PHYSICS
+                        if (selectedCategory == "All" || selectedCategory == "Physics") {
+                            item { SectionLabel(stringResource(R.string.category_physics), AuroraViolet) }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_gravity),
+                                    value = gravitationalForce,
+                                    onValueChange = { gravitationalForce = it },
+                                    valueRange = 1f..20f,
+                                    accentColor = AuroraViolet
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_inches_meter),
+                                    value = inchesPerMeter,
+                                    onValueChange = { inchesPerMeter = it },
+                                    valueRange = 10f..100f,
+                                    accentColor = AuroraViolet
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_decel_rate),
+                                    value = decelerationRate,
+                                    onValueChange = { decelerationRate = it },
+                                    valueRange = 0.5f..10f,
+                                    accentColor = AuroraViolet
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_velocity_threshold),
+                                    value = absVelocityThreshold,
+                                    onValueChange = { absVelocityThreshold = it },
+                                    valueRange = 0f..100f,
+                                    accentColor = AuroraViolet
+                                )
+                            }
                         }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_inches_meter),
-                                value = inchesPerMeter,
-                                onValueChange = { inchesPerMeter = it },
-                                valueRange = 10f..100f,
-                                accentColor = AuroraViolet
-                            )
-                        }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_decel_rate),
-                                value = decelerationRate,
-                                onValueChange = { decelerationRate = it },
-                                valueRange = 0.5f..10f,
-                                accentColor = AuroraViolet
-                            )
-                        }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_velocity_threshold),
-                                value = absVelocityThreshold,
-                                onValueChange = { absVelocityThreshold = it },
-                                valueRange = 0f..100f,
-                                accentColor = AuroraViolet
-                            )
-                        }
-                    }
                     
-                    // SPLINE
-                    if (selectedCategory == "All" || selectedCategory == "Spline") {
-                        item { SectionLabel(stringResource(R.string.category_spline), AuroraMagenta) }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_inflection),
-                                value = splineInflection,
-                                onValueChange = { splineInflection = it },
-                                valueRange = 0.01f..0.5f,
-                                accentColor = AuroraMagenta
-                            )
+                        // SPLINE
+                        if (selectedCategory == "All" || selectedCategory == "Spline") {
+                            item { SectionLabel(stringResource(R.string.category_spline), AuroraMagenta) }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_inflection),
+                                    value = splineInflection,
+                                    onValueChange = { splineInflection = it },
+                                    valueRange = 0.01f..0.5f,
+                                    accentColor = AuroraMagenta
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_start_tension),
+                                    value = splineStartTension,
+                                    onValueChange = { splineStartTension = it },
+                                    valueRange = 0.01f..1.0f,
+                                    accentColor = AuroraMagenta
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_end_tension),
+                                    value = splineEndTension,
+                                    onValueChange = { splineEndTension = it },
+                                    valueRange = 0.1f..2.0f,
+                                    accentColor = AuroraMagenta
+                                )
+                            }
+                            item {
+                                CompactSlider(
+                                    label = stringResource(R.string.param_spline_points),
+                                    value = numberOfSplinePoints.toFloat(),
+                                    onValueChange = { numberOfSplinePoints = it.toInt() },
+                                    valueRange = 10f..500f,
+                                    accentColor = AuroraMagenta
+                                )
+                            }
                         }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_start_tension),
-                                value = splineStartTension,
-                                onValueChange = { splineStartTension = it },
-                                valueRange = 0.01f..1.0f,
-                                accentColor = AuroraMagenta
-                            )
-                        }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_end_tension),
-                                value = splineEndTension,
-                                onValueChange = { splineEndTension = it },
-                                valueRange = 0.1f..2.0f,
-                                accentColor = AuroraMagenta
-                            )
-                        }
-                        item {
-                            CompactSlider(
-                                label = stringResource(R.string.param_spline_points),
-                                value = numberOfSplinePoints.toFloat(),
-                                onValueChange = { numberOfSplinePoints = it.toInt() },
-                                valueRange = 10f..500f,
-                                accentColor = AuroraMagenta
-                            )
-                        }
-                    }
                     
-                    item { Spacer(modifier = Modifier.height(8.dp)) }
+                        item { Spacer(modifier = Modifier.height(8.dp)) }
+                    }
                 }
                 
                 // =====================================================
@@ -402,16 +412,21 @@ fun PlaygroundScreen(navController: NavController) {
                         decelerationRate, splineInflection, splineStartTension, splineEndTension,
                         numberOfSplinePoints, absVelocityThreshold
                     ) {
-                        LazyRow(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(100.dp),
-                            contentPadding = PaddingValues(horizontal = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp),
-                            flingBehavior = flingBehavior(scrollConfiguration = currentConfig)
+                        SquishyOverscrollArea(
+                            state = rowOverscrollState,
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            items(40) { index ->
-                                TestCard(index = index)
+                            LazyRow(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(100.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp),
+                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                flingBehavior = flingBehavior(scrollConfiguration = currentConfig)
+                            ) {
+                                items(40) { index ->
+                                    TestCard(index = index)
+                                }
                             }
                         }
                     }

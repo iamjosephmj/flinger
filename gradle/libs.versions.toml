@@ -2,6 +2,7 @@
 agp = "8.13.2"
 core = "1.7.0"
 flinger = "2.1.0"
+squishy = "2.2.0"
 junit = "4.13.2"
 kotlin = "2.2.20"
 coreKtx = "1.15.0"
@@ -44,8 +45,11 @@ androidx-compose-animation = { module = "androidx.compose.animation:animation" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
-# Library reference (use specific module, not parent, to avoid pulling both flinger + flinger-debug)
-flinger = { module = "com.github.iamjosephmj.flinger:flinger", version.ref = "flinger" }
+# Library reference (single artifact since 2.1.0: group com.github.iamjosephmj, no -debug variant)
+flinger = { module = "com.github.iamjosephmj:flinger", version.ref = "flinger" }
+
+# Overscroll library (https://github.com/iamjosephmj/Squishy)
+squishy = { module = "com.github.iamjosephmj:Squishy", version.ref = "squishy" }
 
 # Unit Testing
 junit = { module = "junit:junit", version.ref = "junit" }

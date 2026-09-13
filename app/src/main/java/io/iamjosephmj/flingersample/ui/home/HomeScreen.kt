@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Speed
 import androidx.compose.material.icons.filled.SwipeRight
 import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material.icons.filled.UnfoldMore
 import androidx.compose.material.icons.filled.ViewCarousel
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -45,22 +46,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flinger.behaviours.FlingPresets
-import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.R
 import io.iamjosephmj.flingersample.ui.components.GlowingIcon
 import io.iamjosephmj.flingersample.ui.components.GradientPresets
+import io.iamjosephmj.flingersample.ui.components.SquishyOverscrollArea
+import io.iamjosephmj.flingersample.ui.components.TranslucentBackground
+import io.iamjosephmj.flingersample.ui.components.rememberSquishyOverscrollState
 import io.iamjosephmj.flingersample.ui.theme.FlingerTheme
 import kotlinx.coroutines.delay
 
@@ -72,6 +75,9 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeScreen(navController: NavController) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+
+    // Child overscroll state: the container stays frozen, items do the motion
+    val squishyOverscrollState = rememberSquishyOverscrollState()
     
     // Use theme colors for accents
     val primaryColor = MaterialTheme.colorScheme.primary
@@ -124,6 +130,13 @@ fun HomeScreen(navController: NavController) {
             icon = Icons.Default.SwipeRight,
             route = "pagerDemo",
             accentColor = secondaryColor
+        ),
+        NavItem(
+            title = stringResource(R.string.nav_squishy_overscroll),
+            description = stringResource(R.string.nav_squishy_overscroll_desc),
+            icon = Icons.Default.UnfoldMore,
+            route = "squishyDemo",
+            accentColor = primaryColor
         )
     )
     
@@ -156,48 +169,50 @@ fun HomeScreen(navController: NavController) {
                 )
             }
         ) { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                flingBehavior = FlingPresets.smooth()
-            ) {
-                item {
-                    SectionHeader(
-                        title = stringResource(R.string.home_core_features),
-                        index = 0
-                    )
-                }
+            SquishyOverscrollArea(state = squishyOverscrollState, modifier = Modifier.fillMaxSize()) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    flingBehavior = FlingPresets.smooth()
+                ) {
+                    item {
+                        SectionHeader(
+                            title = stringResource(R.string.home_core_features),
+                            index = 0
+                        )
+                    }
                 
-                itemsIndexed(coreFeatures) { index, item ->
-                    AnimatedNavigationCard(
-                        item = item,
-                        index = index + 1,
-                        onClick = { navController.navigate(item.route) }
-                    )
-                }
+                    itemsIndexed(coreFeatures) { index, item ->
+                        AnimatedNavigationCard(
+                            item = item,
+                            index = index + 1,
+                            onClick = { navController.navigate(item.route) }
+                        )
+                    }
                 
-                item {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    SectionHeader(
-                        title = stringResource(R.string.home_feature_demos),
-                        index = coreFeatures.size + 1
-                    )
-                }
+                    item {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        SectionHeader(
+                            title = stringResource(R.string.home_feature_demos),
+                            index = coreFeatures.size + 1
+                        )
+                    }
                 
-                itemsIndexed(demoFeatures) { index, item ->
-                    AnimatedNavigationCard(
-                        item = item,
-                        index = index + coreFeatures.size + 2,
-                        onClick = { navController.navigate(item.route) }
-                    )
-                }
+                    itemsIndexed(demoFeatures) { index, item ->
+                        AnimatedNavigationCard(
+                            item = item,
+                            index = index + coreFeatures.size + 2,
+                            onClick = { navController.navigate(item.route) }
+                        )
+                    }
                 
-                item {
-                    Spacer(modifier = Modifier.height(24.dp))
-                    VersionInfo(index = coreFeatures.size + demoFeatures.size + 3)
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                        VersionInfo(index = coreFeatures.size + demoFeatures.size + 3)
+                    }
                 }
             }
         }

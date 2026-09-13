@@ -77,8 +77,10 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
     
-    // Flinger library (local project dependency)
-    implementation(libs.flinger)
+    // Flinger library (local project dependency — picks up uncommitted engine fixes)
+    implementation(project(":flinger"))
+
+    implementation(libs.squishy)
     
     // Debug tooling
     debugImplementation(libs.androidx.compose.ui.tooling)

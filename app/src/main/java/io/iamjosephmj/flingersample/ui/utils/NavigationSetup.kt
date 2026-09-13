@@ -33,6 +33,7 @@ import io.iamjosephmj.flingersample.ui.comparison.ComparisonScreen
 import io.iamjosephmj.flingersample.ui.demos.AdaptiveDemo
 import io.iamjosephmj.flingersample.ui.demos.PagerDemo
 import io.iamjosephmj.flingersample.ui.demos.SnapGalleryDemo
+import io.iamjosephmj.flingersample.ui.demos.SquishyDemo
 import io.iamjosephmj.flingersample.ui.home.HomeScreen
 import io.iamjosephmj.flingersample.ui.playground.PlaygroundScreen
 import io.iamjosephmj.flingersample.ui.presets.PresetsGalleryScreen
@@ -48,6 +49,7 @@ import io.iamjosephmj.flingersample.ui.presets.PresetsGalleryScreen
  * - "snapDemo" - Snap-to-item gallery demo
  * - "adaptiveDemo" - Velocity-aware adaptive fling demo
  * - "pagerDemo" - Custom pager physics demo
+ * - "squishyDemo" - Squishy overscroll effects demo
  */
 @Composable
 fun CreateNavHost(navController: NavHostController) {
@@ -65,5 +67,6 @@ fun CreateNavHost(navController: NavHostController) {
         composable("snapDemo") { SnapGalleryDemo(navController) }
         composable("adaptiveDemo") { AdaptiveDemo(navController) }
         composable("pagerDemo") { PagerDemo(navController) }
+        composable("squishyDemo") { SquishyDemo(navController) }
     }
 }
