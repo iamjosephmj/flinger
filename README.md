@@ -19,6 +19,7 @@
   <a href="https://github.com/iamjosephmj/flinger/stargazers"><img src="https://img.shields.io/github/stars/iamjosephmj/flinger?style=social" alt="GitHub Stars"/></a>
   <a href="https://android-arsenal.com/details/1/8249"><img src="https://img.shields.io/badge/Android%20Arsenal-Flinger-green.svg?style=flat" alt="Android Arsenal"/></a>
   <a href="https://jetc.dev/issues/067.html"><img src="https://img.shields.io/badge/As_Seen_In-jetc.dev_Newsletter_%2367-blue?logo=Jetpack+Compose&logoColor=white" alt="jetc.dev Newsletter"/></a>
+  <a href="https://github.com/sponsors/iamjosephmj"><img src="https://img.shields.io/badge/Sponsor-%E2%9D%A4-DB61A2.svg?style=flat&logo=githubsponsors" alt="GitHub Sponsors"/></a>
   <a href="#privacy"><img src="https://img.shields.io/badge/Privacy-GDPR_Compliant-brightgreen.svg?style=flat" alt="GDPR Compliant"/></a>
 </p>
 
